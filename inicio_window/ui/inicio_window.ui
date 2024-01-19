@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>inicio_window</class>
+ <widget class="QDialog" name="inicio_window">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>402</width>
+    <height>317</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>Inicio - PrePRODIC3D</string>
+  </property>
+  <layout class="QVBoxLayout" name="verticalLayout_5">
+   <item>
+    <widget class="QGroupBox" name="gb_inicio">
+     <property name="title">
+      <string>Inicio</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_4">
+      <item>
+       <widget class="QGroupBox" name="gb_inicio_titulosimu">
+        <property name="title">
+         <string>Titulo de la simulación</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout">
+         <item>
+          <widget class="QLineEdit" name="le_titulosimu">
+           <property name="inputMask">
+            <string/>
+           </property>
+           <property name="text">
+            <string>Sin título</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gb_inicio_tituloimpre">
+        <property name="title">
+         <string>Nombre del archivo de impresión (máx. 8 caracteres)</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_2">
+         <item>
+          <widget class="QLineEdit" name="le_tituloimpre">
+           <property name="text">
+            <string>Print1</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gb_inicio_titulograf">
+        <property name="title">
+         <string>Nombre del archivo gráfico (máx. 8 caracteres)</string>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_3">
+         <item>
+          <widget class="QLineEdit" name="le_titulograf">
+           <property name="text">
+            <string>Plot1</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
