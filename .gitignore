@@ -22,3 +22,4 @@ rad.json
 TestResults.xml
 #Local bats
 *.bat
+*/__pycache__/

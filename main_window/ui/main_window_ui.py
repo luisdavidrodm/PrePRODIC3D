@@ -45,6 +45,11 @@ class Ui_main_window(object):
 
         self.verticalLayout.addWidget(self.pb_malla)
 
+        self.pb_variables = QPushButton(self.centralwidget)
+        self.pb_variables.setObjectName(u"pb_variables")
+
+        self.verticalLayout.addWidget(self.pb_variables)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
@@ -80,6 +85,7 @@ class Ui_main_window(object):
         self.action_manual.setText(QCoreApplication.translate("main_window", u"Manual de Usuario.", None))
         self.pb_inicio.setText(QCoreApplication.translate("main_window", u"Inicio", None))
         self.pb_malla.setText(QCoreApplication.translate("main_window", u"Malla", None))
+        self.pb_variables.setText(QCoreApplication.translate("main_window", u"Variables", None))
         self.menu_archivo.setTitle(QCoreApplication.translate("main_window", u"Archivo", None))
         self.menu_herramientas.setTitle(QCoreApplication.translate("main_window", u"Herramientas", None))
     # retranslateUi

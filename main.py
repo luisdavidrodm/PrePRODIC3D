@@ -6,6 +6,7 @@ from PySide6 import QtGui as qtg
 from main_window.ui.main_window_ui import Ui_main_window
 from inicio_window.inicio_window import InicioWindow
 from malla_window.malla_window import MallaWindow
+from variables_window.variables_window import VariablesWindow
 
 class MainWindow(qtw.QMainWindow, Ui_main_window):
     def __init__(self):
@@ -18,6 +19,8 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
         self.pb_malla.clicked.connect(self.open_malla)
 
+        self.pb_variables.clicked.connect(self.open_variables)
+
     @qtc.Slot()
     def open_inicio(self):
         self.form = InicioWindow()
@@ -26,6 +29,11 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     @qtc.Slot()
     def open_malla(self):
         self.form = MallaWindow()
+        self.form.exec()
+
+    @qtc.Slot()
+    def open_variables(self):
+        self.form = VariablesWindow()
         self.form.exec()
 
 if __name__ == "__main__":
