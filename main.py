@@ -7,6 +7,7 @@ from main_window.ui.main_window_ui import Ui_main_window
 from inicio_window.inicio_window import InicioWindow
 from malla_window.malla_window import MallaWindow
 from variables_window.variables_window import VariablesWindow
+from valores_window.valores_window import ValoresWindow
 
 class MainWindow(qtw.QMainWindow, Ui_main_window):
     def __init__(self):
@@ -20,6 +21,8 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.pb_malla.clicked.connect(self.open_malla)
 
         self.pb_variables.clicked.connect(self.open_variables)
+
+        self.pb_valores.clicked.connect(self.open_valores)
 
     @qtc.Slot()
     def open_inicio(self):
@@ -35,6 +38,11 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def open_variables(self):
         self.form = VariablesWindow()
         self.form.exec()
+    
+    @qtc.Slot()
+    def open_valores(self):
+        self.form = ValoresWindow()
+        self.form.exec()    
 
 if __name__ == "__main__":
     app = qtw.QApplication(sys.argv)

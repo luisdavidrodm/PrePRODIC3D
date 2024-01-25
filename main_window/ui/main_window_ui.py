@@ -50,6 +50,11 @@ class Ui_main_window(object):
 
         self.verticalLayout.addWidget(self.pb_variables)
 
+        self.pb_valores = QPushButton(self.centralwidget)
+        self.pb_valores.setObjectName(u"pb_valores")
+
+        self.verticalLayout.addWidget(self.pb_valores)
+
         self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
@@ -80,12 +85,13 @@ class Ui_main_window(object):
 
     def retranslateUi(self, main_window):
         main_window.setWindowTitle(QCoreApplication.translate("main_window", u"PrePRODIC3D", None))
-        self.action_guardar.setText(QCoreApplication.translate("main_window", u"Guardar como.", None))
-        self.action_salir.setText(QCoreApplication.translate("main_window", u"Salir.", None))
-        self.action_manual.setText(QCoreApplication.translate("main_window", u"Manual de Usuario.", None))
+        self.action_guardar.setText(QCoreApplication.translate("main_window", u"Guardar como", None))
+        self.action_salir.setText(QCoreApplication.translate("main_window", u"Salir", None))
+        self.action_manual.setText(QCoreApplication.translate("main_window", u"Manual de usuario", None))
         self.pb_inicio.setText(QCoreApplication.translate("main_window", u"Inicio", None))
         self.pb_malla.setText(QCoreApplication.translate("main_window", u"Malla", None))
         self.pb_variables.setText(QCoreApplication.translate("main_window", u"Variables", None))
+        self.pb_valores.setText(QCoreApplication.translate("main_window", u"Valores", None))
         self.menu_archivo.setTitle(QCoreApplication.translate("main_window", u"Archivo", None))
         self.menu_herramientas.setTitle(QCoreApplication.translate("main_window", u"Herramientas", None))
     # retranslateUi

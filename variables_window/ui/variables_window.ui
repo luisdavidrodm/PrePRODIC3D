@@ -62,7 +62,7 @@
      <item row="2" column="0" colspan="2">
       <widget class="QStackedWidget" name="sw_tsimu">
        <property name="currentIndex">
-        <number>1</number>
+        <number>0</number>
        </property>
        <widget class="QWidget" name="sw_tsimu_perm"/>
        <widget class="QWidget" name="sw_tsimu_trans">

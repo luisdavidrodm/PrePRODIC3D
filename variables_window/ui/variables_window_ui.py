@@ -455,7 +455,7 @@ class Ui_variables_window(object):
 
         self.retranslateUi(variables_window)
 
-        self.sw_tsimu.setCurrentIndex(1)
+        self.sw_tsimu.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(variables_window)

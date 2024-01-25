@@ -37,6 +37,13 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="pb_valores">
+      <property name="text">
+       <string>Valores</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
@@ -79,17 +86,17 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_guardar">
    <property name="text">
-    <string>Guardar como.</string>
+    <string>Guardar como</string>
    </property>
   </action>
   <action name="action_salir">
    <property name="text">
-    <string>Salir.</string>
+    <string>Salir</string>
    </property>
   </action>
   <action name="action_manual">
    <property name="text">
-    <string>Manual de Usuario.</string>
+    <string>Manual de usuario</string>
    </property>
   </action>
  </widget>
