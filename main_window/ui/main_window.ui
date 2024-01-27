@@ -44,6 +44,20 @@
      </widget>
     </item>
     <item>
+     <widget class="QPushButton" name="pb_bordes">
+      <property name="text">
+       <string>Bordes</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="pb_salida">
+      <property name="text">
+       <string>Salida</string>
+      </property>
+     </widget>
+    </item>
+    <item>
      <spacer name="verticalSpacer">
       <property name="orientation">
        <enum>Qt::Vertical</enum>
