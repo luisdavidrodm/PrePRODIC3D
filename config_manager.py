@@ -12,10 +12,16 @@ class ConfigManager:
             ]
         )
 
-    def set_header(self, header, printf, plotf):
+    def set_header(self, header):
         # Configurar los valores para la sección HEADER
         self.config_structure["HEADER"]["HEADER"] = header
+
+    def set_printf(self, printf):
+        # Configurar los valores para la sección PRINTF       
         self.config_structure["HEADER"]["PRINTF"] = printf
+    
+    def set_plotf(self, plotf):
+        # Configurar los valores para la sección PLOTF        
         self.config_structure["HEADER"]["PLOTF"] = plotf
 
     def set_grid_mode(self, mode):

@@ -17,25 +17,13 @@ class InicioWindow(qtw.QDialog, Ui_inicio_window):
         self.le_titulograf.textChanged.connect(self.update_plotf)
 
     def update_header(self, text):
-        self.config_manager.set_header(
-            text,
-            self.config_manager.config_structure["HEADER"].get("PRINTF", ""),
-            self.config_manager.config_structure["HEADER"].get("PLOTF", ""),
-        )
+        self.config_manager.set_header(text)
 
     def update_printf(self, text):
-        self.config_manager.set_header(
-            self.config_manager.config_structure["HEADER"].get("HEADER", ""),
-            text,
-            self.config_manager.config_structure["HEADER"].get("PLOTF", ""),
-        )
+        self.config_manager.set_printf(text)
 
     def update_plotf(self, text):
-        self.config_manager.set_header(
-            self.config_manager.config_structure["HEADER"].get("HEADER", ""),
-            self.config_manager.config_structure["HEADER"].get("PRINTF", ""),
-            text,
-        )
+        self.config_manager.set_plotf(text)
 
 
 if __name__ == "__main__":
