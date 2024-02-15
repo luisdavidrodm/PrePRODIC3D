@@ -68,45 +68,35 @@ class Ui_malla_window(object):
         self.gb_malla2_dirx.setObjectName(u"gb_malla2_dirx")
         self.formLayout_2 = QFormLayout(self.gb_malla2_dirx)
         self.formLayout_2.setObjectName(u"formLayout_2")
-        self.lb_xini = QLabel(self.gb_malla2_dirx)
-        self.lb_xini.setObjectName(u"lb_xini")
+        self.lb_xlon = QLabel(self.gb_malla2_dirx)
+        self.lb_xlon.setObjectName(u"lb_xlon")
 
-        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.lb_xini)
+        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.lb_xlon)
 
-        self.le_xini = QLineEdit(self.gb_malla2_dirx)
-        self.le_xini.setObjectName(u"le_xini")
+        self.le_xlon = QLineEdit(self.gb_malla2_dirx)
+        self.le_xlon.setObjectName(u"le_xlon")
 
-        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.le_xini)
-
-        self.lb_xfin = QLabel(self.gb_malla2_dirx)
-        self.lb_xfin.setObjectName(u"lb_xfin")
-
-        self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.lb_xfin)
-
-        self.le_xfin = QLineEdit(self.gb_malla2_dirx)
-        self.le_xfin.setObjectName(u"le_xfin")
-
-        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.le_xfin)
+        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.le_xlon)
 
         self.lb_nvcx = QLabel(self.gb_malla2_dirx)
         self.lb_nvcx.setObjectName(u"lb_nvcx")
 
-        self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.lb_nvcx)
+        self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.lb_nvcx)
 
         self.le_nvcx = QLineEdit(self.gb_malla2_dirx)
         self.le_nvcx.setObjectName(u"le_nvcx")
 
-        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.le_nvcx)
-
-        self.le_potenciax = QLineEdit(self.gb_malla2_dirx)
-        self.le_potenciax.setObjectName(u"le_potenciax")
-
-        self.formLayout_2.setWidget(3, QFormLayout.FieldRole, self.le_potenciax)
+        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.le_nvcx)
 
         self.lb_potenciax = QLabel(self.gb_malla2_dirx)
         self.lb_potenciax.setObjectName(u"lb_potenciax")
 
-        self.formLayout_2.setWidget(3, QFormLayout.LabelRole, self.lb_potenciax)
+        self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.lb_potenciax)
+
+        self.le_potenciax = QLineEdit(self.gb_malla2_dirx)
+        self.le_potenciax.setObjectName(u"le_potenciax")
+
+        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.le_potenciax)
 
 
         self.horizontalLayout.addWidget(self.gb_malla2_dirx)
@@ -115,45 +105,35 @@ class Ui_malla_window(object):
         self.gb_malla2_diry.setObjectName(u"gb_malla2_diry")
         self.formLayout_3 = QFormLayout(self.gb_malla2_diry)
         self.formLayout_3.setObjectName(u"formLayout_3")
-        self.lb_yini = QLabel(self.gb_malla2_diry)
-        self.lb_yini.setObjectName(u"lb_yini")
+        self.lb_ylon = QLabel(self.gb_malla2_diry)
+        self.lb_ylon.setObjectName(u"lb_ylon")
 
-        self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.lb_yini)
+        self.formLayout_3.setWidget(0, QFormLayout.LabelRole, self.lb_ylon)
 
-        self.le_yini = QLineEdit(self.gb_malla2_diry)
-        self.le_yini.setObjectName(u"le_yini")
+        self.le_ylon = QLineEdit(self.gb_malla2_diry)
+        self.le_ylon.setObjectName(u"le_ylon")
 
-        self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.le_yini)
-
-        self.lb_yfin = QLabel(self.gb_malla2_diry)
-        self.lb_yfin.setObjectName(u"lb_yfin")
-
-        self.formLayout_3.setWidget(1, QFormLayout.LabelRole, self.lb_yfin)
-
-        self.le_yfin = QLineEdit(self.gb_malla2_diry)
-        self.le_yfin.setObjectName(u"le_yfin")
-
-        self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.le_yfin)
+        self.formLayout_3.setWidget(0, QFormLayout.FieldRole, self.le_ylon)
 
         self.lb_nvcy = QLabel(self.gb_malla2_diry)
         self.lb_nvcy.setObjectName(u"lb_nvcy")
 
-        self.formLayout_3.setWidget(2, QFormLayout.LabelRole, self.lb_nvcy)
+        self.formLayout_3.setWidget(1, QFormLayout.LabelRole, self.lb_nvcy)
 
         self.le_nvcy = QLineEdit(self.gb_malla2_diry)
         self.le_nvcy.setObjectName(u"le_nvcy")
 
-        self.formLayout_3.setWidget(2, QFormLayout.FieldRole, self.le_nvcy)
+        self.formLayout_3.setWidget(1, QFormLayout.FieldRole, self.le_nvcy)
 
         self.lb_potenciay = QLabel(self.gb_malla2_diry)
         self.lb_potenciay.setObjectName(u"lb_potenciay")
 
-        self.formLayout_3.setWidget(3, QFormLayout.LabelRole, self.lb_potenciay)
+        self.formLayout_3.setWidget(2, QFormLayout.LabelRole, self.lb_potenciay)
 
         self.le_potenciay = QLineEdit(self.gb_malla2_diry)
         self.le_potenciay.setObjectName(u"le_potenciay")
 
-        self.formLayout_3.setWidget(3, QFormLayout.FieldRole, self.le_potenciay)
+        self.formLayout_3.setWidget(2, QFormLayout.FieldRole, self.le_potenciay)
 
 
         self.horizontalLayout.addWidget(self.gb_malla2_diry)
@@ -162,45 +142,35 @@ class Ui_malla_window(object):
         self.gb_malla2_dirz.setObjectName(u"gb_malla2_dirz")
         self.formLayout_4 = QFormLayout(self.gb_malla2_dirz)
         self.formLayout_4.setObjectName(u"formLayout_4")
-        self.lb_zini = QLabel(self.gb_malla2_dirz)
-        self.lb_zini.setObjectName(u"lb_zini")
+        self.lb_zlon = QLabel(self.gb_malla2_dirz)
+        self.lb_zlon.setObjectName(u"lb_zlon")
 
-        self.formLayout_4.setWidget(0, QFormLayout.LabelRole, self.lb_zini)
+        self.formLayout_4.setWidget(0, QFormLayout.LabelRole, self.lb_zlon)
 
-        self.le_zini = QLineEdit(self.gb_malla2_dirz)
-        self.le_zini.setObjectName(u"le_zini")
+        self.le_zlon = QLineEdit(self.gb_malla2_dirz)
+        self.le_zlon.setObjectName(u"le_zlon")
 
-        self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.le_zini)
-
-        self.lb_zfin = QLabel(self.gb_malla2_dirz)
-        self.lb_zfin.setObjectName(u"lb_zfin")
-
-        self.formLayout_4.setWidget(1, QFormLayout.LabelRole, self.lb_zfin)
-
-        self.le_zfin = QLineEdit(self.gb_malla2_dirz)
-        self.le_zfin.setObjectName(u"le_zfin")
-
-        self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.le_zfin)
+        self.formLayout_4.setWidget(0, QFormLayout.FieldRole, self.le_zlon)
 
         self.lb_nvcz = QLabel(self.gb_malla2_dirz)
         self.lb_nvcz.setObjectName(u"lb_nvcz")
 
-        self.formLayout_4.setWidget(2, QFormLayout.LabelRole, self.lb_nvcz)
+        self.formLayout_4.setWidget(1, QFormLayout.LabelRole, self.lb_nvcz)
 
         self.le_nvcz = QLineEdit(self.gb_malla2_dirz)
         self.le_nvcz.setObjectName(u"le_nvcz")
 
-        self.formLayout_4.setWidget(2, QFormLayout.FieldRole, self.le_nvcz)
+        self.formLayout_4.setWidget(1, QFormLayout.FieldRole, self.le_nvcz)
 
         self.lb_potenciaz = QLabel(self.gb_malla2_dirz)
         self.lb_potenciaz.setObjectName(u"lb_potenciaz")
 
-        self.formLayout_4.setWidget(3, QFormLayout.LabelRole, self.lb_potenciaz)
+        self.formLayout_4.setWidget(2, QFormLayout.LabelRole, self.lb_potenciaz)
 
         self.le_potenciaz = QLineEdit(self.gb_malla2_dirz)
         self.le_potenciaz.setObjectName(u"le_potenciaz")
 
-        self.formLayout_4.setWidget(3, QFormLayout.FieldRole, self.le_potenciaz)
+        self.formLayout_4.setWidget(2, QFormLayout.FieldRole, self.le_potenciaz)
 
 
         self.horizontalLayout.addWidget(self.gb_malla2_dirz)
@@ -214,45 +184,35 @@ class Ui_malla_window(object):
         self.gb_dirtita.setObjectName(u"gb_dirtita")
         self.formLayout_7 = QFormLayout(self.gb_dirtita)
         self.formLayout_7.setObjectName(u"formLayout_7")
-        self.lb_titaini = QLabel(self.gb_dirtita)
-        self.lb_titaini.setObjectName(u"lb_titaini")
+        self.lb_titalon = QLabel(self.gb_dirtita)
+        self.lb_titalon.setObjectName(u"lb_titalon")
 
-        self.formLayout_7.setWidget(0, QFormLayout.LabelRole, self.lb_titaini)
+        self.formLayout_7.setWidget(0, QFormLayout.LabelRole, self.lb_titalon)
 
-        self.le_titaini = QLineEdit(self.gb_dirtita)
-        self.le_titaini.setObjectName(u"le_titaini")
+        self.le_titalon = QLineEdit(self.gb_dirtita)
+        self.le_titalon.setObjectName(u"le_titalon")
 
-        self.formLayout_7.setWidget(0, QFormLayout.FieldRole, self.le_titaini)
-
-        self.lb_titafin = QLabel(self.gb_dirtita)
-        self.lb_titafin.setObjectName(u"lb_titafin")
-
-        self.formLayout_7.setWidget(1, QFormLayout.LabelRole, self.lb_titafin)
-
-        self.le_titafin = QLineEdit(self.gb_dirtita)
-        self.le_titafin.setObjectName(u"le_titafin")
-
-        self.formLayout_7.setWidget(1, QFormLayout.FieldRole, self.le_titafin)
+        self.formLayout_7.setWidget(0, QFormLayout.FieldRole, self.le_titalon)
 
         self.lb_nvctita = QLabel(self.gb_dirtita)
         self.lb_nvctita.setObjectName(u"lb_nvctita")
 
-        self.formLayout_7.setWidget(2, QFormLayout.LabelRole, self.lb_nvctita)
+        self.formLayout_7.setWidget(1, QFormLayout.LabelRole, self.lb_nvctita)
 
         self.le_nvctita = QLineEdit(self.gb_dirtita)
         self.le_nvctita.setObjectName(u"le_nvctita")
 
-        self.formLayout_7.setWidget(2, QFormLayout.FieldRole, self.le_nvctita)
+        self.formLayout_7.setWidget(1, QFormLayout.FieldRole, self.le_nvctita)
 
         self.lb_potenciatita = QLabel(self.gb_dirtita)
         self.lb_potenciatita.setObjectName(u"lb_potenciatita")
 
-        self.formLayout_7.setWidget(3, QFormLayout.LabelRole, self.lb_potenciatita)
+        self.formLayout_7.setWidget(2, QFormLayout.LabelRole, self.lb_potenciatita)
 
         self.le_potenciatita = QLineEdit(self.gb_dirtita)
         self.le_potenciatita.setObjectName(u"le_potenciatita")
 
-        self.formLayout_7.setWidget(3, QFormLayout.FieldRole, self.le_potenciatita)
+        self.formLayout_7.setWidget(2, QFormLayout.FieldRole, self.le_potenciatita)
 
 
         self.horizontalLayout_2.addWidget(self.gb_dirtita)
@@ -261,25 +221,15 @@ class Ui_malla_window(object):
         self.gb_dirr.setObjectName(u"gb_dirr")
         self.formLayout_6 = QFormLayout(self.gb_dirr)
         self.formLayout_6.setObjectName(u"formLayout_6")
-        self.lb_rini = QLabel(self.gb_dirr)
-        self.lb_rini.setObjectName(u"lb_rini")
+        self.lb_rlon = QLabel(self.gb_dirr)
+        self.lb_rlon.setObjectName(u"lb_rlon")
 
-        self.formLayout_6.setWidget(0, QFormLayout.LabelRole, self.lb_rini)
+        self.formLayout_6.setWidget(1, QFormLayout.LabelRole, self.lb_rlon)
 
-        self.le_rini = QLineEdit(self.gb_dirr)
-        self.le_rini.setObjectName(u"le_rini")
+        self.le_rlon = QLineEdit(self.gb_dirr)
+        self.le_rlon.setObjectName(u"le_rlon")
 
-        self.formLayout_6.setWidget(0, QFormLayout.FieldRole, self.le_rini)
-
-        self.lb_rfin = QLabel(self.gb_dirr)
-        self.lb_rfin.setObjectName(u"lb_rfin")
-
-        self.formLayout_6.setWidget(1, QFormLayout.LabelRole, self.lb_rfin)
-
-        self.le_rfin = QLineEdit(self.gb_dirr)
-        self.le_rfin.setObjectName(u"le_rfin")
-
-        self.formLayout_6.setWidget(1, QFormLayout.FieldRole, self.le_rfin)
+        self.formLayout_6.setWidget(1, QFormLayout.FieldRole, self.le_rlon)
 
         self.lb_nvcr = QLabel(self.gb_dirr)
         self.lb_nvcr.setObjectName(u"lb_nvcr")
@@ -301,6 +251,16 @@ class Ui_malla_window(object):
 
         self.formLayout_6.setWidget(3, QFormLayout.FieldRole, self.le_potenciar)
 
+        self.lb_rini = QLabel(self.gb_dirr)
+        self.lb_rini.setObjectName(u"lb_rini")
+
+        self.formLayout_6.setWidget(0, QFormLayout.LabelRole, self.lb_rini)
+
+        self.le_rini = QLineEdit(self.gb_dirr)
+        self.le_rini.setObjectName(u"le_rini")
+
+        self.formLayout_6.setWidget(0, QFormLayout.FieldRole, self.le_rini)
+
 
         self.horizontalLayout_2.addWidget(self.gb_dirr)
 
@@ -308,45 +268,35 @@ class Ui_malla_window(object):
         self.gb_dirz.setObjectName(u"gb_dirz")
         self.formLayout_5 = QFormLayout(self.gb_dirz)
         self.formLayout_5.setObjectName(u"formLayout_5")
-        self.lb_zinicil = QLabel(self.gb_dirz)
-        self.lb_zinicil.setObjectName(u"lb_zinicil")
+        self.lb_zloncil = QLabel(self.gb_dirz)
+        self.lb_zloncil.setObjectName(u"lb_zloncil")
 
-        self.formLayout_5.setWidget(0, QFormLayout.LabelRole, self.lb_zinicil)
+        self.formLayout_5.setWidget(0, QFormLayout.LabelRole, self.lb_zloncil)
 
-        self.le_zinicil = QLineEdit(self.gb_dirz)
-        self.le_zinicil.setObjectName(u"le_zinicil")
+        self.le_zloncil = QLineEdit(self.gb_dirz)
+        self.le_zloncil.setObjectName(u"le_zloncil")
 
-        self.formLayout_5.setWidget(0, QFormLayout.FieldRole, self.le_zinicil)
-
-        self.lb_zfincil = QLabel(self.gb_dirz)
-        self.lb_zfincil.setObjectName(u"lb_zfincil")
-
-        self.formLayout_5.setWidget(1, QFormLayout.LabelRole, self.lb_zfincil)
-
-        self.le_zfincil = QLineEdit(self.gb_dirz)
-        self.le_zfincil.setObjectName(u"le_zfincil")
-
-        self.formLayout_5.setWidget(1, QFormLayout.FieldRole, self.le_zfincil)
+        self.formLayout_5.setWidget(0, QFormLayout.FieldRole, self.le_zloncil)
 
         self.lb_nvczcil = QLabel(self.gb_dirz)
         self.lb_nvczcil.setObjectName(u"lb_nvczcil")
 
-        self.formLayout_5.setWidget(2, QFormLayout.LabelRole, self.lb_nvczcil)
+        self.formLayout_5.setWidget(1, QFormLayout.LabelRole, self.lb_nvczcil)
 
         self.le_nvczcil = QLineEdit(self.gb_dirz)
         self.le_nvczcil.setObjectName(u"le_nvczcil")
 
-        self.formLayout_5.setWidget(2, QFormLayout.FieldRole, self.le_nvczcil)
+        self.formLayout_5.setWidget(1, QFormLayout.FieldRole, self.le_nvczcil)
 
         self.lb_potenciazcil = QLabel(self.gb_dirz)
         self.lb_potenciazcil.setObjectName(u"lb_potenciazcil")
 
-        self.formLayout_5.setWidget(3, QFormLayout.LabelRole, self.lb_potenciazcil)
+        self.formLayout_5.setWidget(2, QFormLayout.LabelRole, self.lb_potenciazcil)
 
         self.le_potenciazcil = QLineEdit(self.gb_dirz)
         self.le_potenciazcil.setObjectName(u"le_potenciazcil")
 
-        self.formLayout_5.setWidget(3, QFormLayout.FieldRole, self.le_potenciazcil)
+        self.formLayout_5.setWidget(2, QFormLayout.FieldRole, self.le_potenciazcil)
 
 
         self.horizontalLayout_2.addWidget(self.gb_dirz)
@@ -2426,7 +2376,7 @@ class Ui_malla_window(object):
 
         self.retranslateUi(malla_window)
 
-        self.gbsw_malla2.setCurrentIndex(2)
+        self.gbsw_malla2.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(malla_window)
@@ -2444,33 +2394,28 @@ class Ui_malla_window(object):
         self.cb_tipozonas.setItemText(1, QCoreApplication.translate("malla_window", u"Varias zonas", None))
 
         self.gb_malla2_dirx.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n X", None))
-        self.lb_xini.setText(QCoreApplication.translate("malla_window", u"X Inicial: ", None))
-        self.lb_xfin.setText(QCoreApplication.translate("malla_window", u"X Final:", None))
+        self.lb_xlon.setText(QCoreApplication.translate("malla_window", u"X Longitud:", None))
         self.lb_nvcx.setText(QCoreApplication.translate("malla_window", u"NVCX:", None))
         self.lb_potenciax.setText(QCoreApplication.translate("malla_window", u"Potencia:", None))
         self.gb_malla2_diry.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n Y", None))
-        self.lb_yini.setText(QCoreApplication.translate("malla_window", u"Y Inicial: ", None))
-        self.lb_yfin.setText(QCoreApplication.translate("malla_window", u"Y Final:", None))
+        self.lb_ylon.setText(QCoreApplication.translate("malla_window", u"Y Longitud:", None))
         self.lb_nvcy.setText(QCoreApplication.translate("malla_window", u"NVCY", None))
         self.lb_potenciay.setText(QCoreApplication.translate("malla_window", u"Potencia:", None))
         self.gb_malla2_dirz.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n Z", None))
-        self.lb_zini.setText(QCoreApplication.translate("malla_window", u"Z Inicial: ", None))
-        self.lb_zfin.setText(QCoreApplication.translate("malla_window", u"Z Final:", None))
+        self.lb_zlon.setText(QCoreApplication.translate("malla_window", u"Z Longitud: ", None))
         self.lb_nvcz.setText(QCoreApplication.translate("malla_window", u"NVCZ", None))
         self.lb_potenciaz.setText(QCoreApplication.translate("malla_window", u"Potencia:", None))
         self.gb_dirtita.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n \u03b8", None))
-        self.lb_titaini.setText(QCoreApplication.translate("malla_window", u"\u03b8 Inicial:", None))
-        self.lb_titafin.setText(QCoreApplication.translate("malla_window", u"\u03b8 Final:", None))
+        self.lb_titalon.setText(QCoreApplication.translate("malla_window", u"\u03b8 Longitud:", None))
         self.lb_nvctita.setText(QCoreApplication.translate("malla_window", u"NVC\u03b8:", None))
         self.lb_potenciatita.setText(QCoreApplication.translate("malla_window", u"Potencia:", None))
         self.gb_dirr.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n R", None))
-        self.lb_rini.setText(QCoreApplication.translate("malla_window", u"R Inicial:", None))
-        self.lb_rfin.setText(QCoreApplication.translate("malla_window", u"R Final:", None))
+        self.lb_rlon.setText(QCoreApplication.translate("malla_window", u"R Longitud:", None))
         self.lb_nvcr.setText(QCoreApplication.translate("malla_window", u"NVCR:", None))
         self.lb_potenciar.setText(QCoreApplication.translate("malla_window", u"Potencia:", None))
+        self.lb_rini.setText(QCoreApplication.translate("malla_window", u"R Inicial:", None))
         self.gb_dirz.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n Z", None))
-        self.lb_zinicil.setText(QCoreApplication.translate("malla_window", u"Z Inicial:", None))
-        self.lb_zfincil.setText(QCoreApplication.translate("malla_window", u"Z Final:", None))
+        self.lb_zloncil.setText(QCoreApplication.translate("malla_window", u"Z Longitud:", None))
         self.lb_nvczcil.setText(QCoreApplication.translate("malla_window", u"NVCZ:", None))
         self.lb_potenciazcil.setText(QCoreApplication.translate("malla_window", u"Potencia:", None))
         self.gb_dirx_vz.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n X", None))

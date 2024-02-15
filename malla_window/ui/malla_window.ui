@@ -68,7 +68,7 @@
    <item>
     <widget class="QStackedWidget" name="gbsw_malla2">
      <property name="currentIndex">
-      <number>2</number>
+      <number>0</number>
      </property>
      <widget class="QWidget" name="gbsw_cart_zu">
       <layout class="QHBoxLayout" name="horizontalLayout">
@@ -79,44 +79,34 @@
          </property>
          <layout class="QFormLayout" name="formLayout_2">
           <item row="0" column="0">
-           <widget class="QLabel" name="lb_xini">
+           <widget class="QLabel" name="lb_xlon">
             <property name="text">
-             <string>X Inicial: </string>
+             <string>X Longitud:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="le_xini"/>
+           <widget class="QLineEdit" name="le_xlon"/>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="lb_xfin">
-            <property name="text">
-             <string>X Final:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="le_xfin"/>
-          </item>
-          <item row="2" column="0">
            <widget class="QLabel" name="lb_nvcx">
             <property name="text">
              <string>NVCX:</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QLineEdit" name="le_nvcx"/>
           </item>
-          <item row="3" column="1">
-           <widget class="QLineEdit" name="le_potenciax"/>
-          </item>
-          <item row="3" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="lb_potenciax">
             <property name="text">
              <string>Potencia:</string>
             </property>
            </widget>
+          </item>
+          <item row="2" column="1">
+           <widget class="QLineEdit" name="le_potenciax"/>
           </item>
          </layout>
         </widget>
@@ -128,43 +118,33 @@
          </property>
          <layout class="QFormLayout" name="formLayout_3">
           <item row="0" column="0">
-           <widget class="QLabel" name="lb_yini">
+           <widget class="QLabel" name="lb_ylon">
             <property name="text">
-             <string>Y Inicial: </string>
+             <string>Y Longitud:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="le_yini"/>
+           <widget class="QLineEdit" name="le_ylon"/>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="lb_yfin">
-            <property name="text">
-             <string>Y Final:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="le_yfin"/>
-          </item>
-          <item row="2" column="0">
            <widget class="QLabel" name="lb_nvcy">
             <property name="text">
              <string>NVCY</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QLineEdit" name="le_nvcy"/>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="lb_potenciay">
             <property name="text">
              <string>Potencia:</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="le_potenciay"/>
           </item>
          </layout>
@@ -177,43 +157,33 @@
          </property>
          <layout class="QFormLayout" name="formLayout_4">
           <item row="0" column="0">
-           <widget class="QLabel" name="lb_zini">
+           <widget class="QLabel" name="lb_zlon">
             <property name="text">
-             <string>Z Inicial: </string>
+             <string>Z Longitud: </string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="le_zini"/>
+           <widget class="QLineEdit" name="le_zlon"/>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="lb_zfin">
-            <property name="text">
-             <string>Z Final:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="le_zfin"/>
-          </item>
-          <item row="2" column="0">
            <widget class="QLabel" name="lb_nvcz">
             <property name="text">
              <string>NVCZ</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QLineEdit" name="le_nvcz"/>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="lb_potenciaz">
             <property name="text">
              <string>Potencia:</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="le_potenciaz"/>
           </item>
          </layout>
@@ -230,43 +200,33 @@
          </property>
          <layout class="QFormLayout" name="formLayout_7">
           <item row="0" column="0">
-           <widget class="QLabel" name="lb_titaini">
+           <widget class="QLabel" name="lb_titalon">
             <property name="text">
-             <string>θ Inicial:</string>
+             <string>θ Longitud:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="le_titaini"/>
+           <widget class="QLineEdit" name="le_titalon"/>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="lb_titafin">
-            <property name="text">
-             <string>θ Final:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="le_titafin"/>
-          </item>
-          <item row="2" column="0">
            <widget class="QLabel" name="lb_nvctita">
             <property name="text">
              <string>NVCθ:</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QLineEdit" name="le_nvctita"/>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="lb_potenciatita">
             <property name="text">
              <string>Potencia:</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="le_potenciatita"/>
           </item>
          </layout>
@@ -278,25 +238,15 @@
           <string>Dirección R</string>
          </property>
          <layout class="QFormLayout" name="formLayout_6">
-          <item row="0" column="0">
-           <widget class="QLabel" name="lb_rini">
-            <property name="text">
-             <string>R Inicial:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="1">
-           <widget class="QLineEdit" name="le_rini"/>
-          </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="lb_rfin">
+           <widget class="QLabel" name="lb_rlon">
             <property name="text">
-             <string>R Final:</string>
+             <string>R Longitud:</string>
             </property>
            </widget>
           </item>
           <item row="1" column="1">
-           <widget class="QLineEdit" name="le_rfin"/>
+           <widget class="QLineEdit" name="le_rlon"/>
           </item>
           <item row="2" column="0">
            <widget class="QLabel" name="lb_nvcr">
@@ -318,6 +268,16 @@
           <item row="3" column="1">
            <widget class="QLineEdit" name="le_potenciar"/>
           </item>
+          <item row="0" column="0">
+           <widget class="QLabel" name="lb_rini">
+            <property name="text">
+             <string>R Inicial:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1">
+           <widget class="QLineEdit" name="le_rini"/>
+          </item>
          </layout>
         </widget>
        </item>
@@ -328,43 +288,33 @@
          </property>
          <layout class="QFormLayout" name="formLayout_5">
           <item row="0" column="0">
-           <widget class="QLabel" name="lb_zinicil">
+           <widget class="QLabel" name="lb_zloncil">
             <property name="text">
-             <string>Z Inicial:</string>
+             <string>Z Longitud:</string>
             </property>
            </widget>
           </item>
           <item row="0" column="1">
-           <widget class="QLineEdit" name="le_zinicil"/>
+           <widget class="QLineEdit" name="le_zloncil"/>
           </item>
           <item row="1" column="0">
-           <widget class="QLabel" name="lb_zfincil">
-            <property name="text">
-             <string>Z Final:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QLineEdit" name="le_zfincil"/>
-          </item>
-          <item row="2" column="0">
            <widget class="QLabel" name="lb_nvczcil">
             <property name="text">
              <string>NVCZ:</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
+          <item row="1" column="1">
            <widget class="QLineEdit" name="le_nvczcil"/>
           </item>
-          <item row="3" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="lb_potenciazcil">
             <property name="text">
              <string>Potencia:</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="2" column="1">
            <widget class="QLineEdit" name="le_potenciazcil"/>
           </item>
          </layout>
