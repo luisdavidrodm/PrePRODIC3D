@@ -48,7 +48,7 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
         self.le_potenciatita.textChanged.connect(self.update_cil_potenciatita)
 
-        self.le_rini.textChanged.connect(self.update_cil_rini)
+        self.le_rini.textChanged.connect(self.update_cil_rini_zu)
 
         self.le_rlon.textChanged.connect(self.update_cil_rl)
 
@@ -62,7 +62,284 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
         self.le_potenciazcil.textChanged.connect(self.update_cil_potenciaz)
 
-    #####################################################################################
+        #####################################################################################
+        # CONEXION DE WIDGETS VARIAS ZONAS - CARTESIANA
+
+        # -COORDENADA X (CARTESIANA)
+
+        self.sb_dirx_numz.textChanged.connect(self.update_cart_nzx)
+
+        self.le_dirx_lon_zon1.textChanged.connect(self.update_cart_xzone_1)
+        self.le_dirx_nvcx_zon1.textChanged.connect(self.update_cart_ncvx_1)
+        self.le_dirx_poten_zon1.textChanged.connect(self.update_cart_powerx_1)
+
+        self.le_dirx_lon_zon2.textChanged.connect(self.update_cart_xzone_2)
+        self.le_dirx_nvcx_zon2.textChanged.connect(self.update_cart_ncvx_2)
+        self.le_dirx_poten_zon2.textChanged.connect(self.update_cart_powerx_2)
+
+        self.le_dirx_lon_zon3.textChanged.connect(self.update_cart_xzone_3)
+        self.le_dirx_nvcx_zon3.textChanged.connect(self.update_cart_ncvx_3)
+        self.le_dirx_poten_zon3.textChanged.connect(self.update_cart_powerx_3)
+
+        self.le_dirx_lon_zon4.textChanged.connect(self.update_cart_xzone_4)
+        self.le_dirx_nvcx_zon4.textChanged.connect(self.update_cart_ncvx_4)
+        self.le_dirx_poten_zon4.textChanged.connect(self.update_cart_powerx_4)
+
+        self.le_dirx_lon_zon5.textChanged.connect(self.update_cart_xzone_5)
+        self.le_dirx_nvcx_zon5.textChanged.connect(self.update_cart_ncvx_5)
+        self.le_dirx_poten_zon5.textChanged.connect(self.update_cart_powerx_5)
+
+        self.le_dirx_lon_zon6.textChanged.connect(self.update_cart_xzone_6)
+        self.le_dirx_nvcx_zon6.textChanged.connect(self.update_cart_ncvx_6)
+        self.le_dirx_poten_zon6.textChanged.connect(self.update_cart_powerx_6)
+
+        self.le_dirx_lon_zon7.textChanged.connect(self.update_cart_xzone_7)
+        self.le_dirx_nvcx_zon7.textChanged.connect(self.update_cart_ncvx_7)
+        self.le_dirx_poten_zon7.textChanged.connect(self.update_cart_powerx_7)
+
+        self.le_dirx_lon_zon8.textChanged.connect(self.update_cart_xzone_8)
+        self.le_dirx_nvcx_zon8.textChanged.connect(self.update_cart_ncvx_8)
+        self.le_dirx_poten_zon8.textChanged.connect(self.update_cart_powerx_8)
+
+        self.le_dirx_lon_zon9.textChanged.connect(self.update_cart_xzone_9)
+        self.le_dirx_nvcx_zon9.textChanged.connect(self.update_cart_ncvx_9)
+        self.le_dirx_poten_zon9.textChanged.connect(self.update_cart_powerx_9)
+
+        self.le_dirx_lon_zon10.textChanged.connect(self.update_cart_xzone_10)
+        self.le_dirx_nvcx_zon10.textChanged.connect(self.update_cart_ncvx_10)
+        self.le_dirx_poten_zon10.textChanged.connect(self.update_cart_powerx_10)
+
+        # -COORDENADA Y (CARTESIANA)
+
+        self.sb_diry_numz.textChanged.connect(self.update_cart_nzy)
+
+        self.le_diry_lon_zon1.textChanged.connect(self.update_cart_yzone_1)
+        self.le_diry_nvcy_zon1.textChanged.connect(self.update_cart_ncvy_1)
+        self.le_diry_poten_zon1.textChanged.connect(self.update_cart_powery_1)
+
+        self.le_diry_lon_zon2.textChanged.connect(self.update_cart_yzone_2)
+        self.le_diry_nvcy_zon2.textChanged.connect(self.update_cart_ncvy_2)
+        self.le_diry_poten_zon2.textChanged.connect(self.update_cart_powery_2)
+
+        self.le_diry_lon_zon3.textChanged.connect(self.update_cart_yzone_3)
+        self.le_diry_nvcy_zon3.textChanged.connect(self.update_cart_ncvy_3)
+        self.le_diry_poten_zon3.textChanged.connect(self.update_cart_powery_3)
+
+        self.le_diry_lon_zon4.textChanged.connect(self.update_cart_yzone_4)
+        self.le_diry_nvcy_zon4.textChanged.connect(self.update_cart_ncvy_4)
+        self.le_diry_poten_zon4.textChanged.connect(self.update_cart_powery_4)
+
+        self.le_diry_lon_zon5.textChanged.connect(self.update_cart_yzone_5)
+        self.le_diry_nvcy_zon5.textChanged.connect(self.update_cart_ncvy_5)
+        self.le_diry_poten_zon5.textChanged.connect(self.update_cart_powery_5)
+
+        self.le_diry_lon_zon6.textChanged.connect(self.update_cart_yzone_6)
+        self.le_diry_nvcy_zon6.textChanged.connect(self.update_cart_ncvy_6)
+        self.le_diry_poten_zon6.textChanged.connect(self.update_cart_powery_6)
+
+        self.le_diry_lon_zon7.textChanged.connect(self.update_cart_yzone_7)
+        self.le_diry_nvcy_zon7.textChanged.connect(self.update_cart_ncvy_7)
+        self.le_diry_poten_zon7.textChanged.connect(self.update_cart_powery_7)
+
+        self.le_diry_lon_zon8.textChanged.connect(self.update_cart_yzone_8)
+        self.le_diry_nvcy_zon8.textChanged.connect(self.update_cart_ncvy_8)
+        self.le_diry_poten_zon8.textChanged.connect(self.update_cart_powery_8)
+
+        self.le_diry_lon_zon9.textChanged.connect(self.update_cart_yzone_9)
+        self.le_diry_nvcy_zon9.textChanged.connect(self.update_cart_ncvy_9)
+        self.le_diry_poten_zon9.textChanged.connect(self.update_cart_powery_9)
+
+        self.le_diry_lon_zon10.textChanged.connect(self.update_cart_yzone_10)
+        self.le_diry_nvcy_zon10.textChanged.connect(self.update_cart_ncvy_10)
+        self.le_diry_poten_zon10.textChanged.connect(self.update_cart_powery_10)
+
+        # -COORDENADA Z (CARTESIANA)
+
+        self.sb_dirz_numz.textChanged.connect(self.update_cart_nzz)
+
+        self.le_dirz_lon_zon1.textChanged.connect(self.update_cart_zzone_1)
+        self.le_dirz_nvcz_zon1.textChanged.connect(self.update_cart_ncvz_1)
+        self.le_dirz_poten_zon1.textChanged.connect(self.update_cart_powerz_1)
+
+        self.le_dirz_lon_zon2.textChanged.connect(self.update_cart_zzone_2)
+        self.le_dirz_nvcz_zon2.textChanged.connect(self.update_cart_ncvz_2)
+        self.le_dirz_poten_zon2.textChanged.connect(self.update_cart_powerz_2)
+
+        self.le_dirz_lon_zon3.textChanged.connect(self.update_cart_zzone_3)
+        self.le_dirz_nvcz_zon3.textChanged.connect(self.update_cart_ncvz_3)
+        self.le_dirz_poten_zon3.textChanged.connect(self.update_cart_powerz_3)
+
+        self.le_dirz_lon_zon4.textChanged.connect(self.update_cart_zzone_4)
+        self.le_dirz_nvcz_zon4.textChanged.connect(self.update_cart_ncvz_4)
+        self.le_dirz_poten_zon4.textChanged.connect(self.update_cart_powerz_4)
+
+        self.le_dirz_lon_zon5.textChanged.connect(self.update_cart_zzone_5)
+        self.le_dirz_nvcz_zon5.textChanged.connect(self.update_cart_ncvz_5)
+        self.le_dirz_poten_zon5.textChanged.connect(self.update_cart_powerz_5)
+
+        self.le_dirz_lon_zon6.textChanged.connect(self.update_cart_zzone_6)
+        self.le_dirz_nvcz_zon6.textChanged.connect(self.update_cart_ncvz_6)
+        self.le_dirz_poten_zon6.textChanged.connect(self.update_cart_powerz_6)
+
+        self.le_dirz_lon_zon7.textChanged.connect(self.update_cart_zzone_7)
+        self.le_dirz_nvcz_zon7.textChanged.connect(self.update_cart_ncvz_7)
+        self.le_dirz_poten_zon7.textChanged.connect(self.update_cart_powerz_7)
+
+        self.le_dirz_lon_zon8.textChanged.connect(self.update_cart_zzone_8)
+        self.le_dirz_nvcz_zon8.textChanged.connect(self.update_cart_ncvz_8)
+        self.le_dirz_poten_zon8.textChanged.connect(self.update_cart_powerz_8)
+
+        self.le_dirz_lon_zon9.textChanged.connect(self.update_cart_zzone_9)
+        self.le_dirz_nvcz_zon9.textChanged.connect(self.update_cart_ncvz_9)
+        self.le_dirz_poten_zon9.textChanged.connect(self.update_cart_powerz_9)
+
+        self.le_dirz_lon_zon10.textChanged.connect(self.update_cart_zzone_10)
+        self.le_dirz_nvcz_zon10.textChanged.connect(self.update_cart_ncvz_10)
+        self.le_dirz_poten_zon10.textChanged.connect(self.update_cart_powerz_10)
+
+        #####################################################################################
+
+        # CONEXION DE WIDGETS VARIAS ZONAS - CARTESIANA
+
+        # -COORDENADA TITA (CILINDRICA) - VARIAS ZONAS
+
+        self.sb_dirtita_numz.textChanged.connect(self.update_cil_nztita)
+
+        self.le_dirtita_lon_zon1.textChanged.connect(self.update_cil_titazone_1)
+        self.le_dirtita_nvctita_zon1.textChanged.connect(self.update_cil_ncvtita_1)
+        self.le_dirtita_poten_zon1.textChanged.connect(self.update_cil_powertita_1)
+
+        self.le_dirtita_lon_zon2.textChanged.connect(self.update_cil_titazone_2)
+        self.le_dirtita_nvctita_zon2.textChanged.connect(self.update_cil_ncvtita_2)
+        self.le_dirtita_poten_zon2.textChanged.connect(self.update_cil_powertita_2)
+
+        self.le_dirtita_lon_zon3.textChanged.connect(self.update_cil_titazone_3)
+        self.le_dirtita_nvctita_zon3.textChanged.connect(self.update_cil_ncvtita_3)
+        self.le_dirtita_poten_zon3.textChanged.connect(self.update_cil_powertita_3)
+
+        self.le_dirtita_lon_zon4.textChanged.connect(self.update_cil_titazone_4)
+        self.le_dirtita_nvctita_zon4.textChanged.connect(self.update_cil_ncvtita_4)
+        self.le_dirtita_poten_zon4.textChanged.connect(self.update_cil_powertita_4)
+
+        self.le_dirtita_lon_zon5.textChanged.connect(self.update_cil_titazone_5)
+        self.le_dirtita_nvctita_zon5.textChanged.connect(self.update_cil_ncvtita_5)
+        self.le_dirtita_poten_zon5.textChanged.connect(self.update_cil_powertita_5)
+
+        self.le_dirtita_lon_zon6.textChanged.connect(self.update_cil_titazone_6)
+        self.le_dirtita_nvctita_zon6.textChanged.connect(self.update_cil_ncvtita_6)
+        self.le_dirtita_poten_zon6.textChanged.connect(self.update_cil_powertita_6)
+
+        self.le_dirtita_lon_zon7.textChanged.connect(self.update_cil_titazone_7)
+        self.le_dirtita_nvctita_zon7.textChanged.connect(self.update_cil_ncvtita_7)
+        self.le_dirtita_poten_zon7.textChanged.connect(self.update_cil_powertita_7)
+
+        self.le_dirtita_lon_zon8.textChanged.connect(self.update_cil_titazone_8)
+        self.le_dirtita_nvctita_zon8.textChanged.connect(self.update_cil_ncvtita_8)
+        self.le_dirtita_poten_zon8.textChanged.connect(self.update_cil_powertita_8)
+
+        self.le_dirtita_lon_zon9.textChanged.connect(self.update_cil_titazone_9)
+        self.le_dirtita_nvctita_zon9.textChanged.connect(self.update_cil_ncvtita_9)
+        self.le_dirtita_poten_zon9.textChanged.connect(self.update_cil_powertita_9)
+
+        self.le_dirtita_lon_zon10.textChanged.connect(self.update_cil_titazone_10)
+        self.le_dirtita_nvctita_zon10.textChanged.connect(self.update_cil_ncvtita_10)
+        self.le_dirtita_poten_zon10.textChanged.connect(self.update_cil_powertita_10)
+
+        #####################################################################################
+
+        # -COORDENADA RADIO (CILINDRICA) - VARIAS ZONAS
+
+        self.sb_dirr_numz.textChanged.connect(self.update_cil_nzr)
+
+        self.le_dirr_inidom.textChanged.connect(self.update_cil_rini_vz)
+
+        self.le_dirr_lon_zon1.textChanged.connect(self.update_cil_rzone_1)
+        self.le_dirr_nvcr_zon1.textChanged.connect(self.update_cil_ncvr_1)
+        self.le_dirr_poten_zon1.textChanged.connect(self.update_cil_powerr_1)
+
+        self.le_dirr_lon_zon2.textChanged.connect(self.update_cil_rzone_2)
+        self.le_dirr_nvcr_zon2.textChanged.connect(self.update_cil_ncvr_2)
+        self.le_dirr_poten_zon2.textChanged.connect(self.update_cil_powerr_2)
+
+        self.le_dirr_lon_zon3.textChanged.connect(self.update_cil_rzone_3)
+        self.le_dirr_nvcr_zon3.textChanged.connect(self.update_cil_ncvr_3)
+        self.le_dirr_poten_zon3.textChanged.connect(self.update_cil_powerr_3)
+
+        self.le_dirr_lon_zon4.textChanged.connect(self.update_cil_rzone_4)
+        self.le_dirr_nvcr_zon4.textChanged.connect(self.update_cil_ncvr_4)
+        self.le_dirr_poten_zon4.textChanged.connect(self.update_cil_powerr_4)
+
+        self.le_dirr_lon_zon5.textChanged.connect(self.update_cil_rzone_5)
+        self.le_dirr_nvcr_zon5.textChanged.connect(self.update_cil_ncvr_5)
+        self.le_dirr_poten_zon5.textChanged.connect(self.update_cil_powerr_5)
+
+        self.le_dirr_lon_zon6.textChanged.connect(self.update_cil_rzone_6)
+        self.le_dirr_nvcr_zon6.textChanged.connect(self.update_cil_ncvr_6)
+        self.le_dirr_poten_zon6.textChanged.connect(self.update_cil_powerr_6)
+
+        self.le_dirr_lon_zon7.textChanged.connect(self.update_cil_rzone_7)
+        self.le_dirr_nvcr_zon7.textChanged.connect(self.update_cil_ncvr_7)
+        self.le_dirr_poten_zon7.textChanged.connect(self.update_cil_powerr_7)
+
+        self.le_dirr_lon_zon8.textChanged.connect(self.update_cil_rzone_8)
+        self.le_dirr_nvcr_zon8.textChanged.connect(self.update_cil_ncvr_8)
+        self.le_dirr_poten_zon8.textChanged.connect(self.update_cil_powerr_8)
+
+        self.le_dirr_lon_zon9.textChanged.connect(self.update_cil_rzone_9)
+        self.le_dirr_nvcr_zon9.textChanged.connect(self.update_cil_ncvr_9)
+        self.le_dirr_poten_zon9.textChanged.connect(self.update_cil_powerr_9)
+
+        self.le_dirr_lon_zon10.textChanged.connect(self.update_cil_rzone_10)
+        self.le_dirr_nvcr_zon10.textChanged.connect(self.update_cil_ncvr_10)
+        self.le_dirr_poten_zon10.textChanged.connect(self.update_cil_powerr_10)
+
+        #####################################################################################
+
+        # -COORDENADA Z (CILINDRICA) - VARIAS ZONAS
+
+        self.sb_dirzcil_numz.textChanged.connect(self.update_cil_vz_nzz)
+
+        self.le_dirzcil_lon_zon1.textChanged.connect(self.update_cil_vz_zzone_1)
+        self.le_dirzcil_nvczcil_zon1.textChanged.connect(self.update_cil_vz_ncvz_1)
+        self.le_dirzcil_poten_zon1.textChanged.connect(self.update_cil_vz_powerz_1)
+
+        self.le_dirzcil_lon_zon2.textChanged.connect(self.update_cil_vz_zzone_2)
+        self.le_dirzcil_nvczcil_zon2.textChanged.connect(self.update_cil_vz_ncvz_2)
+        self.le_dirzcil_poten_zon2.textChanged.connect(self.update_cil_vz_powerz_2)
+
+        self.le_dirzcil_lon_zon3.textChanged.connect(self.update_cil_vz_zzone_3)
+        self.le_dirzcil_nvczcil_zon3.textChanged.connect(self.update_cil_vz_ncvz_3)
+        self.le_dirzcil_poten_zon3.textChanged.connect(self.update_cil_vz_powerz_3)
+
+        self.le_dirzcil_lon_zon4.textChanged.connect(self.update_cil_vz_zzone_4)
+        self.le_dirzcil_nvczcil_zon4.textChanged.connect(self.update_cil_vz_ncvz_4)
+        self.le_dirzcil_poten_zon4.textChanged.connect(self.update_cil_vz_powerz_4)
+
+        self.le_dirzcil_lon_zon5.textChanged.connect(self.update_cil_vz_zzone_5)
+        self.le_dirzcil_nvczcil_zon5.textChanged.connect(self.update_cil_vz_ncvz_5)
+        self.le_dirzcil_poten_zon5.textChanged.connect(self.update_cil_vz_powerz_5)
+
+        self.le_dirzcil_lon_zon6.textChanged.connect(self.update_cil_vz_zzone_6)
+        self.le_dirzcil_nvczcil_zon6.textChanged.connect(self.update_cil_vz_ncvz_6)
+        self.le_dirzcil_poten_zon6.textChanged.connect(self.update_cil_vz_powerz_6)
+
+        self.le_dirzcil_lon_zon7.textChanged.connect(self.update_cil_vz_zzone_7)
+        self.le_dirzcil_nvczcil_zon7.textChanged.connect(self.update_cil_vz_ncvz_7)
+        self.le_dirzcil_poten_zon7.textChanged.connect(self.update_cil_vz_powerz_7)
+
+        self.le_dirzcil_lon_zon8.textChanged.connect(self.update_cil_vz_zzone_8)
+        self.le_dirzcil_nvczcil_zon8.textChanged.connect(self.update_cil_vz_ncvz_8)
+        self.le_dirzcil_poten_zon8.textChanged.connect(self.update_cil_vz_powerz_8)
+
+        self.le_dirzcil_lon_zon9.textChanged.connect(self.update_cil_vz_zzone_9)
+        self.le_dirzcil_nvczcil_zon9.textChanged.connect(self.update_cil_vz_ncvz_9)
+        self.le_dirzcil_poten_zon9.textChanged.connect(self.update_cil_vz_powerz_9)
+
+        self.le_dirzcil_lon_zon10.textChanged.connect(self.update_cil_vz_zzone_10)
+        self.le_dirzcil_nvczcil_zon10.textChanged.connect(self.update_cil_vz_ncvz_10)
+        self.le_dirzcil_poten_zon10.textChanged.connect(self.update_cil_vz_powerz_10)
+
+        #####################################################################################
 
     def changeZonas(self):
         current_text_coord = self.cb_tipocoord.currentText()
@@ -161,8 +438,8 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
     def update_cil_potenciatita(self, text):
         self.config_manager.set_grid_cil_potenciatita(text)
 
-    def update_cil_rini(self, text):
-        self.config_manager.set_grid_cil_rini(text)
+    def update_cil_rini_zu(self, text):
+        self.config_manager.set_grid_cil_rini_zu(text)
 
     def update_cil_rl(self, text):
         self.config_manager.set_grid_cil_rl(text)
@@ -183,7 +460,588 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.config_manager.set_grid_cil_potenciaz(text)
 
     ##############################################################################################
+    # METODOS PARA CONEXION DE WIDGETS VARIAS ZONAS - CARTESIANA
 
+    # -COORDENADA X (CARTESIANA)
+
+    def update_cart_nzx(self, text):
+        self.config_manager.set_grid_cart_nzx(text)
+
+    def update_cart_xzone_1(self, text):
+        self.config_manager.set_grid_cart_xzone_1(text)
+
+    def update_cart_ncvx_1(self, text):
+        self.config_manager.set_grid_cart_ncvx_1(text)
+
+    def update_cart_powerx_1(self, text):
+        self.config_manager.set_grid_cart_powerx_1(text)
+
+    def update_cart_xzone_2(self, text):
+        self.config_manager.set_grid_cart_xzone_2(text)
+
+    def update_cart_ncvx_2(self, text):
+        self.config_manager.set_grid_cart_ncvx_2(text)
+
+    def update_cart_powerx_2(self, text):
+        self.config_manager.set_grid_cart_powerx_2(text)
+
+    def update_cart_xzone_3(self, text):
+        self.config_manager.set_grid_cart_xzone_3(text)
+
+    def update_cart_ncvx_3(self, text):
+        self.config_manager.set_grid_cart_ncvx_3(text)
+
+    def update_cart_powerx_3(self, text):
+        self.config_manager.set_grid_cart_powerx_3(text)
+
+    def update_cart_xzone_4(self, text):
+        self.config_manager.set_grid_cart_xzone_4(text)
+
+    def update_cart_ncvx_4(self, text):
+        self.config_manager.set_grid_cart_ncvx_4(text)
+
+    def update_cart_powerx_4(self, text):
+        self.config_manager.set_grid_cart_powerx_4(text)
+
+    def update_cart_xzone_5(self, text):
+        self.config_manager.set_grid_cart_xzone_5(text)
+
+    def update_cart_ncvx_5(self, text):
+        self.config_manager.set_grid_cart_ncvx_5(text)
+
+    def update_cart_powerx_5(self, text):
+        self.config_manager.set_grid_cart_powerx_5(text)
+
+    def update_cart_xzone_6(self, text):
+        self.config_manager.set_grid_cart_xzone_6(text)
+
+    def update_cart_ncvx_6(self, text):
+        self.config_manager.set_grid_cart_ncvx_6(text)
+
+    def update_cart_powerx_6(self, text):
+        self.config_manager.set_grid_cart_powerx_6(text)
+
+    def update_cart_xzone_7(self, text):
+        self.config_manager.set_grid_cart_xzone_7(text)
+
+    def update_cart_ncvx_7(self, text):
+        self.config_manager.set_grid_cart_ncvx_7(text)
+
+    def update_cart_powerx_7(self, text):
+        self.config_manager.set_grid_cart_powerx_7(text)
+
+    def update_cart_xzone_8(self, text):
+        self.config_manager.set_grid_cart_xzone_8(text)
+
+    def update_cart_ncvx_8(self, text):
+        self.config_manager.set_grid_cart_ncvx_8(text)
+
+    def update_cart_powerx_8(self, text):
+        self.config_manager.set_grid_cart_powerx_8(text)
+
+    def update_cart_xzone_9(self, text):
+        self.config_manager.set_grid_cart_xzone_9(text)
+
+    def update_cart_ncvx_9(self, text):
+        self.config_manager.set_grid_cart_ncvx_9(text)
+
+    def update_cart_powerx_9(self, text):
+        self.config_manager.set_grid_cart_powerx_9(text)
+
+    def update_cart_xzone_10(self, text):
+        self.config_manager.set_grid_cart_xzone_10(text)
+
+    def update_cart_ncvx_10(self, text):
+        self.config_manager.set_grid_cart_ncvx_10(text)
+
+    def update_cart_powerx_10(self, text):
+        self.config_manager.set_grid_cart_powerx_10(text)
+
+    # -COORDENADA Y (CARTESIANA)
+
+    def update_cart_nzy(self, text):
+        self.config_manager.set_grid_cart_nzy(text)
+
+    def update_cart_yzone_1(self, text):
+        self.config_manager.set_grid_cart_yzone_1(text)
+
+    def update_cart_ncvy_1(self, text):
+        self.config_manager.set_grid_cart_ncvy_1(text)
+
+    def update_cart_powery_1(self, text):
+        self.config_manager.set_grid_cart_powery_1(text)
+
+    def update_cart_yzone_2(self, text):
+        self.config_manager.set_grid_cart_yzone_2(text)
+
+    def update_cart_ncvy_2(self, text):
+        self.config_manager.set_grid_cart_ncvy_2(text)
+
+    def update_cart_powery_2(self, text):
+        self.config_manager.set_grid_cart_powery_2(text)
+
+    def update_cart_yzone_3(self, text):
+        self.config_manager.set_grid_cart_yzone_3(text)
+
+    def update_cart_ncvy_3(self, text):
+        self.config_manager.set_grid_cart_ncvy_3(text)
+
+    def update_cart_powery_3(self, text):
+        self.config_manager.set_grid_cart_powery_3(text)
+
+    def update_cart_yzone_4(self, text):
+        self.config_manager.set_grid_cart_yzone_4(text)
+
+    def update_cart_ncvy_4(self, text):
+        self.config_manager.set_grid_cart_ncvy_4(text)
+
+    def update_cart_powery_4(self, text):
+        self.config_manager.set_grid_cart_powery_4(text)
+
+    def update_cart_yzone_5(self, text):
+        self.config_manager.set_grid_cart_yzone_5(text)
+
+    def update_cart_ncvy_5(self, text):
+        self.config_manager.set_grid_cart_ncvy_5(text)
+
+    def update_cart_powery_5(self, text):
+        self.config_manager.set_grid_cart_powery_5(text)
+
+    def update_cart_yzone_6(self, text):
+        self.config_manager.set_grid_cart_yzone_6(text)
+
+    def update_cart_ncvy_6(self, text):
+        self.config_manager.set_grid_cart_ncvy_6(text)
+
+    def update_cart_powery_6(self, text):
+        self.config_manager.set_grid_cart_powery_6(text)
+
+    def update_cart_yzone_7(self, text):
+        self.config_manager.set_grid_cart_yzone_7(text)
+
+    def update_cart_ncvy_7(self, text):
+        self.config_manager.set_grid_cart_ncvy_7(text)
+
+    def update_cart_powery_7(self, text):
+        self.config_manager.set_grid_cart_powery_7(text)
+
+    def update_cart_yzone_8(self, text):
+        self.config_manager.set_grid_cart_yzone_8(text)
+
+    def update_cart_ncvy_8(self, text):
+        self.config_manager.set_grid_cart_ncvy_8(text)
+
+    def update_cart_powery_8(self, text):
+        self.config_manager.set_grid_cart_powery_8(text)
+
+    def update_cart_yzone_9(self, text):
+        self.config_manager.set_grid_cart_yzone_9(text)
+
+    def update_cart_ncvy_9(self, text):
+        self.config_manager.set_grid_cart_ncvy_9(text)
+
+    def update_cart_powery_9(self, text):
+        self.config_manager.set_grid_cart_powery_9(text)
+
+    def update_cart_yzone_10(self, text):
+        self.config_manager.set_grid_cart_yzone_10(text)
+
+    def update_cart_ncvy_10(self, text):
+        self.config_manager.set_grid_cart_ncvy_10(text)
+
+    def update_cart_powery_10(self, text):
+        self.config_manager.set_grid_cart_powery_10(text)
+
+    # -COORDENADA Z (CARTESIANA)
+
+    def update_cart_nzz(self, text):
+        self.config_manager.set_grid_cart_nzz(text)
+
+    def update_cart_zzone_1(self, text):
+        self.config_manager.set_grid_cart_zzone_1(text)
+
+    def update_cart_ncvz_1(self, text):
+        self.config_manager.set_grid_cart_ncvz_1(text)
+
+    def update_cart_powerz_1(self, text):
+        self.config_manager.set_grid_cart_powerz_1(text)
+
+    def update_cart_zzone_2(self, text):
+        self.config_manager.set_grid_cart_zzone_2(text)
+
+    def update_cart_ncvz_2(self, text):
+        self.config_manager.set_grid_cart_ncvz_2(text)
+
+    def update_cart_powerz_2(self, text):
+        self.config_manager.set_grid_cart_powerz_2(text)
+
+    def update_cart_zzone_3(self, text):
+        self.config_manager.set_grid_cart_zzone_3(text)
+
+    def update_cart_ncvz_3(self, text):
+        self.config_manager.set_grid_cart_ncvz_3(text)
+
+    def update_cart_powerz_3(self, text):
+        self.config_manager.set_grid_cart_powerz_3(text)
+
+    def update_cart_zzone_4(self, text):
+        self.config_manager.set_grid_cart_zzone_4(text)
+
+    def update_cart_ncvz_4(self, text):
+        self.config_manager.set_grid_cart_ncvz_4(text)
+
+    def update_cart_powerz_4(self, text):
+        self.config_manager.set_grid_cart_powerz_4(text)
+
+    def update_cart_zzone_5(self, text):
+        self.config_manager.set_grid_cart_zzone_5(text)
+
+    def update_cart_ncvz_5(self, text):
+        self.config_manager.set_grid_cart_ncvz_5(text)
+
+    def update_cart_powerz_5(self, text):
+        self.config_manager.set_grid_cart_powerz_5(text)
+
+    def update_cart_zzone_6(self, text):
+        self.config_manager.set_grid_cart_zzone_6(text)
+
+    def update_cart_ncvz_6(self, text):
+        self.config_manager.set_grid_cart_ncvz_6(text)
+
+    def update_cart_powerz_6(self, text):
+        self.config_manager.set_grid_cart_powerz_6(text)
+
+    def update_cart_zzone_7(self, text):
+        self.config_manager.set_grid_cart_zzone_7(text)
+
+    def update_cart_ncvz_7(self, text):
+        self.config_manager.set_grid_cart_ncvz_7(text)
+
+    def update_cart_powerz_7(self, text):
+        self.config_manager.set_grid_cart_powerz_7(text)
+
+    def update_cart_zzone_8(self, text):
+        self.config_manager.set_grid_cart_zzone_8(text)
+
+    def update_cart_ncvz_8(self, text):
+        self.config_manager.set_grid_cart_ncvz_8(text)
+
+    def update_cart_powerz_8(self, text):
+        self.config_manager.set_grid_cart_powerz_8(text)
+
+    def update_cart_zzone_9(self, text):
+        self.config_manager.set_grid_cart_zzone_9(text)
+
+    def update_cart_ncvz_9(self, text):
+        self.config_manager.set_grid_cart_ncvz_9(text)
+
+    def update_cart_powerz_9(self, text):
+        self.config_manager.set_grid_cart_powerz_9(text)
+
+    def update_cart_zzone_10(self, text):
+        self.config_manager.set_grid_cart_zzone_10(text)
+
+    def update_cart_ncvz_10(self, text):
+        self.config_manager.set_grid_cart_ncvz_10(text)
+
+    def update_cart_powerz_10(self, text):
+        self.config_manager.set_grid_cart_powerz_10(text)
+
+    ##############################################################################################
+    # METODOS PARA CONEXION DE WIDGETS VARIAS ZONAS - CILINDRICA
+
+    # -COORDENADA TITA (CILINDRICA) - VARIAS ZONAS
+
+    def update_cil_nztita(self, text):
+        self.config_manager.set_grid_cil_nztita(text)
+
+    def update_cil_titazone_1(self, text):
+        self.config_manager.set_grid_cil_titazone_1(text)
+
+    def update_cil_ncvtita_1(self, text):
+        self.config_manager.set_grid_cil_ncvtita_1(text)
+
+    def update_cil_powertita_1(self, text):
+        self.config_manager.set_grid_cil_powertita_1(text)
+
+    def update_cil_titazone_2(self, text):
+        self.config_manager.set_grid_cil_titazone_2(text)
+
+    def update_cil_ncvtita_2(self, text):
+        self.config_manager.set_grid_cil_ncvtita_2(text)
+
+    def update_cil_powertita_2(self, text):
+        self.config_manager.set_grid_cil_powertita_2(text)
+
+    def update_cil_titazone_3(self, text):
+        self.config_manager.set_grid_cil_titazone_3(text)
+
+    def update_cil_ncvtita_3(self, text):
+        self.config_manager.set_grid_cil_ncvtita_3(text)
+
+    def update_cil_powertita_3(self, text):
+        self.config_manager.set_grid_cil_powertita_3(text)
+
+    def update_cil_titazone_4(self, text):
+        self.config_manager.set_grid_cil_titazone_4(text)
+
+    def update_cil_ncvtita_4(self, text):
+        self.config_manager.set_grid_cil_ncvtita_4(text)
+
+    def update_cil_powertita_4(self, text):
+        self.config_manager.set_grid_cil_powertita_4(text)
+
+    def update_cil_titazone_5(self, text):
+        self.config_manager.set_grid_cil_titazone_5(text)
+
+    def update_cil_ncvtita_5(self, text):
+        self.config_manager.set_grid_cil_ncvtita_5(text)
+
+    def update_cil_powertita_5(self, text):
+        self.config_manager.set_grid_cil_powertita_5(text)
+
+    def update_cil_titazone_6(self, text):
+        self.config_manager.set_grid_cil_titazone_6(text)
+
+    def update_cil_ncvtita_6(self, text):
+        self.config_manager.set_grid_cil_ncvtita_6(text)
+
+    def update_cil_powertita_6(self, text):
+        self.config_manager.set_grid_cil_powertita_6(text)
+
+    def update_cil_titazone_7(self, text):
+        self.config_manager.set_grid_cil_titazone_7(text)
+
+    def update_cil_ncvtita_7(self, text):
+        self.config_manager.set_grid_cil_ncvtita_7(text)
+
+    def update_cil_powertita_7(self, text):
+        self.config_manager.set_grid_cil_powertita_7(text)
+
+    def update_cil_titazone_8(self, text):
+        self.config_manager.set_grid_cil_titazone_8(text)
+
+    def update_cil_ncvtita_8(self, text):
+        self.config_manager.set_grid_cil_ncvtita_8(text)
+
+    def update_cil_powertita_8(self, text):
+        self.config_manager.set_grid_cil_powertita_8(text)
+
+    def update_cil_titazone_9(self, text):
+        self.config_manager.set_grid_cil_titazone_9(text)
+
+    def update_cil_ncvtita_9(self, text):
+        self.config_manager.set_grid_cil_ncvtita_9(text)
+
+    def update_cil_powertita_9(self, text):
+        self.config_manager.set_grid_cil_powertita_9(text)
+
+    def update_cil_titazone_10(self, text):
+        self.config_manager.set_grid_cil_titazone_10(text)
+
+    def update_cil_ncvtita_10(self, text):
+        self.config_manager.set_grid_cil_ncvtita_10(text)
+
+    def update_cil_powertita_10(self, text):
+        self.config_manager.set_grid_cil_powertita_10(text)
+
+    ##############################################################################################
+    # -COORDENADA RADIO (CILINDRICA) - VARIAS ZONAS
+
+    def update_cil_nzr(self, text):
+        self.config_manager.set_grid_cil_nzr(text)
+
+    def update_cil_rini_vz(self, text):
+        self.config_manager.set_grid_cil_rini_vz(text)
+
+    def update_cil_rzone_1(self, text):
+        self.config_manager.set_grid_cil_rzone_1(text)
+
+    def update_cil_ncvr_1(self, text):
+        self.config_manager.set_grid_cil_ncvr_1(text)
+
+    def update_cil_powerr_1(self, text):
+        self.config_manager.set_grid_cil_powerr_1(text)
+
+    def update_cil_rzone_2(self, text):
+        self.config_manager.set_grid_cil_rzone_2(text)
+
+    def update_cil_ncvr_2(self, text):
+        self.config_manager.set_grid_cil_ncvr_2(text)
+
+    def update_cil_powerr_2(self, text):
+        self.config_manager.set_grid_cil_powerr_2(text)
+
+    def update_cil_rzone_3(self, text):
+        self.config_manager.set_grid_cil_rzone_3(text)
+
+    def update_cil_ncvr_3(self, text):
+        self.config_manager.set_grid_cil_ncvr_3(text)
+
+    def update_cil_powerr_3(self, text):
+        self.config_manager.set_grid_cil_powerr_3(text)
+
+    def update_cil_rzone_4(self, text):
+        self.config_manager.set_grid_cil_rzone_4(text)
+
+    def update_cil_ncvr_4(self, text):
+        self.config_manager.set_grid_cil_ncvr_4(text)
+
+    def update_cil_powerr_4(self, text):
+        self.config_manager.set_grid_cil_powerr_4(text)
+
+    def update_cil_rzone_5(self, text):
+        self.config_manager.set_grid_cil_rzone_5(text)
+
+    def update_cil_ncvr_5(self, text):
+        self.config_manager.set_grid_cil_ncvr_5(text)
+
+    def update_cil_powerr_5(self, text):
+        self.config_manager.set_grid_cil_powerr_5(text)
+
+    def update_cil_rzone_6(self, text):
+        self.config_manager.set_grid_cil_rzone_6(text)
+
+    def update_cil_ncvr_6(self, text):
+        self.config_manager.set_grid_cil_ncvr_6(text)
+
+    def update_cil_powerr_6(self, text):
+        self.config_manager.set_grid_cil_powerr_6(text)
+
+    def update_cil_rzone_7(self, text):
+        self.config_manager.set_grid_cil_rzone_7(text)
+
+    def update_cil_ncvr_7(self, text):
+        self.config_manager.set_grid_cil_ncvr_7(text)
+
+    def update_cil_powerr_7(self, text):
+        self.config_manager.set_grid_cil_powerr_7(text)
+
+    def update_cil_rzone_8(self, text):
+        self.config_manager.set_grid_cil_rzone_8(text)
+
+    def update_cil_ncvr_8(self, text):
+        self.config_manager.set_grid_cil_ncvr_8(text)
+
+    def update_cil_powerr_8(self, text):
+        self.config_manager.set_grid_cil_powerr_8(text)
+
+    def update_cil_rzone_9(self, text):
+        self.config_manager.set_grid_cil_rzone_9(text)
+
+    def update_cil_ncvr_9(self, text):
+        self.config_manager.set_grid_cil_ncvr_9(text)
+
+    def update_cil_powerr_9(self, text):
+        self.config_manager.set_grid_cil_powerr_9(text)
+
+    def update_cil_rzone_10(self, text):
+        self.config_manager.set_grid_cil_rzone_10(text)
+
+    def update_cil_ncvr_10(self, text):
+        self.config_manager.set_grid_cil_ncvr_10(text)
+
+    def update_cil_powerr_10(self, text):
+        self.config_manager.set_grid_cil_powerr_10(text)
+
+    ##############################################################################################
+    # -COORDENADA Z (CILINDRICA) - VARIAS ZONAS
+
+    def update_cil_vz_nzz(self, text):
+        self.config_manager.set_grid_cil_vz_nzz(text)
+
+    def update_cil_vz_zzone_1(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_1(text)
+
+    def update_cil_vz_ncvz_1(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_1(text)
+
+    def update_cil_vz_powerz_1(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_1(text)
+
+    def update_cil_vz_zzone_2(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_2(text)
+
+    def update_cil_vz_ncvz_2(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_2(text)
+
+    def update_cil_vz_powerz_2(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_2(text)
+
+    def update_cil_vz_zzone_3(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_3(text)
+
+    def update_cil_vz_ncvz_3(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_3(text)
+
+    def update_cil_vz_powerz_3(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_3(text)
+
+    def update_cil_vz_zzone_4(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_4(text)
+
+    def update_cil_vz_ncvz_4(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_4(text)
+
+    def update_cil_vz_powerz_4(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_4(text)
+
+    def update_cil_vz_zzone_5(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_5(text)
+
+    def update_cil_vz_ncvz_5(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_5(text)
+
+    def update_cil_vz_powerz_5(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_5(text)
+
+    def update_cil_vz_zzone_6(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_6(text)
+
+    def update_cil_vz_ncvz_6(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_6(text)
+
+    def update_cil_vz_powerz_6(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_6(text)
+
+    def update_cil_vz_zzone_7(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_7(text)
+
+    def update_cil_vz_ncvz_7(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_7(text)
+
+    def update_cil_vz_powerz_7(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_7(text)
+
+    def update_cil_vz_zzone_8(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_8(text)
+
+    def update_cil_vz_ncvz_8(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_8(text)
+
+    def update_cil_vz_powerz_8(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_8(text)
+
+    def update_cil_vz_zzone_9(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_9(text)
+
+    def update_cil_vz_ncvz_9(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_9(text)
+
+    def update_cil_vz_powerz_9(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_9(text)
+
+    def update_cil_vz_zzone_10(self, text):
+        self.config_manager.set_grid_cil_vz_zzone_10(text)
+
+    def update_cil_vz_ncvz_10(self, text):
+        self.config_manager.set_grid_cil_vz_ncvz_10(text)
+
+    def update_cil_vz_powerz_10(self, text):
+        self.config_manager.set_grid_cil_vz_powerz_10(text)
+
+
+#############################################################################################
 
 if __name__ == "__main__":
     app = qtw.QApplication(sys.argv)
