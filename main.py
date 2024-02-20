@@ -48,7 +48,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
     @qtc.Slot()
     def open_variables(self):
-        self.form = VariablesWindow()
+        self.form = VariablesWindow(self.config_manager)
         self.form.exec()
 
     @qtc.Slot()

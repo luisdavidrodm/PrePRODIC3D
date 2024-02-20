@@ -9,6 +9,7 @@ class ConfigManager:
             [
                 ("HEADER", OrderedDict()),
                 ("GRID", OrderedDict()),
+                ("VARIABLES", OrderedDict()),
             ]
         )
 
@@ -674,6 +675,58 @@ class ConfigManager:
 
     def set_grid_cil_vz_powerz_10(self, powerz10_vz):
         self.config_structure["GRID"]["CIL_VZ_POWERZ(10)"] = powerz10_vz
+
+    ######################################################################################
+
+    # CONFIGURACION DE VALORES PARA SECCION VARIABLES
+
+    def set_variables_iptm(self, iptm):
+        self.config_structure["VARIABLES"]["IPTM"] = iptm
+
+    def set_variables_dt(self, dt):
+        self.config_structure["VARIABLES"]["DT"] = dt
+
+    def set_variables_kord(self, kord):
+        self.config_structure["VARIABLES"]["KORD"] = kord
+
+    def set_variables_title_1(self, title1):
+        self.config_structure["VARIABLES"]["TITLE(1)"] = title1
+
+    def set_variables_title_2(self, title2):
+        self.config_structure["VARIABLES"]["TITLE(2)"] = title2
+
+    def set_variables_title_3(self, title3):
+        self.config_structure["VARIABLES"]["TITLE(3)"] = title3
+
+    def set_variables_title_4(self, title4):
+        self.config_structure["VARIABLES"]["TITLE(4)"] = title4
+
+    def set_variables_title_5(self, title5):
+        self.config_structure["VARIABLES"]["TITLE(5)"] = title5
+
+    def set_variables_title_6(self, title6):
+        self.config_structure["VARIABLES"]["TITLE(6)"] = title6
+
+    def set_variables_title_7(self, title7):
+        self.config_structure["VARIABLES"]["TITLE(7)"] = title7
+
+    def set_variables_title_8(self, title8):
+        self.config_structure["VARIABLES"]["TITLE(8)"] = title8
+
+    def set_variables_title_9(self, title9):
+        self.config_structure["VARIABLES"]["TITLE(9)"] = title9
+
+    def set_variables_title_10(self, title10):
+        self.config_structure["VARIABLES"]["TITLE(10)"] = title10
+
+    def set_variables_title_11(self, title11):
+        self.config_structure["VARIABLES"]["TITLE(11)"] = title11
+
+    def set_variables_title_12(self, title12):
+        self.config_structure["VARIABLES"]["TITLE(12)"] = title12
+    
+    def set_variables_ksolve_1(self, ksolve1):
+        self.config_structure["VARIABLES"]["KSOLVE(1)"] = ksolve1
 
     ######################################################################################
 
