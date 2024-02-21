@@ -88,13 +88,9 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
     def update_variables_title_12(self, text):
         self.config_manager.set_variables_title_12(text)
 
-    ####DUDA
-
     def update_variables_ksolve_1(self, state):
-        if state == qtc.Qt.CheckState.Checked:
-            ksolve1 = 1
-        else:
-            ksolve1 = 0
+        ksolve1 = 1 if state == 2 else 0
+        print(ksolve1)
         self.config_manager.set_variables_ksolve_1(ksolve1)
 
 
