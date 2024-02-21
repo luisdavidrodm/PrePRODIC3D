@@ -724,9 +724,47 @@ class ConfigManager:
 
     def set_variables_title_12(self, title12):
         self.config_structure["VARIABLES"]["TITLE(12)"] = title12
-    
+
     def set_variables_ksolve_1(self, ksolve1):
         self.config_structure["VARIABLES"]["KSOLVE(1)"] = ksolve1
+
+    # - Pendiente agregar el resto de ksolve y kprint
+
+    def set_variables_relax_1(self, relax1):
+        self.config_structure["VARIABLES"]["RELAX(1)"] = relax1
+
+    def set_variables_relax_2(self, relax2):
+        self.config_structure["VARIABLES"]["RELAX(2)"] = relax2
+
+    def set_variables_relax_3(self, relax3):
+        self.config_structure["VARIABLES"]["RELAX(3)"] = relax3
+
+    def set_variables_relax_4(self, relax4):
+        self.config_structure["VARIABLES"]["RELAX(4)"] = relax4
+
+    def set_variables_relax_5(self, relax5):
+        self.config_structure["VARIABLES"]["RELAX(5)"] = relax5
+
+    def set_variables_relax_6(self, relax6):
+        self.config_structure["VARIABLES"]["RELAX(6)"] = relax6
+
+    def set_variables_relax_7(self, relax7):
+        self.config_structure["VARIABLES"]["RELAX(7)"] = relax7
+
+    def set_variables_relax_8(self, relax8):
+        self.config_structure["VARIABLES"]["RELAX(8)"] = relax8
+
+    def set_variables_relax_9(self, relax9):
+        self.config_structure["VARIABLES"]["RELAX(9)"] = relax9
+
+    def set_variables_relax_10(self, relax10):
+        self.config_structure["VARIABLES"]["RELAX(10)"] = relax10
+
+    def set_variables_relax_11(self, relax11):
+        self.config_structure["VARIABLES"]["RELAX(11)"] = relax11
+
+    def set_variables_relax_12(self, relax12):
+        self.config_structure["VARIABLES"]["RELAX(12)"] = relax12
 
     ######################################################################################
 
