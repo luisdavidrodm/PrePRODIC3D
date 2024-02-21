@@ -14,21 +14,6 @@ class ConfigManager:
         )
 
     ######################################################################################
-    # CONFIGURACION DE VALORES PARA SECCION INICIO
-
-    def set_header(self, header):
-        # Configurar los valores para la sección HEADER
-        self.config_structure["HEADER"]["HEADER"] = header
-
-    def set_printf(self, printf):
-        # Configurar los valores para la sección PRINTF
-        self.config_structure["HEADER"]["PRINTF"] = printf
-
-    def set_plotf(self, plotf):
-        # Configurar los valores para la sección PLOTF
-        self.config_structure["HEADER"]["PLOTF"] = plotf
-
-    ######################################################################################
     # CONFIGURACION DE VALORES PARA SECCION GRID
 
     def set_grid_mode(self, mode):
@@ -724,7 +709,7 @@ class ConfigManager:
 
     def set_variables_title_12(self, title12):
         self.config_structure["VARIABLES"]["TITLE(12)"] = title12
-    
+
     def set_variables_ksolve_1(self, ksolve1):
         self.config_structure["VARIABLES"]["KSOLVE(1)"] = ksolve1
 
