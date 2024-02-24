@@ -58,7 +58,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
     @qtc.Slot()
     def open_bordes(self):
-        self.form = BordesWindow()
+        self.form = BordesWindow(self.config_manager)
         self.form.exec()
 
     @qtc.Slot()
