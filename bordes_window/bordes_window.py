@@ -3,18 +3,215 @@ from PySide6 import QtCore as qtc
 from PySide6 import QtWidgets as qtw
 from PySide6 import QtGui as qtg
 
+from config_manager import ConfigManager
 from bordes_window.ui.bordes_window_ui import Ui_bordes_window
 
+
 class BordesWindow(qtw.QDialog, Ui_bordes_window):
-    def __init__(self):
+    def __init__(self, config_manager):
         super().__init__()
         self.setupUi(self)
+        self.config_manager = config_manager
+
+        self.pb_addsegment_xmax.clicked.connect(self.add_segment_x_max)
+        self.pb_remsegment_xmax.clicked.connect(self.remove_segment_x_max)
+
+        self.pb_addsegment_xmin.clicked.connect(self.add_segment_x_min)
+        self.pb_remsegment_xmin.clicked.connect(self.remove_segment_x_min)
+
+        self.pb_addsegment_ymax.clicked.connect(self.add_segment_y_max)
+        self.pb_remsegment_ymax.clicked.connect(self.remove_segment_y_max)
+
+        self.pb_addsegment_ymin.clicked.connect(self.add_segment_y_min)
+        self.pb_remsegment_ymin.clicked.connect(self.remove_segment_y_min)
+
+        self.pb_addsegment_zmax.clicked.connect(self.add_segment_z_max)
+        self.pb_remsegment_zmax.clicked.connect(self.remove_segment_z_max)
+
+        self.pb_addsegment_zmin.clicked.connect(self.add_segment_z_min)
+        self.pb_remsegment_zmin.clicked.connect(self.remove_segment_z_min)
+
+        self.lw_bordes.currentRowChanged.connect(self.change_segment_list)
+
+        self.lw_segmentlist_xmax.currentRowChanged.connect(self.change_lon_segment)
+        self.lw_segmentlist_xmin.currentRowChanged.connect(self.change_lon_segment)
+        self.lw_segmentlist_ymax.currentRowChanged.connect(self.change_lon_segment)
+        self.lw_segmentlist_ymin.currentRowChanged.connect(self.change_lon_segment)
+        self.lw_segmentlist_zmax.currentRowChanged.connect(self.change_lon_segment)
+        self.lw_segmentlist_zmin.currentRowChanged.connect(self.change_lon_segment)
+
+        self.segment_count_xmax = 1
+        self.segment_count_xmin = 1
+        self.segment_count_ymax = 1
+        self.segment_count_ymin = 1
+        self.segment_count_zmax = 1
+        self.segment_count_zmin = 1
+
+    def change_segment_list(self):
+        current_text_segment = self.lw_bordes.currentItem().text()
+
+        if current_text_segment == "X Max":
+            self.sw_segmentlist.setCurrentIndex(0)
+            self.sw_segment_addremove.setCurrentIndex(0)
+
+        elif current_text_segment == "X Min":
+            self.sw_segmentlist.setCurrentIndex(1)
+            self.sw_segment_addremove.setCurrentIndex(1)
+
+        elif current_text_segment == "Y Max":
+            self.sw_segmentlist.setCurrentIndex(2)
+            self.sw_segment_addremove.setCurrentIndex(2)
+
+        elif current_text_segment == "Y Min":
+            self.sw_segmentlist.setCurrentIndex(3)
+            self.sw_segment_addremove.setCurrentIndex(3)
+
+        elif current_text_segment == "Z Max":
+            self.sw_segmentlist.setCurrentIndex(4)
+            self.sw_segment_addremove.setCurrentIndex(4)
+
+        elif current_text_segment == "Z Min":
+            self.sw_segmentlist.setCurrentIndex(5)
+            self.sw_segment_addremove.setCurrentIndex(5)
+
+    def add_segment_x_max(self):
+        if self.segment_count_xmax < 5:
+            self.segment_count_xmax += 1
+            self.lw_segmentlist_xmax.addItem(f"Segmento {self.segment_count_xmax}")
+
+    def remove_segment_x_max(self):
+        count_xmax = self.lw_segmentlist_xmax.count()
+        if count_xmax > 1:
+            self.lw_segmentlist_xmax.takeItem(count_xmax - 1)
+            self.segment_count_xmax -= 1
+
+    def add_segment_x_min(self):
+        if self.segment_count_xmin < 5:
+            self.segment_count_xmin += 1
+            self.lw_segmentlist_xmin.addItem(f"Segmento {self.segment_count_xmin}")
+
+    def remove_segment_x_min(self):
+        count_xmin = self.lw_segmentlist_xmin.count()
+        if count_xmin > 1:
+            self.lw_segmentlist_xmin.takeItem(count_xmin - 1)
+            self.segment_count_xmin -= 1
+
+    def add_segment_y_max(self):
+        if self.segment_count_ymax < 5:
+            self.segment_count_ymax += 1
+            self.lw_segmentlist_ymax.addItem(f"Segmento {self.segment_count_ymax}")
+
+    def remove_segment_y_max(self):
+        count_ymax = self.lw_segmentlist_ymax.count()
+        if count_ymax > 1:
+            self.lw_segmentlist_ymax.takeItem(count_ymax - 1)
+            self.segment_count_ymax -= 1
+
+    def add_segment_y_min(self):
+        if self.segment_count_ymin < 5:
+            self.segment_count_ymin += 1
+            self.lw_segmentlist_ymin.addItem(f"Segmento {self.segment_count_ymin}")
+
+    def remove_segment_y_min(self):
+        count_ymin = self.lw_segmentlist_ymin.count()
+        if count_ymin > 1:
+            self.lw_segmentlist_ymin.takeItem(count_ymin - 1)
+            self.segment_count_ymin -= 1
+
+    def add_segment_z_max(self):
+        if self.segment_count_zmax < 5:
+            self.segment_count_zmax += 1
+            self.lw_segmentlist_zmax.addItem(f"Segmento {self.segment_count_zmax}")
+
+    def remove_segment_z_max(self):
+        count_zmax = self.lw_segmentlist_zmax.count()
+        if count_zmax > 1:
+            self.lw_segmentlist_zmax.takeItem(count_zmax - 1)
+            self.segment_count_zmax -= 1
+
+    def add_segment_z_min(self):
+        if self.segment_count_zmin < 5:
+            self.segment_count_zmin += 1
+            self.lw_segmentlist_zmin.addItem(f"Segmento {self.segment_count_zmin}")
+
+    def remove_segment_z_min(self):
+        count_zmin = self.lw_segmentlist_zmin.count()
+        if count_zmin > 1:
+            self.lw_segmentlist_zmin.takeItem(count_zmin - 1)
+            self.segment_count_zmin -= 1
+
+    def change_lon_segment(self):
+        current_text_segment_list_xmax = (
+            self.lw_segmentlist_xmax.currentItem().text()
+            if self.lw_segmentlist_xmax.currentItem() is not None
+            else None
+        )
+        current_text_segment_list_xmin = (
+            self.lw_segmentlist_xmin.currentItem().text()
+            if self.lw_segmentlist_xmin.currentItem() is not None
+            else None
+        )
+        current_text_segment_list_ymax = (
+            self.lw_segmentlist_ymax.currentItem().text()
+            if self.lw_segmentlist_ymax.currentItem() is not None
+            else None
+        )
+        current_text_segment_list_ymin = (
+            self.lw_segmentlist_ymin.currentItem().text()
+            if self.lw_segmentlist_ymin.currentItem() is not None
+            else None
+        )
+        current_text_segment_list_zmax = (
+            self.lw_segmentlist_zmax.currentItem().text()
+            if self.lw_segmentlist_zmax.currentItem() is not None
+            else None
+        )
+        current_text_segment_list_zmin = (
+            self.lw_segmentlist_zmin.currentItem().text()
+            if self.lw_segmentlist_zmin.currentItem() is not None
+            else None
+        )
+
+        for j in range(0, 5):
+            for i in range(1, 6):
+                if current_text_segment_list_xmax == f"Segmento {i}":
+                    self.sw_lon_segment.setCurrentIndex(j)
+                    break
+
+        for j in range(5, 10):
+            for i in range(1, 6):
+                if current_text_segment_list_xmin == f"Segmento {i}":
+                    self.sw_lon_segment.setCurrentIndex(j)
+                    break
+
+        for j in range(10, 15):
+            for i in range(1, 6):
+                if current_text_segment_list_ymax == f"Segmento {i}":
+                    self.sw_lon_segment.setCurrentIndex(j)
+                    break
+
+        for j in range(15, 20):
+            for i in range(1, 6):
+                if current_text_segment_list_ymin == f"Segmento {i}":
+                    self.sw_lon_segment.setCurrentIndex(j)
+                    break
+
+        for j in range(20, 25):
+            for i in range(1, 6):
+                if current_text_segment_list_zmax == f"Segmento {i}":
+                    self.sw_lon_segment.setCurrentIndex(j)
+                    break
+
+        for j in range(25, 30):
+            for i in range(1, 6):
+                if current_text_segment_list_zmin == f"Segmento {i}":
+                    self.sw_lon_segment.setCurrentIndex(j)
+                    break
+
 
 if __name__ == "__main__":
     app = qtw.QApplication(sys.argv)
-
-    form = BordesWindow()
-
+    config_manager = ConfigManager()
+    form = BordesWindow(config_manager)
     form.open()
-
     sys.exit(app.exec())

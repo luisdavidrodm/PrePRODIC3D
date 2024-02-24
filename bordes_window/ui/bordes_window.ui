@@ -7,103 +7,13 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>490</height>
+    <height>521</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Bordes - PrePRODIC3D</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="0">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>División de bordes</string>
-     </property>
-     <layout class="QGridLayout" name="gridLayout">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Longitud</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3" alignment="Qt::AlignHCenter">
-       <widget class="QListWidget" name="listWidget_2">
-        <item>
-         <property name="text">
-          <string>Segmento 1</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="3">
-       <widget class="QListWidget" name="listWidget">
-        <item>
-         <property name="text">
-          <string>X Max</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>X Min</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Y Max</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Y Min</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Z Max</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Z Min</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="0" column="3">
-       <widget class="QLineEdit" name="lineEdit"/>
-      </item>
-      <item row="1" column="0" colspan="2">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Borde</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Segmento</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="0" colspan="4">
-       <widget class="QPushButton" name="pushButton">
-        <property name="text">
-         <string>Eliminar último segmento</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="0" colspan="4">
-       <widget class="QPushButton" name="pushButton_2">
-        <property name="text">
-         <string>Agregar un segmento</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="0" column="1">
     <widget class="QGroupBox" name="groupBox_2">
      <property name="title">
@@ -137,6 +47,54 @@
          <string>Nodos internos</string>
         </property>
        </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0">
+    <widget class="QGroupBox" name="groupBox_4">
+     <property name="title">
+      <string>Velocidad</string>
+     </property>
+     <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Normal</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_2"/>
+      </item>
+      <item row="1" column="0">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Tangencial</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLineEdit" name="lineEdit_3"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="title">
+      <string>Salida de la masa</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout_2">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Fracción</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="lineEdit_4"/>
       </item>
      </layout>
     </widget>
@@ -227,50 +185,483 @@
      </layout>
     </widget>
    </item>
-   <item row="2" column="0">
-    <widget class="QGroupBox" name="groupBox_4">
+   <item row="0" column="0">
+    <widget class="QGroupBox" name="groupBox">
      <property name="title">
-      <string>Velocidad</string>
+      <string>División de bordes</string>
      </property>
-     <layout class="QGridLayout" name="gridLayout_4">
+     <layout class="QGridLayout" name="gridLayout">
+      <item row="1" column="0" colspan="2">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Borde</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="0" colspan="4">
+       <widget class="QStackedWidget" name="sw_segment_addremove">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="sw_segment_addremove_xmax">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
+          <item>
+           <widget class="QPushButton" name="pb_addsegment_xmax">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_remsegment_xmax">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segment_addremove_xmin">
+         <layout class="QVBoxLayout" name="verticalLayout_6">
+          <item>
+           <widget class="QPushButton" name="pb_addsegment_xmin">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_remsegment_xmin">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segment_addremove_ymax">
+         <layout class="QVBoxLayout" name="verticalLayout_7">
+          <item>
+           <widget class="QPushButton" name="pb_addsegment_ymax">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_remsegment_ymax">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segment_addremove_ymin">
+         <layout class="QVBoxLayout" name="verticalLayout_8">
+          <item>
+           <widget class="QPushButton" name="pb_addsegment_ymin">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_remsegment_ymin">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segment_addremove_zmax">
+         <layout class="QVBoxLayout" name="verticalLayout_9">
+          <item>
+           <widget class="QPushButton" name="pb_addsegment_zmax">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_remsegment_zmax">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segment_addremove_zmin">
+         <layout class="QVBoxLayout" name="verticalLayout_10">
+          <item>
+           <widget class="QPushButton" name="pb_addsegment_zmin">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_remsegment_zmin">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="3">
+       <widget class="QListWidget" name="lw_bordes">
+        <item>
+         <property name="text">
+          <string>X Max</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>X Min</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Y Max</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Y Min</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Z Max</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Z Min</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Segmento</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QStackedWidget" name="sw_segmentlist">
+        <property name="currentIndex">
+         <number>0</number>
+        </property>
+        <widget class="QWidget" name="sw_segmentlist_xmax">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
+          <item>
+           <widget class="QListWidget" name="lw_segmentlist_xmax">
+            <item>
+             <property name="text">
+              <string>Segmento 1</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segmentlist_xmin">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
+          <item>
+           <widget class="QListWidget" name="lw_segmentlist_xmin">
+            <item>
+             <property name="text">
+              <string>Segmento 1</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segmentlist_ymax">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
+          <item>
+           <widget class="QListWidget" name="lw_segmentlist_ymax">
+            <item>
+             <property name="text">
+              <string>Segmento 1</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segmentlist_ymin">
+         <layout class="QVBoxLayout" name="verticalLayout_11">
+          <item>
+           <widget class="QListWidget" name="lw_segmentlist_ymin">
+            <item>
+             <property name="text">
+              <string>Segmento 1</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segmentlist_zmax">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
+          <item>
+           <widget class="QListWidget" name="lw_segmentlist_zmax">
+            <item>
+             <property name="text">
+              <string>Segmento 1</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_segmentlist_zmin">
+         <layout class="QVBoxLayout" name="verticalLayout_12">
+          <item>
+           <widget class="QListWidget" name="lw_segmentlist_zmin">
+            <item>
+             <property name="text">
+              <string>Segmento 1</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+         </layout>
+        </widget>
+       </widget>
+      </item>
       <item row="0" column="0">
-       <widget class="QLabel" name="label_4">
+       <widget class="QLabel" name="label">
         <property name="text">
-         <string>Normal</string>
+         <string>Longitud</string>
         </property>
        </widget>
       </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_2"/>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Tangencial</string>
+      <item row="0" column="3">
+       <widget class="QStackedWidget" name="sw_lon_segment">
+        <property name="currentIndex">
+         <number>29</number>
         </property>
+        <widget class="QWidget" name="sw_lon_segment_xmax_1">
+         <layout class="QVBoxLayout" name="verticalLayout_13">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmax_1"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmax_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_5">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmax_2"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmax_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_6">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmax_3"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmax_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_7">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmax_4"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmax_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_8">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmax_5"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmin_1">
+         <layout class="QHBoxLayout" name="horizontalLayout_9">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmin_1"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmin_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_10">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmin_2"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmin_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_11">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmin_3"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmin_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_12">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmin_4"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_xmin_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_13">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_xmin_5"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymax_1">
+         <layout class="QHBoxLayout" name="horizontalLayout_14">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymax_1"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymax_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_15">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymax_2"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymax_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_16">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymax_3"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymax_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_17">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymax_4"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymax_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_18">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymax_5"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymin_1">
+         <layout class="QHBoxLayout" name="horizontalLayout_19">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymin_1"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymin_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_20">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymin_2"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymin_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_21">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymin_3"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymin_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_22">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymin_4"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_ymin_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_23">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_ymin_5"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmax_1">
+         <layout class="QHBoxLayout" name="horizontalLayout_24">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmax_1"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmax_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_25">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmax_2"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmax_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_26">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmax_3"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmax_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_27">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmax_4"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmax_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_28">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmax_5"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmin_1">
+         <layout class="QHBoxLayout" name="horizontalLayout_29">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmin_1"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmin_2">
+         <layout class="QHBoxLayout" name="horizontalLayout_30">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmin_2"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmin_3">
+         <layout class="QHBoxLayout" name="horizontalLayout_31">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmin_3"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmin_4">
+         <layout class="QHBoxLayout" name="horizontalLayout_32">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmin_4"/>
+          </item>
+         </layout>
+        </widget>
+        <widget class="QWidget" name="sw_lon_segment_zmin_5">
+         <layout class="QHBoxLayout" name="horizontalLayout_33">
+          <item>
+           <widget class="QLineEdit" name="le_lon_segment_zmin_5"/>
+          </item>
+         </layout>
+        </widget>
        </widget>
-      </item>
-      <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QGroupBox" name="groupBox_5">
-     <property name="title">
-      <string>Salida de la masa</string>
-     </property>
-     <layout class="QFormLayout" name="formLayout_2">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_6">
-        <property name="text">
-         <string>Fracción</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_4"/>
       </item>
      </layout>
     </widget>
