@@ -390,74 +390,74 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
     def on_coordinate_system_changed(self, selection):
         mode = 1 if selection == "Cartesianas" else 2
-        self.config_manager.set_grid_mode(mode)
+        self.config_manager.config_structure["GRID"]["MODE"] = mode
 
     def on_zones_system_changed(self, selection):
         zone = "zgrid" if selection == "Varias zonas" else "ezgrid"
-        self.config_manager.set_grid_zgrid_ezgrid(zone)
+        self.config_manager.config_structure["GRID"]["ZONEGRID"] = zone
 
     ##############################################################################################
     # METODOS PARA CONEXION DE WIDGETS ZONA UNICA - CARTESIANA
 
     def update_cart_xl(self, text):
-        self.config_manager.set_grid_cart_xl(text)
+        self.config_manager.config_structure["GRID"]["CART_XL"] = text
 
     def update_cart_nvcx(self, text):
-        self.config_manager.set_grid_cart_nvcx(text)
+        self.config_manager.config_structure["GRID"]["CART_NVCX"] = text
 
     def update_cart_potenciax(self, text):
-        self.config_manager.set_grid_cart_potenciax(text)
+        self.config_manager.config_structure["GRID"]["CART_POWERX"] = text
 
     def update_cart_yl(self, text):
-        self.config_manager.set_grid_cart_yl(text)
+        self.config_manager.config_structure["GRID"]["CART_YL"] = text
 
     def update_cart_nvcy(self, text):
-        self.config_manager.set_grid_cart_nvcy(text)
+        self.config_manager.config_structure["GRID"]["CART_NVCY"] = text
 
     def update_cart_potenciay(self, text):
-        self.config_manager.set_grid_cart_potenciay(text)
+        self.config_manager.config_structure["GRID"]["CART_POWERY"] = text
 
     def update_cart_zl(self, text):
-        self.config_manager.set_grid_cart_zl(text)
+        self.config_manager.config_structure["GRID"]["CART_ZL"] = text
 
     def update_cart_nvcz(self, text):
-        self.config_manager.set_grid_cart_nvcz(text)
+        self.config_manager.config_structure["GRID"]["CART_NVCZ"] = text
 
     def update_cart_potenciaz(self, text):
-        self.config_manager.set_grid_cart_potenciaz(text)
+        self.config_manager.config_structure["GRID"]["CART_POWERZ"] = text
 
     ##############################################################################################
     # METODOS PARA CONEXION DE WIDGETS ZONA UNICA - CILINDRICA
 
     def update_cil_tital(self, text):
-        self.config_manager.set_grid_cil_tital(text)
+        self.config_manager.config_structure["GRID"]["CIL_TITAL"] = text
 
     def update_cil_nvctita(self, text):
-        self.config_manager.set_grid_cil_nvctita(text)
+        self.config_manager.config_structure["GRID"]["CIL_NVCTITA"] = text
 
     def update_cil_potenciatita(self, text):
-        self.config_manager.set_grid_cil_potenciatita(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERTITA"] = text
 
     def update_cil_rini_zu(self, text):
-        self.config_manager.set_grid_cil_rini_zu(text)
+        self.config_manager.config_structure["GRID"]["CIL_R(1)_ZU"] = text
 
     def update_cil_rl(self, text):
-        self.config_manager.set_grid_cil_rl(text)
+        self.config_manager.config_structure["GRID"]["CIL_RL"] = text
 
     def update_cil_nvcr(self, text):
-        self.config_manager.set_grid_cil_nvcr(text)
+        self.config_manager.config_structure["GRID"]["CIL_NVCR"] = text
 
     def update_cil_potenciar(self, text):
-        self.config_manager.set_grid_cil_potenciar(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERR"] = text
 
     def update_cil_zl(self, text):
-        self.config_manager.set_grid_cil_zl(text)
+        self.config_manager.config_structure["GRID"]["CIL_ZL"] = text
 
     def update_cil_nvcz(self, text):
-        self.config_manager.set_grid_cil_nvcz(text)
+        self.config_manager.config_structure["GRID"]["CIL_NVCZ"] = text
 
     def update_cil_potenciaz(self, text):
-        self.config_manager.set_grid_cil_potenciaz(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERZ"] = text
 
     ##############################################################################################
     # METODOS PARA CONEXION DE WIDGETS VARIAS ZONAS - CARTESIANA
@@ -465,287 +465,287 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
     # -COORDENADA X (CARTESIANA)
 
     def update_cart_nzx(self, text):
-        self.config_manager.set_grid_cart_nzx(text)
+        self.config_manager.config_structure["GRID"]["CART_NZX"] = text
 
     def update_cart_xzone_1(self, text):
-        self.config_manager.set_grid_cart_xzone_1(text)
+        self.config_manager.config_structure["GRID"]["XZONE(1)"] = text
 
     def update_cart_ncvx_1(self, text):
-        self.config_manager.set_grid_cart_ncvx_1(text)
+        self.config_manager.config_structure["GRID"]["NCVX(1)"] = text
 
     def update_cart_powerx_1(self, text):
-        self.config_manager.set_grid_cart_powerx_1(text)
+        self.config_manager.config_structure["GRID"]["POWERX(1)"] = text
 
     def update_cart_xzone_2(self, text):
-        self.config_manager.set_grid_cart_xzone_2(text)
+        self.config_manager.config_structure["GRID"]["XZONE(2)"] = text
 
     def update_cart_ncvx_2(self, text):
-        self.config_manager.set_grid_cart_ncvx_2(text)
+        self.config_manager.config_structure["GRID"]["NCVX(2)"] = text
 
     def update_cart_powerx_2(self, text):
-        self.config_manager.set_grid_cart_powerx_2(text)
+        self.config_manager.config_structure["GRID"]["POWERX(2)"] = text
 
     def update_cart_xzone_3(self, text):
-        self.config_manager.set_grid_cart_xzone_3(text)
+        self.config_manager.config_structure["GRID"]["XZONE(3)"] = text
 
     def update_cart_ncvx_3(self, text):
-        self.config_manager.set_grid_cart_ncvx_3(text)
+        self.config_manager.config_structure["GRID"]["NCVX(3)"] = text
 
     def update_cart_powerx_3(self, text):
-        self.config_manager.set_grid_cart_powerx_3(text)
+        self.config_manager.config_structure["GRID"]["POWERX(3)"] = text
 
     def update_cart_xzone_4(self, text):
-        self.config_manager.set_grid_cart_xzone_4(text)
+        self.config_manager.config_structure["GRID"]["XZONE(4)"] = text
 
     def update_cart_ncvx_4(self, text):
-        self.config_manager.set_grid_cart_ncvx_4(text)
+        self.config_manager.config_structure["GRID"]["NCVX(4)"] = text
 
     def update_cart_powerx_4(self, text):
-        self.config_manager.set_grid_cart_powerx_4(text)
+        self.config_manager.config_structure["GRID"]["POWERX(4)"] = text
 
     def update_cart_xzone_5(self, text):
-        self.config_manager.set_grid_cart_xzone_5(text)
+        self.config_manager.config_structure["GRID"]["XZONE(5)"] = text
 
     def update_cart_ncvx_5(self, text):
-        self.config_manager.set_grid_cart_ncvx_5(text)
+        self.config_manager.config_structure["GRID"]["NCVX(5)"] = text
 
     def update_cart_powerx_5(self, text):
-        self.config_manager.set_grid_cart_powerx_5(text)
+        self.config_manager.config_structure["GRID"]["POWERX(5)"] = text
 
     def update_cart_xzone_6(self, text):
-        self.config_manager.set_grid_cart_xzone_6(text)
+        self.config_manager.config_structure["GRID"]["XZONE(6)"] = text
 
     def update_cart_ncvx_6(self, text):
-        self.config_manager.set_grid_cart_ncvx_6(text)
+        self.config_manager.config_structure["GRID"]["NCVX(6)"] = text
 
     def update_cart_powerx_6(self, text):
-        self.config_manager.set_grid_cart_powerx_6(text)
+        self.config_manager.config_structure["GRID"]["POWERX(6)"] = text
 
     def update_cart_xzone_7(self, text):
-        self.config_manager.set_grid_cart_xzone_7(text)
+        self.config_manager.config_structure["GRID"]["XZONE(7)"] = text
 
     def update_cart_ncvx_7(self, text):
-        self.config_manager.set_grid_cart_ncvx_7(text)
+        self.config_manager.config_structure["GRID"]["NCVX(7)"] = text
 
     def update_cart_powerx_7(self, text):
-        self.config_manager.set_grid_cart_powerx_7(text)
+        self.config_manager.config_structure["GRID"]["POWERX(7)"] = text
 
     def update_cart_xzone_8(self, text):
-        self.config_manager.set_grid_cart_xzone_8(text)
+        self.config_manager.config_structure["GRID"]["XZONE(8)"] = text
 
     def update_cart_ncvx_8(self, text):
-        self.config_manager.set_grid_cart_ncvx_8(text)
+        self.config_manager.config_structure["GRID"]["NCVX(8)"] = text
 
     def update_cart_powerx_8(self, text):
-        self.config_manager.set_grid_cart_powerx_8(text)
+        self.config_manager.config_structure["GRID"]["POWERX(8)"] = text
 
     def update_cart_xzone_9(self, text):
-        self.config_manager.set_grid_cart_xzone_9(text)
+        self.config_manager.config_structure["GRID"]["XZONE(9)"] = text
 
     def update_cart_ncvx_9(self, text):
-        self.config_manager.set_grid_cart_ncvx_9(text)
+        self.config_manager.config_structure["GRID"]["NCVX(9)"] = text
 
     def update_cart_powerx_9(self, text):
-        self.config_manager.set_grid_cart_powerx_9(text)
+        self.config_manager.config_structure["GRID"]["POWERX(9)"] = text
 
     def update_cart_xzone_10(self, text):
-        self.config_manager.set_grid_cart_xzone_10(text)
+        self.config_manager.config_structure["GRID"]["XZONE(10)"] = text
 
     def update_cart_ncvx_10(self, text):
-        self.config_manager.set_grid_cart_ncvx_10(text)
+        self.config_manager.config_structure["GRID"]["NCVX(10)"] = text
 
     def update_cart_powerx_10(self, text):
-        self.config_manager.set_grid_cart_powerx_10(text)
+        self.config_manager.config_structure["GRID"]["POWERX(10)"] = text
 
     # -COORDENADA Y (CARTESIANA)
 
     def update_cart_nzy(self, text):
-        self.config_manager.set_grid_cart_nzy(text)
+        self.config_manager.config_structure["GRID"]["CART_NZY"] = text
 
     def update_cart_yzone_1(self, text):
-        self.config_manager.set_grid_cart_yzone_1(text)
+        self.config_manager.config_structure["GRID"]["YZONE(1)"] = text
 
     def update_cart_ncvy_1(self, text):
-        self.config_manager.set_grid_cart_ncvy_1(text)
+        self.config_manager.config_structure["GRID"]["NCVY(1)"] = text
 
     def update_cart_powery_1(self, text):
-        self.config_manager.set_grid_cart_powery_1(text)
+        self.config_manager.config_structure["GRID"]["POWERY(1)"] = text
 
     def update_cart_yzone_2(self, text):
-        self.config_manager.set_grid_cart_yzone_2(text)
+        self.config_manager.config_structure["GRID"]["YZONE(2)"] = text
 
     def update_cart_ncvy_2(self, text):
-        self.config_manager.set_grid_cart_ncvy_2(text)
+        self.config_manager.config_structure["GRID"]["NCVY(2)"] = text
 
     def update_cart_powery_2(self, text):
-        self.config_manager.set_grid_cart_powery_2(text)
+        self.config_manager.config_structure["GRID"]["POWERY(2)"] = text
 
     def update_cart_yzone_3(self, text):
-        self.config_manager.set_grid_cart_yzone_3(text)
+        self.config_manager.config_structure["GRID"]["YZONE(3)"] = text
 
     def update_cart_ncvy_3(self, text):
-        self.config_manager.set_grid_cart_ncvy_3(text)
+        self.config_manager.config_structure["GRID"]["NCVY(3)"] = text
 
     def update_cart_powery_3(self, text):
-        self.config_manager.set_grid_cart_powery_3(text)
+        self.config_manager.config_structure["GRID"]["POWERY(3)"] = text
 
     def update_cart_yzone_4(self, text):
-        self.config_manager.set_grid_cart_yzone_4(text)
+        self.config_manager.config_structure["GRID"]["YZONE(4)"] = text
 
     def update_cart_ncvy_4(self, text):
-        self.config_manager.set_grid_cart_ncvy_4(text)
+        self.config_manager.config_structure["GRID"]["NCVY(4)"] = text
 
     def update_cart_powery_4(self, text):
-        self.config_manager.set_grid_cart_powery_4(text)
+        self.config_manager.config_structure["GRID"]["POWERY(4)"] = text
 
     def update_cart_yzone_5(self, text):
-        self.config_manager.set_grid_cart_yzone_5(text)
+        self.config_manager.config_structure["GRID"]["YZONE(5)"] = text
 
     def update_cart_ncvy_5(self, text):
-        self.config_manager.set_grid_cart_ncvy_5(text)
+        self.config_manager.config_structure["GRID"]["NCVY(5)"] = text
 
     def update_cart_powery_5(self, text):
-        self.config_manager.set_grid_cart_powery_5(text)
+        self.config_manager.config_structure["GRID"]["POWERY(5)"] = text
 
     def update_cart_yzone_6(self, text):
-        self.config_manager.set_grid_cart_yzone_6(text)
+        self.config_manager.config_structure["GRID"]["YZONE(6)"] = text
 
     def update_cart_ncvy_6(self, text):
-        self.config_manager.set_grid_cart_ncvy_6(text)
+        self.config_manager.config_structure["GRID"]["NCVY(6)"] = text
 
     def update_cart_powery_6(self, text):
-        self.config_manager.set_grid_cart_powery_6(text)
+        self.config_manager.config_structure["GRID"]["POWERY(6)"] = text
 
     def update_cart_yzone_7(self, text):
-        self.config_manager.set_grid_cart_yzone_7(text)
+        self.config_manager.config_structure["GRID"]["YZONE(7)"] = text
 
     def update_cart_ncvy_7(self, text):
-        self.config_manager.set_grid_cart_ncvy_7(text)
+        self.config_manager.config_structure["GRID"]["NCVY(7)"] = text
 
     def update_cart_powery_7(self, text):
-        self.config_manager.set_grid_cart_powery_7(text)
+        self.config_manager.config_structure["GRID"]["POWERY(7)"] = text
 
     def update_cart_yzone_8(self, text):
-        self.config_manager.set_grid_cart_yzone_8(text)
+        self.config_manager.config_structure["GRID"]["YZONE(8)"] = text
 
     def update_cart_ncvy_8(self, text):
-        self.config_manager.set_grid_cart_ncvy_8(text)
+        self.config_manager.config_structure["GRID"]["NCVY(8)"] = text
 
     def update_cart_powery_8(self, text):
-        self.config_manager.set_grid_cart_powery_8(text)
+        self.config_manager.config_structure["GRID"]["POWERY(8)"] = text
 
     def update_cart_yzone_9(self, text):
-        self.config_manager.set_grid_cart_yzone_9(text)
+        self.config_manager.config_structure["GRID"]["YZONE(9)"] = text
 
     def update_cart_ncvy_9(self, text):
-        self.config_manager.set_grid_cart_ncvy_9(text)
+        self.config_manager.config_structure["GRID"]["NCVY(9)"] = text
 
     def update_cart_powery_9(self, text):
-        self.config_manager.set_grid_cart_powery_9(text)
+        self.config_manager.config_structure["GRID"]["POWERY(9)"] = text
 
     def update_cart_yzone_10(self, text):
-        self.config_manager.set_grid_cart_yzone_10(text)
+        self.config_manager.config_structure["GRID"]["YZONE(10)"] = text
 
     def update_cart_ncvy_10(self, text):
-        self.config_manager.set_grid_cart_ncvy_10(text)
+        self.config_manager.config_structure["GRID"]["NCVY(10)"] = text
 
     def update_cart_powery_10(self, text):
-        self.config_manager.set_grid_cart_powery_10(text)
+        self.config_manager.config_structure["GRID"]["POWERY(10)"] = text
 
     # -COORDENADA Z (CARTESIANA)
 
     def update_cart_nzz(self, text):
-        self.config_manager.set_grid_cart_nzz(text)
+        self.config_manager.config_structure["GRID"]["CART_NZZ"] = text
 
     def update_cart_zzone_1(self, text):
-        self.config_manager.set_grid_cart_zzone_1(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(1)"] = text
 
     def update_cart_ncvz_1(self, text):
-        self.config_manager.set_grid_cart_ncvz_1(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(1)"] = text
 
     def update_cart_powerz_1(self, text):
-        self.config_manager.set_grid_cart_powerz_1(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(1)"] = text
 
     def update_cart_zzone_2(self, text):
-        self.config_manager.set_grid_cart_zzone_2(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(2)"] = text
 
     def update_cart_ncvz_2(self, text):
-        self.config_manager.set_grid_cart_ncvz_2(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(2)"] = text
 
     def update_cart_powerz_2(self, text):
-        self.config_manager.set_grid_cart_powerz_2(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(2)"] = text
 
     def update_cart_zzone_3(self, text):
-        self.config_manager.set_grid_cart_zzone_3(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(3)"] = text
 
     def update_cart_ncvz_3(self, text):
-        self.config_manager.set_grid_cart_ncvz_3(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(3)"] = text
 
     def update_cart_powerz_3(self, text):
-        self.config_manager.set_grid_cart_powerz_3(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(3)"] = text
 
     def update_cart_zzone_4(self, text):
-        self.config_manager.set_grid_cart_zzone_4(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(4)"] = text
 
     def update_cart_ncvz_4(self, text):
-        self.config_manager.set_grid_cart_ncvz_4(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(4)"] = text
 
     def update_cart_powerz_4(self, text):
-        self.config_manager.set_grid_cart_powerz_4(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(4)"] = text
 
     def update_cart_zzone_5(self, text):
-        self.config_manager.set_grid_cart_zzone_5(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(5)"] = text
 
     def update_cart_ncvz_5(self, text):
-        self.config_manager.set_grid_cart_ncvz_5(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(5)"] = text
 
     def update_cart_powerz_5(self, text):
-        self.config_manager.set_grid_cart_powerz_5(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(5)"] = text
 
     def update_cart_zzone_6(self, text):
-        self.config_manager.set_grid_cart_zzone_6(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(6)"] = text
 
     def update_cart_ncvz_6(self, text):
-        self.config_manager.set_grid_cart_ncvz_6(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(6)"] = text
 
     def update_cart_powerz_6(self, text):
-        self.config_manager.set_grid_cart_powerz_6(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(6)"] = text
 
     def update_cart_zzone_7(self, text):
-        self.config_manager.set_grid_cart_zzone_7(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(7)"] = text
 
     def update_cart_ncvz_7(self, text):
-        self.config_manager.set_grid_cart_ncvz_7(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(7)"] = text
 
     def update_cart_powerz_7(self, text):
-        self.config_manager.set_grid_cart_powerz_7(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(7)"] = text
 
     def update_cart_zzone_8(self, text):
-        self.config_manager.set_grid_cart_zzone_8(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(8)"] = text
 
     def update_cart_ncvz_8(self, text):
-        self.config_manager.set_grid_cart_ncvz_8(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(8)"] = text
 
     def update_cart_powerz_8(self, text):
-        self.config_manager.set_grid_cart_powerz_8(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(8)"] = text
 
     def update_cart_zzone_9(self, text):
-        self.config_manager.set_grid_cart_zzone_9(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(9)"] = text
 
     def update_cart_ncvz_9(self, text):
-        self.config_manager.set_grid_cart_ncvz_9(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(9)"] = text
 
     def update_cart_powerz_9(self, text):
-        self.config_manager.set_grid_cart_powerz_9(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(9)"] = text
 
     def update_cart_zzone_10(self, text):
-        self.config_manager.set_grid_cart_zzone_10(text)
+        self.config_manager.config_structure["GRID"]["ZZONE(10)"] = text
 
     def update_cart_ncvz_10(self, text):
-        self.config_manager.set_grid_cart_ncvz_10(text)
+        self.config_manager.config_structure["GRID"]["NCVZ(10)"] = text
 
     def update_cart_powerz_10(self, text):
-        self.config_manager.set_grid_cart_powerz_10(text)
+        self.config_manager.config_structure["GRID"]["POWERZ(10)"] = text
 
     ##############################################################################################
     # METODOS PARA CONEXION DE WIDGETS VARIAS ZONAS - CILINDRICA
@@ -753,292 +753,292 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
     # -COORDENADA TITA (CILINDRICA) - VARIAS ZONAS
 
     def update_cil_nztita(self, text):
-        self.config_manager.set_grid_cil_nztita(text)
+        self.config_manager.config_structure["GRID"]["CIL_NZX"] = text
 
     def update_cil_titazone_1(self, text):
-        self.config_manager.set_grid_cil_titazone_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(1)"] = text
 
     def update_cil_ncvtita_1(self, text):
-        self.config_manager.set_grid_cil_ncvtita_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(1)"] = text
 
     def update_cil_powertita_1(self, text):
-        self.config_manager.set_grid_cil_powertita_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(1)"] = text
 
     def update_cil_titazone_2(self, text):
-        self.config_manager.set_grid_cil_titazone_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(2)"] = text
 
     def update_cil_ncvtita_2(self, text):
-        self.config_manager.set_grid_cil_ncvtita_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(2)"] = text
 
     def update_cil_powertita_2(self, text):
-        self.config_manager.set_grid_cil_powertita_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(2)"] = text
 
     def update_cil_titazone_3(self, text):
-        self.config_manager.set_grid_cil_titazone_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(3)"] = text
 
     def update_cil_ncvtita_3(self, text):
-        self.config_manager.set_grid_cil_ncvtita_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(3)"] = text
 
     def update_cil_powertita_3(self, text):
-        self.config_manager.set_grid_cil_powertita_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(3)"] = text
 
     def update_cil_titazone_4(self, text):
-        self.config_manager.set_grid_cil_titazone_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(4)"] = text
 
     def update_cil_ncvtita_4(self, text):
-        self.config_manager.set_grid_cil_ncvtita_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(4)"] = text
 
     def update_cil_powertita_4(self, text):
-        self.config_manager.set_grid_cil_powertita_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(4)"] = text
 
     def update_cil_titazone_5(self, text):
-        self.config_manager.set_grid_cil_titazone_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(5)"] = text
 
     def update_cil_ncvtita_5(self, text):
-        self.config_manager.set_grid_cil_ncvtita_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(5)"] = text
 
     def update_cil_powertita_5(self, text):
-        self.config_manager.set_grid_cil_powertita_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(5)"] = text
 
     def update_cil_titazone_6(self, text):
-        self.config_manager.set_grid_cil_titazone_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(6)"] = text
 
     def update_cil_ncvtita_6(self, text):
-        self.config_manager.set_grid_cil_ncvtita_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(6)"] = text
 
     def update_cil_powertita_6(self, text):
-        self.config_manager.set_grid_cil_powertita_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(6)"] = text
 
     def update_cil_titazone_7(self, text):
-        self.config_manager.set_grid_cil_titazone_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(7)"] = text
 
     def update_cil_ncvtita_7(self, text):
-        self.config_manager.set_grid_cil_ncvtita_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(7)"] = text
 
     def update_cil_powertita_7(self, text):
-        self.config_manager.set_grid_cil_powertita_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(7)"] = text
 
     def update_cil_titazone_8(self, text):
-        self.config_manager.set_grid_cil_titazone_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(8)"] = text
 
     def update_cil_ncvtita_8(self, text):
-        self.config_manager.set_grid_cil_ncvtita_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(8)"] = text
 
     def update_cil_powertita_8(self, text):
-        self.config_manager.set_grid_cil_powertita_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(8)"] = text
 
     def update_cil_titazone_9(self, text):
-        self.config_manager.set_grid_cil_titazone_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(9)"] = text
 
     def update_cil_ncvtita_9(self, text):
-        self.config_manager.set_grid_cil_ncvtita_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(9)"] = text
 
     def update_cil_powertita_9(self, text):
-        self.config_manager.set_grid_cil_powertita_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(9)"] = text
 
     def update_cil_titazone_10(self, text):
-        self.config_manager.set_grid_cil_titazone_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_XZONE(10)"] = text
 
     def update_cil_ncvtita_10(self, text):
-        self.config_manager.set_grid_cil_ncvtita_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVX(10)"] = text
 
     def update_cil_powertita_10(self, text):
-        self.config_manager.set_grid_cil_powertita_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERX(10)"] = text
 
     ##############################################################################################
     # -COORDENADA RADIO (CILINDRICA) - VARIAS ZONAS
 
     def update_cil_nzr(self, text):
-        self.config_manager.set_grid_cil_nzr(text)
+        self.config_manager.config_structure["GRID"]["CIL_NZY"] = text
 
     def update_cil_rini_vz(self, text):
-        self.config_manager.set_grid_cil_rini_vz(text)
+        self.config_manager.config_structure["GRID"]["CIL_R(1)_VZ"] = text
 
     def update_cil_rzone_1(self, text):
-        self.config_manager.set_grid_cil_rzone_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(1)"] = text
 
     def update_cil_ncvr_1(self, text):
-        self.config_manager.set_grid_cil_ncvr_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(1)"] = text
 
     def update_cil_powerr_1(self, text):
-        self.config_manager.set_grid_cil_powerr_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(1)"] = text
 
     def update_cil_rzone_2(self, text):
-        self.config_manager.set_grid_cil_rzone_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(2)"] = text
 
     def update_cil_ncvr_2(self, text):
-        self.config_manager.set_grid_cil_ncvr_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(2)"] = text
 
     def update_cil_powerr_2(self, text):
-        self.config_manager.set_grid_cil_powerr_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(2)"] = text
 
     def update_cil_rzone_3(self, text):
-        self.config_manager.set_grid_cil_rzone_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(3)"] = text
 
     def update_cil_ncvr_3(self, text):
-        self.config_manager.set_grid_cil_ncvr_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(3)"] = text
 
     def update_cil_powerr_3(self, text):
-        self.config_manager.set_grid_cil_powerr_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(3)"] = text
 
     def update_cil_rzone_4(self, text):
-        self.config_manager.set_grid_cil_rzone_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(4)"] = text
 
     def update_cil_ncvr_4(self, text):
-        self.config_manager.set_grid_cil_ncvr_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(4)"] = text
 
     def update_cil_powerr_4(self, text):
-        self.config_manager.set_grid_cil_powerr_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(4)"] = text
 
     def update_cil_rzone_5(self, text):
-        self.config_manager.set_grid_cil_rzone_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(5)"] = text
 
     def update_cil_ncvr_5(self, text):
-        self.config_manager.set_grid_cil_ncvr_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(5)"] = text
 
     def update_cil_powerr_5(self, text):
-        self.config_manager.set_grid_cil_powerr_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(5)"] = text
 
     def update_cil_rzone_6(self, text):
-        self.config_manager.set_grid_cil_rzone_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(6)"] = text
 
     def update_cil_ncvr_6(self, text):
-        self.config_manager.set_grid_cil_ncvr_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(6)"] = text
 
     def update_cil_powerr_6(self, text):
-        self.config_manager.set_grid_cil_powerr_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(6)"] = text
 
     def update_cil_rzone_7(self, text):
-        self.config_manager.set_grid_cil_rzone_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(7)"] = text
 
     def update_cil_ncvr_7(self, text):
-        self.config_manager.set_grid_cil_ncvr_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(7)"] = text
 
     def update_cil_powerr_7(self, text):
-        self.config_manager.set_grid_cil_powerr_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(7)"] = text
 
     def update_cil_rzone_8(self, text):
-        self.config_manager.set_grid_cil_rzone_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(8)"] = text
 
     def update_cil_ncvr_8(self, text):
-        self.config_manager.set_grid_cil_ncvr_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(8)"] = text
 
     def update_cil_powerr_8(self, text):
-        self.config_manager.set_grid_cil_powerr_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(8)"] = text
 
     def update_cil_rzone_9(self, text):
-        self.config_manager.set_grid_cil_rzone_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(9)"] = text
 
     def update_cil_ncvr_9(self, text):
-        self.config_manager.set_grid_cil_ncvr_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(9)"] = text
 
     def update_cil_powerr_9(self, text):
-        self.config_manager.set_grid_cil_powerr_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(9)"] = text
 
     def update_cil_rzone_10(self, text):
-        self.config_manager.set_grid_cil_rzone_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_YZONE(10)"] = text
 
     def update_cil_ncvr_10(self, text):
-        self.config_manager.set_grid_cil_ncvr_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_NCVY(10)"] = text
 
     def update_cil_powerr_10(self, text):
-        self.config_manager.set_grid_cil_powerr_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_POWERY(10)"] = text
 
     ##############################################################################################
     # -COORDENADA Z (CILINDRICA) - VARIAS ZONAS
 
     def update_cil_vz_nzz(self, text):
-        self.config_manager.set_grid_cil_vz_nzz(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NZZ"] = text
 
     def update_cil_vz_zzone_1(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(1)"] = text
 
     def update_cil_vz_ncvz_1(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(1)"] = text
 
     def update_cil_vz_powerz_1(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_1(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(1)"] = text
 
     def update_cil_vz_zzone_2(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(2)"] = text
 
     def update_cil_vz_ncvz_2(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(2)"] = text
 
     def update_cil_vz_powerz_2(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_2(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(2)"] = text
 
     def update_cil_vz_zzone_3(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(3)"] = text
 
     def update_cil_vz_ncvz_3(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(3)"] = text
 
     def update_cil_vz_powerz_3(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_3(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(3)"] = text
 
     def update_cil_vz_zzone_4(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(4)"] = text
 
     def update_cil_vz_ncvz_4(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(4)"] = text
 
     def update_cil_vz_powerz_4(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_4(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(4)"] = text
 
     def update_cil_vz_zzone_5(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(5)"] = text
 
     def update_cil_vz_ncvz_5(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(5)"] = text
 
     def update_cil_vz_powerz_5(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_5(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(5)"] = text
 
     def update_cil_vz_zzone_6(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(6)"] = text
 
     def update_cil_vz_ncvz_6(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(6)"] = text
 
     def update_cil_vz_powerz_6(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_6(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(6)"] = text
 
     def update_cil_vz_zzone_7(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(7)"] = text
 
     def update_cil_vz_ncvz_7(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(7)"] = text
 
     def update_cil_vz_powerz_7(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_7(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(7)"] = text
 
     def update_cil_vz_zzone_8(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(8)"] = text
 
     def update_cil_vz_ncvz_8(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(8)"] = text
 
     def update_cil_vz_powerz_8(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_8(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(8)"] = text
 
     def update_cil_vz_zzone_9(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(9)"] = text
 
     def update_cil_vz_ncvz_9(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(9)"] = text
 
     def update_cil_vz_powerz_9(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_9(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(9)"] = text
 
     def update_cil_vz_zzone_10(self, text):
-        self.config_manager.set_grid_cil_vz_zzone_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_ZZONE(10)"] = text
 
     def update_cil_vz_ncvz_10(self, text):
-        self.config_manager.set_grid_cil_vz_ncvz_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_NCVZ(10)"] = text
 
     def update_cil_vz_powerz_10(self, text):
-        self.config_manager.set_grid_cil_vz_powerz_10(text)
+        self.config_manager.config_structure["GRID"]["CIL_VZ_POWERZ(10)"] = text
 
 
 #############################################################################################

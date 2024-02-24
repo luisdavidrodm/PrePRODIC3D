@@ -161,3 +161,7 @@ cython_debug/
 
 # Local bats
 *.bat
+
+# Results
+configuracion.adapt.f90
+configuracion.json

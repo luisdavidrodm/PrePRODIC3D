@@ -43,55 +43,54 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             self.sw_tsimu.setCurrentIndex(1)
 
     def update_variables_iptm(self, text):
-        self.config_manager.set_variables_iptm(text)
+        self.config_manager.config_structure["VARIABLES"]["IPTM"] = text
 
     def update_variables_dt(self, text):
-        self.config_manager.set_variables_dt(text)
+        self.config_manager.config_structure["VARIABLES"]["DT"] = text
 
     def update_variables_kord(self, selection):
         kord = 1 if selection == "Esquema de bajo orden" else 2
-        self.config_manager.set_variables_kord(kord)
+        self.config_manager.config_structure["VARIABLES"]["KORD"] = kord
 
     def update_variables_title_1(self, text):
-        self.config_manager.set_variables_title_1(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(1)"] = text
 
     def update_variables_title_2(self, text):
-        self.config_manager.set_variables_title_2(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(2)"] = text
 
     def update_variables_title_3(self, text):
-        self.config_manager.set_variables_title_3(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(3)"] = text
 
     def update_variables_title_4(self, text):
-        self.config_manager.set_variables_title_4(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(4)"] = text
 
     def update_variables_title_5(self, text):
-        self.config_manager.set_variables_title_5(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(5)"] = text
 
     def update_variables_title_6(self, text):
-        self.config_manager.set_variables_title_6(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(6)"] = text
 
     def update_variables_title_7(self, text):
-        self.config_manager.set_variables_title_7(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(7)"] = text
 
     def update_variables_title_8(self, text):
-        self.config_manager.set_variables_title_8(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(8)"] = text
 
     def update_variables_title_9(self, text):
-        self.config_manager.set_variables_title_9(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(9)"] = text
 
     def update_variables_title_10(self, text):
-        self.config_manager.set_variables_title_10(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(10)"] = text
 
     def update_variables_title_11(self, text):
-        self.config_manager.set_variables_title_11(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(11)"] = text
 
     def update_variables_title_12(self, text):
-        self.config_manager.set_variables_title_12(text)
+        self.config_manager.config_structure["VARIABLES"]["TITLE(12)"] = text
 
     def update_variables_ksolve_1(self, state):
         ksolve1 = 1 if state == 2 else 0
-        print(ksolve1)
-        self.config_manager.set_variables_ksolve_1(ksolve1)
+        self.config_manager.config_structure["VARIABLES"]["KSOLVE(1)"] = ksolve1
 
 
 if __name__ == "__main__":
