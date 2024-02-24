@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>521</height>
+    <height>539</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -449,7 +449,7 @@
       <item row="0" column="3">
        <widget class="QStackedWidget" name="sw_lon_segment">
         <property name="currentIndex">
-         <number>29</number>
+         <number>0</number>
         </property>
         <widget class="QWidget" name="sw_lon_segment_xmax_1">
          <layout class="QVBoxLayout" name="verticalLayout_13">

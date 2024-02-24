@@ -74,6 +74,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             self.sw_segmentlist.setCurrentIndex(5)
             self.sw_segment_addremove.setCurrentIndex(5)
 
+        self.update_line_edit()
+
     def add_segment_x_max(self):
         if self.segment_count_xmax < 5:
             self.segment_count_xmax += 1
@@ -140,73 +142,54 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             self.lw_segmentlist_zmin.takeItem(count_zmin - 1)
             self.segment_count_zmin -= 1
 
+    def update_line_edit(self):
+        current_text_segment_list = self.get_current_segment_list()
+        current_segment = (
+            current_text_segment_list.currentItem().text()
+            if current_text_segment_list.currentItem()
+            else ""
+        )
+
+        if self.sw_segmentlist.currentIndex() == 0:
+            self.m = 0
+        elif self.sw_segmentlist.currentIndex() == 1:
+            self.m = 5
+        if self.sw_segmentlist.currentIndex() == 2:
+            self.m = 10
+        elif self.sw_segmentlist.currentIndex() == 3:
+            self.m = 15
+        if self.sw_segmentlist.currentIndex() == 4:
+            self.m = 20
+        elif self.sw_segmentlist.currentIndex() == 5:
+            self.m = 25
+
+        if current_segment == "Segmento 1":
+            self.sw_lon_segment.setCurrentIndex(0 + self.m)
+        elif current_segment == "Segmento 2":
+            self.sw_lon_segment.setCurrentIndex(1 + self.m)
+        elif current_segment == "Segmento 3":
+            self.sw_lon_segment.setCurrentIndex(2 + self.m)
+        elif current_segment == "Segmento 4":
+            self.sw_lon_segment.setCurrentIndex(3 + self.m)
+        elif current_segment == "Segmento 5":
+            self.sw_lon_segment.setCurrentIndex(4 + self.m)
+
     def change_lon_segment(self):
-        current_text_segment_list_xmax = (
-            self.lw_segmentlist_xmax.currentItem().text()
-            if self.lw_segmentlist_xmax.currentItem() is not None
-            else None
-        )
-        current_text_segment_list_xmin = (
-            self.lw_segmentlist_xmin.currentItem().text()
-            if self.lw_segmentlist_xmin.currentItem() is not None
-            else None
-        )
-        current_text_segment_list_ymax = (
-            self.lw_segmentlist_ymax.currentItem().text()
-            if self.lw_segmentlist_ymax.currentItem() is not None
-            else None
-        )
-        current_text_segment_list_ymin = (
-            self.lw_segmentlist_ymin.currentItem().text()
-            if self.lw_segmentlist_ymin.currentItem() is not None
-            else None
-        )
-        current_text_segment_list_zmax = (
-            self.lw_segmentlist_zmax.currentItem().text()
-            if self.lw_segmentlist_zmax.currentItem() is not None
-            else None
-        )
-        current_text_segment_list_zmin = (
-            self.lw_segmentlist_zmin.currentItem().text()
-            if self.lw_segmentlist_zmin.currentItem() is not None
-            else None
-        )
+        self.update_line_edit()
 
-        for j in range(0, 5):
-            for i in range(1, 6):
-                if current_text_segment_list_xmax == f"Segmento {i}":
-                    self.sw_lon_segment.setCurrentIndex(j)
-                    break
-
-        for j in range(5, 10):
-            for i in range(1, 6):
-                if current_text_segment_list_xmin == f"Segmento {i}":
-                    self.sw_lon_segment.setCurrentIndex(j)
-                    break
-
-        for j in range(10, 15):
-            for i in range(1, 6):
-                if current_text_segment_list_ymax == f"Segmento {i}":
-                    self.sw_lon_segment.setCurrentIndex(j)
-                    break
-
-        for j in range(15, 20):
-            for i in range(1, 6):
-                if current_text_segment_list_ymin == f"Segmento {i}":
-                    self.sw_lon_segment.setCurrentIndex(j)
-                    break
-
-        for j in range(20, 25):
-            for i in range(1, 6):
-                if current_text_segment_list_zmax == f"Segmento {i}":
-                    self.sw_lon_segment.setCurrentIndex(j)
-                    break
-
-        for j in range(25, 30):
-            for i in range(1, 6):
-                if current_text_segment_list_zmin == f"Segmento {i}":
-                    self.sw_lon_segment.setCurrentIndex(j)
-                    break
+    def get_current_segment_list(self):
+        if self.sw_segmentlist.currentIndex() == 0:
+            return self.lw_segmentlist_xmax
+        elif self.sw_segmentlist.currentIndex() == 1:
+            return self.lw_segmentlist_xmin
+        elif self.sw_segmentlist.currentIndex() == 2:
+            return self.lw_segmentlist_ymax
+        elif self.sw_segmentlist.currentIndex() == 3:
+            return self.lw_segmentlist_ymin
+        elif self.sw_segmentlist.currentIndex() == 4:
+            return self.lw_segmentlist_zmax
+        elif self.sw_segmentlist.currentIndex() == 5:
+            return self.lw_segmentlist_zmin
 
 
 if __name__ == "__main__":
