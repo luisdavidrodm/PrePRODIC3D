@@ -1,8 +1,6 @@
 import sys
 from PySide6 import QtCore as qtc
 from PySide6 import QtWidgets as qtw
-from PySide6 import QtGui as qtg
-from PySide6.QtGui import QAction
 
 
 from main_window.ui.main_window_ui import Ui_main_window
@@ -24,6 +22,13 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.config_manager = ConfigManager()
         self.setupUi()
 
+        self.inicio_window = None
+        self.malla_window = None
+        self.variables_window = None
+        self.valores_window = None
+        self.bordes_window = None
+        self.salida_window = None
+
     def setupUi(self):
         super().setupUi(self)
         self.action_guardar.triggered.connect(self.guardar_configuracion)
@@ -38,33 +43,64 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
     @qtc.Slot()
     def open_inicio(self):
-        self.form = InicioWindow(self.config_manager)
-        self.form.exec()
+        if self.inicio_window is None or not self.inicio_window.isVisible():
+            self.inicio_window = InicioWindow(self.config_manager)
+            self.inicio_window.show()
+        else:
+            self.inicio_window.raise_()
+            self.inicio_window.activateWindow()
 
     @qtc.Slot()
     def open_malla(self):
-        self.form = MallaWindow(self.config_manager)
-        self.form.exec()
+        if self.malla_window is None or not self.malla_window.isVisible():
+            self.malla_window = MallaWindow(self.config_manager)
+            self.malla_window.show()
+        else:
+            self.malla_window.raise_()
+            self.malla_window.activateWindow()
 
     @qtc.Slot()
     def open_variables(self):
-        self.form = VariablesWindow(self.config_manager)
-        self.form.exec()
+        if self.variables_window is None or not self.variables_window.isVisible():
+            self.variables_window = VariablesWindow(self.config_manager)
+            self.variables_window.tipo_flujo_cambio_signal.connect(self.handle_tipo_flujo_cambio)
+            self.variables_window.show()
+        else:
+            self.variables_window.raise_()
+            self.variables_window.activateWindow()
 
     @qtc.Slot()
     def open_valores(self):
-        self.form = ValoresWindow()
-        self.form.exec()
+        if self.valores_window is None or not self.valores_window.isVisible():
+            self.valores_window = ValoresWindow(self.config_manager)
+            self.valores_window.show()
+        else:
+            self.valores_window.raise_()
+            self.valores_window.activateWindow()
 
     @qtc.Slot()
     def open_bordes(self):
-        self.form = BordesWindow(self.config_manager)
-        self.form.exec()
+        if self.bordes_window is None or not self.bordes_window.isVisible():
+            self.bordes_window = BordesWindow(self.config_manager)
+            self.bordes_window.show()
+        else:
+            self.bordes_window.raise_()
+            self.bordes_window.activateWindow()
 
     @qtc.Slot()
     def open_salida(self):
-        self.form = SalidaWindow()
-        self.form.exec()
+        if self.salida_window is None or not self.salida_window.isVisible():
+            self.salida_window = SalidaWindow()
+            self.salida_window.show()
+        else:
+            self.salida_window.raise_()
+            self.salida_window.activateWindow()
+
+    def handle_tipo_flujo_cambio(self, es_difusivo):
+        if self.bordes_window:
+            # Llamar a un método que actualice el estado del campo 'Entrada de la masa'
+            print(f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}")  # Impresión de depuración
+            self.bordes_window.update_entrada_masa(es_difusivo)
 
     def guardar_configuracion(self):
         # Primero, guardar la configuración en un archivo JSON

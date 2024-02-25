@@ -9,7 +9,14 @@ class ConfigManager:
             [
                 ("HEADER", OrderedDict()),
                 ("GRID", OrderedDict()),
-                ("VARIABLES", OrderedDict()),
+                (
+                    "VARIABLES",
+                    OrderedDict(
+                        [
+                            ("FT", "Difusivo"),
+                        ]
+                    ),
+                ),
             ]
         )
 

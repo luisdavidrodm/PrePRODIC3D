@@ -1,14 +1,11 @@
 import sys
-from PySide6 import QtCore as qtc
 from PySide6 import QtWidgets as qtw
-from PySide6 import QtGui as qtg
 
-from variables_window.ui.variables_window_ui import Ui_variables_window
 from config_manager import ConfigManager
 from bordes_window.ui.bordes_window_ui import Ui_bordes_window
 
 
-class BordesWindow(qtw.QDialog, Ui_bordes_window, Ui_variables_window):
+class BordesWindow(qtw.QDialog, Ui_bordes_window):
     def __init__(self, config_manager):
         super().__init__()
         self.setupUi(self)
@@ -149,9 +146,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window, Ui_variables_window):
     def update_line_edit(self):
         current_text_segment_list = self.get_current_segment_list()
         current_segment = (
-            current_text_segment_list.currentItem().text()
-            if current_text_segment_list.currentItem()
-            else ""
+            current_text_segment_list.currentItem().text() if current_text_segment_list.currentItem() else ""
         )
 
         if self.sw_segmentlist.currentIndex() == 0:
@@ -202,6 +197,11 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window, Ui_variables_window):
             self.le_value_veloc_u.setDisabled()
             self.chb_inmass.setDisabled()
             self.chb_outmass.setDisabled()
+
+    def update_entrada_masa(self, deshabilitar):
+        # El campo 'Entrada de la masa' se deshabilita si 'deshabilitar' es True
+        print(f"Actualizando Entrada de Masa, deshabilitar: {deshabilitar}")
+        self.chb_inmass.setEnabled(not deshabilitar)
 
 
 if __name__ == "__main__":
