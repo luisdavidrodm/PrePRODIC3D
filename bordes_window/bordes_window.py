@@ -1,7 +1,5 @@
-import sys
 from PySide6 import QtWidgets as qtw
 
-from config_manager import ConfigManager
 from bordes_window.ui.bordes_window_ui import Ui_bordes_window
 
 
@@ -202,11 +200,3 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         # El campo 'Entrada de la masa' se deshabilita si 'deshabilitar' es True
         print(f"Actualizando Entrada de Masa, deshabilitar: {deshabilitar}")
         self.chb_inmass.setEnabled(not deshabilitar)
-
-
-if __name__ == "__main__":
-    app = qtw.QApplication(sys.argv)
-    config_manager = ConfigManager()
-    form = BordesWindow(config_manager)
-    form.open()
-    sys.exit(app.exec())

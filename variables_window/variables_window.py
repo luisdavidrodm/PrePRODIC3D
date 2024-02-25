@@ -1,10 +1,7 @@
-import sys
 from PySide6 import QtWidgets as qtw
 from PySide6.QtCore import Signal
 
-
 from variables_window.ui.variables_window_ui import Ui_variables_window
-from config_manager import ConfigManager
 
 
 class VariablesWindow(qtw.QDialog, Ui_variables_window):
@@ -61,11 +58,3 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         # Emitir 'True' si es "Difusivo", de lo contrario 'False'
         print(f"Cambiando tipo de flujo a: {text}")  # Impresión de depuración
         self.tipo_flujo_cambio_signal.emit(text == "Difusivo")
-
-
-if __name__ == "__main__":
-    app = qtw.QApplication(sys.argv)
-    config_manager = ConfigManager()
-    form = VariablesWindow(config_manager)
-    form.open()
-    sys.exit(app.exec())

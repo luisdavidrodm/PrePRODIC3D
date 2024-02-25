@@ -1,7 +1,5 @@
-import sys
 from PySide6 import QtWidgets as qtw
 
-from config_manager import ConfigManager
 from inicio_window.ui.inicio_window_ui import Ui_inicio_window
 
 
@@ -19,11 +17,3 @@ class InicioWindow(qtw.QDialog, Ui_inicio_window):
     def update_config(self, config_key, text):
         # Actualiza el valor de la configuración en el ConfigManager
         self.config_manager.config_structure["HEADER"][config_key] = text
-
-
-if __name__ == "__main__":
-    app = qtw.QApplication(sys.argv)
-    config_manager = ConfigManager()
-    form = InicioWindow(config_manager)
-    form.open()
-    sys.exit(app.exec())

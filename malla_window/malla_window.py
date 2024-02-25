@@ -1,8 +1,6 @@
-import sys
 from PySide6 import QtWidgets as qtw
 
 from malla_window.ui.malla_window_ui import Ui_malla_window
-from config_manager import ConfigManager
 
 
 class MallaWindow(qtw.QDialog, Ui_malla_window):
@@ -191,13 +189,3 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
     def update_config(self, config_key, text):
         # Actualiza el valor de la configuración en el ConfigManager
         self.config_manager.config_structure["GRID"][config_key] = text
-
-
-#############################################################################################
-
-if __name__ == "__main__":
-    app = qtw.QApplication(sys.argv)
-    config_manager = ConfigManager()  # Crear una instancia del gestor de configuración
-    form = MallaWindow(config_manager)
-    form.open()
-    sys.exit(app.exec())
