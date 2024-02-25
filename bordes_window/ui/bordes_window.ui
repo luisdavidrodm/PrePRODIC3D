@@ -7,94 +7,48 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>539</height>
+    <height>567</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Bordes - PrePRODIC3D</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="1">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Tipo de segmento</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QCheckBox" name="checkBox">
-        <property name="text">
-         <string>Pared</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_3">
-        <property name="text">
-         <string>Entrada de la masa</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_4">
-        <property name="text">
-         <string>Salida de la masa</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="checkBox_5">
-        <property name="text">
-         <string>Nodos internos</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="2" column="0">
     <widget class="QGroupBox" name="groupBox_4">
      <property name="title">
       <string>Velocidad</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
+      <item row="0" column="1">
+       <widget class="QLineEdit" name="le_value_veloc_u"/>
+      </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
-         <string>Normal</string>
+         <string>Velocidad U</string>
         </property>
        </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_2"/>
       </item>
       <item row="1" column="0">
        <widget class="QLabel" name="label_5">
         <property name="text">
-         <string>Tangencial</string>
+         <string>Velocidad V</string>
         </property>
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
+       <widget class="QLineEdit" name="le_value_veloc_v"/>
       </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QGroupBox" name="groupBox_5">
-     <property name="title">
-      <string>Salida de la masa</string>
-     </property>
-     <layout class="QFormLayout" name="formLayout_2">
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_6">
+      <item row="2" column="1">
+       <widget class="QLineEdit" name="le_value_veloc_w"/>
+      </item>
+      <item row="2" column="0">
+       <widget class="QLabel" name="label_9">
         <property name="text">
-         <string>Fracción</string>
+         <string>Velocidad W</string>
         </property>
        </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="lineEdit_4"/>
       </item>
      </layout>
     </widget>
@@ -124,27 +78,27 @@
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_7">
+       <widget class="QGroupBox" name="gb_chbvalues">
         <property name="title">
          <string/>
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_2">
          <item>
-          <widget class="QCheckBox" name="checkBox_6">
+          <widget class="QCheckBox" name="chb_value">
            <property name="text">
             <string>Valor</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="checkBox_7">
+          <widget class="QCheckBox" name="chb_flux">
            <property name="text">
             <string>Flujo</string>
            </property>
           </widget>
          </item>
          <item>
-          <widget class="QCheckBox" name="checkBox_8">
+          <widget class="QCheckBox" name="chb_convec">
            <property name="text">
             <string>Convección</string>
            </property>
@@ -167,7 +121,7 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_5"/>
+          <widget class="QLineEdit" name="le_value"/>
          </item>
          <item>
           <widget class="QLabel" name="label_8">
@@ -177,9 +131,58 @@
           </widget>
          </item>
          <item>
-          <widget class="QLineEdit" name="lineEdit_6"/>
+          <widget class="QLineEdit" name="le_tempamb"/>
          </item>
         </layout>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="1">
+    <widget class="QGroupBox" name="groupBox_5">
+     <property name="title">
+      <string>Salida de la masa</string>
+     </property>
+     <layout class="QHBoxLayout" name="horizontalLayout_34">
+      <item>
+       <widget class="QLabel" name="label_6">
+        <property name="text">
+         <string>Fracción</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QLineEdit" name="le_fracmass"/>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="1">
+    <widget class="QGroupBox" name="gb_tipo_segment">
+     <property name="title">
+      <string>Tipo de segmento</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QCheckBox" name="chb_wall">
+        <property name="text">
+         <string>Pared</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chb_inmass">
+        <property name="text">
+         <string>Entrada de la masa</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chb_outmass">
+        <property name="text">
+         <string>Salida de la masa</string>
+        </property>
        </widget>
       </item>
      </layout>
@@ -439,17 +442,10 @@
         </widget>
        </widget>
       </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Longitud</string>
-        </property>
-       </widget>
-      </item>
       <item row="0" column="3">
        <widget class="QStackedWidget" name="sw_lon_segment">
         <property name="currentIndex">
-         <number>0</number>
+         <number>13</number>
         </property>
         <widget class="QWidget" name="sw_lon_segment_xmax_1">
          <layout class="QVBoxLayout" name="verticalLayout_13">
@@ -661,6 +657,13 @@
           </item>
          </layout>
         </widget>
+       </widget>
+      </item>
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Longitud</string>
+        </property>
        </widget>
       </item>
      </layout>

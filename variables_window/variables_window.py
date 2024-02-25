@@ -18,6 +18,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         self.le_iptm.textChanged.connect(self.update_variables_iptm)
         self.le_dt.textChanged.connect(self.update_variables_dt)
         self.cb_trataborde.currentTextChanged.connect(self.update_variables_kord)
+        self.cb_tipoflujo.currentTextChanged.connect(self.changeTipoFlujo)
 
         self.le_var_title1.textChanged.connect(self.update_variables_title_1)
         self.le_var_title2.textChanged.connect(self.update_variables_title_2)
@@ -78,6 +79,14 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             self.sw_tsimu.setCurrentIndex(0)
         elif current_text_simu == "Transitorio":
             self.sw_tsimu.setCurrentIndex(1)
+
+    def changeTipoFlujo(self):
+        current_text_flujo = self.cb_tipoflujo.currentText()
+
+        if current_text_flujo == "Difusivo":
+            return "Difusivo"
+        elif current_text_flujo == "Flujo Laminar":
+            return "Flujo Laminar"
 
     def update_variables_iptm(self, text):
         self.config_manager.config_structure["VARIABLES"]["IPTM"] = text

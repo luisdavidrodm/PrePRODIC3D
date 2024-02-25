@@ -111,7 +111,7 @@
        </item>
        <item>
         <property name="text">
-         <string>Convectivo</string>
+         <string>Flujo Laminar</string>
         </property>
        </item>
       </widget>

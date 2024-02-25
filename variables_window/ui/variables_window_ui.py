@@ -469,7 +469,7 @@ class Ui_variables_window(object):
         self.label_5.setText(QCoreApplication.translate("variables_window", u"Intervalo de tiempo (DT)", None))
         self.label_2.setText(QCoreApplication.translate("variables_window", u"Tipo de flujo", None))
         self.cb_tipoflujo.setItemText(0, QCoreApplication.translate("variables_window", u"Difusivo", None))
-        self.cb_tipoflujo.setItemText(1, QCoreApplication.translate("variables_window", u"Convectivo", None))
+        self.cb_tipoflujo.setItemText(1, QCoreApplication.translate("variables_window", u"Flujo Laminar", None))
 
         self.label_3.setText(QCoreApplication.translate("variables_window", u"Condiciones de tratamiento de borde", None))
         self.cb_trataborde.setItemText(0, QCoreApplication.translate("variables_window", u"Esquema de bajo orden", None))

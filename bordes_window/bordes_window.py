@@ -3,14 +3,16 @@ from PySide6 import QtCore as qtc
 from PySide6 import QtWidgets as qtw
 from PySide6 import QtGui as qtg
 
+from variables_window.ui.variables_window_ui import Ui_variables_window
 from config_manager import ConfigManager
 from bordes_window.ui.bordes_window_ui import Ui_bordes_window
 
 
-class BordesWindow(qtw.QDialog, Ui_bordes_window):
+class BordesWindow(qtw.QDialog, Ui_bordes_window, Ui_variables_window):
     def __init__(self, config_manager):
         super().__init__()
         self.setupUi(self)
+
         self.config_manager = config_manager
 
         self.pb_addsegment_xmax.clicked.connect(self.add_segment_x_max)
@@ -46,6 +48,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.segment_count_ymin = 1
         self.segment_count_zmax = 1
         self.segment_count_zmin = 1
+
+        self.chb_wall.stateChanged.connect(self.set_wall_value)
 
     def change_segment_list(self):
         current_text_segment = self.lw_bordes.currentItem().text()
@@ -190,6 +194,14 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             return self.lw_segmentlist_zmax
         elif self.sw_segmentlist.currentIndex() == 5:
             return self.lw_segmentlist_zmin
+
+    def set_wall_value(self, state):
+        if state == 2 and self.cb_tipoflujo.currentText() == "Difusivo":
+            self.le_value_veloc_u.setDisabled()
+            self.le_value_veloc_u.setDisabled()
+            self.le_value_veloc_u.setDisabled()
+            self.chb_inmass.setDisabled()
+            self.chb_outmass.setDisabled()
 
 
 if __name__ == "__main__":
