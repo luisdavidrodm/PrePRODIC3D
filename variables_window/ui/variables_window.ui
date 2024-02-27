@@ -6,617 +6,603 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>479</width>
-    <height>573</height>
+    <width>487</width>
+    <height>648</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Variables - PrePRODIC3D</string>
   </property>
-  <widget class="QGroupBox" name="gb_variables">
-   <property name="geometry">
-    <rect>
-     <x>10</x>
-     <y>0</y>
-     <width>461</width>
-     <height>561</height>
-    </rect>
-   </property>
-   <property name="title">
-    <string>Variables</string>
-   </property>
-   <widget class="QGroupBox" name="gb_variables1">
-    <property name="geometry">
-     <rect>
-      <x>10</x>
-      <y>20</y>
-      <width>441</width>
-      <height>201</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Condiciones de la simulación</string>
-    </property>
-    <layout class="QFormLayout" name="formLayout_2">
-     <item row="0" column="0">
-      <widget class="QLabel" name="label">
-       <property name="text">
-        <string>Tipo de simulación</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="1">
-      <widget class="QComboBox" name="cb_tsimu">
-       <item>
-        <property name="text">
-         <string>Permanente</string>
+  <layout class="QHBoxLayout" name="horizontalLayout">
+   <item>
+    <widget class="QGroupBox" name="gb_variables">
+     <property name="title">
+      <string>Variables</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QGroupBox" name="gb_variables1">
+        <property name="title">
+         <string>Condiciones de la simulación</string>
         </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Transitorio</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="2" column="0" colspan="2">
-      <widget class="QStackedWidget" name="sw_tsimu">
-       <property name="currentIndex">
-        <number>0</number>
-       </property>
-       <widget class="QWidget" name="sw_tsimu_perm"/>
-       <widget class="QWidget" name="sw_tsimu_trans">
-        <layout class="QFormLayout" name="formLayout">
+        <layout class="QFormLayout" name="formLayout_2">
          <item row="0" column="0">
-          <widget class="QLabel" name="label_4">
+          <widget class="QLabel" name="label">
            <property name="text">
-            <string>Numero de pasos en el tiempo (IPTM)</string>
+            <string>Tipo de simulación</string>
            </property>
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="le_iptm">
+          <widget class="QComboBox" name="cb_tsimu">
+           <item>
+            <property name="text">
+             <string>Permanente</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Transitorio</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="2" column="0" colspan="2">
+          <widget class="QStackedWidget" name="sw_tsimu">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="sw_tsimu_perm"/>
+           <widget class="QWidget" name="sw_tsimu_trans">
+            <layout class="QFormLayout" name="formLayout">
+             <item row="0" column="0">
+              <widget class="QLabel" name="label_4">
+               <property name="text">
+                <string>Numero de pasos en el tiempo (IPTM)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLineEdit" name="le_iptm">
+               <property name="text">
+                <string/>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_5">
+               <property name="text">
+                <string>Intervalo de tiempo (DT)</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="le_dt"/>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_2">
            <property name="text">
-            <string/>
+            <string>Tipo de flujo</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QComboBox" name="cb_tipoflujo">
+           <item>
+            <property name="text">
+             <string>Difusivo</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Flujo Laminar</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_3">
+           <property name="text">
+            <string>Condiciones de tratamiento de borde</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="1">
+          <widget class="QComboBox" name="cb_trataborde">
+           <item>
+            <property name="text">
+             <string>Esquema de bajo orden</string>
+            </property>
+           </item>
+           <item>
+            <property name="text">
+             <string>Esquema de alto orden</string>
+            </property>
+           </item>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item>
+       <widget class="QGroupBox" name="gb_variables2">
+        <property name="title">
+         <string>Variables a resolver</string>
+        </property>
+        <layout class="QGridLayout" name="gridLayout">
+         <item row="4" column="0">
+          <widget class="QLabel" name="label_11">
+           <property name="text">
+            <string>4</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="0">
+          <widget class="QLabel" name="label_20">
+           <property name="text">
+            <string>12</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="2">
+          <widget class="QLineEdit" name="le_var_title11">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="3">
+          <widget class="QCheckBox" name="chb_ksolve12">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="5">
+          <widget class="QLineEdit" name="le_relax2">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="2">
+          <widget class="QLineEdit" name="le_var_title10">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="5">
+          <widget class="QLineEdit" name="le_relax11">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="0">
+          <widget class="QLabel" name="label_13">
+           <property name="text">
+            <string>5</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="3">
+          <widget class="QCheckBox" name="chb_ksolve3">
+           <property name="text">
+            <string>Resolver</string>
            </property>
           </widget>
          </item>
          <item row="1" column="0">
-          <widget class="QLabel" name="label_5">
+          <widget class="QLabel" name="label_8">
            <property name="text">
-            <string>Intervalo de tiempo (DT)</string>
+            <string>1</string>
            </property>
           </widget>
          </item>
-         <item row="1" column="1">
-          <widget class="QLineEdit" name="le_dt"/>
+         <item row="5" column="2">
+          <widget class="QLineEdit" name="le_var_title5">
+           <property name="text">
+            <string>Temperatura</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="4">
+          <widget class="QCheckBox" name="chb_kprint10">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="0">
+          <widget class="QLabel" name="label_10">
+           <property name="text">
+            <string>3</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="4">
+          <widget class="QCheckBox" name="chb_kprint12">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="5">
+          <widget class="QLineEdit" name="le_relax4">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="3">
+          <widget class="QCheckBox" name="chb_ksolve8">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="2">
+          <widget class="QLineEdit" name="le_var_title3">
+           <property name="text">
+            <string>Velocidad W</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="5">
+          <widget class="QLineEdit" name="le_relax5">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="5">
+          <widget class="QLineEdit" name="le_relax6">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="2">
+          <widget class="QLineEdit" name="le_var_title1">
+           <property name="text">
+            <string>Velocidad U</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="3">
+          <widget class="QCheckBox" name="chb_ksolve11">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="0">
+          <widget class="QLabel" name="label_15">
+           <property name="text">
+            <string>7</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="0">
+          <widget class="QLabel" name="label_17">
+           <property name="text">
+            <string>9</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="0">
+          <widget class="QLabel" name="label_9">
+           <property name="text">
+            <string>2</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="3">
+          <widget class="QCheckBox" name="chb_ksolve10">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="5">
+          <widget class="QLineEdit" name="le_relax10">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="4">
+          <widget class="QCheckBox" name="chb_kprint7">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="4">
+          <widget class="QCheckBox" name="chb_kprint1">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="3">
+          <widget class="QCheckBox" name="chb_ksolve6">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="0">
+          <widget class="QLabel" name="label_19">
+           <property name="text">
+            <string>11</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="3">
+          <widget class="QCheckBox" name="chb_ksolve9">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="4">
+          <widget class="QCheckBox" name="chb_kprint5">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="2">
+          <widget class="QLineEdit" name="le_var_title8">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="3">
+          <widget class="QCheckBox" name="chb_ksolve1">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="11" column="4">
+          <widget class="QCheckBox" name="chb_kprint11">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="2">
+          <widget class="QLineEdit" name="le_var_title6">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="0">
+          <widget class="QLabel" name="label_16">
+           <property name="text">
+            <string>8</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="2">
+          <widget class="QLabel" name="label_7">
+           <property name="text">
+            <string>Variables</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="2">
+          <widget class="QLineEdit" name="le_var_title2">
+           <property name="text">
+            <string>Velocidad V</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="4">
+          <widget class="QCheckBox" name="chb_kprint9">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="4">
+          <widget class="QCheckBox" name="chb_kprint2">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="5">
+          <widget class="QLineEdit" name="le_relax9">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="4">
+          <widget class="QCheckBox" name="chb_kprint4">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="3">
+          <widget class="QCheckBox" name="chb_ksolve2">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="label_6">
+           <property name="text">
+            <string>No.</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="2">
+          <widget class="QLineEdit" name="le_var_title4">
+           <property name="text">
+            <string>Corrección de presión</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="4">
+          <widget class="QCheckBox" name="chb_kprint3">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="1" column="5">
+          <widget class="QLineEdit" name="le_relax1">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="9" column="2">
+          <widget class="QLineEdit" name="le_var_title9">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="10" column="0">
+          <widget class="QLabel" name="label_18">
+           <property name="text">
+            <string>10</string>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="5">
+          <widget class="QLineEdit" name="le_relax12">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="3" column="5">
+          <widget class="QLineEdit" name="le_relax3">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="12" column="2">
+          <widget class="QLineEdit" name="le_var_title12">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="5">
+          <widget class="QLineEdit" name="le_relax7">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="5" column="3">
+          <widget class="QCheckBox" name="chb_ksolve5">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="4">
+          <widget class="QCheckBox" name="chb_kprint6">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="3">
+          <widget class="QCheckBox" name="chb_ksolve4">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLabel" name="label_14">
+           <property name="text">
+            <string>6</string>
+           </property>
+          </widget>
+         </item>
+         <item row="0" column="5">
+          <widget class="QLabel" name="label_12">
+           <property name="text">
+            <string>Relajamiento</string>
+           </property>
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="5">
+          <widget class="QLineEdit" name="le_relax8">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="2">
+          <widget class="QLineEdit" name="le_var_title7">
+           <property name="alignment">
+            <set>Qt::AlignCenter</set>
+           </property>
+          </widget>
+         </item>
+         <item row="8" column="4">
+          <widget class="QCheckBox" name="chb_kprint8">
+           <property name="text">
+            <string>Imprimir</string>
+           </property>
+          </widget>
+         </item>
+         <item row="7" column="3">
+          <widget class="QCheckBox" name="chb_ksolve7">
+           <property name="text">
+            <string>Resolver</string>
+           </property>
+          </widget>
          </item>
         </layout>
        </widget>
-      </widget>
-     </item>
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_2">
-       <property name="text">
-        <string>Tipo de flujo</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="1">
-      <widget class="QComboBox" name="cb_tipoflujo">
-       <item>
-        <property name="text">
-         <string>Difusivo</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Flujo Laminar</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_3">
-       <property name="text">
-        <string>Condiciones de tratamiento de borde</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="1">
-      <widget class="QComboBox" name="cb_trataborde">
-       <item>
-        <property name="text">
-         <string>Esquema de bajo orden</string>
-        </property>
-       </item>
-       <item>
-        <property name="text">
-         <string>Esquema de alto orden</string>
-        </property>
-       </item>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-   <widget class="QGroupBox" name="gb_variables2">
-    <property name="geometry">
-     <rect>
-      <x>0</x>
-      <y>220</y>
-      <width>451</width>
-      <height>331</height>
-     </rect>
-    </property>
-    <property name="title">
-     <string>Variables a resolver</string>
-    </property>
-    <layout class="QGridLayout" name="gridLayout">
-     <item row="4" column="0">
-      <widget class="QLabel" name="label_11">
-       <property name="text">
-        <string>4</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="0">
-      <widget class="QLabel" name="label_20">
-       <property name="text">
-        <string>12</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="2">
-      <widget class="QLineEdit" name="le_var_title11">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="3">
-      <widget class="QCheckBox" name="chb_ksolve12">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="5">
-      <widget class="QLineEdit" name="le_relax2">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="2">
-      <widget class="QLineEdit" name="le_var_title10">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="5">
-      <widget class="QLineEdit" name="le_relax11">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="0">
-      <widget class="QLabel" name="label_13">
-       <property name="text">
-        <string>5</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="3">
-      <widget class="QCheckBox" name="chb_ksolve3">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="0">
-      <widget class="QLabel" name="label_8">
-       <property name="text">
-        <string>1</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="2">
-      <widget class="QLineEdit" name="le_var_title5">
-       <property name="text">
-        <string>Temperatura</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="4">
-      <widget class="QCheckBox" name="chb_kprint10">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="0">
-      <widget class="QLabel" name="label_10">
-       <property name="text">
-        <string>3</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="4">
-      <widget class="QCheckBox" name="chb_kprint12">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="5">
-      <widget class="QLineEdit" name="le_relax4">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="3">
-      <widget class="QCheckBox" name="chb_ksolve8">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="2">
-      <widget class="QLineEdit" name="le_var_title3">
-       <property name="text">
-        <string>Velocidad W</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="5">
-      <widget class="QLineEdit" name="le_relax5">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="5">
-      <widget class="QLineEdit" name="le_relax6">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="2">
-      <widget class="QLineEdit" name="le_var_title1">
-       <property name="text">
-        <string>Velocidad U</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="3">
-      <widget class="QCheckBox" name="chb_ksolve11">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="0">
-      <widget class="QLabel" name="label_15">
-       <property name="text">
-        <string>7</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="0">
-      <widget class="QLabel" name="label_17">
-       <property name="text">
-        <string>9</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="0">
-      <widget class="QLabel" name="label_9">
-       <property name="text">
-        <string>2</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="3">
-      <widget class="QCheckBox" name="chb_ksolve10">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="5">
-      <widget class="QLineEdit" name="le_relax10">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="4">
-      <widget class="QCheckBox" name="chb_kprint7">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="4">
-      <widget class="QCheckBox" name="chb_kprint1">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="3">
-      <widget class="QCheckBox" name="chb_ksolve6">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="0">
-      <widget class="QLabel" name="label_19">
-       <property name="text">
-        <string>11</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="3">
-      <widget class="QCheckBox" name="chb_ksolve9">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="4">
-      <widget class="QCheckBox" name="chb_kprint5">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="2">
-      <widget class="QLineEdit" name="le_var_title8">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="3">
-      <widget class="QCheckBox" name="chb_ksolve1">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="11" column="4">
-      <widget class="QCheckBox" name="chb_kprint11">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="2">
-      <widget class="QLineEdit" name="le_var_title6">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="0">
-      <widget class="QLabel" name="label_16">
-       <property name="text">
-        <string>8</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="2">
-      <widget class="QLabel" name="label_7">
-       <property name="text">
-        <string>Variables</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="2">
-      <widget class="QLineEdit" name="le_var_title2">
-       <property name="text">
-        <string>Velocidad V</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="4">
-      <widget class="QCheckBox" name="chb_kprint9">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="4">
-      <widget class="QCheckBox" name="chb_kprint2">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="5">
-      <widget class="QLineEdit" name="le_relax9">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="4">
-      <widget class="QCheckBox" name="chb_kprint4">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="2" column="3">
-      <widget class="QCheckBox" name="chb_ksolve2">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="0">
-      <widget class="QLabel" name="label_6">
-       <property name="text">
-        <string>No.</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="2">
-      <widget class="QLineEdit" name="le_var_title4">
-       <property name="text">
-        <string>Corrección de presión</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="4">
-      <widget class="QCheckBox" name="chb_kprint3">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="1" column="5">
-      <widget class="QLineEdit" name="le_relax1">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="9" column="2">
-      <widget class="QLineEdit" name="le_var_title9">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="10" column="0">
-      <widget class="QLabel" name="label_18">
-       <property name="text">
-        <string>10</string>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="5">
-      <widget class="QLineEdit" name="le_relax12">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="3" column="5">
-      <widget class="QLineEdit" name="le_relax3">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="12" column="2">
-      <widget class="QLineEdit" name="le_var_title12">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="5">
-      <widget class="QLineEdit" name="le_relax7">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="5" column="3">
-      <widget class="QCheckBox" name="chb_ksolve5">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="4">
-      <widget class="QCheckBox" name="chb_kprint6">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="4" column="3">
-      <widget class="QCheckBox" name="chb_ksolve4">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-     <item row="6" column="0">
-      <widget class="QLabel" name="label_14">
-       <property name="text">
-        <string>6</string>
-       </property>
-      </widget>
-     </item>
-     <item row="0" column="5">
-      <widget class="QLabel" name="label_12">
-       <property name="text">
-        <string>Relajamiento</string>
-       </property>
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="5">
-      <widget class="QLineEdit" name="le_relax8">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="2">
-      <widget class="QLineEdit" name="le_var_title7">
-       <property name="alignment">
-        <set>Qt::AlignCenter</set>
-       </property>
-      </widget>
-     </item>
-     <item row="8" column="4">
-      <widget class="QCheckBox" name="chb_kprint8">
-       <property name="text">
-        <string>Imprimir</string>
-       </property>
-      </widget>
-     </item>
-     <item row="7" column="3">
-      <widget class="QCheckBox" name="chb_ksolve7">
-       <property name="text">
-        <string>Resolver</string>
-       </property>
-      </widget>
-     </item>
-    </layout>
-   </widget>
-  </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+  </layout>
  </widget>
  <resources/>
  <connections/>

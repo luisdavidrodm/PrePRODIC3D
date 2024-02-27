@@ -33,6 +33,7 @@ class Ui_bordes_window(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.le_value_veloc_u = QLineEdit(self.groupBox_4)
         self.le_value_veloc_u.setObjectName(u"le_value_veloc_u")
+        self.le_value_veloc_u.setEnabled(False)
 
         self.gridLayout_4.addWidget(self.le_value_veloc_u, 0, 1, 1, 1)
 
@@ -48,11 +49,13 @@ class Ui_bordes_window(object):
 
         self.le_value_veloc_v = QLineEdit(self.groupBox_4)
         self.le_value_veloc_v.setObjectName(u"le_value_veloc_v")
+        self.le_value_veloc_v.setEnabled(False)
 
         self.gridLayout_4.addWidget(self.le_value_veloc_v, 1, 1, 1, 1)
 
         self.le_value_veloc_w = QLineEdit(self.groupBox_4)
         self.le_value_veloc_w.setObjectName(u"le_value_veloc_w")
+        self.le_value_veloc_w.setEnabled(False)
 
         self.gridLayout_4.addWidget(self.le_value_veloc_w, 2, 1, 1, 1)
 
@@ -87,6 +90,8 @@ class Ui_bordes_window(object):
         self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.chb_value = QCheckBox(self.gb_chbvalues)
         self.chb_value.setObjectName(u"chb_value")
+        self.chb_value.setChecked(True)
+        self.chb_value.setTristate(False)
 
         self.verticalLayout_2.addWidget(self.chb_value)
 
@@ -124,6 +129,7 @@ class Ui_bordes_window(object):
 
         self.le_tempamb = QLineEdit(self.groupBox_8)
         self.le_tempamb.setObjectName(u"le_tempamb")
+        self.le_tempamb.setEnabled(False)
 
         self.verticalLayout_3.addWidget(self.le_tempamb)
 
@@ -144,6 +150,7 @@ class Ui_bordes_window(object):
 
         self.le_fracmass = QLineEdit(self.groupBox_5)
         self.le_fracmass.setObjectName(u"le_fracmass")
+        self.le_fracmass.setEnabled(False)
 
         self.horizontalLayout_34.addWidget(self.le_fracmass)
 
@@ -156,16 +163,20 @@ class Ui_bordes_window(object):
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.chb_wall = QCheckBox(self.gb_tipo_segment)
         self.chb_wall.setObjectName(u"chb_wall")
+        self.chb_wall.setChecked(True)
+        self.chb_wall.setTristate(False)
 
         self.verticalLayout.addWidget(self.chb_wall)
 
         self.chb_inmass = QCheckBox(self.gb_tipo_segment)
         self.chb_inmass.setObjectName(u"chb_inmass")
+        self.chb_inmass.setEnabled(False)
 
         self.verticalLayout.addWidget(self.chb_inmass)
 
         self.chb_outmass = QCheckBox(self.gb_tipo_segment)
         self.chb_outmass.setObjectName(u"chb_outmass")
+        self.chb_outmass.setEnabled(False)
 
         self.verticalLayout.addWidget(self.chb_outmass)
 

@@ -63,7 +63,9 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def open_variables(self):
         if self.variables_window is None or not self.variables_window.isVisible():
             self.variables_window = VariablesWindow(self.config_manager)
-            self.variables_window.tipo_flujo_cambio_signal.connect(self.handle_tipo_flujo_cambio)
+            self.variables_window.tipo_flujo_cambio_signal.connect(
+                self.handle_tipo_flujo_cambio
+            )
             self.variables_window.show()
         else:
             self.variables_window.raise_()
@@ -99,7 +101,9 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def handle_tipo_flujo_cambio(self, es_difusivo):
         if self.bordes_window:
             # Llamar a un método que actualice el estado del campo 'Entrada de la masa'
-            print(f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}")  # Impresión de depuración
+            print(
+                f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}"
+            )  # Impresión de depuración
             self.bordes_window.update_entrada_masa(es_difusivo)
 
     def guardar_configuracion(self):

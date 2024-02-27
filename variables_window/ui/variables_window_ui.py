@@ -16,20 +16,23 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
 from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout,
-    QGridLayout, QGroupBox, QLabel, QLineEdit,
-    QSizePolicy, QStackedWidget, QWidget)
+    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
+    QLineEdit, QSizePolicy, QStackedWidget, QVBoxLayout,
+    QWidget)
 
 class Ui_variables_window(object):
     def setupUi(self, variables_window):
         if not variables_window.objectName():
             variables_window.setObjectName(u"variables_window")
-        variables_window.resize(479, 573)
+        variables_window.resize(487, 648)
+        self.horizontalLayout = QHBoxLayout(variables_window)
+        self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.gb_variables = QGroupBox(variables_window)
         self.gb_variables.setObjectName(u"gb_variables")
-        self.gb_variables.setGeometry(QRect(10, 0, 461, 561))
+        self.verticalLayout = QVBoxLayout(self.gb_variables)
+        self.verticalLayout.setObjectName(u"verticalLayout")
         self.gb_variables1 = QGroupBox(self.gb_variables)
         self.gb_variables1.setObjectName(u"gb_variables1")
-        self.gb_variables1.setGeometry(QRect(10, 20, 441, 201))
         self.formLayout_2 = QFormLayout(self.gb_variables1)
         self.formLayout_2.setObjectName(u"formLayout_2")
         self.label = QLabel(self.gb_variables1)
@@ -101,9 +104,11 @@ class Ui_variables_window(object):
 
         self.formLayout_2.setWidget(5, QFormLayout.FieldRole, self.cb_trataborde)
 
+
+        self.verticalLayout.addWidget(self.gb_variables1)
+
         self.gb_variables2 = QGroupBox(self.gb_variables)
         self.gb_variables2.setObjectName(u"gb_variables2")
-        self.gb_variables2.setGeometry(QRect(0, 220, 451, 331))
         self.gridLayout = QGridLayout(self.gb_variables2)
         self.gridLayout.setObjectName(u"gridLayout")
         self.label_11 = QLabel(self.gb_variables2)
@@ -446,6 +451,12 @@ class Ui_variables_window(object):
         self.chb_ksolve7.setObjectName(u"chb_ksolve7")
 
         self.gridLayout.addWidget(self.chb_ksolve7, 7, 3, 1, 1)
+
+
+        self.verticalLayout.addWidget(self.gb_variables2)
+
+
+        self.horizontalLayout.addWidget(self.gb_variables)
 
 
         self.retranslateUi(variables_window)
