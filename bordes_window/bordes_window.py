@@ -1,4 +1,5 @@
 from PySide6 import QtWidgets as qtw
+from PySide6.QtCore import Signal, Slot
 
 from bordes_window.ui.bordes_window_ui import Ui_bordes_window
 
@@ -42,6 +43,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.segment_count_ymin = 1
         self.segment_count_zmax = 1
         self.segment_count_zmin = 1
+
+        self.chb_wall.stateChanged.connect(self.handle_chb_state_changed)
+        self.chb_inmass.stateChanged.connect(self.handle_chb_state_changed)
+        self.chb_outmass.stateChanged.connect(self.handle_chb_state_changed)
 
     def change_segment_list(self):
         current_text_segment = self.lw_bordes.currentItem().text()
@@ -141,9 +146,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
     def update_line_edit(self):
         current_text_segment_list = self.get_current_segment_list()
         current_segment = (
-            current_text_segment_list.currentItem().text()
-            if current_text_segment_list.currentItem()
-            else ""
+            current_text_segment_list.currentItem().text() if current_text_segment_list.currentItem() else ""
         )
 
         if self.sw_segmentlist.currentIndex() == 0:
@@ -187,62 +190,47 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         elif self.sw_segmentlist.currentIndex() == 5:
             return self.lw_segmentlist_zmin
 
-    def update_entrada_masa(self, deshabilitar):
-        # El campo 'Entrada de la masa' se deshabilita si 'deshabilitar' es True
-        print(f"Actualizando Entrada de Masa, deshabilitar: {deshabilitar}")
-        self.chb_inmass.setEnabled(not deshabilitar)
-        self.chb_outmass.setEnabled(not deshabilitar)
+    def update_entrada_masa(self, es_difusivo):
+        print(f"Actualizando Entrada de Masa, es_difusivo: {es_difusivo}")
 
-        state_wall_checkbox = self.chb_wall.isChecked()
-        state_inmass_checkbox = self.chb_inmass.isChecked()
-        state_outmass_checkbox = self.chb_outmass.isChecked()
+        # Estado de los checkboxes
+        state_wall = self.chb_wall.isChecked()
+        state_inmass = self.chb_inmass.isChecked()
+        state_outmass = self.chb_outmass.isChecked()
 
-        if deshabilitar and state_wall_checkbox:  # habilitando pared - difusiva
-            self.le_value_veloc_u.setDisabled(True)
-            self.le_value_veloc_v.setDisabled(True)
-            self.le_value_veloc_w.setDisabled(True)
-            self.le_fracmass.setDisabled(True)
-            self.chb_value.setEnabled(True)
-            self.chb_flux.setEnabled(True)
-            self.chb_convec.setEnabled(True)
+        # Deshabilitar o habilitar controles basados en condiciones específicas
+        velocidades_habilitadas = not es_difusivo and (state_wall or state_inmass)
+        fracmass_habilitada = not es_difusivo and state_outmass
+        flux_convec_deshabilitado = state_inmass or state_outmass
+
+        # Aplicar estados directamente con condiciones
+        self.chb_inmass.setDisabled(es_difusivo)
+        self.chb_outmass.setDisabled(es_difusivo)
+        self.le_value_veloc_u.setDisabled(not velocidades_habilitadas)
+        self.le_value_veloc_v.setDisabled(not velocidades_habilitadas)
+        self.le_value_veloc_w.setDisabled(not velocidades_habilitadas)
+        self.le_fracmass.setDisabled(not fracmass_habilitada)
+        self.chb_value.setDisabled(state_outmass)
+        self.chb_flux.setDisabled(flux_convec_deshabilitado)
+        self.chb_convec.setDisabled(flux_convec_deshabilitado)
+
+        # Manejo de condiciones especiales para resetear checkboxes
+        if es_difusivo or not (state_inmass or state_outmass):
             self.chb_inmass.setChecked(False)
             self.chb_outmass.setChecked(False)
-
-        elif (
-            not deshabilitar and state_wall_checkbox
-        ):  # habilitando pared - flujo laminar
-            self.le_value_veloc_u.setEnabled(True)
-            self.le_value_veloc_v.setEnabled(True)
-            self.le_value_veloc_w.setEnabled(True)
-            self.le_fracmass.setDisabled(True)
-            self.chb_value.setEnabled(True)
-            self.chb_flux.setEnabled(True)
-            self.chb_convec.setEnabled(True)
-            self.chb_inmass.setChecked(False)
-            self.chb_outmass.setChecked(False)
-
-        elif (
-            not deshabilitar and state_inmass_checkbox
-        ):  ##habilitando entrada de masa - flujo laminar
-            self.le_value_veloc_u.setEnabled(True)
-            self.le_value_veloc_v.setEnabled(True)
-            self.le_value_veloc_w.setEnabled(True)
-            self.le_fracmass.setDisabled(True)
-            self.chb_value.setEnabled(True)
-            self.chb_flux.setDisabled(True)
-            self.chb_convec.setDisabled(True)
+        if state_inmass or state_outmass:
             self.chb_wall.setChecked(False)
-            self.chb_outmass.setChecked(False)
 
-        elif (
-            not deshabilitar and state_outmass_checkbox
-        ):  ##habiitando salida de masa - flujo laminar
-            self.le_value_veloc_u.setDisabled(True)
-            self.le_value_veloc_v.setDisabled(True)
-            self.le_value_veloc_w.setDisabled(True)
-            self.le_fracmass.setEnabled(True)
-            self.chb_inmass.setDisabled(True)
-            self.chb_value.setDisabled(True)
-            self.chb_flux.setDisabled(True)
-            self.chb_wall.setChecked(False)
-            self.chb_inmass.setChecked(False)
+    @Slot()
+    def handle_chb_state_changed(self, state):
+        sender = self.sender()
+        if state == 2:
+            if sender == self.chb_wall:
+                self.chb_inmass.setChecked(False)
+                self.chb_outmass.setChecked(False)
+            elif sender == self.chb_inmass:
+                self.chb_wall.setChecked(False)
+                self.chb_outmass.setChecked(False)
+            elif sender == self.chb_outmass:
+                self.chb_wall.setChecked(False)
+                self.chb_inmass.setChecked(False)
