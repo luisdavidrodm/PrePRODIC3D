@@ -52,6 +52,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_flux.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
         self.chb_convec.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
 
+        self.sw_segmentlist.currentChanged.connect(
+            self.handle_segmentlist_index_changed
+        )
+
     def change_segment_list(self):
         current_text_segment = self.lw_bordes.currentItem().text()
 
@@ -208,17 +212,36 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         state_convec = self.chb_convec.isChecked()
 
         # Deshabilitar o habilitar controles basados en condiciones específicas
-        velocidades_habilitadas = not es_difusivo and (state_wall or state_inmass)
+        velocidades_habilitadas = not es_difusivo and state_inmass
         fracmass_habilitada = not es_difusivo and state_outmass
         flux_convec_deshabilitado = state_inmass or state_outmass
+        vel_habilitadas_pared_laminar_x = state_wall and (
+            self.sw_segmentlist.currentIndex() == 0
+            or self.sw_segmentlist.currentIndex() == 1
+        )
+        vel_habilitadas_pared_laminar_y = state_wall and (
+            self.sw_segmentlist.currentIndex() == 2
+            or self.sw_segmentlist.currentIndex() == 3
+        )
 
+        vel_habilitadas_pared_laminar_z = state_wall and (
+            self.sw_segmentlist.currentIndex() == 4
+            or self.sw_segmentlist.currentIndex() == 5
+        )
         # Aplicar estados directamente con condiciones
         self.chb_inmass.setDisabled(es_difusivo)
         self.chb_outmass.setDisabled(es_difusivo)
-        self.le_value_veloc_u.setDisabled(not velocidades_habilitadas)
-        self.le_value_veloc_v.setDisabled(not velocidades_habilitadas)
-        self.le_value_veloc_w.setDisabled(not velocidades_habilitadas)
+        self.le_value_veloc_u.setDisabled(
+            not velocidades_habilitadas and vel_habilitadas_pared_laminar_x
+        )
+        self.le_value_veloc_v.setDisabled(
+            not velocidades_habilitadas and vel_habilitadas_pared_laminar_y
+        )
+        self.le_value_veloc_w.setDisabled(
+            not velocidades_habilitadas and vel_habilitadas_pared_laminar_z
+        )
         self.le_fracmass.setDisabled(not fracmass_habilitada)
+        self.le_tempamb.setDisabled(not state_convec)
         self.chb_value.setDisabled(state_outmass)
         self.chb_flux.setDisabled(flux_convec_deshabilitado)
         self.chb_convec.setDisabled(flux_convec_deshabilitado)
@@ -236,6 +259,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         if state_flux or state_convec:
             self.chb_value.setChecked(False)
 
+        self.es_difusivo = es_difusivo
+
     @Slot()
     def handle_chb_state_changed(self, state):
         sender = self.sender()
@@ -250,6 +275,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.chb_wall.setChecked(False)
                 self.chb_inmass.setChecked(False)
 
+        self.update_entrada_masa(self.es_difusivo)
+
     @Slot()
     def handle_chb_valuefluxconvec_changed(self, state):
         sender = self.sender()
@@ -263,3 +290,9 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             elif sender == self.chb_convec:
                 self.chb_value.setChecked(False)
                 self.chb_flux.setChecked(False)
+
+        self.update_entrada_masa(self.es_difusivo)
+
+    @Slot()
+    def handle_segmentlist_index_changed(self, index):
+        self.update_entrada_masa(self.es_difusivo)
