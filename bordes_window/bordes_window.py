@@ -48,6 +48,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_inmass.stateChanged.connect(self.handle_chb_state_changed)
         self.chb_outmass.stateChanged.connect(self.handle_chb_state_changed)
 
+        self.chb_value.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
+        self.chb_flux.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
+        self.chb_convec.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
+
     def change_segment_list(self):
         current_text_segment = self.lw_bordes.currentItem().text()
 
@@ -146,7 +150,9 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
     def update_line_edit(self):
         current_text_segment_list = self.get_current_segment_list()
         current_segment = (
-            current_text_segment_list.currentItem().text() if current_text_segment_list.currentItem() else ""
+            current_text_segment_list.currentItem().text()
+            if current_text_segment_list.currentItem()
+            else ""
         )
 
         if self.sw_segmentlist.currentIndex() == 0:
@@ -197,6 +203,9 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         state_wall = self.chb_wall.isChecked()
         state_inmass = self.chb_inmass.isChecked()
         state_outmass = self.chb_outmass.isChecked()
+        state_value = self.chb_value.isChecked()
+        state_flux = self.chb_flux.isChecked()
+        state_convec = self.chb_convec.isChecked()
 
         # Deshabilitar o habilitar controles basados en condiciones específicas
         velocidades_habilitadas = not es_difusivo and (state_wall or state_inmass)
@@ -221,6 +230,12 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         if state_inmass or state_outmass:
             self.chb_wall.setChecked(False)
 
+        if not (state_flux or state_convec):
+            self.chb_convec.setChecked(False)
+            self.chb_flux.setChecked(False)
+        if state_flux or state_convec:
+            self.chb_value.setChecked(False)
+
     @Slot()
     def handle_chb_state_changed(self, state):
         sender = self.sender()
@@ -234,3 +249,17 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             elif sender == self.chb_outmass:
                 self.chb_wall.setChecked(False)
                 self.chb_inmass.setChecked(False)
+
+    @Slot()
+    def handle_chb_valuefluxconvec_changed(self, state):
+        sender = self.sender()
+        if state == 2:
+            if sender == self.chb_value:
+                self.chb_flux.setChecked(False)
+                self.chb_convec.setChecked(False)
+            elif sender == self.chb_flux:
+                self.chb_value.setChecked(False)
+                self.chb_convec.setChecked(False)
+            elif sender == self.chb_convec:
+                self.chb_value.setChecked(False)
+                self.chb_flux.setChecked(False)
