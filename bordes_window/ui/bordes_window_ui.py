@@ -75,11 +75,11 @@ class Ui_bordes_window(object):
         self.groupBox_6.setObjectName(u"groupBox_6")
         self.gridLayout_2 = QGridLayout(self.groupBox_6)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.listWidget_3 = QListWidget(self.groupBox_6)
-        QListWidgetItem(self.listWidget_3)
-        self.listWidget_3.setObjectName(u"listWidget_3")
+        self.lw_variables = QListWidget(self.groupBox_6)
+        QListWidgetItem(self.lw_variables)
+        self.lw_variables.setObjectName(u"lw_variables")
 
-        self.gridLayout_2.addWidget(self.listWidget_3, 0, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.lw_variables, 0, 0, 1, 1)
 
 
         self.horizontalLayout.addWidget(self.groupBox_6)
@@ -707,11 +707,11 @@ class Ui_bordes_window(object):
         self.groupBox_3.setTitle(QCoreApplication.translate("bordes_window", u"Variables escalares", None))
         self.groupBox_6.setTitle("")
 
-        __sortingEnabled = self.listWidget_3.isSortingEnabled()
-        self.listWidget_3.setSortingEnabled(False)
-        ___qlistwidgetitem = self.listWidget_3.item(0)
+        __sortingEnabled = self.lw_variables.isSortingEnabled()
+        self.lw_variables.setSortingEnabled(False)
+        ___qlistwidgetitem = self.lw_variables.item(0)
         ___qlistwidgetitem.setText(QCoreApplication.translate("bordes_window", u"Temperatura", None));
-        self.listWidget_3.setSortingEnabled(__sortingEnabled)
+        self.lw_variables.setSortingEnabled(__sortingEnabled)
 
         self.gb_chbvalues.setTitle("")
         self.chb_value.setText(QCoreApplication.translate("bordes_window", u"Valor", None))

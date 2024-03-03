@@ -66,6 +66,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.variables_window.tipo_flujo_cambio_signal.connect(
                 self.handle_tipo_flujo_cambio
             )
+            self.variables_window.variables_signal.connect(self.handle_variables_lista)
             self.variables_window.show()
         else:
             self.variables_window.raise_()
@@ -105,6 +106,13 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
                 f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}"
             )  # Impresión de depuración
             self.bordes_window.update_entrada_masa(es_difusivo)
+
+    def handle_variables_lista(self, variables):
+        if self.bordes_window:
+            print(
+                f"Recibiendo señal en MainWindow, variables: {variables}"
+            )  # Impresión de depuración
+            self.bordes_window.agregar_variables_lista(variables)
 
     def guardar_configuracion(self):
         # Primero, guardar la configuración en un archivo JSON

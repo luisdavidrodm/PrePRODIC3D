@@ -299,3 +299,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
     @Slot()
     def handle_segmentlist_index_changed(self):
         self.update_entrada_masa(self.es_difusivo)
+
+    def agregar_variables_lista(self, variables):
+        print(f"Actualizando Lista de variables: {variables}")
+        self.lw_variables.clear()
+        self.lw_variables.addItems(variables)
