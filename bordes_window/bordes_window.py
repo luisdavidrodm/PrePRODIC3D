@@ -212,9 +212,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         state_convec = self.chb_convec.isChecked()
 
         # Deshabilitar o habilitar controles basados en condiciones específicas
-        velocidades_habilitadas = not es_difusivo and (state_inmass or state_outmass)
+        velocidades_habilitadas = not es_difusivo and state_inmass
         fracmass_habilitada = not es_difusivo and state_outmass
-        flux_convec_deshabilitado = state_inmass or state_outmass
+        flux_convec_deshabilitado = state_inmass
+        out_mass_deshabilitada = not state_outmass
 
         # Manejo de condiciones especiales para resetear checkboxes
         if es_difusivo or not (state_inmass or state_outmass):
@@ -233,25 +234,33 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_inmass.setDisabled(es_difusivo)
         self.chb_outmass.setDisabled(es_difusivo)
         self.le_value_veloc_u.setDisabled(
-            not velocidades_habilitadas
-            and self.sw_segmentlist.currentIndex() in [0, 1]
-            and not state_outmass
+            (
+                not velocidades_habilitadas
+                and (self.sw_segmentlist.currentIndex() in [0, 1])
+            )
+            or state_outmass
         )
         self.le_value_veloc_v.setDisabled(
-            not velocidades_habilitadas
-            and self.sw_segmentlist.currentIndex() in [2, 3]
-            and not state_outmass
+            (
+                not velocidades_habilitadas
+                and (self.sw_segmentlist.currentIndex() in [2, 3])
+            )
+            or state_outmass
         )
         self.le_value_veloc_w.setDisabled(
-            not velocidades_habilitadas
-            and self.sw_segmentlist.currentIndex() in [4, 5]
-            and not state_outmass
+            (
+                not velocidades_habilitadas
+                and (self.sw_segmentlist.currentIndex() in [4, 5])
+            )
+            or state_outmass
         )
+
         self.le_fracmass.setDisabled(not fracmass_habilitada)
         self.le_tempamb.setDisabled(not state_convec)
+        self.le_value.setDisabled(state_outmass)
         self.chb_value.setDisabled(state_outmass)
-        self.chb_flux.setDisabled(flux_convec_deshabilitado)
-        self.chb_convec.setDisabled(flux_convec_deshabilitado)
+        self.chb_flux.setDisabled(flux_convec_deshabilitado or state_outmass)
+        self.chb_convec.setDisabled(flux_convec_deshabilitado or state_outmass)
 
         self.es_difusivo = es_difusivo
 
@@ -288,5 +297,5 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.update_entrada_masa(self.es_difusivo)
 
     @Slot()
-    def handle_segmentlist_index_changed(self, index):
+    def handle_segmentlist_index_changed(self):
         self.update_entrada_masa(self.es_difusivo)
