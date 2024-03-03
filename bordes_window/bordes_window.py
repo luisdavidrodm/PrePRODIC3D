@@ -212,39 +212,9 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         state_convec = self.chb_convec.isChecked()
 
         # Deshabilitar o habilitar controles basados en condiciones específicas
-        velocidades_habilitadas = not es_difusivo and state_inmass
+        velocidades_habilitadas = not es_difusivo and (state_inmass or state_outmass)
         fracmass_habilitada = not es_difusivo and state_outmass
         flux_convec_deshabilitado = state_inmass or state_outmass
-        vel_habilitadas_pared_laminar_x = state_wall and (
-            self.sw_segmentlist.currentIndex() == 0
-            or self.sw_segmentlist.currentIndex() == 1
-        )
-        vel_habilitadas_pared_laminar_y = state_wall and (
-            self.sw_segmentlist.currentIndex() == 2
-            or self.sw_segmentlist.currentIndex() == 3
-        )
-
-        vel_habilitadas_pared_laminar_z = state_wall and (
-            self.sw_segmentlist.currentIndex() == 4
-            or self.sw_segmentlist.currentIndex() == 5
-        )
-        # Aplicar estados directamente con condiciones
-        self.chb_inmass.setDisabled(es_difusivo)
-        self.chb_outmass.setDisabled(es_difusivo)
-        self.le_value_veloc_u.setDisabled(
-            not velocidades_habilitadas and vel_habilitadas_pared_laminar_x
-        )
-        self.le_value_veloc_v.setDisabled(
-            not velocidades_habilitadas and vel_habilitadas_pared_laminar_y
-        )
-        self.le_value_veloc_w.setDisabled(
-            not velocidades_habilitadas and vel_habilitadas_pared_laminar_z
-        )
-        self.le_fracmass.setDisabled(not fracmass_habilitada)
-        self.le_tempamb.setDisabled(not state_convec)
-        self.chb_value.setDisabled(state_outmass)
-        self.chb_flux.setDisabled(flux_convec_deshabilitado)
-        self.chb_convec.setDisabled(flux_convec_deshabilitado)
 
         # Manejo de condiciones especiales para resetear checkboxes
         if es_difusivo or not (state_inmass or state_outmass):
@@ -258,6 +228,30 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             self.chb_flux.setChecked(False)
         if state_flux or state_convec:
             self.chb_value.setChecked(False)
+
+        # Aplicar estados directamente con condiciones
+        self.chb_inmass.setDisabled(es_difusivo)
+        self.chb_outmass.setDisabled(es_difusivo)
+        self.le_value_veloc_u.setDisabled(
+            not velocidades_habilitadas
+            and self.sw_segmentlist.currentIndex() in [0, 1]
+            and not state_outmass
+        )
+        self.le_value_veloc_v.setDisabled(
+            not velocidades_habilitadas
+            and self.sw_segmentlist.currentIndex() in [2, 3]
+            and not state_outmass
+        )
+        self.le_value_veloc_w.setDisabled(
+            not velocidades_habilitadas
+            and self.sw_segmentlist.currentIndex() in [4, 5]
+            and not state_outmass
+        )
+        self.le_fracmass.setDisabled(not fracmass_habilitada)
+        self.le_tempamb.setDisabled(not state_convec)
+        self.chb_value.setDisabled(state_outmass)
+        self.chb_flux.setDisabled(flux_convec_deshabilitado)
+        self.chb_convec.setDisabled(flux_convec_deshabilitado)
 
         self.es_difusivo = es_difusivo
 
