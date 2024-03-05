@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>567</height>
+    <height>637</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -232,129 +232,99 @@
       <string>División de bordes</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="1" column="0" colspan="2">
-       <widget class="QLabel" name="label_2">
+      <item row="2" column="3">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Borde</string>
+         <string>Segmento</string>
         </property>
        </widget>
       </item>
-      <item row="3" column="0" colspan="4">
-       <widget class="QStackedWidget" name="sw_segment_addremove">
+      <item row="3" column="3">
+       <widget class="QStackedWidget" name="sw_patchlist">
         <property name="currentIndex">
          <number>0</number>
         </property>
-        <widget class="QWidget" name="sw_segment_addremove_xmax">
-         <layout class="QVBoxLayout" name="verticalLayout_5">
+        <widget class="QWidget" name="sw_patchlist_xmax">
+         <layout class="QVBoxLayout" name="verticalLayout_4">
           <item>
-           <widget class="QPushButton" name="pb_addsegment_xmax">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_remsegment_xmax">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
+           <widget class="QListWidget" name="lw_patchlist_xmax">
+            <item>
+             <property name="text">
+              <string>Borde base</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segment_addremove_xmin">
-         <layout class="QVBoxLayout" name="verticalLayout_6">
+        <widget class="QWidget" name="sw_patchlist_xmin">
+         <layout class="QHBoxLayout" name="horizontalLayout_2">
           <item>
-           <widget class="QPushButton" name="pb_addsegment_xmin">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_remsegment_xmin">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
+           <widget class="QListWidget" name="lw_patchlist_xmin">
+            <item>
+             <property name="text">
+              <string>Borde base</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segment_addremove_ymax">
-         <layout class="QVBoxLayout" name="verticalLayout_7">
+        <widget class="QWidget" name="sw_patchlist_ymax">
+         <layout class="QHBoxLayout" name="horizontalLayout_3">
           <item>
-           <widget class="QPushButton" name="pb_addsegment_ymax">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_remsegment_ymax">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
+           <widget class="QListWidget" name="lw_patchlist_ymax">
+            <item>
+             <property name="text">
+              <string>Borde base</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segment_addremove_ymin">
-         <layout class="QVBoxLayout" name="verticalLayout_8">
+        <widget class="QWidget" name="sw_patchlist_ymin">
+         <layout class="QVBoxLayout" name="verticalLayout_11">
           <item>
-           <widget class="QPushButton" name="pb_addsegment_ymin">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_remsegment_ymin">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
+           <widget class="QListWidget" name="lw_patchlist_ymin">
+            <item>
+             <property name="text">
+              <string>Borde base</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segment_addremove_zmax">
-         <layout class="QVBoxLayout" name="verticalLayout_9">
+        <widget class="QWidget" name="sw_patchlist_zmax">
+         <layout class="QHBoxLayout" name="horizontalLayout_4">
           <item>
-           <widget class="QPushButton" name="pb_addsegment_zmax">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_remsegment_zmax">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
+           <widget class="QListWidget" name="lw_patchlist_zmax">
+            <item>
+             <property name="text">
+              <string>Borde base</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segment_addremove_zmin">
-         <layout class="QVBoxLayout" name="verticalLayout_10">
+        <widget class="QWidget" name="sw_patchlist_zmin">
+         <layout class="QVBoxLayout" name="verticalLayout_12">
           <item>
-           <widget class="QPushButton" name="pb_addsegment_zmin">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_remsegment_zmin">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
+           <widget class="QListWidget" name="lw_patchlist_zmin">
+            <item>
+             <property name="text">
+              <string>Borde base</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
         </widget>
        </widget>
       </item>
-      <item row="2" column="0" colspan="3">
+      <item row="3" column="0" colspan="3">
        <widget class="QListWidget" name="lw_bordes">
         <item>
          <property name="text">
@@ -388,320 +358,1642 @@
         </item>
        </widget>
       </item>
-      <item row="1" column="3">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Segmento</string>
-        </property>
-       </widget>
-      </item>
-      <item row="2" column="3">
-       <widget class="QStackedWidget" name="sw_segmentlist">
+      <item row="5" column="0" colspan="4">
+       <widget class="QStackedWidget" name="sw_patch_addremove">
         <property name="currentIndex">
-         <number>0</number>
+         <number>5</number>
         </property>
-        <widget class="QWidget" name="sw_segmentlist_xmax">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
+        <widget class="QWidget" name="sw_patch_addremove_xmax">
+         <layout class="QVBoxLayout" name="verticalLayout_5">
           <item>
-           <widget class="QListWidget" name="lw_segmentlist_xmax">
-            <item>
-             <property name="text">
-              <string>Segmento 1</string>
-             </property>
-            </item>
+           <widget class="QPushButton" name="pb_addpatch_xmax">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_rempatch_xmax">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segmentlist_xmin">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
+        <widget class="QWidget" name="sw_patch_addremove_xmin">
+         <layout class="QVBoxLayout" name="verticalLayout_6">
           <item>
-           <widget class="QListWidget" name="lw_segmentlist_xmin">
-            <item>
-             <property name="text">
-              <string>Segmento 1</string>
-             </property>
-            </item>
+           <widget class="QPushButton" name="pb_addpatch_xmin">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_rempatch_xmin">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segmentlist_ymax">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
+        <widget class="QWidget" name="sw_patch_addremove_ymax">
+         <layout class="QVBoxLayout" name="verticalLayout_7">
           <item>
-           <widget class="QListWidget" name="lw_segmentlist_ymax">
-            <item>
-             <property name="text">
-              <string>Segmento 1</string>
-             </property>
-            </item>
+           <widget class="QPushButton" name="pb_addpatch_ymax">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_rempatch_ymax">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segmentlist_ymin">
-         <layout class="QVBoxLayout" name="verticalLayout_11">
+        <widget class="QWidget" name="sw_patch_addremove_ymin">
+         <layout class="QVBoxLayout" name="verticalLayout_8">
           <item>
-           <widget class="QListWidget" name="lw_segmentlist_ymin">
-            <item>
-             <property name="text">
-              <string>Segmento 1</string>
-             </property>
-            </item>
+           <widget class="QPushButton" name="pb_addpatch_ymin">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_rempatch_ymin">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segmentlist_zmax">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
+        <widget class="QWidget" name="sw_patch_addremove_zmax">
+         <layout class="QVBoxLayout" name="verticalLayout_9">
           <item>
-           <widget class="QListWidget" name="lw_segmentlist_zmax">
-            <item>
-             <property name="text">
-              <string>Segmento 1</string>
-             </property>
-            </item>
+           <widget class="QPushButton" name="pb_addpatch_zmax">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_rempatch_zmax">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
            </widget>
           </item>
          </layout>
         </widget>
-        <widget class="QWidget" name="sw_segmentlist_zmin">
-         <layout class="QVBoxLayout" name="verticalLayout_12">
+        <widget class="QWidget" name="sw_patch_addremove_zmin">
+         <layout class="QVBoxLayout" name="verticalLayout_10">
           <item>
-           <widget class="QListWidget" name="lw_segmentlist_zmin">
-            <item>
-             <property name="text">
-              <string>Segmento 1</string>
-             </property>
-            </item>
+           <widget class="QPushButton" name="pb_addpatch_zmin">
+            <property name="text">
+             <string>Agregar un segmento</string>
+            </property>
+           </widget>
+          </item>
+          <item>
+           <widget class="QPushButton" name="pb_rempatch_zmin">
+            <property name="text">
+             <string>Eliminar un segmento</string>
+            </property>
            </widget>
           </item>
          </layout>
         </widget>
        </widget>
       </item>
-      <item row="0" column="3">
-       <widget class="QStackedWidget" name="sw_lon_segment">
-        <property name="currentIndex">
-         <number>13</number>
-        </property>
-        <widget class="QWidget" name="sw_lon_segment_xmax_1">
-         <layout class="QVBoxLayout" name="verticalLayout_13">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmax_1"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmax_2">
-         <layout class="QHBoxLayout" name="horizontalLayout_5">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmax_2"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmax_3">
-         <layout class="QHBoxLayout" name="horizontalLayout_6">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmax_3"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmax_4">
-         <layout class="QHBoxLayout" name="horizontalLayout_7">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmax_4"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmax_5">
-         <layout class="QHBoxLayout" name="horizontalLayout_8">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmax_5"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmin_1">
-         <layout class="QHBoxLayout" name="horizontalLayout_9">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmin_1"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmin_2">
-         <layout class="QHBoxLayout" name="horizontalLayout_10">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmin_2"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmin_3">
-         <layout class="QHBoxLayout" name="horizontalLayout_11">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmin_3"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmin_4">
-         <layout class="QHBoxLayout" name="horizontalLayout_12">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmin_4"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_xmin_5">
-         <layout class="QHBoxLayout" name="horizontalLayout_13">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_xmin_5"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymax_1">
-         <layout class="QHBoxLayout" name="horizontalLayout_14">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymax_1"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymax_2">
-         <layout class="QHBoxLayout" name="horizontalLayout_15">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymax_2"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymax_3">
-         <layout class="QHBoxLayout" name="horizontalLayout_16">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymax_3"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymax_4">
-         <layout class="QHBoxLayout" name="horizontalLayout_17">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymax_4"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymax_5">
-         <layout class="QHBoxLayout" name="horizontalLayout_18">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymax_5"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymin_1">
-         <layout class="QHBoxLayout" name="horizontalLayout_19">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymin_1"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymin_2">
-         <layout class="QHBoxLayout" name="horizontalLayout_20">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymin_2"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymin_3">
-         <layout class="QHBoxLayout" name="horizontalLayout_21">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymin_3"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymin_4">
-         <layout class="QHBoxLayout" name="horizontalLayout_22">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymin_4"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_ymin_5">
-         <layout class="QHBoxLayout" name="horizontalLayout_23">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_ymin_5"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmax_1">
-         <layout class="QHBoxLayout" name="horizontalLayout_24">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmax_1"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmax_2">
-         <layout class="QHBoxLayout" name="horizontalLayout_25">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmax_2"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmax_3">
-         <layout class="QHBoxLayout" name="horizontalLayout_26">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmax_3"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmax_4">
-         <layout class="QHBoxLayout" name="horizontalLayout_27">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmax_4"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmax_5">
-         <layout class="QHBoxLayout" name="horizontalLayout_28">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmax_5"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmin_1">
-         <layout class="QHBoxLayout" name="horizontalLayout_29">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmin_1"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmin_2">
-         <layout class="QHBoxLayout" name="horizontalLayout_30">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmin_2"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmin_3">
-         <layout class="QHBoxLayout" name="horizontalLayout_31">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmin_3"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmin_4">
-         <layout class="QHBoxLayout" name="horizontalLayout_32">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmin_4"/>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_lon_segment_zmin_5">
-         <layout class="QHBoxLayout" name="horizontalLayout_33">
-          <item>
-           <widget class="QLineEdit" name="le_lon_segment_zmin_5"/>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
+      <item row="2" column="0" colspan="2">
+       <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Longitud</string>
+         <string>Borde</string>
         </property>
+       </widget>
+      </item>
+      <item row="1" column="0" colspan="4">
+       <widget class="QGroupBox" name="groupBox_2">
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QHBoxLayout" name="horizontalLayout_35">
+         <item>
+          <widget class="QStackedWidget" name="sw_lon_patch">
+           <property name="currentIndex">
+            <number>0</number>
+           </property>
+           <widget class="QWidget" name="sw_lon_patch_xmax_1">
+            <layout class="QGridLayout" name="gridLayout_5">
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_11">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_1"/>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_2"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit"/>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_3"/>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_10">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmax_2">
+            <layout class="QGridLayout" name="gridLayout_6">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_16">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_17">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_4"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_2"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_15">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_5"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_6"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmax_3">
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_19">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_21">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_20">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_8"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_3"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_18">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_9"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_7"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmax_4">
+            <layout class="QGridLayout" name="gridLayout_8">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_23">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_25">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_24">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_11"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_4"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_22">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_12"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_10"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmax_5">
+            <layout class="QGridLayout" name="gridLayout_9">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_27">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_29">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_28">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_14"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_5"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_26">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_15"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_13"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmin_1">
+            <layout class="QGridLayout" name="gridLayout_10">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_31">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_33">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_32">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_17"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_6"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_30">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_18"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_16"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmin_2">
+            <layout class="QGridLayout" name="gridLayout_11">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_35">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_37">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_36">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_20"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_7"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_34">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_21"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_19"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmin_3">
+            <layout class="QGridLayout" name="gridLayout_12">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_39">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_41">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_40">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_23"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_8"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_38">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_24"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_22"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmin_4">
+            <layout class="QGridLayout" name="gridLayout_13">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_43">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_45">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_44">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_26"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_9"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_42">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_27"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_25"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_xmin_5">
+            <layout class="QGridLayout" name="gridLayout_14">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_47">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_49">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_48">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_29"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_10"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_46">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_30"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_28"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymax_1">
+            <layout class="QGridLayout" name="gridLayout_15">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_51">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_53">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_52">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_32"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_11"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_50">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_33"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_31"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymax_2">
+            <layout class="QGridLayout" name="gridLayout_16">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_54">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_55">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_56">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_34"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_12"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_57">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_36"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_35"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymax_3">
+            <layout class="QGridLayout" name="gridLayout_17">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_58">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_59">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_60">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_37"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_13"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_61">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_39"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_38"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymax_4">
+            <layout class="QGridLayout" name="gridLayout_18">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_62">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_63">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_64">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_40"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_14"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_65">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_42"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_41"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymax_5">
+            <layout class="QGridLayout" name="gridLayout_19">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_66">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_67">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_68">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_43"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_15"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_69">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_45"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_44"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymin_1">
+            <layout class="QGridLayout" name="gridLayout_20">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_70">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_71">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_72">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_46"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_16"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_73">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_48"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_47"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymin_2">
+            <layout class="QGridLayout" name="gridLayout_21">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_74">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_75">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_76">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_49"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_17"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_77">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_51"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_50"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymin_3">
+            <layout class="QGridLayout" name="gridLayout_22">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_78">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_79">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_80">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_52"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_18"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_81">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_54"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_53"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymin_4">
+            <layout class="QGridLayout" name="gridLayout_23">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_82">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_83">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_84">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_55"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_19"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_85">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_57"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_56"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_ymin_5">
+            <layout class="QGridLayout" name="gridLayout_24">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_86">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_87">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_88">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_58"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_20"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_89">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_60"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_59"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmax_1">
+            <layout class="QGridLayout" name="gridLayout_25">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_90">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_91">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_92">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_61"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_21"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_93">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_63"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_62"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmax_2">
+            <layout class="QGridLayout" name="gridLayout_26">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_94">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_95">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_97">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_66"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_22"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_96">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_64"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_65"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmax_3">
+            <layout class="QGridLayout" name="gridLayout_27">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_98">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_99">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_101">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_69"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_23"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_100">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_67"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_68"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmax_4">
+            <layout class="QGridLayout" name="gridLayout_28">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_102">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_103">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_105">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_72"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_24"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_104">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_70"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_71"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmax_5">
+            <layout class="QGridLayout" name="gridLayout_29">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_106">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_107">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_109">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_75"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_25"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_108">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_73"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_74"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmin_1">
+            <layout class="QGridLayout" name="gridLayout_30">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_110">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_111">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_113">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_78"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_26"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_112">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_76"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_77"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmin_2">
+            <layout class="QGridLayout" name="gridLayout_31">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_114">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_115">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_117">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_81"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_27"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_116">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_79"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_80"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmin_3">
+            <layout class="QGridLayout" name="gridLayout_32">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_118">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_119">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_121">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_84"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_28"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_120">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_82"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_83"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmin_4">
+            <layout class="QGridLayout" name="gridLayout_33">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_122">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_123">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_125">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_87"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_29"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_124">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_85"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_86"/>
+             </item>
+            </layout>
+           </widget>
+           <widget class="QWidget" name="sw_lon_patch_zmin_5">
+            <layout class="QGridLayout" name="gridLayout_34">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_126">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="2">
+              <widget class="QLabel" name="label_127">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QLabel" name="label_129">
+               <property name="text">
+                <string>Empieza</string>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="lineEdit_90"/>
+             </item>
+             <item row="1" column="2">
+              <widget class="QLineEdit" name="le_lon_segment_xmax_30"/>
+             </item>
+             <item row="2" column="0">
+              <widget class="QLabel" name="label_128">
+               <property name="text">
+                <string>Longitud</string>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="lineEdit_88"/>
+             </item>
+             <item row="2" column="2">
+              <widget class="QLineEdit" name="lineEdit_89"/>
+             </item>
+            </layout>
+           </widget>
+          </widget>
+         </item>
+        </layout>
        </widget>
       </item>
      </layout>
