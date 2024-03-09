@@ -54,8 +54,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
         self.sw_patchlist.currentChanged.connect(self.handle_segmentlist_index_changed)
 
-        self.longitudes_bordes_signal.connect(self.actualizar_longitudes)
-
     def change_patch_list(self):
         current_text_bordes = self.lw_bordes.currentItem().text()
 

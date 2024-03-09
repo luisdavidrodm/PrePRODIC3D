@@ -110,7 +110,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.bordes_window.agregar_variables_lista(variables)
 
     def actualizar_longitudes_bordes(self, longitudes):
-        self.bordes_window.longitudes_bordes_signal.emit(longitudes)
+        self.bordes_window.actualizar_longitudes(longitudes)
 
     def guardar_configuracion(self):
         # Primero, guardar la configuración en un archivo JSON

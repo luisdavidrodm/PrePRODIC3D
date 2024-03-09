@@ -21,6 +21,10 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
         self.cb_tipozonas.currentTextChanged.connect(self.on_zones_system_changed)
 
+        self.le_xlon.textChanged.connect(self.actualizar_longitudes)
+        self.le_ylon.textChanged.connect(self.actualizar_longitudes)
+        self.le_zlon.textChanged.connect(self.actualizar_longitudes)
+
         ##############################################################################################
         # CONEXION DE WIDGETS ZONA UNICA - CARTESIANA
 
@@ -195,6 +199,7 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.config_manager.config_structure["GRID"][config_key] = text
 
     def actualizar_longitudes(self):
+
         longitud_x = self.le_xlon.text()
         longitud_y = self.le_ylon.text()
         longitud_z = self.le_zlon.text()
