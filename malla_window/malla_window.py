@@ -24,6 +24,42 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.le_xlon.textChanged.connect(self.actualizar_longitudes)
         self.le_ylon.textChanged.connect(self.actualizar_longitudes)
         self.le_zlon.textChanged.connect(self.actualizar_longitudes)
+        self.le_titalon.textChanged.connect(self.actualizar_longitudes)
+        self.le_rlon.textChanged.connect(self.actualizar_longitudes)
+        self.le_rini.textChanged.connect(self.actualizar_longitudes)
+        self.le_zloncil.textChanged.connect(self.actualizar_longitudes)
+
+        for i in range(1, 11):
+            line_edit_name_x_vz = f"le_dirx_lon_zon{i}"
+            line_edit_object_x_vz = getattr(self, line_edit_name_x_vz)
+            line_edit_object_x_vz.textChanged.connect(self.actualizar_longitudes)
+
+        for i in range(1, 11):
+            line_edit_name_y_vz = f"le_diry_lon_zon{i}"
+            line_edit_object_y_vz = getattr(self, line_edit_name_y_vz)
+            line_edit_object_y_vz.textChanged.connect(self.actualizar_longitudes)
+
+        for i in range(1, 11):
+            line_edit_name_z_vz = f"le_dirz_lon_zon{i}"
+            line_edit_object_z_vz = getattr(self, line_edit_name_z_vz)
+            line_edit_object_z_vz.textChanged.connect(self.actualizar_longitudes)
+
+        for i in range(1, 11):
+            line_edit_name_tita_vz = f"le_dirtita_lon_zon{i}"
+            line_edit_object_tita_vz = getattr(self, line_edit_name_tita_vz)
+            line_edit_object_tita_vz.textChanged.connect(self.actualizar_longitudes)
+
+        for i in range(1, 11):
+            line_edit_name_r_vz = f"le_dirr_lon_zon{i}"
+            line_edit_object_r_vz = getattr(self, line_edit_name_r_vz)
+            line_edit_object_r_vz.textChanged.connect(self.actualizar_longitudes)
+
+        for i in range(1, 11):
+            line_edit_name_zcil_vz = f"le_dirzcil_lon_zon{i}"
+            line_edit_object_zcil_vz = getattr(self, line_edit_name_zcil_vz)
+            line_edit_object_zcil_vz.textChanged.connect(self.actualizar_longitudes)
+
+        self.le_dirr_inidom.textChanged.connect(self.actualizar_longitudes)
 
         ##############################################################################################
         # CONEXION DE WIDGETS ZONA UNICA - CARTESIANA
@@ -200,8 +236,95 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
     def actualizar_longitudes(self):
 
-        longitud_x = self.le_xlon.text()
-        longitud_y = self.le_ylon.text()
-        longitud_z = self.le_zlon.text()
+        tipocoord = self.cb_tipocoord.currentText()
+        tipozonas = self.cb_tipozonas.currentText()
 
-        self.longitudes_actualizadas_signal.emit([longitud_x, longitud_y, longitud_z])
+        longitud_x_cart_zu = self.le_xlon.text()
+        longitud_y_cart_zu = self.le_ylon.text()
+        longitud_z_cart_zu = self.le_zlon.text()
+        longitud_tita_cil_zu = self.le_titalon.text()
+        longitud_r_cil_zu = self.le_rlon.text()
+        rini_cil_zu = self.le_rini.text()
+        longitud_zcil_cil_zu = self.le_zloncil.text()
+
+        longitud_x_cart_vz = 0
+        longitud_y_cart_vz = 0
+        longitud_z_cart_vz = 0
+
+        longitud_tita_cil_vz = 0
+        longitud_r_cil_vz = 0
+        rini_cil_vz = self.le_dirr_inidom.text()
+        longitud_zcil_cil_vz = 0
+
+        for i in range(1, 11):
+            # X
+            attr_name_x_vz = f"le_dirx_lon_zon{i}"
+            line_edit_object_x = getattr(self, attr_name_x_vz)
+            try:
+                valor_numerico_x_cart_vz = float(line_edit_object_x.text())
+                longitud_x_cart_vz += valor_numerico_x_cart_vz
+            except ValueError:
+                print(f"El valor de {attr_name_x_vz} no es un número válido")
+
+            # Y
+            attr_name_y_vz = f"le_diry_lon_zon{i}"
+            line_edit_object_y = getattr(self, attr_name_y_vz)
+            try:
+                valor_numerico_y_cart_vz = float(line_edit_object_y.text())
+                longitud_y_cart_vz += valor_numerico_y_cart_vz
+            except ValueError:
+                print(f"El valor de {attr_name_y_vz} no es un número válido")
+
+            # Z
+            attr_name_z_vz = f"le_dirz_lon_zon{i}"
+            line_edit_object_z = getattr(self, attr_name_z_vz)
+            try:
+                valor_numerico_z_cart_vz = float(line_edit_object_z.text())
+                longitud_z_cart_vz += valor_numerico_z_cart_vz
+            except ValueError:
+                print(f"El valor de {attr_name_z_vz} no es un número válido")
+
+        # Itera para las coordenadas en el sistema cilíndrico
+        for i in range(1, 11):
+            # Tita
+            attr_name_tita_vz = f"le_dirtita_lon_zon{i}"
+            line_edit_object_tita = getattr(self, attr_name_tita_vz)
+            try:
+                valor_numerico_tita_cil_vz = float(line_edit_object_tita.text())
+                longitud_tita_cil_vz += valor_numerico_tita_cil_vz
+            except ValueError:
+                print(f"El valor de {attr_name_tita_vz} no es un número válido")
+
+            # R
+            attr_name_r_vz = f"le_dirr_lon_zon{i}"
+            line_edit_object_r = getattr(self, attr_name_r_vz)
+            try:
+                valor_numerico_r_cil_vz = float(line_edit_object_r.text())
+                longitud_r_cil_vz += valor_numerico_r_cil_vz
+            except ValueError:
+                print(f"El valor de {attr_name_r_vz} no es un número válido")
+
+            # Zcil
+            attr_name_zcil_vz = f"le_dirzcil_lon_zon{i}"
+            line_edit_object_zcil = getattr(self, attr_name_zcil_vz)
+            try:
+                valor_numerico_zcil_cil_vz = float(line_edit_object_zcil.text())
+                longitud_zcil_cil_vz += valor_numerico_zcil_cil_vz
+            except ValueError:
+                print(f"El valor de {attr_name_zcil_vz} no es un número válido")
+
+        if tipocoord == "Cartesianas" and tipozonas == "Zona única":
+            self.longitudes_actualizadas_signal.emit([longitud_x_cart_zu, longitud_y_cart_zu, longitud_z_cart_zu, 0])
+
+        elif tipocoord == "Cilindricas" and tipozonas == "Zona única":
+            self.longitudes_actualizadas_signal.emit(
+                [longitud_tita_cil_zu, longitud_r_cil_zu, longitud_zcil_cil_zu, rini_cil_zu]
+            )
+
+        elif tipocoord == "Cartesianas" and tipozonas == "Varias zonas":
+            self.longitudes_actualizadas_signal.emit([longitud_x_cart_vz, longitud_y_cart_vz, longitud_z_cart_vz, 0])
+
+        elif tipocoord == "Cilindricas" and tipozonas == "Varias zonas":
+            self.longitudes_actualizadas_signal.emit(
+                [longitud_tita_cil_vz, longitud_r_cil_vz, longitud_zcil_cil_vz, rini_cil_vz]
+            )
