@@ -504,16 +504,16 @@
               </widget>
              </item>
              <item row="1" column="2">
-              <widget class="QLineEdit" name="le_lon_segment_xmax_1"/>
+              <widget class="QLineEdit" name="le_xmax_bb_zstart"/>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="lineEdit_2"/>
+              <widget class="QLineEdit" name="le_xmax_bb_ystart"/>
              </item>
              <item row="2" column="2">
-              <widget class="QLineEdit" name="lineEdit"/>
+              <widget class="QLineEdit" name="le_xmax_bb_zlon"/>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="lineEdit_3"/>
+              <widget class="QLineEdit" name="le_xmax_bb_ylon"/>
              </item>
              <item row="0" column="1">
               <widget class="QLabel" name="label_10">
@@ -771,10 +771,10 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="lineEdit_17"/>
+              <widget class="QLineEdit" name="le_xmin_bb_ystart"/>
              </item>
              <item row="1" column="2">
-              <widget class="QLineEdit" name="le_lon_segment_xmax_6"/>
+              <widget class="QLineEdit" name="le_xmin_bb_zstart"/>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_30">
@@ -784,10 +784,10 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="lineEdit_18"/>
+              <widget class="QLineEdit" name="le_xmin_bb_ylon"/>
              </item>
              <item row="2" column="2">
-              <widget class="QLineEdit" name="lineEdit_16"/>
+              <widget class="QLineEdit" name="le_xmin_bb_zlon"/>
              </item>
             </layout>
            </widget>
@@ -1021,10 +1021,10 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="lineEdit_32"/>
+              <widget class="QLineEdit" name="le_ymax_bb_xstart"/>
              </item>
              <item row="1" column="2">
-              <widget class="QLineEdit" name="le_lon_segment_xmax_11"/>
+              <widget class="QLineEdit" name="le_ymax_bb_zstart"/>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_50">
@@ -1034,10 +1034,10 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="lineEdit_33"/>
+              <widget class="QLineEdit" name="le_ymax_bb_xlon"/>
              </item>
              <item row="2" column="2">
-              <widget class="QLineEdit" name="lineEdit_31"/>
+              <widget class="QLineEdit" name="le_ymax_bb_zlon"/>
              </item>
             </layout>
            </widget>
@@ -1271,10 +1271,10 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="lineEdit_46"/>
+              <widget class="QLineEdit" name="le_ymin_bb_xstart"/>
              </item>
              <item row="1" column="2">
-              <widget class="QLineEdit" name="le_lon_segment_xmax_16"/>
+              <widget class="QLineEdit" name="le_ymin_bb_zstart"/>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_73">
@@ -1284,10 +1284,10 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="lineEdit_48"/>
+              <widget class="QLineEdit" name="le_ymin_bb_xlon"/>
              </item>
              <item row="2" column="2">
-              <widget class="QLineEdit" name="lineEdit_47"/>
+              <widget class="QLineEdit" name="le_ymin_bb_zlon"/>
              </item>
             </layout>
            </widget>
@@ -1521,10 +1521,10 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="lineEdit_61"/>
+              <widget class="QLineEdit" name="le_zmax_bb_xstart"/>
              </item>
              <item row="1" column="2">
-              <widget class="QLineEdit" name="le_lon_segment_xmax_21"/>
+              <widget class="QLineEdit" name="le_zmax_bb_ystart"/>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_93">
@@ -1534,10 +1534,10 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="lineEdit_63"/>
+              <widget class="QLineEdit" name="le_zmax_bb_xlon"/>
              </item>
              <item row="2" column="2">
-              <widget class="QLineEdit" name="lineEdit_62"/>
+              <widget class="QLineEdit" name="le_zmax_bb_ylon"/>
              </item>
             </layout>
            </widget>
@@ -1771,10 +1771,10 @@
               </widget>
              </item>
              <item row="1" column="1">
-              <widget class="QLineEdit" name="lineEdit_78"/>
+              <widget class="QLineEdit" name="le_zmin_bb_xstart"/>
              </item>
              <item row="1" column="2">
-              <widget class="QLineEdit" name="le_lon_segment_xmax_26"/>
+              <widget class="QLineEdit" name="le_zmin_bb_ystart"/>
              </item>
              <item row="2" column="0">
               <widget class="QLabel" name="label_112">
@@ -1784,10 +1784,10 @@
               </widget>
              </item>
              <item row="2" column="1">
-              <widget class="QLineEdit" name="lineEdit_76"/>
+              <widget class="QLineEdit" name="le_zmin_bb_xlon"/>
              </item>
              <item row="2" column="2">
-              <widget class="QLineEdit" name="lineEdit_77"/>
+              <widget class="QLineEdit" name="le_zmin_bb_ylon"/>
              </item>
             </layout>
            </widget>

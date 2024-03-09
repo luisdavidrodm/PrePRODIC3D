@@ -1,9 +1,13 @@
 from PySide6 import QtWidgets as qtw
+from PySide6.QtCore import Signal
 
 from malla_window.ui.malla_window_ui import Ui_malla_window
 
 
 class MallaWindow(qtw.QDialog, Ui_malla_window):
+
+    longitudes_actualizadas_signal = Signal(list)
+
     def __init__(self, config_manager):
         super().__init__()
         self.setupUi(self)
@@ -189,3 +193,10 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
     def update_config(self, config_key, text):
         # Actualiza el valor de la configuración en el ConfigManager
         self.config_manager.config_structure["GRID"][config_key] = text
+
+    def actualizar_longitudes(self):
+        longitud_x = self.le_xlon.text()
+        longitud_y = self.le_ylon.text()
+        longitud_z = self.le_zlon.text()
+
+        self.longitudes_actualizadas_signal.emit([longitud_x, longitud_y, longitud_z])

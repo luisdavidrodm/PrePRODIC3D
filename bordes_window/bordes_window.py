@@ -54,6 +54,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
         self.sw_patchlist.currentChanged.connect(self.handle_segmentlist_index_changed)
 
+        self.longitudes_bordes_signal.connect(self.actualizar_longitudes)
+
     def change_patch_list(self):
         current_text_bordes = self.lw_bordes.currentItem().text()
 
@@ -151,11 +153,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
     def update_line_edit(self):
         current_text_patch_list = self.get_current_patch_list()
-        current_patch = (
-            current_text_patch_list.currentItem().text()
-            if current_text_patch_list.currentItem()
-            else ""
-        )
+        current_patch = current_text_patch_list.currentItem().text() if current_text_patch_list.currentItem() else ""
 
         if self.sw_patchlist.currentIndex() == 0:
             self.m = 0
@@ -232,25 +230,13 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_inmass.setDisabled(es_difusivo)
         self.chb_outmass.setDisabled(es_difusivo)
         self.le_value_veloc_u.setDisabled(
-            (
-                not velocidades_habilitadas
-                and (self.sw_patchlist.currentIndex() in [0, 1])
-            )
-            or state_outmass
+            (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [0, 1])) or state_outmass
         )
         self.le_value_veloc_v.setDisabled(
-            (
-                not velocidades_habilitadas
-                and (self.sw_patchlist.currentIndex() in [2, 3])
-            )
-            or state_outmass
+            (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [2, 3])) or state_outmass
         )
         self.le_value_veloc_w.setDisabled(
-            (
-                not velocidades_habilitadas
-                and (self.sw_patchlist.currentIndex() in [4, 5])
-            )
-            or state_outmass
+            (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [4, 5])) or state_outmass
         )
 
         self.le_fracmass.setDisabled(not fracmass_habilitada)
@@ -302,3 +288,17 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         print(f"Actualizando Lista de variables: {variables}")
         self.lw_variables.clear()
         self.lw_variables.addItems(variables)
+
+    def actualizar_longitudes(self, longitudes):
+        self.le_xmax_bb_ylon.setText(longitudes[0])
+        self.le_xmax_bb_zlon.setText(longitudes[2])
+        self.le_xmin_bb_ylon.setText(longitudes[0])
+        self.le_xmin_bb_zlon.setText(longitudes[2])
+        self.le_ymax_bb_xlon.setText(longitudes[1])
+        self.le_ymax_bb_zlon.setText(longitudes[2])
+        self.le_ymin_bb_xlon.setText(longitudes[1])
+        self.le_ymin_bb_zlon.setText(longitudes[2])
+        self.le_zmax_bb_xlon.setText(longitudes[0])
+        self.le_zmax_bb_ylon.setText(longitudes[1])
+        self.le_zmin_bb_xlon.setText(longitudes[0])
+        self.le_zmin_bb_ylon.setText(longitudes[1])

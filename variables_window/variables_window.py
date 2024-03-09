@@ -39,9 +39,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             getattr(self, f"chb_kprint{i}").stateChanged.connect(
                 lambda state, i=i: self.update_config_kprint(f"KPRINT({i})", state)
             )
-            getattr(self, f"le_relax{i}").textChanged.connect(
-                lambda text, i=i: self.update_config(f"RELAX({i})", text)
-            )
+            getattr(self, f"le_relax{i}").textChanged.connect(lambda text, i=i: self.update_config(f"RELAX({i})", text))
 
     def changeTipoSimu(self):
         current_text_simu = self.cb_tsimu.currentText()

@@ -390,25 +390,25 @@ class Ui_bordes_window(object):
 
         self.gridLayout_5.addWidget(self.label_11, 0, 2, 1, 1)
 
-        self.le_lon_segment_xmax_1 = QLineEdit(self.sw_lon_patch_xmax_1)
-        self.le_lon_segment_xmax_1.setObjectName(u"le_lon_segment_xmax_1")
+        self.le_xmax_bb_zstart = QLineEdit(self.sw_lon_patch_xmax_1)
+        self.le_xmax_bb_zstart.setObjectName(u"le_xmax_bb_zstart")
 
-        self.gridLayout_5.addWidget(self.le_lon_segment_xmax_1, 1, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.le_xmax_bb_zstart, 1, 2, 1, 1)
 
-        self.lineEdit_2 = QLineEdit(self.sw_lon_patch_xmax_1)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.le_xmax_bb_ystart = QLineEdit(self.sw_lon_patch_xmax_1)
+        self.le_xmax_bb_ystart.setObjectName(u"le_xmax_bb_ystart")
 
-        self.gridLayout_5.addWidget(self.lineEdit_2, 1, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.le_xmax_bb_ystart, 1, 1, 1, 1)
 
-        self.lineEdit = QLineEdit(self.sw_lon_patch_xmax_1)
-        self.lineEdit.setObjectName(u"lineEdit")
+        self.le_xmax_bb_zlon = QLineEdit(self.sw_lon_patch_xmax_1)
+        self.le_xmax_bb_zlon.setObjectName(u"le_xmax_bb_zlon")
 
-        self.gridLayout_5.addWidget(self.lineEdit, 2, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.le_xmax_bb_zlon, 2, 2, 1, 1)
 
-        self.lineEdit_3 = QLineEdit(self.sw_lon_patch_xmax_1)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
+        self.le_xmax_bb_ylon = QLineEdit(self.sw_lon_patch_xmax_1)
+        self.le_xmax_bb_ylon.setObjectName(u"le_xmax_bb_ylon")
 
-        self.gridLayout_5.addWidget(self.lineEdit_3, 2, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.le_xmax_bb_ylon, 2, 1, 1, 1)
 
         self.label_10 = QLabel(self.sw_lon_patch_xmax_1)
         self.label_10.setObjectName(u"label_10")
@@ -636,30 +636,30 @@ class Ui_bordes_window(object):
 
         self.gridLayout_10.addWidget(self.label_32, 1, 0, 1, 1)
 
-        self.lineEdit_17 = QLineEdit(self.sw_lon_patch_xmin_1)
-        self.lineEdit_17.setObjectName(u"lineEdit_17")
+        self.le_xmin_bb_ystart = QLineEdit(self.sw_lon_patch_xmin_1)
+        self.le_xmin_bb_ystart.setObjectName(u"le_xmin_bb_ystart")
 
-        self.gridLayout_10.addWidget(self.lineEdit_17, 1, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.le_xmin_bb_ystart, 1, 1, 1, 1)
 
-        self.le_lon_segment_xmax_6 = QLineEdit(self.sw_lon_patch_xmin_1)
-        self.le_lon_segment_xmax_6.setObjectName(u"le_lon_segment_xmax_6")
+        self.le_xmin_bb_zstart = QLineEdit(self.sw_lon_patch_xmin_1)
+        self.le_xmin_bb_zstart.setObjectName(u"le_xmin_bb_zstart")
 
-        self.gridLayout_10.addWidget(self.le_lon_segment_xmax_6, 1, 2, 1, 1)
+        self.gridLayout_10.addWidget(self.le_xmin_bb_zstart, 1, 2, 1, 1)
 
         self.label_30 = QLabel(self.sw_lon_patch_xmin_1)
         self.label_30.setObjectName(u"label_30")
 
         self.gridLayout_10.addWidget(self.label_30, 2, 0, 1, 1)
 
-        self.lineEdit_18 = QLineEdit(self.sw_lon_patch_xmin_1)
-        self.lineEdit_18.setObjectName(u"lineEdit_18")
+        self.le_xmin_bb_ylon = QLineEdit(self.sw_lon_patch_xmin_1)
+        self.le_xmin_bb_ylon.setObjectName(u"le_xmin_bb_ylon")
 
-        self.gridLayout_10.addWidget(self.lineEdit_18, 2, 1, 1, 1)
+        self.gridLayout_10.addWidget(self.le_xmin_bb_ylon, 2, 1, 1, 1)
 
-        self.lineEdit_16 = QLineEdit(self.sw_lon_patch_xmin_1)
-        self.lineEdit_16.setObjectName(u"lineEdit_16")
+        self.le_xmin_bb_zlon = QLineEdit(self.sw_lon_patch_xmin_1)
+        self.le_xmin_bb_zlon.setObjectName(u"le_xmin_bb_zlon")
 
-        self.gridLayout_10.addWidget(self.lineEdit_16, 2, 2, 1, 1)
+        self.gridLayout_10.addWidget(self.le_xmin_bb_zlon, 2, 2, 1, 1)
 
         self.sw_lon_patch.addWidget(self.sw_lon_patch_xmin_1)
         self.sw_lon_patch_xmin_2 = QWidget()
@@ -871,30 +871,30 @@ class Ui_bordes_window(object):
 
         self.gridLayout_15.addWidget(self.label_52, 1, 0, 1, 1)
 
-        self.lineEdit_32 = QLineEdit(self.sw_lon_patch_ymax_1)
-        self.lineEdit_32.setObjectName(u"lineEdit_32")
+        self.le_ymax_bb_xstart = QLineEdit(self.sw_lon_patch_ymax_1)
+        self.le_ymax_bb_xstart.setObjectName(u"le_ymax_bb_xstart")
 
-        self.gridLayout_15.addWidget(self.lineEdit_32, 1, 1, 1, 1)
+        self.gridLayout_15.addWidget(self.le_ymax_bb_xstart, 1, 1, 1, 1)
 
-        self.le_lon_segment_xmax_11 = QLineEdit(self.sw_lon_patch_ymax_1)
-        self.le_lon_segment_xmax_11.setObjectName(u"le_lon_segment_xmax_11")
+        self.le_ymax_bb_zstart = QLineEdit(self.sw_lon_patch_ymax_1)
+        self.le_ymax_bb_zstart.setObjectName(u"le_ymax_bb_zstart")
 
-        self.gridLayout_15.addWidget(self.le_lon_segment_xmax_11, 1, 2, 1, 1)
+        self.gridLayout_15.addWidget(self.le_ymax_bb_zstart, 1, 2, 1, 1)
 
         self.label_50 = QLabel(self.sw_lon_patch_ymax_1)
         self.label_50.setObjectName(u"label_50")
 
         self.gridLayout_15.addWidget(self.label_50, 2, 0, 1, 1)
 
-        self.lineEdit_33 = QLineEdit(self.sw_lon_patch_ymax_1)
-        self.lineEdit_33.setObjectName(u"lineEdit_33")
+        self.le_ymax_bb_xlon = QLineEdit(self.sw_lon_patch_ymax_1)
+        self.le_ymax_bb_xlon.setObjectName(u"le_ymax_bb_xlon")
 
-        self.gridLayout_15.addWidget(self.lineEdit_33, 2, 1, 1, 1)
+        self.gridLayout_15.addWidget(self.le_ymax_bb_xlon, 2, 1, 1, 1)
 
-        self.lineEdit_31 = QLineEdit(self.sw_lon_patch_ymax_1)
-        self.lineEdit_31.setObjectName(u"lineEdit_31")
+        self.le_ymax_bb_zlon = QLineEdit(self.sw_lon_patch_ymax_1)
+        self.le_ymax_bb_zlon.setObjectName(u"le_ymax_bb_zlon")
 
-        self.gridLayout_15.addWidget(self.lineEdit_31, 2, 2, 1, 1)
+        self.gridLayout_15.addWidget(self.le_ymax_bb_zlon, 2, 2, 1, 1)
 
         self.sw_lon_patch.addWidget(self.sw_lon_patch_ymax_1)
         self.sw_lon_patch_ymax_2 = QWidget()
@@ -1106,30 +1106,30 @@ class Ui_bordes_window(object):
 
         self.gridLayout_20.addWidget(self.label_72, 1, 0, 1, 1)
 
-        self.lineEdit_46 = QLineEdit(self.sw_lon_patch_ymin_1)
-        self.lineEdit_46.setObjectName(u"lineEdit_46")
+        self.le_ymin_bb_xstart = QLineEdit(self.sw_lon_patch_ymin_1)
+        self.le_ymin_bb_xstart.setObjectName(u"le_ymin_bb_xstart")
 
-        self.gridLayout_20.addWidget(self.lineEdit_46, 1, 1, 1, 1)
+        self.gridLayout_20.addWidget(self.le_ymin_bb_xstart, 1, 1, 1, 1)
 
-        self.le_lon_segment_xmax_16 = QLineEdit(self.sw_lon_patch_ymin_1)
-        self.le_lon_segment_xmax_16.setObjectName(u"le_lon_segment_xmax_16")
+        self.le_ymin_bb_zstart = QLineEdit(self.sw_lon_patch_ymin_1)
+        self.le_ymin_bb_zstart.setObjectName(u"le_ymin_bb_zstart")
 
-        self.gridLayout_20.addWidget(self.le_lon_segment_xmax_16, 1, 2, 1, 1)
+        self.gridLayout_20.addWidget(self.le_ymin_bb_zstart, 1, 2, 1, 1)
 
         self.label_73 = QLabel(self.sw_lon_patch_ymin_1)
         self.label_73.setObjectName(u"label_73")
 
         self.gridLayout_20.addWidget(self.label_73, 2, 0, 1, 1)
 
-        self.lineEdit_48 = QLineEdit(self.sw_lon_patch_ymin_1)
-        self.lineEdit_48.setObjectName(u"lineEdit_48")
+        self.le_ymin_bb_xlon = QLineEdit(self.sw_lon_patch_ymin_1)
+        self.le_ymin_bb_xlon.setObjectName(u"le_ymin_bb_xlon")
 
-        self.gridLayout_20.addWidget(self.lineEdit_48, 2, 1, 1, 1)
+        self.gridLayout_20.addWidget(self.le_ymin_bb_xlon, 2, 1, 1, 1)
 
-        self.lineEdit_47 = QLineEdit(self.sw_lon_patch_ymin_1)
-        self.lineEdit_47.setObjectName(u"lineEdit_47")
+        self.le_ymin_bb_zlon = QLineEdit(self.sw_lon_patch_ymin_1)
+        self.le_ymin_bb_zlon.setObjectName(u"le_ymin_bb_zlon")
 
-        self.gridLayout_20.addWidget(self.lineEdit_47, 2, 2, 1, 1)
+        self.gridLayout_20.addWidget(self.le_ymin_bb_zlon, 2, 2, 1, 1)
 
         self.sw_lon_patch.addWidget(self.sw_lon_patch_ymin_1)
         self.sw_lon_patch_ymin_2 = QWidget()
@@ -1341,30 +1341,30 @@ class Ui_bordes_window(object):
 
         self.gridLayout_25.addWidget(self.label_92, 1, 0, 1, 1)
 
-        self.lineEdit_61 = QLineEdit(self.sw_lon_patch_zmax_1)
-        self.lineEdit_61.setObjectName(u"lineEdit_61")
+        self.le_zmax_bb_xstart = QLineEdit(self.sw_lon_patch_zmax_1)
+        self.le_zmax_bb_xstart.setObjectName(u"le_zmax_bb_xstart")
 
-        self.gridLayout_25.addWidget(self.lineEdit_61, 1, 1, 1, 1)
+        self.gridLayout_25.addWidget(self.le_zmax_bb_xstart, 1, 1, 1, 1)
 
-        self.le_lon_segment_xmax_21 = QLineEdit(self.sw_lon_patch_zmax_1)
-        self.le_lon_segment_xmax_21.setObjectName(u"le_lon_segment_xmax_21")
+        self.le_zmax_bb_ystart = QLineEdit(self.sw_lon_patch_zmax_1)
+        self.le_zmax_bb_ystart.setObjectName(u"le_zmax_bb_ystart")
 
-        self.gridLayout_25.addWidget(self.le_lon_segment_xmax_21, 1, 2, 1, 1)
+        self.gridLayout_25.addWidget(self.le_zmax_bb_ystart, 1, 2, 1, 1)
 
         self.label_93 = QLabel(self.sw_lon_patch_zmax_1)
         self.label_93.setObjectName(u"label_93")
 
         self.gridLayout_25.addWidget(self.label_93, 2, 0, 1, 1)
 
-        self.lineEdit_63 = QLineEdit(self.sw_lon_patch_zmax_1)
-        self.lineEdit_63.setObjectName(u"lineEdit_63")
+        self.le_zmax_bb_xlon = QLineEdit(self.sw_lon_patch_zmax_1)
+        self.le_zmax_bb_xlon.setObjectName(u"le_zmax_bb_xlon")
 
-        self.gridLayout_25.addWidget(self.lineEdit_63, 2, 1, 1, 1)
+        self.gridLayout_25.addWidget(self.le_zmax_bb_xlon, 2, 1, 1, 1)
 
-        self.lineEdit_62 = QLineEdit(self.sw_lon_patch_zmax_1)
-        self.lineEdit_62.setObjectName(u"lineEdit_62")
+        self.le_zmax_bb_ylon = QLineEdit(self.sw_lon_patch_zmax_1)
+        self.le_zmax_bb_ylon.setObjectName(u"le_zmax_bb_ylon")
 
-        self.gridLayout_25.addWidget(self.lineEdit_62, 2, 2, 1, 1)
+        self.gridLayout_25.addWidget(self.le_zmax_bb_ylon, 2, 2, 1, 1)
 
         self.sw_lon_patch.addWidget(self.sw_lon_patch_zmax_1)
         self.sw_lon_patch_zmax_2 = QWidget()
@@ -1576,30 +1576,30 @@ class Ui_bordes_window(object):
 
         self.gridLayout_30.addWidget(self.label_113, 1, 0, 1, 1)
 
-        self.lineEdit_78 = QLineEdit(self.sw_lon_patch_zmin_1)
-        self.lineEdit_78.setObjectName(u"lineEdit_78")
+        self.le_zmin_bb_xstart = QLineEdit(self.sw_lon_patch_zmin_1)
+        self.le_zmin_bb_xstart.setObjectName(u"le_zmin_bb_xstart")
 
-        self.gridLayout_30.addWidget(self.lineEdit_78, 1, 1, 1, 1)
+        self.gridLayout_30.addWidget(self.le_zmin_bb_xstart, 1, 1, 1, 1)
 
-        self.le_lon_segment_xmax_26 = QLineEdit(self.sw_lon_patch_zmin_1)
-        self.le_lon_segment_xmax_26.setObjectName(u"le_lon_segment_xmax_26")
+        self.le_zmin_bb_ystart = QLineEdit(self.sw_lon_patch_zmin_1)
+        self.le_zmin_bb_ystart.setObjectName(u"le_zmin_bb_ystart")
 
-        self.gridLayout_30.addWidget(self.le_lon_segment_xmax_26, 1, 2, 1, 1)
+        self.gridLayout_30.addWidget(self.le_zmin_bb_ystart, 1, 2, 1, 1)
 
         self.label_112 = QLabel(self.sw_lon_patch_zmin_1)
         self.label_112.setObjectName(u"label_112")
 
         self.gridLayout_30.addWidget(self.label_112, 2, 0, 1, 1)
 
-        self.lineEdit_76 = QLineEdit(self.sw_lon_patch_zmin_1)
-        self.lineEdit_76.setObjectName(u"lineEdit_76")
+        self.le_zmin_bb_xlon = QLineEdit(self.sw_lon_patch_zmin_1)
+        self.le_zmin_bb_xlon.setObjectName(u"le_zmin_bb_xlon")
 
-        self.gridLayout_30.addWidget(self.lineEdit_76, 2, 1, 1, 1)
+        self.gridLayout_30.addWidget(self.le_zmin_bb_xlon, 2, 1, 1, 1)
 
-        self.lineEdit_77 = QLineEdit(self.sw_lon_patch_zmin_1)
-        self.lineEdit_77.setObjectName(u"lineEdit_77")
+        self.le_zmin_bb_ylon = QLineEdit(self.sw_lon_patch_zmin_1)
+        self.le_zmin_bb_ylon.setObjectName(u"le_zmin_bb_ylon")
 
-        self.gridLayout_30.addWidget(self.lineEdit_77, 2, 2, 1, 1)
+        self.gridLayout_30.addWidget(self.le_zmin_bb_ylon, 2, 2, 1, 1)
 
         self.sw_lon_patch.addWidget(self.sw_lon_patch_zmin_1)
         self.sw_lon_patch_zmin_2 = QWidget()

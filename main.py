@@ -54,6 +54,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def open_malla(self):
         if self.malla_window is None or not self.malla_window.isVisible():
             self.malla_window = MallaWindow(self.config_manager)
+            self.malla_window.longitudes_actualizadas_signal.connect(self.actualizar_longitudes_bordes)
             self.malla_window.show()
         else:
             self.malla_window.raise_()
@@ -63,9 +64,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def open_variables(self):
         if self.variables_window is None or not self.variables_window.isVisible():
             self.variables_window = VariablesWindow(self.config_manager)
-            self.variables_window.tipo_flujo_cambio_signal.connect(
-                self.handle_tipo_flujo_cambio
-            )
+            self.variables_window.tipo_flujo_cambio_signal.connect(self.handle_tipo_flujo_cambio)
             self.variables_window.variables_signal.connect(self.handle_variables_lista)
             self.variables_window.show()
         else:
@@ -102,17 +101,16 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def handle_tipo_flujo_cambio(self, es_difusivo):
         if self.bordes_window:
             # Llamar a un método que actualice el estado del campo 'Entrada de la masa'
-            print(
-                f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}"
-            )  # Impresión de depuración
+            print(f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}")  # Impresión de depuración
             self.bordes_window.update_entrada_masa(es_difusivo)
 
     def handle_variables_lista(self, variables):
         if self.bordes_window:
-            print(
-                f"Recibiendo señal en MainWindow, variables: {variables}"
-            )  # Impresión de depuración
+            print(f"Recibiendo señal en MainWindow, variables: {variables}")  # Impresión de depuración
             self.bordes_window.agregar_variables_lista(variables)
+
+    def actualizar_longitudes_bordes(self, longitudes):
+        self.bordes_window.longitudes_bordes_signal.emit(longitudes)
 
     def guardar_configuracion(self):
         # Primero, guardar la configuración en un archivo JSON
