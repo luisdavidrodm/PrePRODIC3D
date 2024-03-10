@@ -14,6 +14,19 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.ui = Ui_malla_window()
         self.config_manager = config_manager
 
+        self.sb_dirx_numz.setMinimum(2)
+        self.sb_dirx_numz.setMaximum(10)
+        self.sb_diry_numz.setMinimum(2)
+        self.sb_diry_numz.setMaximum(10)
+        self.sb_dirz_numz.setMinimum(2)
+        self.sb_dirz_numz.setMaximum(10)
+        self.sb_dirtita_numz.setMinimum(2)
+        self.sb_dirtita_numz.setMaximum(10)
+        self.sb_dirr_numz.setMinimum(2)
+        self.sb_dirr_numz.setMaximum(10)
+        self.sb_dirzcil_numz.setMinimum(2)
+        self.sb_dirzcil_numz.setMaximum(10)
+
         self.cb_tipocoord.currentTextChanged.connect(self.changeZonas)
         self.cb_tipozonas.currentTextChanged.connect(self.changeZonas)
 
@@ -60,6 +73,13 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
             line_edit_object_zcil_vz.textChanged.connect(self.actualizar_longitudes)
 
         self.le_dirr_inidom.textChanged.connect(self.actualizar_longitudes)
+
+        self.sb_dirx_numz.valueChanged.connect(self.handle_dirx_numz_change)
+        self.sb_diry_numz.valueChanged.connect(self.handle_diry_numz_change)
+        self.sb_dirz_numz.valueChanged.connect(self.handle_dirz_numz_change)
+        self.sb_dirtita_numz.valueChanged.connect(self.handle_dirtita_numz_change)
+        self.sb_dirr_numz.valueChanged.connect(self.handle_dirr_numz_change)
+        self.sb_dirzcil_numz.valueChanged.connect(self.handle_dirzcil_numz_change)
 
         ##############################################################################################
         # CONEXION DE WIDGETS ZONA UNICA - CARTESIANA
@@ -328,3 +348,42 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
             self.longitudes_actualizadas_signal.emit(
                 [longitud_tita_cil_vz, longitud_r_cil_vz, longitud_zcil_cil_vz, rini_cil_vz]
             )
+
+    def handle_generic_numz_change(self, value, prefix, ncv_prefix):
+        for i in range(1, 11):
+            le_lon = getattr(self, f"{prefix}_lon_zon{i}", None)
+            le_ncv = getattr(self, f"{prefix}_{ncv_prefix}_zon{i}", None)
+            le_pot = getattr(self, f"{prefix}_poten_zon{i}", None)
+
+            if i <= value:
+                if le_lon:
+                    le_lon.setEnabled(True)
+                if le_ncv:
+                    le_ncv.setEnabled(True)
+                if le_pot:
+                    le_pot.setEnabled(True)
+            else:
+                if le_lon:
+                    le_lon.setEnabled(False)
+                if le_ncv:
+                    le_ncv.setEnabled(False)
+                if le_pot:
+                    le_pot.setEnabled(False)
+
+    def handle_dirx_numz_change(self, value):
+        self.handle_generic_numz_change(value, "le_dirx", "nvcx")
+
+    def handle_diry_numz_change(self, value):
+        self.handle_generic_numz_change(value, "le_diry", "nvcy")
+
+    def handle_dirz_numz_change(self, value):
+        self.handle_generic_numz_change(value, "le_dirz", "nvcz")
+
+    def handle_dirtita_numz_change(self, value):
+        self.handle_generic_numz_change(value, "le_dirtita", "nvctita")
+
+    def handle_dirr_numz_change(self, value):
+        self.handle_generic_numz_change(value, "le_dirr", "nvcr")
+
+    def handle_dirzcil_numz_change(self, value):
+        self.handle_generic_numz_change(value, "le_dirzcil", "nvczcil")
