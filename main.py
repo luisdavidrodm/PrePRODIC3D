@@ -41,7 +41,12 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.pb_bordes.clicked.connect(self.open_bordes)
         self.pb_salida.clicked.connect(self.open_salida)
 
-    @qtc.Slot()
+    ################################################################################
+    ##
+    ## Funciones para abrir ventanas
+    ##
+    ################################################################################
+
     def open_inicio(self):
         if self.inicio_window is None or not self.inicio_window.isVisible():
             self.inicio_window = InicioWindow(self.config_manager)
@@ -50,7 +55,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.inicio_window.raise_()
             self.inicio_window.activateWindow()
 
-    @qtc.Slot()
     def open_malla(self):
         if self.malla_window is None or not self.malla_window.isVisible():
             self.malla_window = MallaWindow(self.config_manager)
@@ -60,7 +64,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.malla_window.raise_()
             self.malla_window.activateWindow()
 
-    @qtc.Slot()
     def open_variables(self):
         if self.variables_window is None or not self.variables_window.isVisible():
             self.variables_window = VariablesWindow(self.config_manager)
@@ -71,7 +74,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.variables_window.raise_()
             self.variables_window.activateWindow()
 
-    @qtc.Slot()
     def open_valores(self):
         if self.valores_window is None or not self.valores_window.isVisible():
             self.valores_window = ValoresWindow(self.config_manager)
@@ -80,7 +82,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.valores_window.raise_()
             self.valores_window.activateWindow()
 
-    @qtc.Slot()
     def open_bordes(self):
         if self.bordes_window is None or not self.bordes_window.isVisible():
             self.bordes_window = BordesWindow(self.config_manager)
@@ -89,7 +90,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.bordes_window.raise_()
             self.bordes_window.activateWindow()
 
-    @qtc.Slot()
     def open_salida(self):
         if self.salida_window is None or not self.salida_window.isVisible():
             self.salida_window = SalidaWindow()
@@ -97,6 +97,12 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         else:
             self.salida_window.raise_()
             self.salida_window.activateWindow()
+
+    ################################################################################
+    ##
+    ## Funciones de señales
+    ##
+    ################################################################################
 
     def handle_tipo_flujo_cambio(self, es_difusivo):
         if self.bordes_window:
@@ -111,6 +117,12 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
     def actualizar_longitudes_bordes(self, longitudes):
         self.bordes_window.actualizar_longitudes(longitudes)
+
+    ################################################################################
+    ##
+    ## Guardado de archivos
+    ##
+    ################################################################################
 
     def guardar_configuracion(self):
         # Primero, guardar la configuración en un archivo JSON
