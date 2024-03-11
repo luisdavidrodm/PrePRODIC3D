@@ -1,5 +1,4 @@
 import sys
-from PySide6 import QtCore as qtc
 from PySide6 import QtWidgets as qtw
 
 
@@ -41,7 +40,12 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.pb_bordes.clicked.connect(self.open_bordes)
         self.pb_salida.clicked.connect(self.open_salida)
 
-    @qtc.Slot()
+    ################################################################################
+    ##
+    ## Funciones para abrir ventanas
+    ##
+    ################################################################################
+
     def open_inicio(self):
         if self.inicio_window is None or not self.inicio_window.isVisible():
             self.inicio_window = InicioWindow(self.config_manager)
@@ -50,7 +54,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.inicio_window.raise_()
             self.inicio_window.activateWindow()
 
-    @qtc.Slot()
     def open_malla(self):
         if self.malla_window is None or not self.malla_window.isVisible():
             self.malla_window = MallaWindow(self.config_manager)
@@ -60,7 +63,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.malla_window.raise_()
             self.malla_window.activateWindow()
 
-    @qtc.Slot()
     def open_variables(self):
         if self.variables_window is None or not self.variables_window.isVisible():
             self.variables_window = VariablesWindow(self.config_manager)
@@ -71,7 +73,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.variables_window.raise_()
             self.variables_window.activateWindow()
 
-    @qtc.Slot()
     def open_valores(self):
         if self.valores_window is None or not self.valores_window.isVisible():
             self.valores_window = ValoresWindow(self.config_manager)
@@ -80,7 +81,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.valores_window.raise_()
             self.valores_window.activateWindow()
 
-    @qtc.Slot()
     def open_bordes(self):
         if self.bordes_window is None or not self.bordes_window.isVisible():
             self.bordes_window = BordesWindow(self.config_manager)
@@ -89,7 +89,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.bordes_window.raise_()
             self.bordes_window.activateWindow()
 
-    @qtc.Slot()
     def open_salida(self):
         if self.salida_window is None or not self.salida_window.isVisible():
             self.salida_window = SalidaWindow()
@@ -98,19 +97,31 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.salida_window.raise_()
             self.salida_window.activateWindow()
 
-    def handle_tipo_flujo_cambio(self, es_difusivo):
+    ################################################################################
+    ##
+    ## Funciones de señales
+    ##
+    ################################################################################
+
+    def handle_tipo_flujo_cambio(self, es_difusivo: bool):
         if self.bordes_window:
             # Llamar a un método que actualice el estado del campo 'Entrada de la masa'
             print(f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}")  # Impresión de depuración
             self.bordes_window.update_entrada_masa(es_difusivo)
 
-    def handle_variables_lista(self, variables):
+    def handle_variables_lista(self, variables: list):
         if self.bordes_window:
             print(f"Recibiendo señal en MainWindow, variables: {variables}")  # Impresión de depuración
             self.bordes_window.agregar_variables_lista(variables)
 
-    def actualizar_longitudes_bordes(self, longitudes):
+    def actualizar_longitudes_bordes(self, longitudes: list):
         self.bordes_window.actualizar_longitudes(longitudes)
+
+    ################################################################################
+    ##
+    ## Guardado de archivos
+    ##
+    ################################################################################
 
     def guardar_configuracion(self):
         # Primero, guardar la configuración en un archivo JSON

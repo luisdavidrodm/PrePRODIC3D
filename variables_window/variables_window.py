@@ -13,7 +13,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         self.setupUi(self)
         self.config_manager = config_manager
 
-        self.cb_tsimu.currentTextChanged.connect(self.changeTipoSimu)
+        self.cb_tsimu.currentTextChanged.connect(self.change_tipo_simu)
         self.le_iptm.textChanged.connect(lambda text: self.update_config("IPTM", text))
         self.le_dt.textChanged.connect(lambda text: self.update_config("DT", text))
         self.cb_tipoflujo.currentTextChanged.connect(self.handle_tipo_flujo_cambio)
@@ -55,7 +55,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         for i in range(6, 11):  # Para le_var_title6 hasta le_var_title10
             getattr(self, f"le_var_title{i}").textChanged.connect(lambda: self.controlarWidgetsTitles())
 
-    def changeTipoSimu(self):
+    def change_tipo_simu(self):
         current_text_simu = self.cb_tsimu.currentText()
 
         if current_text_simu == "Permanente":
