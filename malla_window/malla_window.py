@@ -217,30 +217,21 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         current_text_coord = self.cb_tipocoord.currentText()
         current_text_zona = self.cb_tipozonas.currentText()
 
+        # Determina el índice de la capa basado en la selección actual
         if current_text_zona == "Zona única" and current_text_coord == "Cartesianas":
-            self.gbsw_malla2.setCurrentIndex(0)
+            capaIndex = 0
         elif current_text_zona == "Zona única" and current_text_coord == "Cilindricas":
-            self.gbsw_malla2.setCurrentIndex(1)
+            capaIndex = 1
         elif current_text_zona == "Varias zonas" and current_text_coord == "Cartesianas":
-            self.gbsw_malla2.setCurrentIndex(2)
+            capaIndex = 2
         elif current_text_zona == "Varias zonas" and current_text_coord == "Cilindricas":
-            self.gbsw_malla2.setCurrentIndex(3)
-            self.sb_dirx_numz.valueChanged.connect(self.changingNumBoxX)
+            capaIndex = 3
 
-    # AYUDAAA
-    def changingNumBoxX(self):
-        currentNumBox = self.sb_dirx_numz.value()
-        if not getattr(self.gb_dirx_vz1, "le_dirx_lon_zon{}".format(currentNumBox)).isEnabled():
-            getattr(self.gb_dirx_vz1, "le_dirx_lon_zon{}".format(currentNumBox)).setEnabled(True)
-            getattr(self.gb_dirx_vz1, "le_dirx_nvcx_zon{}".format(currentNumBox)).setEnabled(True)
-            getattr(self.gb_dirx_vz1, "le_dirx_poten_zon{}".format(currentNumBox)).setEnabled(True)
-        else:
-            try:
-                getattr(self.gb_dirx_vz1, "le_dirx_lon_zon{}".format(currentNumBox + 1)).setEnabled(False)
-                getattr(self.gb_dirx_vz1, "le_dirx_nvcx_zon{}".format(currentNumBox + 1)).setEnabled(False)
-                getattr(self.gb_dirx_vz1, "le_dirx_poten_zon{}".format(currentNumBox + 1)).setEnabled(False)
-            except:
-                pass
+        # Resetear widgets de la capa actual antes de cambiar
+        self.resetearWidgetsDeCapa(capaIndex)
+
+        # Cambia el índice del QStackedWidget
+        self.gbsw_malla2.setCurrentIndex(capaIndex)
 
     def on_coordinate_system_changed(self, selection):
         mode = 1 if selection == "Cartesianas" else 2
@@ -387,3 +378,17 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
     def handle_dirzcil_numz_change(self, value):
         self.handle_generic_numz_change(value, "le_dirzcil", "nvczcil")
+
+    def resetearWidgetsDeCapa(self, capaIndex):
+        # Obtén el widget (capa) actual del QStackedWidget basado en el índice
+        capa = self.gbsw_malla2.widget(capaIndex)
+
+        # Encuentra todos los QLineEdit en esta capa y limpia su texto
+        lineEdits = capa.findChildren(qtw.QLineEdit)
+        for lineEdit in lineEdits:
+            lineEdit.clear()
+
+        # Encuentra todos los QSpinBox en esta capa y restablece su valor al mínimo
+        spinBoxes = capa.findChildren(qtw.QSpinBox)
+        for spinBox in spinBoxes:
+            spinBox.setValue(spinBox.minimum())
