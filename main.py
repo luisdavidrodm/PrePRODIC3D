@@ -1,5 +1,4 @@
 import sys
-from PySide6 import QtCore as qtc
 from PySide6 import QtWidgets as qtw
 
 
@@ -104,18 +103,18 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     ##
     ################################################################################
 
-    def handle_tipo_flujo_cambio(self, es_difusivo):
+    def handle_tipo_flujo_cambio(self, es_difusivo: bool):
         if self.bordes_window:
             # Llamar a un método que actualice el estado del campo 'Entrada de la masa'
             print(f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}")  # Impresión de depuración
             self.bordes_window.update_entrada_masa(es_difusivo)
 
-    def handle_variables_lista(self, variables):
+    def handle_variables_lista(self, variables: list):
         if self.bordes_window:
             print(f"Recibiendo señal en MainWindow, variables: {variables}")  # Impresión de depuración
             self.bordes_window.agregar_variables_lista(variables)
 
-    def actualizar_longitudes_bordes(self, longitudes):
+    def actualizar_longitudes_bordes(self, longitudes: list):
         self.bordes_window.actualizar_longitudes(longitudes)
 
     ################################################################################

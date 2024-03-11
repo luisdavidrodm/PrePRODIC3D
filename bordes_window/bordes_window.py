@@ -1,3 +1,5 @@
+from collections import OrderedDict
+
 from PySide6 import QtWidgets as qtw
 from PySide6.QtCore import Slot
 
@@ -52,6 +54,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_flux.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
         self.chb_convec.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
 
+        self.le_value.textChanged.connect(self.on_le_value_changed)
+
     ################################################################################
     ##
     ## Funciones de Connect
@@ -89,34 +93,23 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.update_line_edit()
 
     def update_line_edit(self):
+        """Actualiza los campos de longitudes de segmentos segun la seleccion"""
         current_text_patch_list = self.get_current_patch_list()
         current_patch = current_text_patch_list.currentItem().text() if current_text_patch_list.currentItem() else ""
 
-        if self.sw_patchlist.currentIndex() == 0:
-            self.m = 0
-        elif self.sw_patchlist.currentIndex() == 1:
-            self.m = 5
-        if self.sw_patchlist.currentIndex() == 2:
-            self.m = 10
-        elif self.sw_patchlist.currentIndex() == 3:
-            self.m = 15
-        if self.sw_patchlist.currentIndex() == 4:
-            self.m = 20
-        elif self.sw_patchlist.currentIndex() == 5:
-            self.m = 25
+        m = self.sw_patchlist.currentIndex() * 5
+        patch_to_index = {
+            "Borde base": 0,
+            "Parche 2": 1,
+            "Parche 3": 2,
+            "Parche 4": 3,
+            "Parche 5": 4,
+        }
+        base_index = patch_to_index.get(current_patch, 0)
+        self.sw_lon_patch.setCurrentIndex(base_index + m)
 
-        if current_patch == "Borde base":
-            self.sw_lon_patch.setCurrentIndex(0 + self.m)
-        elif current_patch == "Parche 2":
-            self.sw_lon_patch.setCurrentIndex(1 + self.m)
-        elif current_patch == "Parche 3":
-            self.sw_lon_patch.setCurrentIndex(2 + self.m)
-        elif current_patch == "Parche 4":
-            self.sw_lon_patch.setCurrentIndex(3 + self.m)
-        elif current_patch == "Parche 5":
-            self.sw_lon_patch.setCurrentIndex(4 + self.m)
-
-    def get_current_patch_list(self):
+    def get_current_patch_list(self) -> qtw.QListWidget:
+        """Devuelve la lista de segmentos dependiendo del borde seleccionado"""
         if self.sw_patchlist.currentIndex() == 0:
             result = self.lw_patchlist_xmax
         elif self.sw_patchlist.currentIndex() == 1:
@@ -129,12 +122,14 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             result = self.lw_patchlist_zmax
         elif self.sw_patchlist.currentIndex() == 5:
             result = self.lw_patchlist_zmin
+        print(result)
         for index in range(result.count()):
             item = result.item(index)
-            print(item.text())
+            print(index, item.text())
         return result
 
-    def handle_chb_state_changed(self, state):
+    def handle_chb_state_changed(self, state: int):
+        """Permite solo seleccionar un tipo de segmento"""
         sender = self.sender()
         if state == 2:
             if sender == self.chb_wall:
@@ -147,7 +142,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.chb_wall.setChecked(False)
                 self.chb_inmass.setChecked(False)
 
-    def handle_chb_valuefluxconvec_changed(self, state):
+    def handle_chb_valuefluxconvec_changed(self, state: int):
+        """Permite solo seleccionar un tipo de variable escalar"""
         sender = self.sender()
         if state == 2:
             if sender == self.chb_value:
@@ -159,6 +155,28 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             elif sender == self.chb_convec:
                 self.chb_value.setChecked(False)
                 self.chb_flux.setChecked(False)
+
+    def on_le_value_changed(self, new_value: str):
+        current_index = self.sw_patchlist.currentIndex()
+        current_borde = self.lw_bordes.currentItem().text().replace(" ", "_").lower()
+        segment_name = f"Parche {current_index + 1}"
+
+        # Actualiza el valor en el ConfigManager
+        self.config_manager.update_patch_config(current_borde, segment_name, "value", new_value)
+
+        if current_borde not in self.config_structure:
+            self.config_structure[current_borde] = OrderedDict()
+        if segment_name not in self.config_structure[current_borde]:
+            self.config_structure[current_borde][segment_name] = OrderedDict()
+
+        # Actualiza el valor específico
+        self.config_structure[current_borde][segment_name][key] = value
+
+    def load_segment_config(self, borde, segment_name):
+        # Carga la configuración para el segmento dado y actualiza los campos de la UI
+        segment_config = self.config_manager.config_structure.get(borde, {}).get(segment_name, {})
+        value = segment_config.get("value", "")  # Usa un valor predeterminado si no se encuentra
+        self.le_value.setText(value)
 
     def add_patch_x_max(self):
         if self.patch_count_xmax < 5:
@@ -233,7 +251,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
     ################################################################################
 
     @Slot()
-    def update_entrada_masa(self, es_difusivo):
+    def update_entrada_masa(self, es_difusivo: bool):
         print(f"Actualizando Entrada de Masa, es_difusivo: {es_difusivo}")
 
         # Estado de los checkboxes
@@ -284,13 +302,13 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_convec.setDisabled(flux_convec_deshabilitado or state_outmass)
 
     @Slot()
-    def agregar_variables_lista(self, variables):
+    def agregar_variables_lista(self, variables: list):
         print(f"Actualizando Lista de variables: {variables}")
         self.lw_variables.clear()
         self.lw_variables.addItems(variables)
 
     @Slot()
-    def actualizar_longitudes(self, longitudes):
+    def actualizar_longitudes(self, longitudes: list):
         self.le_xmax_bb_ylon.setText(str(longitudes[1]))
         self.le_xmax_bb_zlon.setText(str(longitudes[2]))
         self.le_xmax_bb_ystart.setText(str(longitudes[3]))
