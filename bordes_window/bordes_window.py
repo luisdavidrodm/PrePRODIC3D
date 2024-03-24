@@ -1,4 +1,4 @@
-from collections import OrderedDict
+from typing import Union
 
 from PySide6 import QtWidgets as qtw
 from PySide6.QtCore import Slot
@@ -30,14 +30,14 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.pb_addpatch_zmin.clicked.connect(self.add_patch_z_min)
         self.pb_rempatch_zmin.clicked.connect(self.remove_patch_z_min)
 
-        self.lw_bordes.currentRowChanged.connect(self.change_patch_list)
+        self.lw_bordes.currentRowChanged.connect(self.select_border)
 
-        self.lw_patchlist_xmax.currentRowChanged.connect(self.update_line_edit)
-        self.lw_patchlist_xmin.currentRowChanged.connect(self.update_line_edit)
-        self.lw_patchlist_ymax.currentRowChanged.connect(self.update_line_edit)
-        self.lw_patchlist_ymin.currentRowChanged.connect(self.update_line_edit)
-        self.lw_patchlist_zmax.currentRowChanged.connect(self.update_line_edit)
-        self.lw_patchlist_zmin.currentRowChanged.connect(self.update_line_edit)
+        self.lw_patchlist_xmax.currentRowChanged.connect(self.select_patch)
+        self.lw_patchlist_xmin.currentRowChanged.connect(self.select_patch)
+        self.lw_patchlist_ymax.currentRowChanged.connect(self.select_patch)
+        self.lw_patchlist_ymin.currentRowChanged.connect(self.select_patch)
+        self.lw_patchlist_zmax.currentRowChanged.connect(self.select_patch)
+        self.lw_patchlist_zmin.currentRowChanged.connect(self.select_patch)
 
         self.patch_count_xmax = 1
         self.patch_count_xmin = 1
@@ -54,7 +54,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_flux.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
         self.chb_convec.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
 
-        self.le_value.textChanged.connect(self.on_le_value_changed)
+        self.le_value.textChanged.connect(self.value_changed)
+        self.le_tempamb.textChanged.connect(self.value_changed)
+
+        self.clear_and_disable_fields()
 
     ################################################################################
     ##
@@ -62,42 +65,24 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
     ##
     ################################################################################
 
-    def change_patch_list(self):
-        """Actualiza la lista de segmentos segun el borde seleccionado"""
+    def select_border(self):
+        """Actualiza la lista de parches segun el borde seleccionado"""
+        border_to_index = {"X Max": 0, "X Min": 1, "Y Max": 2, "Y Min": 3, "Z Max": 4, "Z Min": 5}
         current_text_bordes = self.lw_bordes.currentItem().text()
+        new_index = border_to_index.get(current_text_bordes, None)
 
-        if current_text_bordes == "X Max":
-            self.sw_patchlist.setCurrentIndex(0)
-            self.sw_patch_addremove.setCurrentIndex(0)
+        if new_index is not None:
+            # Cambiar al QListWidget correspondiente en el QStackedWidget
+            self.sw_patchlist.setCurrentIndex(new_index)
+            self.sw_patch_addremove.setCurrentIndex(new_index)
+            # Llamar a select_patch para verificar el parche seleccionado
+            self.select_patch()
+        else:
+            # Si no hay un borde seleccionado, limpia y deshabilita los campos relevantes
+            self.clear_and_disable_fields()
 
-        elif current_text_bordes == "X Min":
-            self.sw_patchlist.setCurrentIndex(1)
-            self.sw_patch_addremove.setCurrentIndex(1)
-
-        elif current_text_bordes == "Y Max":
-            self.sw_patchlist.setCurrentIndex(2)
-            self.sw_patch_addremove.setCurrentIndex(2)
-
-        elif current_text_bordes == "Y Min":
-            self.sw_patchlist.setCurrentIndex(3)
-            self.sw_patch_addremove.setCurrentIndex(3)
-
-        elif current_text_bordes == "Z Max":
-            self.sw_patchlist.setCurrentIndex(4)
-            self.sw_patch_addremove.setCurrentIndex(4)
-
-        elif current_text_bordes == "Z Min":
-            self.sw_patchlist.setCurrentIndex(5)
-            self.sw_patch_addremove.setCurrentIndex(5)
-
-        self.update_line_edit()
-
-    def update_line_edit(self):
-        """Actualiza los campos de longitudes de segmentos segun la seleccion"""
-        current_text_patch_list = self.get_current_patch_list()
-        current_patch = current_text_patch_list.currentItem().text() if current_text_patch_list.currentItem() else ""
-
-        m = self.sw_patchlist.currentIndex() * 5
+    def select_patch(self):
+        """Actualiza los campos de longitudes de parches segun la seleccion"""
         patch_to_index = {
             "Borde base": 0,
             "Parche 2": 1,
@@ -105,11 +90,18 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             "Parche 4": 3,
             "Parche 5": 4,
         }
-        base_index = patch_to_index.get(current_patch, 0)
-        self.sw_lon_patch.setCurrentIndex(base_index + m)
+        current_patch_list = self.get_current_patch_list()
+        if current_patch_list:
+            current_patch = current_patch_list.currentItem().text() if current_patch_list.currentItem() else None
+            if current_patch:
+                base_index = patch_to_index.get(current_patch)
+                self.sw_lon_patch.setCurrentIndex(base_index + (self.sw_patchlist.currentIndex() * 5))
+                self.load_patch_config()
+                return None
+        self.clear_and_disable_fields()
 
-    def get_current_patch_list(self) -> qtw.QListWidget:
-        """Devuelve la lista de segmentos dependiendo del borde seleccionado"""
+    def get_current_patch_list(self) -> Union[qtw.QListWidget, None]:
+        """Devuelve la lista de parches dependiendo del borde seleccionado"""
         if self.sw_patchlist.currentIndex() == 0:
             result = self.lw_patchlist_xmax
         elif self.sw_patchlist.currentIndex() == 1:
@@ -122,14 +114,29 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             result = self.lw_patchlist_zmax
         elif self.sw_patchlist.currentIndex() == 5:
             result = self.lw_patchlist_zmin
-        print(result)
+        else:
+            result = None
+        # print(result)
         for index in range(result.count()):
             item = result.item(index)
-            print(index, item.text())
+            # print(index, item.text())
         return result
 
+    def get_current_border_and_patch_name(self) -> Union[tuple[str, str], None]:
+        """Devuelve el tuple con borde y parche actual en formato ("X Max", "Parche 1")"""
+        current_border_item = self.lw_bordes.currentItem()
+        if current_border_item is not None:
+            current_border = current_border_item.text()
+            # Obtiene el parche actualmente seleccionado desde la lista de parches para el borde seleccionado
+            current_patch_list = self.get_current_patch_list()
+            current_patch_item = current_patch_list.currentItem()
+            if current_patch_item is not None:
+                current_patch = current_patch_item.text()
+                return current_border, current_patch
+        return None
+
     def handle_chb_state_changed(self, state: int):
-        """Permite solo seleccionar un tipo de segmento"""
+        """Permite solo seleccionar un tipo de parche"""
         sender = self.sender()
         if state == 2:
             if sender == self.chb_wall:
@@ -146,6 +153,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         """Permite solo seleccionar un tipo de variable escalar"""
         sender = self.sender()
         if state == 2:
+            self.le_tempamb.setEnabled(sender == self.chb_convec)
             if sender == self.chb_value:
                 self.chb_flux.setChecked(False)
                 self.chb_convec.setChecked(False)
@@ -155,28 +163,13 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             elif sender == self.chb_convec:
                 self.chb_value.setChecked(False)
                 self.chb_flux.setChecked(False)
-
-    def on_le_value_changed(self, new_value: str):
-        current_index = self.sw_patchlist.currentIndex()
-        current_borde = self.lw_bordes.currentItem().text().replace(" ", "_").lower()
-        segment_name = f"Parche {current_index + 1}"
-
-        # Actualiza el valor en el ConfigManager
-        self.config_manager.update_patch_config(current_borde, segment_name, "value", new_value)
-
-        if current_borde not in self.config_structure:
-            self.config_structure[current_borde] = OrderedDict()
-        if segment_name not in self.config_structure[current_borde]:
-            self.config_structure[current_borde][segment_name] = OrderedDict()
-
-        # Actualiza el valor específico
-        self.config_structure[current_borde][segment_name][key] = value
-
-    def load_segment_config(self, borde, segment_name):
-        # Carga la configuración para el segmento dado y actualiza los campos de la UI
-        segment_config = self.config_manager.config_structure.get(borde, {}).get(segment_name, {})
-        value = segment_config.get("value", "")  # Usa un valor predeterminado si no se encuentra
-        self.le_value.setText(value)
+            if sender != self.chb_convec:
+                self.le_tempamb.clear()
+                border_and_patch_name = self.get_current_border_and_patch_name()
+                if border_and_patch_name:
+                    self.config_manager.set_patch_config(
+                        border=border_and_patch_name[0], patch=border_and_patch_name[1], key="le_tempamb", value=None
+                    )
 
     def add_patch_x_max(self):
         if self.patch_count_xmax < 5:
@@ -243,6 +236,69 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         if count_zmin > 1:
             self.lw_patchlist_zmin.takeItem(count_zmin - 1)
             self.patch_count_zmin -= 1
+
+    ################################################################################
+    ##
+    ## Funciones de Carga
+    ##
+    ################################################################################
+
+    def value_changed(self, value):
+        sender = self.sender()
+        # print(sender, sender.objectName())
+        border_and_patch_name = self.get_current_border_and_patch_name()
+        if border_and_patch_name:
+            # Actualiza la configuración para el parche seleccionado
+            self.config_manager.set_patch_config(
+                border=border_and_patch_name[0], patch=border_and_patch_name[1], key=sender.objectName(), value=value
+            )
+
+    def load_patch_config(self):
+        """
+        Carga la configuración para el borde y parche actualmente seleccionados y
+        actualiza la interfaz de usuario con estos valores.
+        """
+        border_and_patch_name = self.get_current_border_and_patch_name()
+        if border_and_patch_name:
+            # Habilita los campos si esta seleccionado un parche
+            self.le_value.setEnabled(True)
+            self.chb_value.setEnabled(True)
+            self.chb_value.setChecked(True)
+            self.chb_convec.setEnabled(True)
+            self.chb_flux.setEnabled(True)
+            # Carga la configuración para el parche dado
+            patch_config = (
+                self.config_manager.config_structure["BOUND"]
+                .get(border_and_patch_name[0], {})
+                .get(border_and_patch_name[1], None)
+            )
+            print(patch_config)
+            # Actualiza los campos de la UI
+            if patch_config:
+                self.le_value.setText(patch_config.get("le_value", ""))
+                self.le_tempamb.setText(patch_config.get("le_tempamb", ""))
+            else:
+                self.chb_value.setChecked(True)
+                self.chb_convec.setChecked(False)
+                self.chb_flux.setChecked(False)
+                self.le_value.clear()
+                self.le_tempamb.clear()
+            self.le_tempamb.setEnabled(self.chb_convec.isChecked())
+
+    def clear_and_disable_fields(self):
+        """Limpia y deshabilita los campos si es necesario."""
+        self.chb_value.setChecked(False)
+        self.chb_convec.setChecked(False)
+        self.chb_flux.setChecked(False)
+        self.chb_value.setEnabled(False)
+        self.chb_convec.setEnabled(False)
+        self.chb_flux.setEnabled(False)
+        self.le_value.setEnabled(False)
+        self.le_tempamb.setEnabled(False)
+        if self.le_value.text():
+            self.le_value.clear()
+        if self.le_tempamb.text():
+            self.le_tempamb.clear()
 
     ################################################################################
     ##
