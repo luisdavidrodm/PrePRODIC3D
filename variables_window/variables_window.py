@@ -13,11 +13,10 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         self.setupUi(self)
         self.config_manager = config_manager
 
-        self.cb_tsimu.currentTextChanged.connect(self.change_tipo_simu)
-        self.le_iptm.textChanged.connect(lambda text: self.update_config("IPTM", text))
-        self.le_dt.textChanged.connect(lambda text: self.update_config("DT", text))
-        self.cb_tipoflujo.currentTextChanged.connect(self.handle_tipo_flujo_cambio)
-        self.cb_trataborde.currentTextChanged.connect(self.update_variables_kord)
+        self.connect_signals()
+        self.load_variable_config()
+
+        # Conexion de Variables con ventana Bordes
         self.le_var_title5.textChanged.connect(self.enviar_datos_variables)
         self.le_var_title6.textChanged.connect(self.enviar_datos_variables)
         self.le_var_title7.textChanged.connect(self.enviar_datos_variables)
@@ -27,33 +26,46 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         self.le_var_title11.textChanged.connect(self.enviar_datos_variables)
         self.le_var_title12.textChanged.connect(self.enviar_datos_variables)
 
+        # Nombre de Variable Temperatura enviado a Bordes
         self.le_var_title5.setText("Temperatura")
-
-        for i in range(1, 13):
-            if hasattr(self, f"le_var_title{i}"):
-                getattr(self, f"le_var_title{i}").textChanged.connect(
-                    lambda text, i=i: self.update_config(f"TITLE({i})", text)
-                )
-
-            if hasattr(self, f"chb_ksolve{i}"):
-                getattr(self, f"chb_ksolve{i}").stateChanged.connect(
-                    lambda state, i=i: self.update_config_ksolve(f"KSOLVE({i})", state)
-                )
-
-            if hasattr(self, f"chb_kprint{i}"):
-                getattr(self, f"chb_kprint{i}").stateChanged.connect(
-                    lambda state, i=i: self.update_config_kprint(f"KPRINT({i})", state)
-                )
-
-            if hasattr(self, f"le_relax{i}"):
-                getattr(self, f"le_relax{i}").textChanged.connect(
-                    lambda text, i=i: self.update_config(f"RELAX({i})", text)
-                )
-
-        self.cb_tipoflujo.currentIndexChanged.connect(self.handle_flujo_change)
 
         for i in range(6, 11):  # Para le_var_title6 hasta le_var_title10
             getattr(self, f"le_var_title{i}").textChanged.connect(lambda: self.controlarWidgetsTitles())
+
+    def connect_signals(self):
+        self.cb_tsimu.currentTextChanged.connect(self.change_tipo_simu)
+        self.cb_tipoflujo.currentTextChanged.connect(self.handle_tipo_flujo_cambio)
+        self.cb_trataborde.currentTextChanged.connect(self.update_variables_kord)
+        self.cb_tipoflujo.currentIndexChanged.connect(self.handle_flujo_change)
+
+        self.cb_tsimu.currentTextChanged.connect(lambda value: self.update_config("TSIMU", value))
+        self.cb_tipoflujo.currentTextChanged.connect(lambda value: self.update_config("TIPOFLUJO", value))
+        self.cb_trataborde.currentTextChanged.connect(lambda value: self.update_config("TRATABORDE", value))
+
+        self.le_iptm.textChanged.connect(lambda text: self.update_config("IPTM", text))
+        self.le_dt.textChanged.connect(lambda text: self.update_config("DT", text))
+
+        # Conexiones para le_var_titleX y otros QLineEdits específicos
+        for i in range(1, 13):
+            if hasattr(self, f"le_var_title{i}"):
+                getattr(self, f"le_var_title{i}").textChanged.connect(
+                    lambda text, i=i: self.value_changed(text, f"TITLE({i})")
+                )
+            if hasattr(self, f"le_relax{i}"):
+                getattr(self, f"le_relax{i}").textChanged.connect(
+                    lambda text, i=i: self.value_changed(text, f"RELAX({i})")
+                )
+
+        # Conectar cambios de estado en CheckBoxes a value_changed
+        for i in range(1, 13):
+            if hasattr(self, f"chb_ksolve{i}"):
+                getattr(self, f"chb_ksolve{i}").stateChanged.connect(
+                    lambda state, i=i: self.value_changed(1 if state > 0 else 0, f"KSOLVE({i})")
+                )
+            if hasattr(self, f"chb_kprint{i}"):
+                getattr(self, f"chb_kprint{i}").stateChanged.connect(
+                    lambda state, i=i: self.value_changed(1 if state > 0 else 0, f"KPRINT({i})")
+                )
 
     def change_tipo_simu(self):
         current_text_simu = self.cb_tsimu.currentText()
@@ -67,9 +79,9 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         kord = 1 if selection == "Esquema de bajo orden" else 2
         self.config_manager.config_structure["VARIABLES"]["KORD"] = kord
 
-    def update_config(self, config_key, text):
+    def update_config(self, config_key, value):
         # Actualiza el valor de la configuración en el ConfigManager
-        self.config_manager.config_structure["VARIABLES"][config_key] = text
+        self.config_manager.config_structure["VARIABLES"][config_key] = value
 
     def update_config_ksolve(self, config_key, state):
         value = 1 if state == 2 else 0
@@ -151,42 +163,97 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             self.chb_kprint11.setEnabled(False)
 
     def controlarWidgetsTitles(self):
-        # Primero, maneja el caso especial para le_var_title6
-        if not self.le_var_title6.text():
-            self.desactivarComponentesDesde(6)
-
-        for i in range(6, 11):  # Ahora incluye hasta le_var_title10 en el bucle
-            current_le_var = getattr(self, f"le_var_title{i}")
-            texto = current_le_var.text().strip()
-
-            if texto:
-                # Para todos los LineEdit con texto, habilita sus componentes asociados
+        # Comprueba todos los LineEdits a partir del 5 hasta el 10 (incluyendo el 10)
+        ultimoConTexto = 5  # Asume que al menos el primer LineEdit debe tener texto (Temperatura)
+        for i in range(5, 11):  # Cambio aquí para limitar hasta el 10
+            le_var = getattr(self, f"le_var_title{i}", None)
+            if le_var and le_var.text().strip():
+                # Habilita y configura los componentes para este LineEdit
                 self.activarComponentesPara(i)
-                # Si no es le_var_title10, habilita el siguiente LineEdit
-                if i < 10:
-                    getattr(self, f"le_var_title{i+1}").setEnabled(True)
+                ultimoConTexto = i
             else:
-                # Si se encuentra un LineEdit vacío, desactiva los componentes desde el siguiente
-                self.desactivarComponentesDesde(i + 1)
+                # Encuentra el primer LineEdit vacío y detiene el bucle
                 break
 
+        # Desactiva los componentes desde el siguiente al último con texto, si es necesario
+        if ultimoConTexto < 10:  # Si no todos tienen texto y se ajusta el límite a 10
+            self.desactivarComponentesDesde(ultimoConTexto + 1)
+
+        # Asegura que el siguiente al último con texto esté habilitado para continuar la entrada
+        if ultimoConTexto < 10:  # Si no estamos en el último (10), ajuste aquí
+            siguienteLE = getattr(self, f"le_var_title{ultimoConTexto + 1}", None)
+            if siguienteLE:
+                siguienteLE.setEnabled(True)
+
     def activarComponentesPara(self, indice):
-        # Habilitar y chequear los componentes relacionados al índice proporcionado
-        getattr(self, f"chb_ksolve{indice}").setEnabled(True)
-        getattr(self, f"chb_kprint{indice}").setEnabled(True)
-        getattr(self, f"le_relax{indice}").setEnabled(True)
-        getattr(self, f"chb_ksolve{indice}").setChecked(True)
-        getattr(self, f"chb_kprint{indice}").setChecked(True)
-        getattr(self, f"le_relax{indice}").setText("1")
+        # Solo activa componentes si el índice está entre 5 y 10
+        if 5 <= indice <= 10:
+            if hasattr(self, f"chb_ksolve{indice}"):
+                getattr(self, f"chb_ksolve{indice}").setEnabled(True)
+                getattr(self, f"chb_ksolve{indice}").setChecked(True)
+            if hasattr(self, f"chb_kprint{indice}"):
+                getattr(self, f"chb_kprint{indice}").setEnabled(True)
+                getattr(self, f"chb_kprint{indice}").setChecked(True)
+            if hasattr(self, f"le_relax{indice}"):
+                getattr(self, f"le_relax{indice}").setEnabled(True)
+                getattr(self, f"le_relax{indice}").setText("1")
 
     def desactivarComponentesDesde(self, indice):
-        # Desde el índice proporcionado, deshabilitar y limpiar los componentes asociados
-        for j in range(indice, 11):
-            getattr(self, f"le_var_title{j}").setEnabled(False)
-            getattr(self, f"le_var_title{j}").setText("")
-            getattr(self, f"chb_ksolve{j}", None).setEnabled(False)
-            getattr(self, f"chb_kprint{j}", None).setEnabled(False)
-            getattr(self, f"le_relax{j}", None).setEnabled(False)
-            getattr(self, f"chb_ksolve{j}", None).setChecked(False)
-            getattr(self, f"chb_kprint{j}", None).setChecked(False)
-            getattr(self, f"le_relax{j}", None).setText("")
+        # Asegúrate de que la desactivación se limite desde el 6 al 11
+        for j in range(indice, 11):  # Desactiva solo hasta el 10, incluyendo desde el que se indica
+            if 5 <= j <= 10:  # Asegúrate de operar solo en el rango deseado
+                le_var_title = getattr(self, f"le_var_title{j}", None)
+                if le_var_title:
+                    le_var_title.setEnabled(False)
+                    le_var_title.setText("")
+                chb_ksolve = getattr(self, f"chb_ksolve{j}", None)
+                if chb_ksolve:
+                    chb_ksolve.setEnabled(False)
+                    chb_ksolve.setChecked(False)
+                chb_kprint = getattr(self, f"chb_kprint{j}", None)
+                if chb_kprint:
+                    chb_kprint.setEnabled(False)
+                    chb_kprint.setChecked(False)
+                le_relax = getattr(self, f"le_relax{j}", None)
+                if le_relax:
+                    le_relax.setEnabled(False)
+                    le_relax.setText("")
+
+    def value_changed(self, value, config_key):
+        # Actualizar la configuración con el nuevo valor
+        self.config_manager.config_structure["VARIABLES"][config_key] = value
+
+    def load_variable_config(self):
+        config = self.config_manager.config_structure["VARIABLES"]
+
+        self.le_iptm.setText(config.get("IPTM", ""))
+        self.le_dt.setText(config.get("DT", ""))
+
+        for i in range(1, 13):
+            if hasattr(self, f"le_var_title{i}"):
+                getattr(self, f"le_var_title{i}").setText(config.get(f"TITLE({i})", ""))
+
+            if hasattr(self, f"chb_ksolve{i}"):
+                state = config.get(f"KSOLVE({i})", 0)
+                getattr(self, f"chb_ksolve{i}").setChecked(state == 1)
+
+            if hasattr(self, f"chb_kprint{i}"):
+                state = config.get(f"KPRINT({i})", 0)
+                getattr(self, f"chb_kprint{i}").setChecked(state == 1)
+
+            if hasattr(self, f"le_relax{i}"):
+                getattr(self, f"le_relax{i}").setText(config.get(f"RELAX({i})", ""))
+
+            self.controlarWidgetsTitles()  # Llama a esta función al final para ajustar los controles
+
+            # Cargar configuración para QComboBox
+            tsimu = config.get("TSIMU", "Permanente")  # Asume un valor predeterminado si no está definido
+            self.cb_tsimu.setCurrentText(tsimu)
+
+            tipoflujo = config.get("TIPOFLUJO", "Difusivo")  # Asume un valor predeterminado
+            self.cb_tipoflujo.setCurrentText(tipoflujo)
+
+            trataborde = config.get("TRATABORDE", "Esquema de bajo orden")  # Asume un valor predeterminado
+            self.cb_trataborde.setCurrentText(trataborde)
+
+        # Añade aquí la lógica para cargar otros valores específicos que manejes en tu ventana de variables
