@@ -56,6 +56,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
         self.le_value.textChanged.connect(self.value_changed)
         self.le_tempamb.textChanged.connect(self.value_changed)
+        self.chb_value.stateChanged.connect(self.value_changed)
+        self.lw_variables.currentRowChanged.connect(self.value_changed)
 
         self.clear_and_disable_fields()
 

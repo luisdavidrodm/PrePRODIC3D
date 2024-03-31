@@ -1,6 +1,5 @@
 from PySide6 import QtWidgets as qtw
 from PySide6.QtCore import Signal
-
 from malla_window.ui.malla_window_ui import Ui_malla_window
 
 
@@ -14,65 +13,18 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.ui = Ui_malla_window()
         self.config_manager = config_manager
 
-        self.sb_dirx_numz.setMinimum(2)
-        self.sb_dirx_numz.setMaximum(10)
-        self.sb_diry_numz.setMinimum(2)
-        self.sb_diry_numz.setMaximum(10)
-        self.sb_dirz_numz.setMinimum(2)
-        self.sb_dirz_numz.setMaximum(10)
-        self.sb_dirtita_numz.setMinimum(2)
-        self.sb_dirtita_numz.setMaximum(10)
-        self.sb_dirr_numz.setMinimum(2)
-        self.sb_dirr_numz.setMaximum(10)
-        self.sb_dirzcil_numz.setMinimum(2)
-        self.sb_dirzcil_numz.setMaximum(10)
+        self.initialize_spin_boxes()
 
         self.cb_tipocoord.currentTextChanged.connect(self.changeZonas)
         self.cb_tipozonas.currentTextChanged.connect(self.changeZonas)
-
         self.cb_tipocoord.currentTextChanged.connect(self.on_coordinate_system_changed)
-
         self.cb_tipozonas.currentTextChanged.connect(self.on_zones_system_changed)
 
-        self.le_xlon.textChanged.connect(self.actualizar_longitudes)
-        self.le_ylon.textChanged.connect(self.actualizar_longitudes)
-        self.le_zlon.textChanged.connect(self.actualizar_longitudes)
-        self.le_titalon.textChanged.connect(self.actualizar_longitudes)
-        self.le_rlon.textChanged.connect(self.actualizar_longitudes)
-        self.le_rini.textChanged.connect(self.actualizar_longitudes)
-        self.le_zloncil.textChanged.connect(self.actualizar_longitudes)
+        # Conexiones para la actualización de configuraciones
+        self.connect_line_edits()
 
-        for i in range(1, 11):
-            line_edit_name_x_vz = f"le_dirx_lon_zon{i}"
-            line_edit_object_x_vz = getattr(self, line_edit_name_x_vz)
-            line_edit_object_x_vz.textChanged.connect(self.actualizar_longitudes)
-
-        for i in range(1, 11):
-            line_edit_name_y_vz = f"le_diry_lon_zon{i}"
-            line_edit_object_y_vz = getattr(self, line_edit_name_y_vz)
-            line_edit_object_y_vz.textChanged.connect(self.actualizar_longitudes)
-
-        for i in range(1, 11):
-            line_edit_name_z_vz = f"le_dirz_lon_zon{i}"
-            line_edit_object_z_vz = getattr(self, line_edit_name_z_vz)
-            line_edit_object_z_vz.textChanged.connect(self.actualizar_longitudes)
-
-        for i in range(1, 11):
-            line_edit_name_tita_vz = f"le_dirtita_lon_zon{i}"
-            line_edit_object_tita_vz = getattr(self, line_edit_name_tita_vz)
-            line_edit_object_tita_vz.textChanged.connect(self.actualizar_longitudes)
-
-        for i in range(1, 11):
-            line_edit_name_r_vz = f"le_dirr_lon_zon{i}"
-            line_edit_object_r_vz = getattr(self, line_edit_name_r_vz)
-            line_edit_object_r_vz.textChanged.connect(self.actualizar_longitudes)
-
-        for i in range(1, 11):
-            line_edit_name_zcil_vz = f"le_dirzcil_lon_zon{i}"
-            line_edit_object_zcil_vz = getattr(self, line_edit_name_zcil_vz)
-            line_edit_object_zcil_vz.textChanged.connect(self.actualizar_longitudes)
-
-        self.le_dirr_inidom.textChanged.connect(self.actualizar_longitudes)
+        # Cargar configuración inicial
+        self.load_malla_config()
 
         self.sb_dirx_numz.valueChanged.connect(self.handle_dirx_numz_change)
         self.sb_diry_numz.valueChanged.connect(self.handle_diry_numz_change)
@@ -213,132 +165,245 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
         #####################################################################################
 
+    def initialize_spin_boxes(self):
+        for direction in ["dirx", "diry", "dirz", "dirtita", "dirr", "dirzcil"]:
+            spin_box = getattr(self, f"sb_{direction}_numz")
+            spin_box.setMinimum(2)
+            spin_box.setMaximum(10)
+
+    def connect_line_edits(self):
+        ##ZONA UNICA COORDENADAS CARTESIANAS
+        self.le_xlon.textChanged.connect(lambda: self.value_changed(self.le_xlon.text(), "CART_XL"))
+        self.le_nvcx.textChanged.connect(lambda: self.value_changed(self.le_nvcx.text(), "CART_NVCX"))
+        self.le_potenciax.textChanged.connect(lambda: self.value_changed(self.le_potenciax.text(), "CART_POWERX"))
+        self.le_ylon.textChanged.connect(lambda text: self.value_changed(self.le_ylon.text(), "CART_YL"))
+        self.le_nvcy.textChanged.connect(lambda text: self.value_changed(self.le_nvcy.text(), "CART_NVCY"))
+        self.le_potenciay.textChanged.connect(lambda text: self.value_changed(self.le_potenciay.text(), "CART_POWERY"))
+        self.le_zlon.textChanged.connect(lambda text: self.value_changed(self.le_zlon.text(), "CART_ZL"))
+        self.le_nvcz.textChanged.connect(lambda text: self.value_changed(self.le_nvcz.text(), "CART_NVCZ"))
+        self.le_potenciaz.textChanged.connect(lambda text: self.value_changed(self.le_potenciaz.text(), "CART_POWERZ"))
+
+        ##ZONA UNICA COORDENADAS CILINDRICAS
+        self.le_titalon.textChanged.connect(lambda: self.value_changed(self.le_titalon.text(), "CIL_TITAL"))
+        self.le_nvctita.textChanged.connect(lambda: self.value_changed(self.le_nvctita.text(), "CIL_NVCTITA"))
+        self.le_potenciatita.textChanged.connect(
+            lambda: self.value_changed(self.le_potenciatita.text(), "CIL_POWERTITA")
+        )
+        self.le_rini.textChanged.connect(lambda: self.value_changed(self.le_rini.text(), "CIL_R(1)_ZU"))
+        self.le_rlon.textChanged.connect(lambda: self.value_changed(self.le_rlon.text(), "CIL_RL"))
+        self.le_nvcr.textChanged.connect(lambda: self.value_changed(self.le_nvcr.text(), "CIL_NVCR"))
+        self.le_potenciar.textChanged.connect(lambda: self.value_changed(self.le_potenciar.text(), "CIL_POWERR"))
+        self.le_zloncil.textChanged.connect(lambda: self.value_changed(self.le_zloncil.text(), "CIL_ZL"))
+        self.le_nvczcil.textChanged.connect(lambda: self.value_changed(self.le_nvczcil.text(), "CIL_NVCZ"))
+        self.le_potenciazcil.textChanged.connect(lambda: self.value_changed(self.le_potenciazcil.text(), "CIL_POWERZ"))
+
+        ##VARIAS ZONAS COORDENADAS CARTESIANAS
+
+        # -COORDENADA X (CARTESIANA)
+        self.sb_dirx_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CART_NZX"))
+
+        for i in range(1, 11):
+            getattr(self, f"le_dirx_lon_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"XZONE({i})")
+            )
+            getattr(self, f"le_dirx_nvcx_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"NCVX({i})")
+            )
+            getattr(self, f"le_dirx_poten_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"POWERX({i})")
+            )
+
+        # -COORDENADA Y (CARTESIANA)
+        self.sb_diry_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CART_NZY"))
+
+        for i in range(1, 11):
+            getattr(self, f"le_diry_lon_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"YZONE({i})")
+            )
+            getattr(self, f"le_diry_nvcy_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"NCVY({i})")
+            )
+            getattr(self, f"le_diry_poten_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"POWERY({i})")
+            )
+
+        # -COORDENADA Z (CARTESIANA)
+        self.sb_dirz_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CART_NZZ"))
+
+        for i in range(1, 11):
+            getattr(self, f"le_dirz_lon_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"ZZONE({i})")
+            )
+            getattr(self, f"le_dirz_nvcz_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"NCVZ({i})")
+            )
+            getattr(self, f"le_dirz_poten_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"POWERZ({i})")
+            )
+
+        ##VARIAS ZONAS COORDENADAS CILINDRICAS
+
+        # -COORDENADA TITA (CILINDRICA) - VARIAS ZONAS
+        self.sb_dirtita_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CIL_NZX"))
+
+        for i in range(1, 11):
+            getattr(self, f"le_dirtita_lon_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"CIL_XZONE({i})")
+            )
+            getattr(self, f"le_dirtita_nvctita_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"CIL_NCVX({i})")
+            )
+            getattr(self, f"le_dirtita_poten_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"CIL_POWERX({i})")
+            )
+
+        # -COORDENADA RADIO (CILINDRICA) - VARIAS ZONAS
+        self.sb_dirr_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CIL_NZY"))
+
+        self.le_dirr_inidom.textChanged.connect(lambda text: self.value_changed(text, "CIL_R(1)_VZ"))
+
+        for i in range(1, 11):
+            getattr(self, f"le_dirr_lon_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"CIL_YZONE({i})")
+            )
+            getattr(self, f"le_dirr_nvcr_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"CIL_NCVY({i})")
+            )
+            getattr(self, f"le_dirr_poten_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"CIL_POWERY({i})")
+            )
+
+        # -COORDENADA Z (CILINDRICA) - VARIAS ZONAS
+        self.sb_dirzcil_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CIL_VZ_NZZ"))
+
+        for i in range(1, 11):
+            getattr(self, f"le_dirzcil_lon_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"CIL_VZ_ZZONE({i})")
+            )
+            getattr(self, f"le_dirzcil_nvczcil_zon{i}").textChanged.connect(
+                lambda text, i=i: self.value_changed(text, f"CIL_VZ_NCVZ({i})")
+            )
+            getattr(self, f"le_dirzcil_poten_zon{i}").textChanged.connect(
+                lambda text, i=i: sepipelf.value_changed(text, f"CIL_VZ_POWERZ({i})")
+            )
+
+        self.sb_dirx_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CART_NZX"))
+        self.sb_diry_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CART_NZY"))
+        self.sb_dirz_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CART_NZZ"))
+        self.sb_dirtita_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CIL_NZTITA"))
+        self.sb_dirr_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CIL_NZR"))
+        self.sb_dirzcil_numz.valueChanged.connect(lambda value: self.value_changed(str(value), "CIL_NZZCIL"))
+
+    def load_malla_config(self):
+        # Carga la configuración desde config_manager
+        config = self.config_manager.config_structure["GRID"]
+
+        ##ZONA UNICA COORDENADAS CARTESIANAS
+        self.le_xlon.setText(config.get("CART_XL", ""))
+        self.le_nvcx.setText(config.get("CART_NVCX", ""))
+        self.le_potenciax.setText(config.get("CART_POWERX", ""))
+        self.le_ylon.setText(config.get("CART_YL", ""))
+        self.le_nvcy.setText(config.get("CART_NVCY", ""))
+        self.le_potenciay.setText(config.get("CART_POWERY", ""))
+        self.le_zlon.setText(config.get("CART_ZL", ""))
+        self.le_nvcz.setText(config.get("CART_NVCZ", ""))
+        self.le_potenciaz.setText(config.get("CART_POWERZ", ""))
+
+        ##ZONA UNICA COORDENADAS CILINDRICAS
+        self.le_titalon.setText(config.get("CIL_TITAL", ""))
+        self.le_nvctita.setText(config.get("CIL_NVCTITA", ""))
+        self.le_potenciatita.setText(config.get("CIL_POWERTITA", ""))
+        self.le_rini.setText(config.get("CIL_R(1)_ZU", ""))
+        self.le_rlon.setText(config.get("CIL_RL", ""))
+        self.le_nvcr.setText(config.get("CIL_NVCR", ""))
+        self.le_potenciar.setText(config.get("CIL_POWERR", ""))
+        self.le_zloncil.setText(config.get("CIL_ZL", ""))
+        self.le_nvczcil.setText(config.get("CIL_NVCZ", ""))
+        self.le_potenciazcil.setText(config.get("CIL_POWERZ", ""))
+
+        self.load_configuration_for_zones()
+
+    def load_configuration_for_zones(self):
+        config = self.config_manager.config_structure[
+            "GRID"
+        ]  # Asumiendo que ya tienes una estructura de configuración.
+
+        # Para varias zonas en coordenadas cartesianas
+        for i in range(1, 11):
+            getattr(self, f"le_dirx_lon_zon{i}").setText(config.get(f"XZONE({i})", ""))
+            getattr(self, f"le_dirx_nvcx_zon{i}").setText(config.get(f"NCVX({i})", ""))
+            getattr(self, f"le_dirx_poten_zon{i}").setText(config.get(f"POWERX({i})", ""))
+
+            getattr(self, f"le_diry_lon_zon{i}").setText(config.get(f"YZONE({i})", ""))
+            getattr(self, f"le_diry_nvcy_zon{i}").setText(config.get(f"NCVY({i})", ""))
+            getattr(self, f"le_diry_poten_zon{i}").setText(config.get(f"POWERY({i})", ""))
+
+            getattr(self, f"le_dirz_lon_zon{i}").setText(config.get(f"ZZONE({i})", ""))
+            getattr(self, f"le_dirz_nvcz_zon{i}").setText(config.get(f"NCVZ({i})", ""))
+            getattr(self, f"le_dirz_poten_zon{i}").setText(config.get(f"POWERZ({i})", ""))
+
+        # Para varias zonas en coordenadas cilíndricas
+        self.le_dirr_inidom.setText(config.get("CIL_R(1)_VZ", ""))
+
+        for i in range(1, 11):
+            getattr(self, f"le_dirtita_lon_zon{i}").setText(config.get(f"CIL_XZONE({i})", ""))
+            getattr(self, f"le_dirtita_nvctita_zon{i}").setText(config.get(f"CIL_NCVX({i})", ""))
+            getattr(self, f"le_dirtita_poten_zon{i}").setText(config.get(f"CIL_POWERX({i})", ""))
+
+            getattr(self, f"le_dirr_lon_zon{i}").setText(config.get(f"CIL_YZONE({i})", ""))
+            getattr(self, f"le_dirr_nvcr_zon{i}").setText(config.get(f"CIL_NCVY({i})", ""))
+            getattr(self, f"le_dirr_poten_zon{i}").setText(config.get(f"CIL_POWERY({i})", ""))
+
+            getattr(self, f"le_dirzcil_lon_zon{i}").setText(config.get(f"CIL_VZ_ZZONE({i})", ""))
+            getattr(self, f"le_dirzcil_nvczcil_zon{i}").setText(config.get(f"CIL_VZ_NCVZ({i})", ""))
+            getattr(self, f"le_dirzcil_poten_zon{i}").setText(config.get(f"CIL_VZ_POWERZ({i})", ""))
+
+            # Carga el número de zonas guardado y ajusta los SpinBoxes
+            self.sb_dirx_numz.setValue(int(config.get("CART_NZX", 2)))
+            self.sb_diry_numz.setValue(int(config.get("CART_NZY", 2)))
+            self.sb_dirz_numz.setValue(int(config.get("CART_NZZ", 2)))
+            self.sb_dirtita_numz.setValue(int(config.get("CIL_NZTITA", 2)))
+            self.sb_dirr_numz.setValue(int(config.get("CIL_NZR", 2)))
+            self.sb_dirzcil_numz.setValue(int(config.get("CIL_NZZCIL", 2)))
+
+            ##Para asegurar que al abrir la ventana se habiliten los LineEdit dependiendo del NZ cargados
+            self.handle_dirx_numz_change(self.sb_dirx_numz.value())
+            self.handle_diry_numz_change(self.sb_diry_numz.value())
+            self.handle_dirz_numz_change(self.sb_dirz_numz.value())
+            self.handle_dirtita_numz_change(self.sb_dirtita_numz.value())
+            self.handle_dirr_numz_change(self.sb_dirr_numz.value())
+            self.handle_dirzcil_numz_change(self.sb_dirzcil_numz.value())
+
+    def value_changed(self, value, config_key):
+        # Actualiza la configuración en el ConfigManager basado en el valor de QLineEdit o QSpinBox
+        self.config_manager.config_structure["GRID"][config_key] = value
+
     def changeZonas(self):
         current_text_coord = self.cb_tipocoord.currentText()
         current_text_zona = self.cb_tipozonas.currentText()
+        capaIndex = {
+            ("Zona única", "Cartesianas"): 0,
+            ("Zona única", "Cilindricas"): 1,
+            ("Varias zonas", "Cartesianas"): 2,
+            ("Varias zonas", "Cilindricas"): 3,
+        }.get((current_text_zona, current_text_coord), 0)
 
-        # Determina el índice de la capa basado en la selección actual
-        if current_text_zona == "Zona única" and current_text_coord == "Cartesianas":
-            capaIndex = 0
-        elif current_text_zona == "Zona única" and current_text_coord == "Cilindricas":
-            capaIndex = 1
-        elif current_text_zona == "Varias zonas" and current_text_coord == "Cartesianas":
-            capaIndex = 2
-        elif current_text_zona == "Varias zonas" and current_text_coord == "Cilindricas":
-            capaIndex = 3
-
-        # Resetear widgets de la capa actual antes de cambiar
-        self.resetearWidgetsDeCapa(capaIndex)
-
-        # Cambia el índice del QStackedWidget
         self.gbsw_malla2.setCurrentIndex(capaIndex)
+        self.load_malla_config()
 
     def on_coordinate_system_changed(self, selection):
         mode = 1 if selection == "Cartesianas" else 2
         self.config_manager.config_structure["GRID"]["MODE"] = mode
+        self.load_malla_config()
 
     def on_zones_system_changed(self, selection):
         zone = "zgrid" if selection == "Varias zonas" else "ezgrid"
         self.config_manager.config_structure["GRID"]["ZONEGRID"] = zone
+        self.load_malla_config()
 
     def update_config(self, config_key, text):
         # Actualiza el valor de la configuración en el ConfigManager
         self.config_manager.config_structure["GRID"][config_key] = text
-
-    def actualizar_longitudes(self):
-
-        tipocoord = self.cb_tipocoord.currentText()
-        tipozonas = self.cb_tipozonas.currentText()
-
-        longitud_x_cart_zu = self.le_xlon.text()
-        longitud_y_cart_zu = self.le_ylon.text()
-        longitud_z_cart_zu = self.le_zlon.text()
-        longitud_tita_cil_zu = self.le_titalon.text()
-        longitud_r_cil_zu = self.le_rlon.text()
-        rini_cil_zu = self.le_rini.text()
-        longitud_zcil_cil_zu = self.le_zloncil.text()
-
-        longitud_x_cart_vz = 0
-        longitud_y_cart_vz = 0
-        longitud_z_cart_vz = 0
-
-        longitud_tita_cil_vz = 0
-        longitud_r_cil_vz = 0
-        rini_cil_vz = self.le_dirr_inidom.text()
-        longitud_zcil_cil_vz = 0
-
-        for i in range(1, 11):
-            # X
-            attr_name_x_vz = f"le_dirx_lon_zon{i}"
-            line_edit_object_x = getattr(self, attr_name_x_vz)
-            try:
-                valor_numerico_x_cart_vz = float(line_edit_object_x.text())
-                longitud_x_cart_vz += valor_numerico_x_cart_vz
-            except ValueError:
-                print(f"El valor de {attr_name_x_vz} no es un número válido")
-
-            # Y
-            attr_name_y_vz = f"le_diry_lon_zon{i}"
-            line_edit_object_y = getattr(self, attr_name_y_vz)
-            try:
-                valor_numerico_y_cart_vz = float(line_edit_object_y.text())
-                longitud_y_cart_vz += valor_numerico_y_cart_vz
-            except ValueError:
-                print(f"El valor de {attr_name_y_vz} no es un número válido")
-
-            # Z
-            attr_name_z_vz = f"le_dirz_lon_zon{i}"
-            line_edit_object_z = getattr(self, attr_name_z_vz)
-            try:
-                valor_numerico_z_cart_vz = float(line_edit_object_z.text())
-                longitud_z_cart_vz += valor_numerico_z_cart_vz
-            except ValueError:
-                print(f"El valor de {attr_name_z_vz} no es un número válido")
-
-        # Itera para las coordenadas en el sistema cilíndrico
-        for i in range(1, 11):
-            # Tita
-            attr_name_tita_vz = f"le_dirtita_lon_zon{i}"
-            line_edit_object_tita = getattr(self, attr_name_tita_vz)
-            try:
-                valor_numerico_tita_cil_vz = float(line_edit_object_tita.text())
-                longitud_tita_cil_vz += valor_numerico_tita_cil_vz
-            except ValueError:
-                print(f"El valor de {attr_name_tita_vz} no es un número válido")
-
-            # R
-            attr_name_r_vz = f"le_dirr_lon_zon{i}"
-            line_edit_object_r = getattr(self, attr_name_r_vz)
-            try:
-                valor_numerico_r_cil_vz = float(line_edit_object_r.text())
-                longitud_r_cil_vz += valor_numerico_r_cil_vz
-            except ValueError:
-                print(f"El valor de {attr_name_r_vz} no es un número válido")
-
-            # Zcil
-            attr_name_zcil_vz = f"le_dirzcil_lon_zon{i}"
-            line_edit_object_zcil = getattr(self, attr_name_zcil_vz)
-            try:
-                valor_numerico_zcil_cil_vz = float(line_edit_object_zcil.text())
-                longitud_zcil_cil_vz += valor_numerico_zcil_cil_vz
-            except ValueError:
-                print(f"El valor de {attr_name_zcil_vz} no es un número válido")
-
-        if tipocoord == "Cartesianas" and tipozonas == "Zona única":
-            self.longitudes_actualizadas_signal.emit([longitud_x_cart_zu, longitud_y_cart_zu, longitud_z_cart_zu, 0])
-
-        elif tipocoord == "Cilindricas" and tipozonas == "Zona única":
-            self.longitudes_actualizadas_signal.emit(
-                [longitud_tita_cil_zu, longitud_r_cil_zu, longitud_zcil_cil_zu, rini_cil_zu]
-            )
-
-        elif tipocoord == "Cartesianas" and tipozonas == "Varias zonas":
-            self.longitudes_actualizadas_signal.emit([longitud_x_cart_vz, longitud_y_cart_vz, longitud_z_cart_vz, 0])
-
-        elif tipocoord == "Cilindricas" and tipozonas == "Varias zonas":
-            self.longitudes_actualizadas_signal.emit(
-                [longitud_tita_cil_vz, longitud_r_cil_vz, longitud_zcil_cil_vz, rini_cil_vz]
-            )
 
     def handle_generic_numz_change(self, value, prefix, ncv_prefix):
         for i in range(1, 11):
@@ -378,17 +443,3 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
     def handle_dirzcil_numz_change(self, value):
         self.handle_generic_numz_change(value, "le_dirzcil", "nvczcil")
-
-    def resetearWidgetsDeCapa(self, capaIndex):
-        # Obtén el widget (capa) actual del QStackedWidget basado en el índice
-        capa = self.gbsw_malla2.widget(capaIndex)
-
-        # Encuentra todos los QLineEdit en esta capa y limpia su texto
-        lineEdits = capa.findChildren(qtw.QLineEdit)
-        for lineEdit in lineEdits:
-            lineEdit.clear()
-
-        # Encuentra todos los QSpinBox en esta capa y restablece su valor al mínimo
-        spinBoxes = capa.findChildren(qtw.QSpinBox)
-        for spinBox in spinBoxes:
-            spinBox.setValue(spinBox.minimum())
