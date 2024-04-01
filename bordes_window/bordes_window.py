@@ -58,6 +58,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.le_tempamb.textChanged.connect(self.value_changed)
         self.chb_value.stateChanged.connect(self.value_changed)
         self.lw_variables.currentRowChanged.connect(self.value_changed)
+        self.le_value_veloc_u.textChanged.connect(self.value_changed)
+        self.le_value_veloc_v.textChanged.connect(self.value_changed)
+        self.le_value_veloc_w.textChanged.connect(self.value_changed)
+        self.le_fracmass.textChanged.connect(self.value_changed)
 
         self.clear_and_disable_fields()
 
@@ -279,12 +283,20 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             if patch_config:
                 self.le_value.setText(patch_config.get("le_value", ""))
                 self.le_tempamb.setText(patch_config.get("le_tempamb", ""))
+                self.le_value_veloc_u.setText(patch_config.get("le_value_veloc_u", ""))
+                self.le_value_veloc_v.setText(patch_config.get("le_value_veloc_v", ""))
+                self.le_value_veloc_w.setText(patch_config.get("le_value_veloc_w", ""))
+                self.le_fracmass.setText(patch_config.get("le_fracmass", ""))
             else:
                 self.chb_value.setChecked(True)
                 self.chb_convec.setChecked(False)
                 self.chb_flux.setChecked(False)
                 self.le_value.clear()
                 self.le_tempamb.clear()
+                self.le_value_veloc_u.clear()
+                self.le_value_veloc_v.clear()
+                self.le_value_veloc_w.clear()
+                self.le_fracmass.clear()
             self.le_tempamb.setEnabled(self.chb_convec.isChecked())
 
     def clear_and_disable_fields(self):
@@ -297,10 +309,19 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_flux.setEnabled(False)
         self.le_value.setEnabled(False)
         self.le_tempamb.setEnabled(False)
+        # self.le_value_veloc_u.setEnabled(False)
+        # self.le_value_veloc_v.setEnabled(False)
+        # self.le_value_veloc_w.setEnabled(False)
         if self.le_value.text():
             self.le_value.clear()
         if self.le_tempamb.text():
             self.le_tempamb.clear()
+        # if self.le_value_veloc_u.text():
+        #     self.le_value_veloc_u.text()
+        # if self.le_value_veloc_v.text():
+        #     self.le_value_veloc_v.text()
+        # if self.le_value_veloc_w.text():
+        #     self.le_value_veloc_w.text()
 
     ################################################################################
     ##
@@ -352,7 +373,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [4, 5])) or state_outmass
         )
 
-        self.le_fracmass.setDisabled(not fracmass_habilitada)
+        # self.le_fracmass.setDisabled(not fracmass_habilitada)
         self.le_tempamb.setDisabled(not temamb_habilitada)
         self.le_value.setDisabled(state_outmass)
         self.chb_value.setDisabled(state_outmass)
