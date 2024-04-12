@@ -58,13 +58,3 @@ class ConfigManager:
             self.config_structure["BOUND"][border][patch].pop(key, None)
             if len(self.config_structure["BOUND"][border][patch]) == 0 and patch != "Borde base":
                 self.config_structure["BOUND"][border].pop(patch, None)
-
-    def get_patch_config(self, border, patch):
-        """
-        Obtiene la configuración para un parche específico.
-
-        :param border: str - El nombre del borde (ejemplo: "X Max").
-        :param patch: str - El nombre del parche (ejemplo: "Borde Base").
-        :return: dict - La configuración del parche o None si no existe.
-        """
-        return self.config_structure["BOUND"].get(border, {}).get(patch, None)
