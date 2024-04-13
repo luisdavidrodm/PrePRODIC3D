@@ -9,11 +9,17 @@ class InicioWindow(qtw.QDialog, Ui_inicio_window):
         self.setupUi(self)
         self.config_manager = config_manager
 
-        # Conectar los widgets con los métodos para actualizar la configuración
-        self.le_titulosimu.textChanged.connect(lambda text: self.update_config("HEADER", text))
-        self.le_tituloimpre.textChanged.connect(lambda text: self.update_config("PRINTF", text))
-        self.le_titulograf.textChanged.connect(lambda text: self.update_config("PLOTF", text))
+        self.widgets = ["le_titulosimu", "le_tituloimpre", "le_titulograf"]
+        for widget_name in self.widgets:
+            getattr(self, widget_name).textChanged.connect(self.value_changed)
 
-    def update_config(self, config_key, text):
-        # Actualiza el valor de la configuración en el ConfigManager
-        self.config_manager.config_structure["HEADER"][config_key] = text
+        self.load_malla_config()
+
+    def value_changed(self, value):
+        sender = self.sender()
+        self.config_manager.config_structure["HEADER"][sender.objectName()] = value
+
+    def load_malla_config(self):
+        config = self.config_manager.config_structure["HEADER"]
+        for widget_name, value in config.items():
+            getattr(self, widget_name).setText(value)

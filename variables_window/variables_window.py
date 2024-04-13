@@ -9,6 +9,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
     variables_signal = Signal(list)
 
     def __init__(self, config_manager):
+
         super().__init__()
         self.setupUi(self)
         self.config_manager = config_manager
@@ -30,7 +31,37 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         self.le_var_title5.setText("Temperatura")
 
         for i in range(6, 11):  # Para le_var_title6 hasta le_var_title10
-            getattr(self, f"le_var_title{i}").textChanged.connect(lambda: self.controlarWidgetsTitles())
+            getattr(self, f"le_var_title{i}").textChanged.connect(self.controlar_widgets_titles)
+        # fmt: off
+        self.widgets = [
+            "le_xlon", "le_nvcx", "le_potenciax", "le_ylon", "le_nvcy",
+            "le_potenciay", "le_zlon", "le_nvcz", "le_potenciaz", "le_titalon",
+            "le_nvctita", "le_potenciatita", "le_rini", "le_rlon", "le_nvcr",
+            "le_potenciar", "le_zloncil", "le_nvczcil", "le_potenciazcil",
+            "sb_dirx_numz", "sb_diry_numz", "sb_dirz_numz", "sb_dirtita_numz",
+            "sb_dirr_numz", "le_dirr_inidom", "sb_dirzcil_numz",
+        ]
+
+        self.widgets_to_extend = [
+            "le_dirx_lon_zon{0}", "le_dirx_nvcx_zon{0}", "le_dirx_poten_zon{0}",
+            "le_diry_lon_zon{0}", "le_diry_nvcy_zon{0}", "le_diry_poten_zon{0}",
+            "le_dirz_lon_zon{0}", "le_dirz_nvcz_zon{0}", "le_dirz_poten_zon{0}",
+            "le_dirr_lon_zon{0}", "le_dirr_nvcr_zon{0}", "le_dirr_poten_zon{0}",
+            "le_dirtita_lon_zon{0}", "le_dirtita_nvctita_zon{0}", "le_dirtita_poten_zon{0}",
+            "le_dirzcil_lon_zon{0}", "le_dirzcil_nvczcil_zon{0}", "le_dirzcil_poten_zon{0}"
+        ]
+        # fmt: on
+        for widget_name in self.widgets:
+            widget = getattr(self, widget_name)
+            if isinstance(widget, QComboBox):
+                signal = widget.currentTextChanged
+            elif isinstance(widget, QSpinBox):
+                signal = widget.valueChanged
+            elif isinstance(widget, QLineEdit):
+                signal = widget.textChanged
+            else:
+                continue
+            signal.connect(self.value_changed)
 
     def connect_signals(self):
         self.cb_tsimu.currentTextChanged.connect(self.change_tipo_simu)
@@ -162,14 +193,14 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             # Asegúrate de que chb_kprint11 también se maneje adecuadamente
             self.chb_kprint11.setEnabled(False)
 
-    def controlarWidgetsTitles(self):
+    def controlar_widgets_titles(self):
         # Comprueba todos los LineEdits a partir del 5 hasta el 10 (incluyendo el 10)
         ultimoConTexto = 5  # Asume que al menos el primer LineEdit debe tener texto (Temperatura)
         for i in range(5, 11):  # Cambio aquí para limitar hasta el 10
             le_var = getattr(self, f"le_var_title{i}", None)
             if le_var and le_var.text().strip():
                 # Habilita y configura los componentes para este LineEdit
-                self.activarComponentesPara(i)
+                self.activar_componentes_para(i)
                 ultimoConTexto = i
             else:
                 # Encuentra el primer LineEdit vacío y detiene el bucle
@@ -177,7 +208,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
 
         # Desactiva los componentes desde el siguiente al último con texto, si es necesario
         if ultimoConTexto < 10:  # Si no todos tienen texto y se ajusta el límite a 10
-            self.desactivarComponentesDesde(ultimoConTexto + 1)
+            self.desactivar_componentes_desde(ultimoConTexto + 1)
 
         # Asegura que el siguiente al último con texto esté habilitado para continuar la entrada
         if ultimoConTexto < 10:  # Si no estamos en el último (10), ajuste aquí
@@ -185,7 +216,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             if siguienteLE:
                 siguienteLE.setEnabled(True)
 
-    def activarComponentesPara(self, indice):
+    def activar_componentes_para(self, indice):
         # Solo activa componentes si el índice está entre 5 y 10
         if 5 <= indice <= 10:
             if hasattr(self, f"chb_ksolve{indice}"):
@@ -198,7 +229,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
                 getattr(self, f"le_relax{indice}").setEnabled(True)
                 getattr(self, f"le_relax{indice}").setText("1")
 
-    def desactivarComponentesDesde(self, indice):
+    def desactivar_componentes_desde(self, indice):
         # Asegúrate de que la desactivación se limite desde el 6 al 11
         for j in range(indice, 11):  # Desactiva solo hasta el 10, incluyendo desde el que se indica
             if 5 <= j <= 10:  # Asegúrate de operar solo en el rango deseado
@@ -244,7 +275,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             if hasattr(self, f"le_relax{i}"):
                 getattr(self, f"le_relax{i}").setText(config.get(f"RELAX({i})", ""))
 
-            self.controlarWidgetsTitles()  # Llama a esta función al final para ajustar los controles
+            self.controlar_widgets_titles()  # Llama a esta función al final para ajustar los controles
 
             # Cargar configuración para QComboBox
             tsimu = config.get("TSIMU", "Permanente")  # Asume un valor predeterminado si no está definido
