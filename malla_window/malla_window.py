@@ -1,6 +1,6 @@
 from PySide6 import QtWidgets as qtw
 from PySide6.QtCore import Signal
-from PySide6.QtWidgets import QSpinBox, QComboBox, QLineEdit
+
 from malla_window.ui.malla_window_ui import Ui_malla_window
 
 
@@ -12,11 +12,11 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         # fmt: off
         super().__init__()
         self.setupUi(self)
-        self.ui = Ui_malla_window()
         self.config_manager = config_manager
+        self.config_name = "GRID"
 
-        self.cb_tipocoord.currentTextChanged.connect(self.changeZonas)
-        self.cb_tipozonas.currentTextChanged.connect(self.changeZonas)
+        self.cb_tipocoord.currentTextChanged.connect(self.change_zones)
+        self.cb_tipozonas.currentTextChanged.connect(self.change_zones)
         self.cb_tipocoord.currentTextChanged.connect(self.on_coordinate_system_changed)
         self.cb_tipozonas.currentTextChanged.connect(self.on_zones_system_changed)
 
@@ -27,6 +27,7 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.sb_dirr_numz.valueChanged.connect(lambda value: self.handle_generic_numz_change(value, "le_dirr", "nvcr"))
         self.sb_dirzcil_numz.valueChanged.connect(lambda value: self.handle_generic_numz_change(value, "le_dirzcil", "nvczcil"))
 
+        # Conexion con ConfigManager
         self.widgets = [
             "le_xlon", "le_nvcx", "le_potenciax", "le_ylon", "le_nvcy",
             "le_potenciay", "le_zlon", "le_nvcz", "le_potenciaz", "le_titalon",
@@ -44,27 +45,16 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
             "le_dirtita_lon_zon{0}", "le_dirtita_nvctita_zon{0}", "le_dirtita_poten_zon{0}",
             "le_dirzcil_lon_zon{0}", "le_dirzcil_nvczcil_zon{0}", "le_dirzcil_poten_zon{0}"
         ]
-        
+
         for i in range(1, 11):
             for widget_name in self.widgets_to_extend:
                 self.widgets.append(widget_name.format(i))
-                    
-        for widget_name  in self.widgets:
-            widget = getattr(self, widget_name)
-            if isinstance(widget, QComboBox):
-                signal = widget.currentTextChanged
-            elif isinstance(widget, QSpinBox):
-                signal = widget.valueChanged
-            elif isinstance(widget, QLineEdit):
-                signal = widget.textChanged
-            else:
-                continue
-            signal.connect(self.value_changed)
-        # fmt: on
 
+        self.config_manager.connect_config(self)
         # Cargar configuración inicial
         self.initialize_spin_boxes()
         self.load_malla_config()
+        # fmt: on
 
     def initialize_spin_boxes(self):
         for direction in ["dirx", "diry", "dirz", "dirtita", "dirr", "dirzcil"]:
@@ -74,16 +64,7 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
     def load_malla_config(self):
         # Carga la configuración desde config_manager
-        config = self.config_manager.config_structure["GRID"]
-
-        for widget_name, value in config.items():
-            widget = getattr(self, widget_name)
-            if isinstance(widget, QLineEdit) or isinstance(widget, QComboBox):
-                widget.setText(value)
-            elif isinstance(widget, QSpinBox):
-                widget.setValue(value)
-            else:
-                continue
+        self.config_manager.load_config(self)
 
         # Para asegurar que al abrir la ventana se habiliten los LineEdit dependiendo del NZ cargados
         self.handle_generic_numz_change(self.sb_dirx_numz.value(), "le_dirx", "nvcx")
@@ -95,9 +76,9 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
     def value_changed(self, value):
         sender = self.sender()
-        self.config_manager.config_structure["GRID"][sender.objectName()] = value
+        self.config_manager.config_structure[self.config_name][sender.objectName()] = value
 
-    def changeZonas(self):
+    def change_zones(self):
         current_text_coord = self.cb_tipocoord.currentText()
         current_text_zona = self.cb_tipozonas.currentText()
         capaIndex = {
@@ -112,12 +93,12 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
     def on_coordinate_system_changed(self, selection):
         mode = 1 if selection == "Cartesianas" else 2
-        self.config_manager.config_structure["GRID"]["MODE"] = mode
+        self.config_manager.config_structure[self.config_name]["MODE"] = mode
         self.load_malla_config()
 
     def on_zones_system_changed(self, selection):
         zone = "zgrid" if selection == "Varias zonas" else "ezgrid"
-        self.config_manager.config_structure["GRID"]["ZONEGRID"] = zone
+        self.config_manager.config_structure[self.config_name]["ZONEGRID"] = zone
         self.load_malla_config()
 
     def handle_generic_numz_change(self, value, prefix, ncv_prefix):

@@ -5,98 +5,40 @@ from variables_window.ui.variables_window_ui import Ui_variables_window
 
 
 class VariablesWindow(qtw.QDialog, Ui_variables_window):
+
     tipo_flujo_cambio_signal = Signal(bool)
     variables_signal = Signal(list)
 
     def __init__(self, config_manager):
-
+        # fmt: off
         super().__init__()
         self.setupUi(self)
         self.config_manager = config_manager
+        self.config_name = "VARIABLES"
 
-        self.connect_signals()
-        self.load_variable_config()
-
-        # Conexion de Variables con ventana Bordes
-        self.le_var_title5.textChanged.connect(self.enviar_datos_variables)
-        self.le_var_title6.textChanged.connect(self.enviar_datos_variables)
-        self.le_var_title7.textChanged.connect(self.enviar_datos_variables)
-        self.le_var_title8.textChanged.connect(self.enviar_datos_variables)
-        self.le_var_title9.textChanged.connect(self.enviar_datos_variables)
-        self.le_var_title10.textChanged.connect(self.enviar_datos_variables)
-        self.le_var_title11.textChanged.connect(self.enviar_datos_variables)
-        self.le_var_title12.textChanged.connect(self.enviar_datos_variables)
-
-        # Nombre de Variable Temperatura enviado a Bordes
-        self.le_var_title5.setText("Temperatura")
-
-        for i in range(6, 11):  # Para le_var_title6 hasta le_var_title10
-            getattr(self, f"le_var_title{i}").textChanged.connect(self.controlar_widgets_titles)
-        # fmt: off
-        self.widgets = [
-            "le_xlon", "le_nvcx", "le_potenciax", "le_ylon", "le_nvcy",
-            "le_potenciay", "le_zlon", "le_nvcz", "le_potenciaz", "le_titalon",
-            "le_nvctita", "le_potenciatita", "le_rini", "le_rlon", "le_nvcr",
-            "le_potenciar", "le_zloncil", "le_nvczcil", "le_potenciazcil",
-            "sb_dirx_numz", "sb_diry_numz", "sb_dirz_numz", "sb_dirtita_numz",
-            "sb_dirr_numz", "le_dirr_inidom", "sb_dirzcil_numz",
-        ]
-
-        self.widgets_to_extend = [
-            "le_dirx_lon_zon{0}", "le_dirx_nvcx_zon{0}", "le_dirx_poten_zon{0}",
-            "le_diry_lon_zon{0}", "le_diry_nvcy_zon{0}", "le_diry_poten_zon{0}",
-            "le_dirz_lon_zon{0}", "le_dirz_nvcz_zon{0}", "le_dirz_poten_zon{0}",
-            "le_dirr_lon_zon{0}", "le_dirr_nvcr_zon{0}", "le_dirr_poten_zon{0}",
-            "le_dirtita_lon_zon{0}", "le_dirtita_nvctita_zon{0}", "le_dirtita_poten_zon{0}",
-            "le_dirzcil_lon_zon{0}", "le_dirzcil_nvczcil_zon{0}", "le_dirzcil_poten_zon{0}"
-        ]
-        # fmt: on
-        for widget_name in self.widgets:
-            widget = getattr(self, widget_name)
-            if isinstance(widget, QComboBox):
-                signal = widget.currentTextChanged
-            elif isinstance(widget, QSpinBox):
-                signal = widget.valueChanged
-            elif isinstance(widget, QLineEdit):
-                signal = widget.textChanged
-            else:
-                continue
-            signal.connect(self.value_changed)
-
-    def connect_signals(self):
         self.cb_tsimu.currentTextChanged.connect(self.change_tipo_simu)
         self.cb_tipoflujo.currentTextChanged.connect(self.handle_tipo_flujo_cambio)
-        self.cb_trataborde.currentTextChanged.connect(self.update_variables_kord)
         self.cb_tipoflujo.currentIndexChanged.connect(self.handle_flujo_change)
 
-        self.cb_tsimu.currentTextChanged.connect(lambda value: self.update_config("TSIMU", value))
-        self.cb_tipoflujo.currentTextChanged.connect(lambda value: self.update_config("TIPOFLUJO", value))
-        self.cb_trataborde.currentTextChanged.connect(lambda value: self.update_config("TRATABORDE", value))
+        for i in range(5, 13):
+            getattr(self, f"le_var_title{i}").textChanged.connect(self.enviar_datos_variables)
 
-        self.le_iptm.textChanged.connect(lambda text: self.update_config("IPTM", text))
-        self.le_dt.textChanged.connect(lambda text: self.update_config("DT", text))
+        for i in range(6, 11):
+            getattr(self, f"le_var_title{i}").textChanged.connect(self.controlar_widgets_titles)
 
-        # Conexiones para le_var_titleX y otros QLineEdits específicos
+        # Conexion con ConfigManager
+        self.widgets = ["cb_tsimu", "cb_tipoflujo", "cb_trataborde", "le_iptm", "le_dt"] 
+
         for i in range(1, 13):
-            if hasattr(self, f"le_var_title{i}"):
-                getattr(self, f"le_var_title{i}").textChanged.connect(
-                    lambda text, i=i: self.value_changed(text, f"TITLE({i})")
-                )
-            if hasattr(self, f"le_relax{i}"):
-                getattr(self, f"le_relax{i}").textChanged.connect(
-                    lambda text, i=i: self.value_changed(text, f"RELAX({i})")
-                )
+            self.widgets.extend([f"le_var_title{i}", f"chb_kprint{i}"])
 
-        # Conectar cambios de estado en CheckBoxes a value_changed
-        for i in range(1, 13):
-            if hasattr(self, f"chb_ksolve{i}"):
-                getattr(self, f"chb_ksolve{i}").stateChanged.connect(
-                    lambda state, i=i: self.value_changed(1 if state > 0 else 0, f"KSOLVE({i})")
-                )
-            if hasattr(self, f"chb_kprint{i}"):
-                getattr(self, f"chb_kprint{i}").stateChanged.connect(
-                    lambda state, i=i: self.value_changed(1 if state > 0 else 0, f"KPRINT({i})")
-                )
+        for i in range(1, 12):
+            self.widgets.extend([f"le_relax{i}", f"chb_ksolve{i}"])
+
+        self.config_manager.connect_config(self)
+        # Cargar configuración inicial
+        self.load_variable_config()
+        # fmt: on
 
     def change_tipo_simu(self):
         current_text_simu = self.cb_tsimu.currentText()
@@ -106,38 +48,17 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         elif current_text_simu == "Transitorio":
             self.sw_tsimu.setCurrentIndex(1)
 
-    def update_variables_kord(self, selection):
-        kord = 1 if selection == "Esquema de bajo orden" else 2
-        self.config_manager.config_structure["VARIABLES"]["KORD"] = kord
-
-    def update_config(self, config_key, value):
-        # Actualiza el valor de la configuración en el ConfigManager
-        self.config_manager.config_structure["VARIABLES"][config_key] = value
-
-    def update_config_ksolve(self, config_key, state):
-        value = 1 if state == 2 else 0
-        self.config_manager.config_structure["VARIABLES"][config_key] = value
-
-    def update_config_kprint(self, config_key, state):
-        value = 1 if state == 2 else 0
-        self.config_manager.config_structure["VARIABLES"][config_key] = value
-
     def handle_tipo_flujo_cambio(self, text):
         # Emitir 'True' si es "Difusivo", de lo contrario 'False'
         print(f"Cambiando tipo de flujo a: {text}")  # Impresión de depuración
         self.tipo_flujo_cambio_signal.emit(text == "Difusivo")
 
     def enviar_datos_variables(self):
+        # fmt: off
         datos_variables = [
-            self.le_var_title5.text(),
-            self.le_var_title6.text(),
-            self.le_var_title7.text(),
-            self.le_var_title8.text(),
-            self.le_var_title9.text(),
-            self.le_var_title10.text(),
-            self.le_var_title11.text(),
-            self.le_var_title12.text(),
-        ]
+            self.le_var_title5.text(), self.le_var_title6.text(), self.le_var_title7.text(), self.le_var_title8.text(), 
+            self.le_var_title9.text(), self.le_var_title10.text(), self.le_var_title11.text(), self.le_var_title12.text(),
+        ]  # fmt: on
         self.variables_signal.emit(datos_variables)
 
     def handle_flujo_change(self):
@@ -146,18 +67,12 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         # Si el flujo es Flujo Laminar, chequea los CheckBox y habilita/habilita y establece los QLineEdit
         if flujo == "Flujo Laminar":
             # Chequear CheckBoxes
+            # fmt: off
             for chb_name in [
-                "chb_kprint1",
-                "chb_kprint2",
-                "chb_kprint3",
-                "chb_ksolve1",
-                "chb_ksolve2",
-                "chb_ksolve3",
-                "chb_ksolve4",
-                "chb_ksolve11",
-                "chb_kprint11",
-                "chb_kprint12",
-            ]:
+                "chb_kprint1", "chb_kprint2", "chb_kprint3", "chb_ksolve1", "chb_ksolve2", 
+                "chb_ksolve3", "chb_ksolve4", "chb_ksolve11", "chb_kprint11", "chb_kprint12",
+            ]:  # fmt: on
+
                 getattr(self, chb_name).setChecked(True)
 
             # Habilitar widgets y establecer valor en LineEdits
@@ -170,18 +85,11 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         # Si el flujo es Difusivo, revierte las acciones
         elif flujo == "Difusivo":
             # Desmarcar CheckBoxes
+            # fmt: off
             for chb_name in [
-                "chb_kprint1",
-                "chb_kprint2",
-                "chb_kprint3",
-                "chb_ksolve1",
-                "chb_ksolve2",
-                "chb_ksolve3",
-                "chb_ksolve4",
-                "chb_ksolve11",
-                "chb_kprint11",
-                "chb_kprint12",
-            ]:
+                "chb_kprint1", "chb_kprint2", "chb_kprint3", "chb_ksolve1", "chb_ksolve2", 
+                "chb_ksolve3", "chb_ksolve4", "chb_ksolve11", "chb_kprint11", "chb_kprint12",
+            ]:  # fmt: on
                 getattr(self, chb_name).setChecked(False)
 
             # Deshabilitar LineEdits y borrar su contenido
@@ -250,41 +158,10 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
                     le_relax.setEnabled(False)
                     le_relax.setText("")
 
-    def value_changed(self, value, config_key):
-        # Actualizar la configuración con el nuevo valor
-        self.config_manager.config_structure["VARIABLES"][config_key] = value
+    def value_changed(self, value):
+        sender = self.sender()
+        self.config_manager.config_structure[self.config_name][sender.objectName()] = value
 
     def load_variable_config(self):
-        config = self.config_manager.config_structure["VARIABLES"]
-
-        self.le_iptm.setText(config.get("IPTM", ""))
-        self.le_dt.setText(config.get("DT", ""))
-
-        for i in range(1, 13):
-            if hasattr(self, f"le_var_title{i}"):
-                getattr(self, f"le_var_title{i}").setText(config.get(f"TITLE({i})", ""))
-
-            if hasattr(self, f"chb_ksolve{i}"):
-                state = config.get(f"KSOLVE({i})", 0)
-                getattr(self, f"chb_ksolve{i}").setChecked(state == 1)
-
-            if hasattr(self, f"chb_kprint{i}"):
-                state = config.get(f"KPRINT({i})", 0)
-                getattr(self, f"chb_kprint{i}").setChecked(state == 1)
-
-            if hasattr(self, f"le_relax{i}"):
-                getattr(self, f"le_relax{i}").setText(config.get(f"RELAX({i})", ""))
-
-            self.controlar_widgets_titles()  # Llama a esta función al final para ajustar los controles
-
-            # Cargar configuración para QComboBox
-            tsimu = config.get("TSIMU", "Permanente")  # Asume un valor predeterminado si no está definido
-            self.cb_tsimu.setCurrentText(tsimu)
-
-            tipoflujo = config.get("TIPOFLUJO", "Difusivo")  # Asume un valor predeterminado
-            self.cb_tipoflujo.setCurrentText(tipoflujo)
-
-            trataborde = config.get("TRATABORDE", "Esquema de bajo orden")  # Asume un valor predeterminado
-            self.cb_trataborde.setCurrentText(trataborde)
-
-        # Añade aquí la lógica para cargar otros valores específicos que manejes en tu ventana de variables
+        self.config_manager.load_config(self)
+        self.controlar_widgets_titles()  # Llama a esta función al final para ajustar los controles

@@ -7,63 +7,38 @@ from bordes_window.ui.bordes_window_ui import Ui_bordes_window
 
 
 class BordesWindow(qtw.QDialog, Ui_bordes_window):
+
     def __init__(self, config_manager):
+        # fmt: off
         super().__init__()
         self.setupUi(self)
         self.config_manager = config_manager
-
-        self.pb_addpatch_xmax.clicked.connect(self.add_patch_x_max)
-        self.pb_rempatch_xmax.clicked.connect(self.remove_patch_x_max)
-
-        self.pb_addpatch_xmin.clicked.connect(self.add_patch_x_min)
-        self.pb_rempatch_xmin.clicked.connect(self.remove_patch_x_min)
-
-        self.pb_addpatch_ymax.clicked.connect(self.add_patch_y_max)
-        self.pb_rempatch_ymax.clicked.connect(self.remove_patch_y_max)
-
-        self.pb_addpatch_ymin.clicked.connect(self.add_patch_y_min)
-        self.pb_rempatch_ymin.clicked.connect(self.remove_patch_y_min)
-
-        self.pb_addpatch_zmax.clicked.connect(self.add_patch_z_max)
-        self.pb_rempatch_zmax.clicked.connect(self.remove_patch_z_max)
-
-        self.pb_addpatch_zmin.clicked.connect(self.add_patch_z_min)
-        self.pb_rempatch_zmin.clicked.connect(self.remove_patch_z_min)
+        self.config_name = "BOUND"
 
         self.lw_bordes.currentRowChanged.connect(self.select_border)
 
-        self.lw_patchlist_xmax.currentRowChanged.connect(self.select_patch)
-        self.lw_patchlist_xmin.currentRowChanged.connect(self.select_patch)
-        self.lw_patchlist_ymax.currentRowChanged.connect(self.select_patch)
-        self.lw_patchlist_ymin.currentRowChanged.connect(self.select_patch)
-        self.lw_patchlist_zmax.currentRowChanged.connect(self.select_patch)
-        self.lw_patchlist_zmin.currentRowChanged.connect(self.select_patch)
+        for axis in ['x', 'y', 'z']:
+            for direction in ['min', 'max']:
+                getattr(self, f'pb_addpatch_{axis}{direction}').clicked.connect(getattr(self, f'add_patch_{axis}_{direction}'))
+                getattr(self, f'pb_rempatch_{axis}{direction}').clicked.connect(getattr(self, f'remove_patch_{axis}_{direction}'))
+                getattr(self, f'lw_patchlist_{axis}{direction}').currentRowChanged.connect(self.select_patch)
+                setattr(self, f'patch_count_{axis}{direction}', 1)
 
-        self.patch_count_xmax = 1
-        self.patch_count_xmin = 1
-        self.patch_count_ymax = 1
-        self.patch_count_ymin = 1
-        self.patch_count_zmax = 1
-        self.patch_count_zmin = 1
+        for chb_name in ['wall', 'inmass', 'outmass']:
+            getattr(self, f'chb_{chb_name}').stateChanged.connect(self.handle_chb_state_changed)
 
-        self.chb_wall.stateChanged.connect(self.handle_chb_state_changed)
-        self.chb_inmass.stateChanged.connect(self.handle_chb_state_changed)
-        self.chb_outmass.stateChanged.connect(self.handle_chb_state_changed)
+        for chb_name in ['value', 'flux', 'convec']:
+            getattr(self, f'chb_{chb_name}').stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
 
-        self.chb_value.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
-        self.chb_flux.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
-        self.chb_convec.stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
-
-        self.le_value.textChanged.connect(self.value_changed)
-        self.le_tempamb.textChanged.connect(self.value_changed)
-        self.chb_value.stateChanged.connect(self.value_changed)
-        self.lw_variables.currentRowChanged.connect(self.value_changed)
-        self.le_value_veloc_u.textChanged.connect(self.value_changed)
-        self.le_value_veloc_v.textChanged.connect(self.value_changed)
-        self.le_value_veloc_w.textChanged.connect(self.value_changed)
-        self.le_fracmass.textChanged.connect(self.value_changed)
-
+        # Conexion con ConfigManager
+        self.widgets = [
+            "le_value", "le_tempamb", "chb_value", "lw_variables", "le_value_veloc_u",
+            "le_value_veloc_v", "le_value_veloc_w", "le_fracmass"
+        ]
+        self.config_manager.connect_config(self)
+        # Cargar configuración inicial
         self.clear_and_disable_fields()
+        # fmt: on
 
     ################################################################################
     ##
@@ -122,10 +97,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             result = self.lw_patchlist_zmin
         else:
             result = None
-        # print(result)
-        for index in range(result.count()):
-            item = result.item(index)
-            # print(index, item.text())
         return result
 
     def get_current_border_and_patch_name(self) -> Union[tuple[str, str], None]:
@@ -274,7 +245,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             self.chb_flux.setEnabled(True)
             # Carga la configuración para el parche dado
             patch_config = (
-                self.config_manager.config_structure["BOUND"]
+                self.config_manager.config_structure[self.config_name]
                 .get(border_and_patch_name[0], {})
                 .get(border_and_patch_name[1], None)
             )

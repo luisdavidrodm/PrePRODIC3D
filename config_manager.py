@@ -1,5 +1,6 @@
 import json
 from collections import OrderedDict
+from PySide6.QtWidgets import QLineEdit, QSpinBox, QComboBox, QCheckBox, QListWidget
 
 
 class ConfigManager:
@@ -10,7 +11,10 @@ class ConfigManager:
             ('HEADER', OrderedDict()),
             ('GRID', OrderedDict()),
             ('VARIABLES', OrderedDict([
-                ('FT', 'Difusivo')
+                ('cb_tipoflujo', 'Difusivo'),
+                ('le_var_title5', 'Temperatura'),
+                ('cb_tsimu', 'Permanente'),
+                ('cb_trataborde', 'Esquema de bajo orden')
                 ])),
             ('BOUND', OrderedDict([
                 ('X Max', OrderedDict([('Borde base', OrderedDict())])),
@@ -37,6 +41,39 @@ class ConfigManager:
         # Cargar la configuración desde un archivo JSON
         with open(filename, "r", encoding="utf8") as f:
             self.config_structure = json.load(f, object_pairs_hook=OrderedDict)
+
+    def load_config(self, window):
+        # Carga la configuración de una ventana desde config_manager
+        config = window.config_manager.config_structure[window.config_name]
+        for widget_name, value in config.items():
+            widget = getattr(window, widget_name)
+            if isinstance(widget, QLineEdit):
+                widget.setText(value)
+            elif isinstance(widget, QComboBox):
+                widget.setCurrentText(value)
+            elif isinstance(widget, QSpinBox):
+                widget.setValue(value)
+            elif isinstance(widget, QCheckBox):
+                widget.setChecked(value == 2)
+            else:
+                continue
+
+    def connect_config(self, window):
+        for widget_name in window.widgets:
+            widget = getattr(window, widget_name)
+            if isinstance(widget, QLineEdit):
+                signal = widget.textChanged
+            elif isinstance(widget, QComboBox):
+                signal = widget.currentTextChanged
+            elif isinstance(widget, QSpinBox):
+                signal = widget.valueChanged
+            elif isinstance(widget, QCheckBox):
+                signal = widget.stateChanged
+            elif isinstance(widget, QListWidget):
+                signal = widget.currentRowChanged
+            else:
+                continue
+            signal.connect(window.value_changed)
 
     def set_patch_config(self, border, patch, key, value):
         """
