@@ -12,7 +12,7 @@ from salida_window.salida_window import SalidaWindow
 
 
 from config_manager import ConfigManager
-from f90_serializer import generate_f90
+from f90_serializer import F90Serializer
 
 
 class MainWindow(qtw.QMainWindow, Ui_main_window):
@@ -134,7 +134,8 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         )
 
         # Luego, generar y guardar el contenido .f90
-        contenido_f90 = generate_f90(self.config_manager.config_structure)
+        serializer = F90Serializer()
+        contenido_f90 = serializer.generate_f90(self.config_manager.config_structure)
         nombre_archivo_f90 = "configuracion.adapt.f90"
         with open(nombre_archivo_f90, "w") as archivo:
             archivo.write(contenido_f90)
