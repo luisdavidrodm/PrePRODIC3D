@@ -34,7 +34,8 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
             "le_nvctita", "le_potenciatita", "le_rini", "le_rlon", "le_nvcr",
             "le_potenciar", "le_zloncil", "le_nvczcil", "le_potenciazcil",
             "sb_dirx_numz", "sb_diry_numz", "sb_dirz_numz", "sb_dirtita_numz",
-            "sb_dirr_numz", "le_dirr_inidom", "sb_dirzcil_numz",
+            "sb_dirr_numz", "le_dirr_inidom", "sb_dirzcil_numz", "cb_tipocoord",
+            "cb_tipozonas"
         ]
 
         self.widgets_to_extend = [

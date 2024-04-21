@@ -9,12 +9,19 @@ class ConfigManager:
         # fmt: off
         self.config_structure = OrderedDict([
             ('HEADER', OrderedDict()),
-            ('GRID', OrderedDict()),
+            ('GRID', OrderedDict([
+                ('cb_tipocoord', 'Cartesianas'),
+                ('cb_tipozonas', 'Zona única'),
+            ])),
             ('VARIABLES', OrderedDict([
-                ('cb_tipoflujo', 'Difusivo'),
-                ('le_var_title5', 'Temperatura'),
                 ('cb_tsimu', 'Permanente'),
-                ('cb_trataborde', 'Esquema de bajo orden')
+                ('cb_tipoflujo', 'Difusivo'),
+                ('cb_trataborde', 'Esquema de bajo orden'),
+                ('le_var_title5', 'Temperatura'),
+                ('chb_ksolve5', 2),
+                ('chb_kprint5', 2),
+                ('le_relax5', '1'),
+                ('checkBox', 2)
                 ])),
             ('BOUND', OrderedDict([
                 ('X Max', OrderedDict([('Borde base', OrderedDict())])),

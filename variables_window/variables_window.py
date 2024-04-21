@@ -27,7 +27,9 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             getattr(self, f"le_var_title{i}").textChanged.connect(self.controlar_widgets_titles)
 
         # Conexion con ConfigManager
-        self.widgets = ["cb_tsimu", "cb_tipoflujo", "cb_trataborde", "le_iptm", "le_dt"] 
+        self.widgets = [
+            "cb_tsimu", "cb_tipoflujo", "cb_trataborde", "le_iptm", "le_dt", "checkBox"
+            ] 
 
         for i in range(1, 13):
             self.widgets.extend([f"le_var_title{i}", f"chb_kprint{i}"])
