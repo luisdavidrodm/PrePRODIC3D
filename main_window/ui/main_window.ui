@@ -86,6 +86,8 @@
      <string>Archivo</string>
     </property>
     <addaction name="action_guardar"/>
+    <addaction name="actionGenerar_Rutina_FORTRAN"/>
+    <addaction name="actionGenerar_y_visualiza_resultados"/>
     <addaction name="action_salir"/>
    </widget>
    <widget class="QMenu" name="menu_herramientas">
@@ -100,7 +102,7 @@
   <widget class="QStatusBar" name="statusbar"/>
   <action name="action_guardar">
    <property name="text">
-    <string>Guardar como</string>
+    <string>Guardar cambios</string>
    </property>
   </action>
   <action name="action_salir">
@@ -111,6 +113,16 @@
   <action name="action_manual">
    <property name="text">
     <string>Manual de usuario</string>
+   </property>
+  </action>
+  <action name="actionGenerar_Rutina_FORTRAN">
+   <property name="text">
+    <string>Generar rutina FORTRAN</string>
+   </property>
+  </action>
+  <action name="actionGenerar_y_visualiza_resultados">
+   <property name="text">
+    <string>Generar y visualiza resultados</string>
    </property>
   </action>
  </widget>

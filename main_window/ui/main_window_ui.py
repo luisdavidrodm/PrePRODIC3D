@@ -31,6 +31,10 @@ class Ui_main_window(object):
         self.action_salir.setObjectName(u"action_salir")
         self.action_manual = QAction(main_window)
         self.action_manual.setObjectName(u"action_manual")
+        self.actionGenerar_Rutina_FORTRAN = QAction(main_window)
+        self.actionGenerar_Rutina_FORTRAN.setObjectName(u"actionGenerar_Rutina_FORTRAN")
+        self.actionGenerar_y_visualiza_resultados = QAction(main_window)
+        self.actionGenerar_y_visualiza_resultados.setObjectName(u"actionGenerar_y_visualiza_resultados")
         self.centralwidget = QWidget(main_window)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -85,6 +89,8 @@ class Ui_main_window(object):
         self.menubar.addAction(self.menu_archivo.menuAction())
         self.menubar.addAction(self.menu_herramientas.menuAction())
         self.menu_archivo.addAction(self.action_guardar)
+        self.menu_archivo.addAction(self.actionGenerar_Rutina_FORTRAN)
+        self.menu_archivo.addAction(self.actionGenerar_y_visualiza_resultados)
         self.menu_archivo.addAction(self.action_salir)
         self.menu_herramientas.addAction(self.action_manual)
 
@@ -95,9 +101,11 @@ class Ui_main_window(object):
 
     def retranslateUi(self, main_window):
         main_window.setWindowTitle(QCoreApplication.translate("main_window", u"PrePRODIC3D", None))
-        self.action_guardar.setText(QCoreApplication.translate("main_window", u"Guardar como", None))
+        self.action_guardar.setText(QCoreApplication.translate("main_window", u"Guardar cambios", None))
         self.action_salir.setText(QCoreApplication.translate("main_window", u"Salir", None))
         self.action_manual.setText(QCoreApplication.translate("main_window", u"Manual de usuario", None))
+        self.actionGenerar_Rutina_FORTRAN.setText(QCoreApplication.translate("main_window", u"Generar rutina FORTRAN", None))
+        self.actionGenerar_y_visualiza_resultados.setText(QCoreApplication.translate("main_window", u"Generar y visualiza resultados", None))
         self.pb_inicio.setText(QCoreApplication.translate("main_window", u"Inicio", None))
         self.pb_malla.setText(QCoreApplication.translate("main_window", u"Malla", None))
         self.pb_variables.setText(QCoreApplication.translate("main_window", u"Variables", None))
