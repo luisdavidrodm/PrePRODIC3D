@@ -141,16 +141,12 @@ class F90Serializer:
 if __name__ == "__main__":
     working_directory = Path("C:/PRODIC3D/Utilidades/F90/dona")
     os.chdir(working_directory)
-    with open(
-        "dona.json",
-        "r",
-        encoding="utf-8",
-    ) as file:
-        json_data = json.load(file)
+    with open("dona.json", "r", encoding="utf-8") as f:
+        json_data = json.load(f)
     serializer = F90Serializer()
     f90_code = serializer.generate_f90(json_data)
-    with open(working_directory / "output.f90", "w", encoding="utf-8") as f90_file:
-        f90_file.write(f90_code)
+    with open(working_directory / "output.f90", "w", encoding="utf-8") as f:
+        f.write(f90_code)
     exe_path = working_directory / "myprogram.exe"
     if exe_path.exists():
         exe_path.unlink()
@@ -158,5 +154,5 @@ if __name__ == "__main__":
     subprocess.run(compile_command, check=True, shell=True, cwd=working_directory)
     subprocess.run(str(exe_path), shell=True, check=False)
     ruta_paraview = "C:/Program Files/ParaView 5.12.0/bin/paraview.exe"
-    script_path = "C:/PREPRODIC3D/open_tecplot.py"
+    script_path = "C:/PREPRODIC3D/tecplot.py"
     subprocess.run([ruta_paraview, "--script=" + script_path], check=True)

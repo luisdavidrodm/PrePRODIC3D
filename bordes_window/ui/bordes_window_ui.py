@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bordes_window.ui'
+## Form generated from reading UI file 'bordes_windowjXIAYb.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -112,20 +112,20 @@ class Ui_bordes_window(object):
         self.groupBox_8.setObjectName(u"groupBox_8")
         self.verticalLayout_3 = QVBoxLayout(self.groupBox_8)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.label_7 = QLabel(self.groupBox_8)
-        self.label_7.setObjectName(u"label_7")
+        self.lb_value = QLabel(self.groupBox_8)
+        self.lb_value.setObjectName(u"lb_value")
 
-        self.verticalLayout_3.addWidget(self.label_7)
+        self.verticalLayout_3.addWidget(self.lb_value)
 
         self.le_value = QLineEdit(self.groupBox_8)
         self.le_value.setObjectName(u"le_value")
 
         self.verticalLayout_3.addWidget(self.le_value)
 
-        self.label_8 = QLabel(self.groupBox_8)
-        self.label_8.setObjectName(u"label_8")
+        self.lb_variable = QLabel(self.groupBox_8)
+        self.lb_variable.setObjectName(u"lb_variable")
 
-        self.verticalLayout_3.addWidget(self.label_8)
+        self.verticalLayout_3.addWidget(self.lb_variable)
 
         self.le_tempamb = QLineEdit(self.groupBox_8)
         self.le_tempamb.setObjectName(u"le_tempamb")
@@ -457,8 +457,8 @@ class Ui_bordes_window(object):
         self.chb_flux.setText(QCoreApplication.translate("bordes_window", u"Flujo", None))
         self.chb_convec.setText(QCoreApplication.translate("bordes_window", u"Convecci\u00f3n", None))
         self.groupBox_8.setTitle("")
-        self.label_7.setText(QCoreApplication.translate("bordes_window", u"Valor", None))
-        self.label_8.setText(QCoreApplication.translate("bordes_window", u"Temp. ambiente", None))
+        self.lb_value.setText(QCoreApplication.translate("bordes_window", u"Valor", None))
+        self.lb_variable.setText(QCoreApplication.translate("bordes_window", u"Temp. ambiente", None))
         self.gb_tipo_segment.setTitle(QCoreApplication.translate("bordes_window", u"Tipo de segmento", None))
         self.chb_wall.setText(QCoreApplication.translate("bordes_window", u"Pared", None))
         self.chb_inmass.setText(QCoreApplication.translate("bordes_window", u"Entrada de la masa", None))

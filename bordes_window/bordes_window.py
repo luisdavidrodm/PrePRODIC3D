@@ -24,17 +24,21 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 getattr(self, f'lw_patchlist_{axis}{direction}').currentRowChanged.connect(self.select_patch)
                 setattr(self, f'patch_count_{axis}{direction}', 1)
 
-        for chb_name in ['wall', 'inmass', 'outmass']:
-            getattr(self, f'chb_{chb_name}').stateChanged.connect(self.handle_chb_state_changed)
-
-        for chb_name in ['value', 'flux', 'convec']:
-            getattr(self, f'chb_{chb_name}').stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
-
         # Conexion con ConfigManager
         self.widgets = [
             "le_value", "le_tempamb", "chb_value", "lw_variables", "le_value_veloc_u",
-            "le_value_veloc_v", "le_value_veloc_w", "le_fracmass"
+            "le_value_veloc_v", "le_value_veloc_w", "le_fracmass", "le_transversal_lon",
+            "le_transversal_start", "le_vertical_lon", "le_vertical_start"
         ]
+
+        for chb_name in ['wall', 'inmass', 'outmass']:
+            getattr(self, f'chb_{chb_name}').stateChanged.connect(self.handle_chb_state_changed)
+            self.widgets.append(f'chb_{chb_name}')
+
+        for chb_name in ['value', 'flux', 'convec']:
+            getattr(self, f'chb_{chb_name}').stateChanged.connect(self.handle_chb_valuefluxconvec_changed)
+            self.widgets.append(f'chb_{chb_name}')
+
         self.config_manager.connect_config(self)
         # Cargar configuración inicial
         self.clear_and_disable_fields()
@@ -75,8 +79,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         if current_patch_list:
             current_patch = current_patch_list.currentItem().text() if current_patch_list.currentItem() else None
             if current_patch:
-                base_index = patch_to_index.get(current_patch)
-                self.sw_lon_patch.setCurrentIndex(base_index + (self.sw_patchlist.currentIndex() * 5))
                 self.load_patch_config()
                 return None
         self.clear_and_disable_fields()

@@ -132,7 +132,7 @@
         </property>
         <layout class="QVBoxLayout" name="verticalLayout_3">
          <item>
-          <widget class="QLabel" name="label_7">
+          <widget class="QLabel" name="lb_value">
            <property name="text">
             <string>Valor</string>
            </property>
@@ -142,7 +142,7 @@
           <widget class="QLineEdit" name="le_value"/>
          </item>
          <item>
-          <widget class="QLabel" name="label_8">
+          <widget class="QLabel" name="lb_variable">
            <property name="text">
             <string>Temp. ambiente</string>
            </property>

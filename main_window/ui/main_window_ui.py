@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_window.ui'
+## Form generated from reading UI file 'main_windowQXvqtl.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -25,16 +25,20 @@ class Ui_main_window(object):
         if not main_window.objectName():
             main_window.setObjectName(u"main_window")
         main_window.resize(301, 280)
-        self.action_guardar = QAction(main_window)
-        self.action_guardar.setObjectName(u"action_guardar")
+        self.action_guardar_datos = QAction(main_window)
+        self.action_guardar_datos.setObjectName(u"action_guardar_datos")
+        self.action_guardar_datos.setCheckable(False)
+        self.action_guardar_datos.setChecked(False)
         self.action_salir = QAction(main_window)
         self.action_salir.setObjectName(u"action_salir")
         self.action_manual = QAction(main_window)
         self.action_manual.setObjectName(u"action_manual")
-        self.actionGenerar_Rutina_FORTRAN = QAction(main_window)
-        self.actionGenerar_Rutina_FORTRAN.setObjectName(u"actionGenerar_Rutina_FORTRAN")
-        self.actionGenerar_y_visualiza_resultados = QAction(main_window)
-        self.actionGenerar_y_visualiza_resultados.setObjectName(u"actionGenerar_y_visualiza_resultados")
+        self.action_generar_rutina_fortran = QAction(main_window)
+        self.action_generar_rutina_fortran.setObjectName(u"action_generar_rutina_fortran")
+        self.action_generar_y_visualizar_resultados = QAction(main_window)
+        self.action_generar_y_visualizar_resultados.setObjectName(u"action_generar_y_visualizar_resultados")
+        self.action_cargar_datos = QAction(main_window)
+        self.action_cargar_datos.setObjectName(u"action_cargar_datos")
         self.centralwidget = QWidget(main_window)
         self.centralwidget.setObjectName(u"centralwidget")
         self.verticalLayout = QVBoxLayout(self.centralwidget)
@@ -88,9 +92,10 @@ class Ui_main_window(object):
 
         self.menubar.addAction(self.menu_archivo.menuAction())
         self.menubar.addAction(self.menu_herramientas.menuAction())
-        self.menu_archivo.addAction(self.action_guardar)
-        self.menu_archivo.addAction(self.actionGenerar_Rutina_FORTRAN)
-        self.menu_archivo.addAction(self.actionGenerar_y_visualiza_resultados)
+        self.menu_archivo.addAction(self.action_guardar_datos)
+        self.menu_archivo.addAction(self.action_cargar_datos)
+        self.menu_archivo.addAction(self.action_generar_rutina_fortran)
+        self.menu_archivo.addAction(self.action_generar_y_visualizar_resultados)
         self.menu_archivo.addAction(self.action_salir)
         self.menu_herramientas.addAction(self.action_manual)
 
@@ -101,11 +106,12 @@ class Ui_main_window(object):
 
     def retranslateUi(self, main_window):
         main_window.setWindowTitle(QCoreApplication.translate("main_window", u"PrePRODIC3D", None))
-        self.action_guardar.setText(QCoreApplication.translate("main_window", u"Guardar cambios", None))
+        self.action_guardar_datos.setText(QCoreApplication.translate("main_window", u"Guardar datos", None))
         self.action_salir.setText(QCoreApplication.translate("main_window", u"Salir", None))
         self.action_manual.setText(QCoreApplication.translate("main_window", u"Manual de usuario", None))
-        self.actionGenerar_Rutina_FORTRAN.setText(QCoreApplication.translate("main_window", u"Generar rutina FORTRAN", None))
-        self.actionGenerar_y_visualiza_resultados.setText(QCoreApplication.translate("main_window", u"Generar y visualiza resultados", None))
+        self.action_generar_rutina_fortran.setText(QCoreApplication.translate("main_window", u"Generar rutina FORTRAN", None))
+        self.action_generar_y_visualizar_resultados.setText(QCoreApplication.translate("main_window", u"Generar y visualiza resultados", None))
+        self.action_cargar_datos.setText(QCoreApplication.translate("main_window", u"Cargar datos", None))
         self.pb_inicio.setText(QCoreApplication.translate("main_window", u"Inicio", None))
         self.pb_malla.setText(QCoreApplication.translate("main_window", u"Malla", None))
         self.pb_variables.setText(QCoreApplication.translate("main_window", u"Variables", None))

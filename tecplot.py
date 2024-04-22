@@ -1,11 +1,15 @@
 import sys
+import os
 
 try:
     from paraview.simple import *
 except ImportError:
     sys.exit("Este script debe ejecutarse dentro del entorno de Python de ParaView.")
 
-tecplot_file_path = "C:/PRODIC3D/Utilidades/F90/dona/A1PLOT  .000"
+tecplot_file_path = os.getenv("TECPLOT_FILE_PATH")
+if tecplot_file_path is None:
+    print("Error: No se proporcionó la ruta del archivo tecplot.")
+    sys.exit(1)
 reader = TecplotReader(FileNames=[tecplot_file_path])
 reader.UpdatePipeline()
 view = GetActiveViewOrCreate("RenderView")

@@ -85,9 +85,10 @@
     <property name="title">
      <string>Archivo</string>
     </property>
-    <addaction name="action_guardar"/>
-    <addaction name="actionGenerar_Rutina_FORTRAN"/>
-    <addaction name="actionGenerar_y_visualiza_resultados"/>
+    <addaction name="action_guardar_datos"/>
+    <addaction name="action_cargar_datos"/>
+    <addaction name="action_generar_rutina_fortran"/>
+    <addaction name="action_generar_y_visualizar_resultados"/>
     <addaction name="action_salir"/>
    </widget>
    <widget class="QMenu" name="menu_herramientas">
@@ -100,9 +101,15 @@
    <addaction name="menu_herramientas"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_guardar">
+  <action name="action_guardar_datos">
+   <property name="checkable">
+    <bool>false</bool>
+   </property>
+   <property name="checked">
+    <bool>false</bool>
+   </property>
    <property name="text">
-    <string>Guardar cambios</string>
+    <string>Guardar datos</string>
    </property>
   </action>
   <action name="action_salir">
@@ -115,14 +122,19 @@
     <string>Manual de usuario</string>
    </property>
   </action>
-  <action name="actionGenerar_Rutina_FORTRAN">
+  <action name="action_generar_rutina_fortran">
    <property name="text">
     <string>Generar rutina FORTRAN</string>
    </property>
   </action>
-  <action name="actionGenerar_y_visualiza_resultados">
+  <action name="action_generar_y_visualizar_resultados">
    <property name="text">
     <string>Generar y visualiza resultados</string>
+   </property>
+  </action>
+  <action name="action_cargar_datos">
+   <property name="text">
+    <string>Cargar datos</string>
    </property>
   </action>
  </widget>

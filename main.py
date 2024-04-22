@@ -1,6 +1,11 @@
+import json
+import glob
 import sys
-from PySide6 import QtWidgets as qtw
+import os
+import subprocess
+import shutil
 
+from PySide6 import QtWidgets as qtw
 
 from main_window.ui.main_window_ui import Ui_main_window
 from inicio_window.inicio_window import InicioWindow
@@ -9,7 +14,6 @@ from variables_window.variables_window import VariablesWindow
 from valores_window.valores_window import ValoresWindow
 from bordes_window.bordes_window import BordesWindow
 from salida_window.salida_window import SalidaWindow
-
 
 from config_manager import ConfigManager
 from f90_serializer import F90Serializer
@@ -28,9 +32,12 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.bordes_window = None
         self.salida_window = None
 
-    def setupUi(self):
-        super().setupUi(self)
-        self.action_guardar.triggered.connect(self.guardar_configuracion)
+    def setupUi(self, *args):
+        super().setupUi(self, *args)
+        self.action_cargar_datos.triggered.connect(self.cargar_datos)
+        self.action_guardar_datos.triggered.connect(self.guardar_datos)
+        self.action_generar_rutina_fortran.triggered.connect(self.generar_rutina_fortran)
+        self.action_generar_y_visualizar_resultados.triggered.connect(self.generar_y_visualizar_resultados)
         self.action_salir.triggered.connect(self.close)
 
         self.pb_inicio.clicked.connect(self.open_inicio)
@@ -123,27 +130,115 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     ##
     ################################################################################
 
-    def guardar_configuracion(self):
-        # Primero, guardar la configuración en un archivo JSON
-        nombre_archivo_json = "configuracion.json"
-        self.config_manager.save_to_json(nombre_archivo_json)
-        qtw.QMessageBox.information(
-            self,
-            "Guardar Configuración",
-            f"La configuración se ha guardado correctamente en '{nombre_archivo_json}'.",
-        )
+    def cargar_datos(self):
+        filename, _ = qtw.QFileDialog.getOpenFileName(self, "Seleccionar archivo", "", "Todos los archivos (*)")
+        if filename:
+            self.config_manager.load_from_json(filename)
 
-        # Luego, generar y guardar el contenido .f90
-        serializer = F90Serializer()
-        contenido_f90 = serializer.generate_f90(self.config_manager.config_structure)
-        nombre_archivo_f90 = "configuracion.adapt.f90"
-        with open(nombre_archivo_f90, "w") as archivo:
-            archivo.write(contenido_f90)
+    def guardar_datos(self):
+        folder_name = self.config_manager.config_structure["HEADER"].get("le_titulosimu", None)
+        if folder_name:
+            base_dir = os.path.dirname(os.path.realpath(__file__))
+            folder_path = os.path.join(base_dir, "Resultados", folder_name)
+            if not os.path.exists(folder_path):
+                try:
+                    os.makedirs(folder_path)
+                except OSError as e:
+                    qtw.QMessageBox.critical(
+                        self,
+                        "Error al guardar configuración",
+                        f"No se pudo crear la carpeta '{folder_path}': {e}",
+                    )
+                    return False
+        else:
+            qtw.QMessageBox.critical(
+                self,
+                "Error al guardar configuración",
+                "No se indicó el nombre de la simulación",
+            )
+            return False
+        json_path = os.path.join(folder_path, "datos.json")
+        self.config_manager.save_to_json(json_path)
         qtw.QMessageBox.information(
             self,
-            "Guardar Configuración",
-            f"La configuración se ha guardado correctamente en '{nombre_archivo_f90}'.",
+            "Guardar Cambios",
+            f"La configuración se ha guardado correctamente en '{json_path}'.",
         )
+        return folder_path
+
+    def generar_rutina_fortran(self):
+        folder_path = self.guardar_datos()
+        if folder_path:
+            serializer = F90Serializer()
+            f90_content = serializer.generate_f90(self.config_manager.config_structure)
+            f90_path = os.path.join(folder_path, "datos.f90")
+            with open(f90_path, "w", encoding="utf-8") as f:
+                f.write(f90_content)
+            qtw.QMessageBox.information(
+                self,
+                "Guardar Cambios",
+                f"La rutina ADAPT se ha guardado correctamente en '{f90_path}'.",
+            )
+            return folder_path
+        else:
+            return False, False
+
+    def generar_y_visualizar_resultados(self):
+        folder_path = self.generar_rutina_fortran()
+        if folder_path:
+
+            # Compilando y ejecutando
+            base_dir = os.path.dirname(os.path.realpath(__file__))
+            exe_path = os.path.join(folder_path, "resultados.exe").replace("\\", "/")
+            # Verificando si estan ubicados los archivos f90
+            prodic3d_path = os.path.join(base_dir, "prodic3d.f90")
+            common_path = os.path.join(base_dir, "3dcommon.f90")
+            if not os.path.exists(os.path.join(folder_path, "prodic3d.f90")):
+                shutil.copy(prodic3d_path, folder_path)
+            if not os.path.exists(os.path.join(folder_path, "3dcommon.f90")):
+                shutil.copy(common_path, folder_path)
+            compile_command = "gfortran -o resultados.exe prodic3d.f90 datos.f90"
+            subprocess.run(compile_command, check=True, shell=True, cwd=folder_path)
+            subprocess.run(str(exe_path), check=False, shell=True, cwd=folder_path)
+
+            # Buscando ubicación de Paraview
+            try:
+                with open("user_config.json", "r", encoding="utf-8") as f:
+                    config = json.load(f)
+                paraview_path = config.get("ruta_paraview")
+                if not paraview_path:
+                    raise ValueError("La ruta de ParaView no está definida en la configuración.")
+            except FileNotFoundError:
+                qtw.QMessageBox.critical(None, "Error de Configuración", "El archivo de configuración no se encuentra.")
+                return False
+            except json.JSONDecodeError:
+                qtw.QMessageBox.critical(
+                    None, "Error de Configuración", "Error en el formato del archivo de configuración."
+                )
+                return False
+            except Exception as e:
+                qtw.QMessageBox.critical(None, "Error de Configuración", str(e))
+                return False
+
+            # Buscando ubicacion de archivo grafico
+            script_path = os.path.join(base_dir, "tecplot.py")
+            search_pattern = os.path.join(folder_path, "*.000")
+            tecplot_files = glob.glob(search_pattern)
+            if tecplot_files:
+                tecplot_path = os.path.join(folder_path, tecplot_files[0])
+            else:
+                qtw.QMessageBox.critical(
+                    self,
+                    "Error al abrir Archivo Gráfico",
+                    "No se encontro el archivo de salida gráfica de la simulación",
+                )
+                return False
+            os.environ["TECPLOT_FILE_PATH"] = tecplot_path
+            subprocess.run([paraview_path, "--script=" + script_path], check=True)
+            del os.environ["TECPLOT_FILE_PATH"]
+            return True
+        else:
+            return False
 
 
 if __name__ == "__main__":
