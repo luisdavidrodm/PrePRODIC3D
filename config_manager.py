@@ -8,10 +8,13 @@ class ConfigManager:
         # Inicializar la estructura de la configuración con las secciones requeridas
         # fmt: off
         self.config_structure = OrderedDict([
-            ('HEADER', OrderedDict()),
+            ('HEADER', OrderedDict([
+                ('le_tituloimpre', 'PRINTF'),
+                ('le_titulograf', 'PLOTF')
+            ])),
             ('GRID', OrderedDict([
                 ('cb_tipocoord', 'Cartesianas'),
-                ('cb_tipozonas', 'Zona única'),
+                ('cb_tipozonas', 'Zona única')
             ])),
             ('VARIABLES', OrderedDict([
                 ('cb_tsimu', 'Permanente'),
@@ -29,7 +32,7 @@ class ConfigManager:
                 ('Y Max', OrderedDict([('Borde base', OrderedDict())])),
                 ('Y Min', OrderedDict([('Borde base', OrderedDict())])),
                 ('Z Max', OrderedDict([('Borde base', OrderedDict())])),
-                ('Z Min', OrderedDict([('Borde base', OrderedDict())])),
+                ('Z Min', OrderedDict([('Borde base', OrderedDict())]))
             ]))])
         # fmt: on
 
@@ -50,6 +53,7 @@ class ConfigManager:
     def load_config(self, window):
         # Carga la configuración de una ventana desde config_manager
         config = window.config_manager.config_structure[window.config_name]
+        print(f"LOAD_CONFIG: {config}")
         for widget_name, value in config.items():
             try:
                 widget = getattr(window, widget_name)
@@ -62,6 +66,7 @@ class ConfigManager:
                 elif isinstance(widget, QCheckBox):
                     widget.setChecked(value == 2)
                 else:
+                    print(f"LOAD_CONFIG / CONTINUE: {widget}")
                     continue
             except Exception as e:
                 print(f"ERROR AL CARGAR: {e}")

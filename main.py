@@ -233,9 +233,9 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
                     "No se encontro el archivo de salida gráfica de la simulación",
                 )
                 return False
-            os.environ["TECPLOT_FILE_PATH"] = tecplot_path
+            os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
             subprocess.run([paraview_path, "--script=" + script_path], check=True)
-            del os.environ["TECPLOT_FILE_PATH"]
+            del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
             return True
         else:
             return False

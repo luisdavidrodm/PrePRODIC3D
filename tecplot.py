@@ -6,7 +6,7 @@ try:
 except ImportError:
     sys.exit("Este script debe ejecutarse dentro del entorno de Python de ParaView.")
 
-tecplot_file_path = os.getenv("TECPLOT_FILE_PATH")
+tecplot_file_path = os.getenv("PREPRODIC3D_TECPLOT_FILE_PATH")
 if tecplot_file_path is None:
     print("Error: No se proporcionó la ruta del archivo tecplot.")
     sys.exit(1)

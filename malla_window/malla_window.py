@@ -15,11 +15,6 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.config_manager = config_manager
         self.config_name = "GRID"
 
-        self.cb_tipocoord.currentTextChanged.connect(self.change_zones)
-        self.cb_tipozonas.currentTextChanged.connect(self.change_zones)
-        self.cb_tipocoord.currentTextChanged.connect(self.on_coordinate_system_changed)
-        self.cb_tipozonas.currentTextChanged.connect(self.on_zones_system_changed)
-
         self.sb_dirx_numz.valueChanged.connect(lambda value: self.handle_generic_numz_change(value, "le_dirx", "nvcx"))
         self.sb_diry_numz.valueChanged.connect(lambda value: self.handle_generic_numz_change(value, "le_diry", "nvcy"))
         self.sb_dirz_numz.valueChanged.connect(lambda value: self.handle_generic_numz_change(value, "le_dirz", "nvcz"))
@@ -54,7 +49,13 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.config_manager.connect_config(self)
         # Cargar configuración inicial
         self.initialize_spin_boxes()
+        # TODO Cambiar para que se cargue bien la primera vez
         self.load_malla_config()
+        self.change_zones()
+        self.load_malla_config()
+
+        self.cb_tipocoord.currentTextChanged.connect(self.zones_changed)
+        self.cb_tipozonas.currentTextChanged.connect(self.zones_changed)
         # fmt: on
 
     def initialize_spin_boxes(self):
@@ -79,28 +80,20 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         sender = self.sender()
         self.config_manager.config_structure[self.config_name][sender.objectName()] = value
 
+    def zones_changed(self):
+        self.change_zones()
+        self.load_malla_config()
+
     def change_zones(self):
         current_text_coord = self.cb_tipocoord.currentText()
         current_text_zona = self.cb_tipozonas.currentText()
-        capaIndex = {
+        capa_index = {
             ("Zona única", "Cartesianas"): 0,
             ("Zona única", "Cilindricas"): 1,
             ("Varias zonas", "Cartesianas"): 2,
             ("Varias zonas", "Cilindricas"): 3,
         }.get((current_text_zona, current_text_coord), 0)
-
-        self.gbsw_malla2.setCurrentIndex(capaIndex)
-        self.load_malla_config()
-
-    def on_coordinate_system_changed(self, selection):
-        mode = 1 if selection == "Cartesianas" else 2
-        self.config_manager.config_structure[self.config_name]["MODE"] = mode
-        self.load_malla_config()
-
-    def on_zones_system_changed(self, selection):
-        zone = "zgrid" if selection == "Varias zonas" else "ezgrid"
-        self.config_manager.config_structure[self.config_name]["ZONEGRID"] = zone
-        self.load_malla_config()
+        self.gbsw_malla2.setCurrentIndex(capa_index)
 
     def handle_generic_numz_change(self, value, prefix, ncv_prefix):
         for i in range(1, 11):

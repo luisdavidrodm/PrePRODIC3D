@@ -12,7 +12,8 @@ class InicioWindow(qtw.QDialog, Ui_inicio_window):
         self.widgets = ["le_titulosimu", "le_tituloimpre", "le_titulograf"]
         for widget_name in self.widgets:
             getattr(self, widget_name).textChanged.connect(self.value_changed)
-
+        self.le_tituloimpre.setEnabled(False)
+        self.le_titulograf.setEnabled(False)
         self.load_malla_config()
 
     def value_changed(self, value):

@@ -241,6 +241,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         if border_and_patch_name:
             # Habilita los campos si esta seleccionado un parche
             self.le_value.setEnabled(True)
+            self.le_transversal_start.setEnabled(True)
+            self.le_transversal_lon.setEnabled(True)
+            self.le_vertical_start.setEnabled(True)
+            self.le_vertical_lon.setEnabled(True)
             self.chb_value.setEnabled(True)
             self.chb_value.setChecked(True)
             self.chb_convec.setEnabled(True)
@@ -260,10 +264,14 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.le_value_veloc_v.setText(patch_config.get("le_value_veloc_v", ""))
                 self.le_value_veloc_w.setText(patch_config.get("le_value_veloc_w", ""))
                 self.le_fracmass.setText(patch_config.get("le_fracmass", ""))
+                self.le_transversal_start.setText(patch_config.get("le_transversal_start", ""))
+                self.le_transversal_lon.setText(patch_config.get("le_transversal_lon", ""))
+                self.le_vertical_start.setText(patch_config.get("le_vertical_start", ""))
+                self.le_vertical_lon.setText(patch_config.get("le_vertical_lon", ""))
             else:
-                self.chb_value.setChecked(True)
-                self.chb_convec.setChecked(False)
-                self.chb_flux.setChecked(False)
+                self.chb_value.setChecked(patch_config.get("chb_value", ""))
+                self.chb_convec.setChecked(patch_config.get("chb_convec", ""))
+                self.chb_flux.setChecked(patch_config.get("chb_flux", ""))
                 self.le_value.clear()
                 self.le_tempamb.clear()
                 self.le_value_veloc_u.clear()
@@ -282,6 +290,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.chb_flux.setEnabled(False)
         self.le_value.setEnabled(False)
         self.le_tempamb.setEnabled(False)
+        self.le_transversal_start.setEnabled(False)
+        self.le_transversal_lon.setEnabled(False)
+        self.le_vertical_start.setEnabled(False)
+        self.le_vertical_lon.setEnabled(False)
         # self.le_value_veloc_u.setEnabled(False)
         # self.le_value_veloc_v.setEnabled(False)
         # self.le_value_veloc_w.setEnabled(False)
@@ -289,6 +301,14 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             self.le_value.clear()
         if self.le_tempamb.text():
             self.le_tempamb.clear()
+        if self.le_transversal_start.text():
+            self.le_transversal_start.clear()
+        if self.le_transversal_lon.text():
+            self.le_transversal_lon.clear()
+        if self.le_vertical_start.text():
+            self.le_vertical_start.clear()
+        if self.le_vertical_lon.text():
+            self.le_vertical_lon.clear()
         # if self.le_value_veloc_u.text():
         #     self.le_value_veloc_u.text()
         # if self.le_value_veloc_v.text():
