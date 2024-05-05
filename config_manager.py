@@ -1,5 +1,6 @@
 import json
 from collections import OrderedDict
+
 from PySide6.QtWidgets import QLineEdit, QSpinBox, QComboBox, QCheckBox, QListWidget
 
 
@@ -33,6 +34,14 @@ class ConfigManager:
                 ('Y Min', OrderedDict([('Borde base', OrderedDict())])),
                 ('Z Max', OrderedDict([('Borde base', OrderedDict())])),
                 ('Z Min', OrderedDict([('Borde base', OrderedDict())]))
+            ])),
+            ('VALUES', OrderedDict([
+                ('Temperatura', OrderedDict([
+                    ('Region 1', OrderedDict([
+                        ('Volumen 1', OrderedDict([
+                        ]))
+                    ]))
+                ]))
             ]))])
         # fmt: on
 
@@ -50,24 +59,26 @@ class ConfigManager:
         with open(filename, "w", encoding="utf8") as f:
             json.dump(self.config_structure, f, ensure_ascii=False, indent=4)
 
-    def load_config(self, window):
+    def load_config(self, window, config=None):
         # Carga la configuración de una ventana desde config_manager
-        config = window.config_manager.config_structure[window.config_name]
-        print(f"LOAD_CONFIG: {config}")
+        if config is None:
+            config = window.config_manager.config_structure[window.config_name]
+        # print(f"LOAD_CONFIG: {config}")
         for widget_name, value in config.items():
             try:
-                widget = getattr(window, widget_name)
-                if isinstance(widget, QLineEdit):
-                    widget.setText(value)
-                elif isinstance(widget, QComboBox):
-                    widget.setCurrentText(value)
-                elif isinstance(widget, QSpinBox):
-                    widget.setValue(value)
-                elif isinstance(widget, QCheckBox):
-                    widget.setChecked(value == 2)
-                else:
-                    print(f"LOAD_CONFIG / CONTINUE: {widget}")
-                    continue
+                if not isinstance(value, OrderedDict):
+                    widget = getattr(window, widget_name)
+                    if isinstance(widget, QLineEdit):
+                        widget.setText(value)
+                    elif isinstance(widget, QComboBox):
+                        widget.setCurrentText(value)
+                    elif isinstance(widget, QSpinBox):
+                        widget.setValue(value)
+                    elif isinstance(widget, QCheckBox):
+                        widget.setChecked(value == 2)
+                    else:
+                        print(f"LOAD_CONFIG / CONTINUE: {widget}")
+                        continue
             except Exception as e:
                 print(f"ERROR AL CARGAR: {e}")
 

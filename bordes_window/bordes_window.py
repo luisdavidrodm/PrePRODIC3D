@@ -132,7 +132,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         """Permite solo seleccionar un tipo de variable escalar"""
         sender = self.sender()
         if state == 2:
-            self.le_tempamb.setEnabled(sender == self.chb_convec)
+            self.le_tempamb.setEnabled(sender == self.chb_convec or sender == self.chb_flux)
             if sender == self.chb_value:
                 self.chb_flux.setChecked(False)
                 self.chb_convec.setChecked(False)
@@ -278,7 +278,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.le_value_veloc_v.clear()
                 self.le_value_veloc_w.clear()
                 self.le_fracmass.clear()
-            self.le_tempamb.setEnabled(self.chb_convec.isChecked())
+            self.le_tempamb.setEnabled(self.chb_convec.isChecked() or self.chb_flux.isChecked())
 
     def clear_and_disable_fields(self):
         """Limpia y deshabilita los campos si es necesario."""
@@ -338,7 +338,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         velocidades_habilitadas = not es_difusivo and state_inmass
         fracmass_habilitada = not es_difusivo and state_outmass
         flux_convec_deshabilitado = es_difusivo and state_inmass
-        temamb_habilitada = state_convec
+        temamb_habilitada = state_convec or state_flux
 
         # Manejo de condiciones especiales para resetear checkboxes
         if es_difusivo or not (state_inmass or state_outmass):

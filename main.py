@@ -11,7 +11,7 @@ from main_window.ui.main_window_ui import Ui_main_window
 from inicio_window.inicio_window import InicioWindow
 from malla_window.malla_window import MallaWindow
 from variables_window.variables_window import VariablesWindow
-from valores_window.valores_window import ValoresWindow
+from values_window.values_window import ValuesWindow
 from bordes_window.bordes_window import BordesWindow
 from salida_window.salida_window import SalidaWindow
 
@@ -82,7 +82,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
     def open_valores(self):
         if self.valores_window is None or not self.valores_window.isVisible():
-            self.valores_window = ValoresWindow(self.config_manager)
+            self.valores_window = ValuesWindow(self.config_manager)
             self.valores_window.show()
         else:
             self.valores_window.raise_()

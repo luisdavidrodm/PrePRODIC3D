@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>585</width>
-    <height>414</height>
+    <height>762</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>548</width>
-        <height>741</height>
+        <width>565</width>
+        <height>742</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -48,7 +48,7 @@
                </property>
                <layout class="QGridLayout" name="gridLayout_2">
                 <item row="0" column="0">
-                 <widget class="QListWidget" name="listWidget">
+                 <widget class="QListWidget" name="lw_variables">
                   <item>
                    <property name="text">
                     <string>Temperatura</string>
@@ -73,7 +73,7 @@
                  </widget>
                 </item>
                 <item row="0" column="1">
-                 <widget class="QLineEdit" name="lineEdit"/>
+                 <widget class="QLineEdit" name="le_general_value"/>
                 </item>
                 <item row="1" column="0">
                  <widget class="QLabel" name="label_2">
@@ -83,7 +83,7 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="lineEdit_2"/>
+                 <widget class="QLineEdit" name="le_k"/>
                 </item>
                 <item row="2" column="0" colspan="2">
                  <widget class="QCheckBox" name="checkBox">
@@ -147,7 +147,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QCheckBox" name="checkBox_2">
+           <widget class="QCheckBox" name="chb_local_value">
             <property name="text">
              <string>Para aplicar valores locales para alguna variable, active la siguiente casilla</string>
             </property>
@@ -162,31 +162,40 @@
              <item>
               <widget class="QGroupBox" name="groupBox_7">
                <property name="layoutDirection">
-                <enum>Qt::RightToLeft</enum>
+                <enum>Qt::LeftToRight</enum>
                </property>
                <property name="title">
                 <string>Regiones</string>
                </property>
                <layout class="QFormLayout" name="formLayout_3">
                 <item row="2" column="0" colspan="2">
-                 <widget class="QPushButton" name="pushButton">
+                 <widget class="QPushButton" name="pb_add_region">
                   <property name="text">
                    <string>Agregar una región</string>
                   </property>
                  </widget>
                 </item>
                 <item row="4" column="0" colspan="2">
-                 <widget class="QPushButton" name="pushButton_2">
+                 <widget class="QPushButton" name="pb_remove_region">
                   <property name="text">
                    <string>Eliminar última región</string>
                   </property>
                  </widget>
                 </item>
                 <item row="0" column="0" colspan="2">
-                 <widget class="QListWidget" name="listWidget_2"/>
+                 <widget class="QListWidget" name="lw_regions">
+                  <property name="layoutDirection">
+                   <enum>Qt::LeftToRight</enum>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>Region 1</string>
+                   </property>
+                  </item>
+                 </widget>
                 </item>
                 <item row="10" column="0">
-                 <widget class="QLineEdit" name="lineEdit_6"/>
+                 <widget class="QLineEdit" name="le_local_value"/>
                 </item>
                 <item row="10" column="1">
                  <widget class="QLabel" name="label_6">
@@ -225,7 +234,7 @@
                  </widget>
                 </item>
                 <item row="17" column="0">
-                 <widget class="QLineEdit" name="lineEdit_9"/>
+                 <widget class="QLineEdit" name="le_local_k"/>
                 </item>
                 <item row="17" column="1">
                  <widget class="QLabel" name="label_9">
@@ -238,14 +247,14 @@
                  </widget>
                 </item>
                 <item row="8" column="1">
-                 <widget class="QCheckBox" name="checkBox_4">
+                 <widget class="QCheckBox" name="chb_fixed_value">
                   <property name="text">
                    <string>Valor fijo</string>
                   </property>
                  </widget>
                 </item>
                 <item row="8" column="0">
-                 <widget class="QCheckBox" name="checkBox_3">
+                 <widget class="QCheckBox" name="chb_linear_source">
                   <property name="text">
                    <string>Fuente lineal</string>
                   </property>
@@ -261,19 +270,25 @@
                </property>
                <layout class="QVBoxLayout" name="verticalLayout">
                 <item>
-                 <widget class="QListWidget" name="listWidget_3"/>
+                 <widget class="QListWidget" name="lw_volumes">
+                  <item>
+                   <property name="text">
+                    <string>Volumen 1</string>
+                   </property>
+                  </item>
+                 </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton_4">
+                 <widget class="QPushButton" name="pb_add_volume">
                   <property name="text">
-                   <string>Agregar un área</string>
+                   <string>Agregar un volumen</string>
                   </property>
                  </widget>
                 </item>
                 <item>
-                 <widget class="QPushButton" name="pushButton_3">
+                 <widget class="QPushButton" name="pb_remove_volume">
                   <property name="text">
-                   <string>Eliminar última área</string>
+                   <string>Eliminar último volumen</string>
                   </property>
                  </widget>
                 </item>
@@ -307,7 +322,7 @@
                     </widget>
                    </item>
                    <item row="2" column="2">
-                    <widget class="QLineEdit" name="lineEdit_13">
+                    <widget class="QLineEdit" name="le_y_lon">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -317,7 +332,7 @@
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <widget class="QLineEdit" name="lineEdit_10">
+                    <widget class="QLineEdit" name="le_x_start">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -327,7 +342,7 @@
                     </widget>
                    </item>
                    <item row="1" column="2">
-                    <widget class="QLineEdit" name="lineEdit_11">
+                    <widget class="QLineEdit" name="le_y_start">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -337,7 +352,7 @@
                     </widget>
                    </item>
                    <item row="2" column="1">
-                    <widget class="QLineEdit" name="lineEdit_12">
+                    <widget class="QLineEdit" name="le_x_lon">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -384,7 +399,7 @@
                     </widget>
                    </item>
                    <item row="1" column="3">
-                    <widget class="QLineEdit" name="lineEdit_14">
+                    <widget class="QLineEdit" name="le_z_start">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
                        <horstretch>0</horstretch>
@@ -394,7 +409,7 @@
                     </widget>
                    </item>
                    <item row="2" column="3">
-                    <widget class="QLineEdit" name="lineEdit_15">
+                    <widget class="QLineEdit" name="le_z_lon">
                      <property name="sizePolicy">
                       <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
                        <horstretch>0</horstretch>
