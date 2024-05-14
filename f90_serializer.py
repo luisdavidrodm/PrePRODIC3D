@@ -59,20 +59,58 @@ class F90Serializer:
 
     def serialize_begin_section(self, variables, bound, values):
         f90_lines = ["ENTRY BEGIN"]
-        if "le_var_title5" in variables:
-            f90_lines.append(f"TITLE(5)='{variables['le_var_title5']}'")
+        for num in [1, 2, 3] + list(range(5, 11)):
+            if variables.get(f"chb_kprint{num}") == 2:
+                f90_lines.append(f"TITLE({num})='{variables[f'le_var_title{num}']}'")
         if variables.get("chb_ksolve5") == 2:
             f90_lines.append("KSOLVE(5)=1")
-        if variables.get("chb_kprint5") == 2:
-            f90_lines.append("KPRINT(5)=1")
+        for num in [1, 2, 3] + list(range(5, 11)):
+            if variables.get(f"chb_kprint{num}") == 2:
+                f90_lines.append(f"KPRINT({num})=1")
         # f90_lines.append("IBORY(5)=1")
-        if "Temperatura" in values and "le_general_value" in values["Temperatura"]:
+        if "le_var_title5" in values and "le_general_value" in values["le_var_title5"]:
             f90_lines.extend(
                 [
                     "DO I=1,L1",
                     f"{i}DO J=1,M1",
                     f"{i}{i}DO K=1,N1",
-                    f"{i}{i}{i}T(I,J,K)={values['Temperatura']['le_general_value']}",
+                    f"{i}{i}{i}T(I,J,K)={values['le_var_title5']['le_general_value']}",
+                    f"{i}{i}ENDDO",
+                    f"{i}ENDDO",
+                    "ENDDO",
+                ]
+            )
+        if "le_var_title1" in values and "le_general_value" in values["le_var_title1"]:
+            f90_lines.extend(
+                [
+                    "DO I=1,L1",
+                    f"{i}DO J=1,M1",
+                    f"{i}{i}DO K=1,N1",
+                    f"{i}{i}{i}U(I,J,K)={values['le_var_title1']['le_general_value']}",
+                    f"{i}{i}ENDDO",
+                    f"{i}ENDDO",
+                    "ENDDO",
+                ]
+            )
+        if "le_var_title2" in values and "le_general_value" in values["le_var_title2"]:
+            f90_lines.extend(
+                [
+                    "DO I=1,L1",
+                    f"{i}DO J=1,M1",
+                    f"{i}{i}DO K=1,N1",
+                    f"{i}{i}{i}V(I,J,K)={values['le_var_title2']['le_general_value']}",
+                    f"{i}{i}ENDDO",
+                    f"{i}ENDDO",
+                    "ENDDO",
+                ]
+            )
+        if "le_var_title3" in values and "le_general_value" in values["le_var_title3"]:
+            f90_lines.extend(
+                [
+                    "DO I=1,L1",
+                    f"{i}DO J=1,M1",
+                    f"{i}{i}DO K=1,N1",
+                    f"{i}{i}{i}W(I,J,K)={values['le_var_title3']['le_general_value']}",
                     f"{i}{i}ENDDO",
                     f"{i}ENDDO",
                     "ENDDO",

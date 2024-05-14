@@ -21,7 +21,13 @@ class ConfigManager:
                 ('cb_tsimu', 'Permanente'),
                 ('cb_tipoflujo', 'Difusivo'),
                 ('cb_trataborde', 'Esquema de bajo orden'),
+                ('le_var_title1', 'Velocidad U'),
+                ('le_var_title2', 'Velocidad V'),
+                ('le_var_title3', 'Velocidad W'),
+                ('le_var_title4', 'Corrección de presión'),
                 ('le_var_title5', 'Temperatura'),
+                ('le_var_title11', 'Presión'),
+                ('le_var_title12', 'Función de corriente'),
                 ('chb_ksolve5', 2),
                 ('chb_kprint5', 2),
                 ('le_relax5', '1'),
@@ -36,7 +42,8 @@ class ConfigManager:
                 ('Z Min', OrderedDict([('Borde base', OrderedDict())]))
             ])),
             ('VALUES', OrderedDict([
-                ('Temperatura', OrderedDict([
+                ('le_var_title5', OrderedDict([
+                    ('name', 'Temperatura'),
                     ('Region 1', OrderedDict([
                         ('Volumen 1', OrderedDict([
                         ]))
@@ -80,7 +87,8 @@ class ConfigManager:
                         print(f"LOAD_CONFIG / CONTINUE: {widget}")
                         continue
             except Exception as e:
-                print(f"ERROR AL CARGAR: {e}")
+                if not window.config_name == "VALUES" and not widget_name == "name":
+                    print(f"ERROR AL CARGAR: {e}")
 
     def connect_config(self, window):
         for widget_name in window.widgets:

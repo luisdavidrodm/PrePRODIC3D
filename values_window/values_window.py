@@ -1,7 +1,8 @@
 from collections import OrderedDict
 
 from PySide6 import QtWidgets as qtw
-from PySide6.QtWidgets import QLineEdit, QCheckBox
+from PySide6.QtWidgets import QLineEdit, QCheckBox, QListWidgetItem
+from PySide6.QtCore import Qt
 
 from values_window.ui.values_window_ui import Ui_valores_window
 
@@ -31,14 +32,14 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
 
         self.config_manager.connect_config(self)
         self.chb_local_value.stateChanged.connect(self.load_current_config)
-        self.load_current_config()
+        self.load_values_list()
         # fmt: on
 
     def get_configured_widgets(self, variable, region, volume):
         """"""
         # Esta función busca en la configuración y recoge todos los widgets configurados
         if variable:
-            config = self.config_manager.config_structure[self.config_name][variable.text()]
+            config = self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)]
             configured_widgets = set()
             configured_widgets.update(k for k, v in config.items() if not isinstance(v, OrderedDict))
             if region:
@@ -60,7 +61,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.toggle_widget_list(not_configured_widgets, False)
         # Seleccionada una variable
         if variable is not None:
-            config = self.config_manager.config_structure[self.config_name][variable.text()]
+            config = self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)]
             self.toggle_widget_list(self.variable_widgets, True)
             self.config_manager.load_config(self, config)
             self.chb_local_value.setEnabled(True)
@@ -100,24 +101,43 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             self.pb_remove_volume.setEnabled(False)
             self.chb_local_value.setEnabled(False)
 
+    def load_values_list(self):
+        """Carga y actualiza la lista de variables considerando el orden y permitiendo duplicados."""
+        values_section = self.config_manager.config_structure["VALUES"]
+        current_items = [
+            (self.lw_variables.item(i).text(), self.lw_variables.item(i).data(Qt.UserRole))
+            for i in range(self.lw_variables.count())
+        ]
+        new_items = [(data["name"], key) for key, data in values_section.items() if "name" in data]
+        print("CURRENT VS NEW:", current_items, new_items)
+        # Verificar si las listas son diferentes en contenido o en orden
+        if new_items != current_items:
+            self.lw_variables.clear()
+            for name, tech_name in new_items:
+                item = QListWidgetItem(name)
+                item.setData(Qt.UserRole, tech_name)  # Almacenar el nombre técnico
+                self.lw_variables.addItem(item)
+        self.load_current_config()
+
     def load_region_config(self):
+        """Carga la configuración de la región basada en la variable seleccionada."""
         variable = self.lw_variables.currentItem()
-        # self.print_ordereddict(self.config_manager.config_structure, show_markers=True)
         if variable is not None:
             self.lw_regions.clear()
-            config = self.config_manager.config_structure[self.config_name][variable.text()]
+            config = self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)]
             for key, value in config.items():
                 if isinstance(value, OrderedDict):
                     self.lw_regions.addItem(key)
             self.load_current_config()
 
     def load_volume_config(self):
+        """"""
         variable = self.lw_variables.currentItem()
         region = self.lw_regions.currentItem()
         # self.print_ordereddict(self.config_manager.config_structure, show_markers=True)
         if region is not None:
             self.lw_volumes.clear()
-            config = self.config_manager.config_structure[self.config_name][variable.text()][region.text()]
+            config = self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()]
             for key, value in config.items():
                 if isinstance(value, OrderedDict):
                     self.lw_volumes.addItem(key)
@@ -147,39 +167,39 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         region = self.lw_regions.currentItem()
         volume = self.lw_volumes.currentItem()
         if value is not None:
-            if volume and sender.objectName() in self.volume_widgets:
-                if variable.text() not in self.config_manager.config_structure[self.config_name]:
-                    self.config_manager.config_structure[self.config_name][variable.text()] = OrderedDict()
-                if region.text() not in self.config_manager.config_structure[self.config_name][variable.text()]:
-                    self.config_manager.config_structure[self.config_name][variable.text()][region.text()] = OrderedDict()
-                if volume.text() not in self.config_manager.config_structure[self.config_name][variable.text()][region.text()]:
-                    self.config_manager.config_structure[self.config_name][variable.text()][region.text()][[volume.text()]] = OrderedDict()
-                self.config_manager.config_structure[self.config_name][variable.text()][region.text()][volume.text()][sender.objectName()] = value
+            if region and volume and sender.objectName() in self.volume_widgets:
+                if variable.data(Qt.UserRole) not in self.config_manager.config_structure[self.config_name]:
+                    self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)] = OrderedDict()
+                if region.text() not in self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)]:
+                    self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()] = OrderedDict()
+                if volume.text() not in self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()]:
+                    self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()][[volume.text()]] = OrderedDict()
+                self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()][volume.text()][sender.objectName()] = value
             elif region and sender.objectName() in self.region_widgets:
-                if variable.text() not in self.config_manager.config_structure[self.config_name]:
-                    self.config_manager.config_structure[self.config_name][variable.text()] = OrderedDict()
-                if region.text() not in self.config_manager.config_structure[self.config_name][variable.text()]:
-                    self.config_manager.config_structure[self.config_name][variable.text()][region.text()] = OrderedDict()
-                self.config_manager.config_structure[self.config_name][variable.text()][region.text()][sender.objectName()] = value
+                if variable.data(Qt.UserRole) not in self.config_manager.config_structure[self.config_name]:
+                    self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)] = OrderedDict()
+                if region.text() not in self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)]:
+                    self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()] = OrderedDict()
+                self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()][sender.objectName()] = value
             elif variable and sender.objectName() in self.variable_widgets:
-                if variable.text() not in self.config_manager.config_structure[self.config_name]:
-                    self.config_manager.config_structure[self.config_name][variable.text()] = OrderedDict()
-                self.config_manager.config_structure[self.config_name][variable.text()][sender.objectName()] = value
+                if variable.data(Qt.UserRole) not in self.config_manager.config_structure[self.config_name]:
+                    self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)] = OrderedDict()
+                self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][sender.objectName()] = value
             else:
                 return None
         else:
             if volume:
-                self.config_manager.config_structure[self.config_name][variable.text()][region.text()][volume.text()].pop(sender.objectName(), None)
-                # if len(self.config_manager.config_structure[self.config_name][variable.text()][region.text()][volume.text()]) == 0 and volume.text() != "Volumen 1":
-                #     self.config_manager.config_structure[self.config_name][variable.text()][region.text()].pop(volume.text(), None)
-                    # if len(self.config_manager.config_structure[self.config_name][variable.text()][region.text()]) == 0 and volume.text() != "Region 1":
-                    #     self.config_manager.config_structure[self.config_name][variable.text()].pop(region.text(), None)
+                self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()][volume.text()].pop(sender.objectName(), None)
+                # if len(self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()][volume.text()]) == 0 and volume.text() != "Volumen 1":
+                #     self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()].pop(volume.text(), None)
+                    # if len(self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()]) == 0 and volume.text() != "Region 1":
+                    #     self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)].pop(region.text(), None)
             elif region:
-                self.config_manager.config_structure[self.config_name][variable.text()][region.text()].pop(sender.objectName(), None)
-                # if len(self.config_manager.config_structure[self.config_name][variable.text()][region.text()]) == 0 and volume.text() != "Region 1":
-                #     self.config_manager.config_structure[self.config_name][variable.text()].pop(region.text(), None)
+                self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()].pop(sender.objectName(), None)
+                # if len(self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()]) == 0 and volume.text() != "Region 1":
+                #     self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)].pop(region.text(), None)
             elif variable:
-                self.config_manager.config_structure[self.config_name][variable.text()].pop(sender.objectName(), None)
+                self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)].pop(sender.objectName(), None)
             else:
                 return None
         # fmt: on
@@ -190,7 +210,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.lw_regions.addItem(f"Region {region_number}")
         variable = self.lw_variables.currentItem()
         if variable is not None:
-            self.config_manager.config_structure[self.config_name][variable.text()][
+            self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][
                 f"Region {region_number}"
             ] = OrderedDict()
 
@@ -202,7 +222,9 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             last_region = self.lw_regions.item(region_count - 1)
             variable = self.lw_variables.currentItem()
             if variable is not None:
-                self.config_manager.config_structure[self.config_name][variable.text()].pop(last_region.text(), None)
+                self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)].pop(
+                    last_region.text(), None
+                )
 
     def add_volume(self):
         """"""
@@ -211,7 +233,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         variable = self.lw_variables.currentItem()
         region = self.lw_regions.currentItem()
         if variable is not None and region is not None:
-            self.config_manager.config_structure[self.config_name][variable.text()][region.text()][
+            self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()][
                 f"Volumen {volume_number}"
             ] = OrderedDict()
 
@@ -224,7 +246,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             variable = self.lw_variables.currentItem()
             region = self.lw_regions.currentItem()
             if variable is not None and region is not None:
-                self.config_manager.config_structure[self.config_name][variable.text()][region.text()].pop(
+                self.config_manager.config_structure[self.config_name][variable.data(Qt.UserRole)][region.text()].pop(
                     last_volume.text(), None
                 )
 
