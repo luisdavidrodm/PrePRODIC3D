@@ -36,11 +36,6 @@ class Ui_malla_window(object):
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.lb_tipocoord)
 
-        self.lb_tipozonas = QLabel(self.gb_malla1)
-        self.lb_tipozonas.setObjectName(u"lb_tipozonas")
-
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.lb_tipozonas)
-
         self.cb_tipocoord = QComboBox(self.gb_malla1)
         self.cb_tipocoord.addItem("")
         self.cb_tipocoord.addItem("")
@@ -48,12 +43,29 @@ class Ui_malla_window(object):
 
         self.formLayout.setWidget(0, QFormLayout.FieldRole, self.cb_tipocoord)
 
+        self.lb_tipozonas = QLabel(self.gb_malla1)
+        self.lb_tipozonas.setObjectName(u"lb_tipozonas")
+
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.lb_tipozonas)
+
         self.cb_tipozonas = QComboBox(self.gb_malla1)
         self.cb_tipozonas.addItem("")
         self.cb_tipozonas.addItem("")
         self.cb_tipozonas.setObjectName(u"cb_tipozonas")
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.cb_tipozonas)
+
+        self.label = QLabel(self.gb_malla1)
+        self.label.setObjectName(u"label")
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label)
+
+        self.comboBox = QComboBox(self.gb_malla1)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.comboBox)
 
 
         self.verticalLayout.addWidget(self.gb_malla1)
@@ -2331,12 +2343,16 @@ class Ui_malla_window(object):
         malla_window.setWindowTitle(QCoreApplication.translate("malla_window", u"Malla - PrePRODIC3D", None))
         self.gb_malla1.setTitle(QCoreApplication.translate("malla_window", u"Malla", None))
         self.lb_tipocoord.setText(QCoreApplication.translate("malla_window", u"Coordenadas:", None))
-        self.lb_tipozonas.setText(QCoreApplication.translate("malla_window", u"Numero de zonas:  ", None))
         self.cb_tipocoord.setItemText(0, QCoreApplication.translate("malla_window", u"Cartesianas", None))
         self.cb_tipocoord.setItemText(1, QCoreApplication.translate("malla_window", u"Cilindricas", None))
 
+        self.lb_tipozonas.setText(QCoreApplication.translate("malla_window", u"Numero de zonas:  ", None))
         self.cb_tipozonas.setItemText(0, QCoreApplication.translate("malla_window", u"Zona \u00fanica", None))
         self.cb_tipozonas.setItemText(1, QCoreApplication.translate("malla_window", u"Varias zonas", None))
+
+        self.label.setText(QCoreApplication.translate("malla_window", u"Sistema:", None))
+        self.comboBox.setItemText(0, QCoreApplication.translate("malla_window", u"Abierto", None))
+        self.comboBox.setItemText(1, QCoreApplication.translate("malla_window", u"Cerrado", None))
 
         self.gb_malla2_dirx.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n X", None))
         self.lb_xlon.setText(QCoreApplication.translate("malla_window", u"X Longitud:", None))

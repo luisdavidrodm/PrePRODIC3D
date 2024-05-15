@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windowZIglXx.ui'
+## Form generated from reading UI file 'values_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.3
+## Created by: Qt User Interface Compiler version 6.6.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -24,7 +24,7 @@ class Ui_valores_window(object):
     def setupUi(self, valores_window):
         if not valores_window.objectName():
             valores_window.setObjectName(u"valores_window")
-        valores_window.resize(585, 762)
+        valores_window.resize(664, 762)
         self.gridLayout_3 = QGridLayout(valores_window)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.scrollArea = QScrollArea(valores_window)
@@ -32,7 +32,7 @@ class Ui_valores_window(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 565, 742))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 644, 742))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.groupBox = QGroupBox(self.scrollAreaWidgetContents)
@@ -60,11 +60,6 @@ class Ui_valores_window(object):
         self.groupBox_4.setObjectName(u"groupBox_4")
         self.formLayout_2 = QFormLayout(self.groupBox_4)
         self.formLayout_2.setObjectName(u"formLayout_2")
-        self.label = QLabel(self.groupBox_4)
-        self.label.setObjectName(u"label")
-
-        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label)
-
         self.le_general_value = QLineEdit(self.groupBox_4)
         self.le_general_value.setObjectName(u"le_general_value")
 
@@ -72,6 +67,7 @@ class Ui_valores_window(object):
 
         self.label_2 = QLabel(self.groupBox_4)
         self.label_2.setObjectName(u"label_2")
+        self.label_2.setAlignment(Qt.AlignCenter)
 
         self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.label_2)
 
@@ -80,12 +76,58 @@ class Ui_valores_window(object):
 
         self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.le_k)
 
-        self.checkBox = QCheckBox(self.groupBox_4)
-        self.checkBox.setObjectName(u"checkBox")
+        self.label_15 = QLabel(self.groupBox_4)
+        self.label_15.setObjectName(u"label_15")
 
-        self.formLayout_2.setWidget(2, QFormLayout.SpanningRole, self.checkBox)
+        self.formLayout_2.setWidget(5, QFormLayout.LabelRole, self.label_15)
 
-        self.groupBox_5 = QGroupBox(self.groupBox_4)
+        self.groupBox_11 = QGroupBox(self.groupBox_4)
+        self.groupBox_11.setObjectName(u"groupBox_11")
+        self.horizontalLayout_3 = QHBoxLayout(self.groupBox_11)
+        self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
+        self.cb_ipun = QCheckBox(self.groupBox_11)
+        self.cb_ipun.setObjectName(u"cb_ipun")
+        self.cb_ipun.setLayoutDirection(Qt.RightToLeft)
+
+        self.horizontalLayout_3.addWidget(self.cb_ipun)
+
+
+        self.formLayout_2.setWidget(6, QFormLayout.LabelRole, self.groupBox_11)
+
+        self.groupBox_10 = QGroupBox(self.groupBox_4)
+        self.groupBox_10.setObjectName(u"groupBox_10")
+        self.gridLayout_4 = QGridLayout(self.groupBox_10)
+        self.gridLayout_4.setObjectName(u"gridLayout_4")
+        self.cb_iborx = QCheckBox(self.groupBox_10)
+        self.cb_iborx.setObjectName(u"cb_iborx")
+        self.cb_iborx.setLayoutDirection(Qt.RightToLeft)
+
+        self.gridLayout_4.addWidget(self.cb_iborx, 1, 0, 1, 1)
+
+        self.cb_iborz = QCheckBox(self.groupBox_10)
+        self.cb_iborz.setObjectName(u"cb_iborz")
+        self.cb_iborz.setLayoutDirection(Qt.RightToLeft)
+
+        self.gridLayout_4.addWidget(self.cb_iborz, 1, 2, 1, 1)
+
+        self.cb_ibory = QCheckBox(self.groupBox_10)
+        self.cb_ibory.setObjectName(u"cb_ibory")
+        self.cb_ibory.setLayoutDirection(Qt.RightToLeft)
+
+        self.gridLayout_4.addWidget(self.cb_ibory, 1, 1, 1, 1)
+
+
+        self.formLayout_2.setWidget(6, QFormLayout.FieldRole, self.groupBox_10)
+
+        self.label = QLabel(self.groupBox_4)
+        self.label.setObjectName(u"label")
+
+        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label)
+
+
+        self.horizontalLayout.addWidget(self.groupBox_4)
+
+        self.groupBox_5 = QGroupBox(self.groupBox_2)
         self.groupBox_5.setObjectName(u"groupBox_5")
         self.formLayout = QFormLayout(self.groupBox_5)
         self.formLayout.setObjectName(u"formLayout")
@@ -93,40 +135,42 @@ class Ui_valores_window(object):
         self.label_3.setObjectName(u"label_3")
         self.label_3.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.label_3)
+        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_3)
 
         self.lineEdit_3 = QLineEdit(self.groupBox_5)
         self.lineEdit_3.setObjectName(u"lineEdit_3")
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.lineEdit_3)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.lineEdit_3)
 
         self.label_4 = QLabel(self.groupBox_5)
         self.label_4.setObjectName(u"label_4")
         self.label_4.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_4)
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_4)
 
         self.lineEdit_4 = QLineEdit(self.groupBox_5)
         self.lineEdit_4.setObjectName(u"lineEdit_4")
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.lineEdit_4)
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.lineEdit_4)
 
         self.label_5 = QLabel(self.groupBox_5)
         self.label_5.setObjectName(u"label_5")
         self.label_5.setAlignment(Qt.AlignCenter)
 
-        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_5)
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_5)
 
         self.lineEdit_5 = QLineEdit(self.groupBox_5)
         self.lineEdit_5.setObjectName(u"lineEdit_5")
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.lineEdit_5)
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.lineEdit_5)
+
+        self.checkBox = QCheckBox(self.groupBox_5)
+        self.checkBox.setObjectName(u"checkBox")
+
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.checkBox)
 
 
-        self.formLayout_2.setWidget(3, QFormLayout.SpanningRole, self.groupBox_5)
-
-
-        self.horizontalLayout.addWidget(self.groupBox_4)
+        self.horizontalLayout.addWidget(self.groupBox_5)
 
 
         self.verticalLayout_2.addWidget(self.groupBox_2)
@@ -355,13 +399,20 @@ class Ui_valores_window(object):
         self.lw_variables.setSortingEnabled(__sortingEnabled)
 
         self.groupBox_4.setTitle("")
+        self.label_2.setText(QCoreApplication.translate("valores_window", u"Conductividad", None))
+        self.label_15.setText(QCoreApplication.translate("valores_window", u"Extrapola excepto", None))
+        self.groupBox_11.setTitle("")
+        self.cb_ipun.setText(QCoreApplication.translate("valores_window", u"Esquinas", None))
+        self.groupBox_10.setTitle("")
+        self.cb_iborx.setText(QCoreApplication.translate("valores_window", u"X", None))
+        self.cb_iborz.setText(QCoreApplication.translate("valores_window", u"Z", None))
+        self.cb_ibory.setText(QCoreApplication.translate("valores_window", u"Y", None))
         self.label.setText(QCoreApplication.translate("valores_window", u"Valor general", None))
-        self.label_2.setText(QCoreApplication.translate("valores_window", u"k", None))
-        self.checkBox.setText(QCoreApplication.translate("valores_window", u"Activar flotabilidad", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("valores_window", u"Flotabilidad", None))
         self.label_3.setText(QCoreApplication.translate("valores_window", u"Coef. exp. term.", None))
         self.label_4.setText(QCoreApplication.translate("valores_window", u"Gravedad", None))
         self.label_5.setText(QCoreApplication.translate("valores_window", u"\u00c1ngulo", None))
+        self.checkBox.setText(QCoreApplication.translate("valores_window", u"Activar flotabilidad", None))
         self.chb_local_value.setText(QCoreApplication.translate("valores_window", u"Para aplicar valores locales para alguna variable, active la siguiente casilla", None))
         self.groupBox_6.setTitle(QCoreApplication.translate("valores_window", u"Valores locales por variable", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("valores_window", u"Regiones", None))
