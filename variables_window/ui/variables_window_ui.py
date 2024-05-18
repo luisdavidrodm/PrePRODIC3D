@@ -24,7 +24,7 @@ class Ui_variables_window(object):
     def setupUi(self, variables_window):
         if not variables_window.objectName():
             variables_window.setObjectName(u"variables_window")
-        variables_window.resize(487, 648)
+        variables_window.resize(487, 674)
         self.horizontalLayout = QHBoxLayout(variables_window)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.gb_variables = QGroupBox(variables_window)
@@ -490,6 +490,16 @@ class Ui_variables_window(object):
 
         self.gridLayout.addWidget(self.checkBox, 13, 2, 1, 2)
 
+        self.label_21 = QLabel(self.gb_variables2)
+        self.label_21.setObjectName(u"label_21")
+
+        self.gridLayout.addWidget(self.label_21, 12, 4, 1, 1)
+
+        self.le_tol = QLineEdit(self.gb_variables2)
+        self.le_tol.setObjectName(u"le_tol")
+
+        self.gridLayout.addWidget(self.le_tol, 12, 5, 1, 1)
+
 
         self.verticalLayout.addWidget(self.gb_variables2)
 
@@ -572,5 +582,6 @@ class Ui_variables_window(object):
         self.le_relax5.setText(QCoreApplication.translate("variables_window", u"1", None))
         self.le_var_title1.setText(QCoreApplication.translate("variables_window", u"Velocidad U", None))
         self.checkBox.setText(QCoreApplication.translate("variables_window", u"Tratar variable 5 como temperatura:", None))
+        self.label_21.setText(QCoreApplication.translate("variables_window", u"Tolerancia", None))
     # retranslateUi
 

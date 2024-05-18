@@ -124,6 +124,16 @@ class Ui_valores_window(object):
 
         self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label)
 
+        self.label_16 = QLabel(self.groupBox_4)
+        self.label_16.setObjectName(u"label_16")
+
+        self.formLayout_2.setWidget(7, QFormLayout.LabelRole, self.label_16)
+
+        self.le_ixyz = QLineEdit(self.groupBox_4)
+        self.le_ixyz.setObjectName(u"le_ixyz")
+
+        self.formLayout_2.setWidget(7, QFormLayout.FieldRole, self.le_ixyz)
+
 
         self.horizontalLayout.addWidget(self.groupBox_4)
 
@@ -408,6 +418,7 @@ class Ui_valores_window(object):
         self.cb_iborz.setText(QCoreApplication.translate("valores_window", u"Z", None))
         self.cb_ibory.setText(QCoreApplication.translate("valores_window", u"Y", None))
         self.label.setText(QCoreApplication.translate("valores_window", u"Valor general", None))
+        self.label_16.setText(QCoreApplication.translate("valores_window", u"Ind Impresi\u00f3n", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("valores_window", u"Flotabilidad", None))
         self.label_3.setText(QCoreApplication.translate("valores_window", u"Coef. exp. term.", None))
         self.label_4.setText(QCoreApplication.translate("valores_window", u"Gravedad", None))
