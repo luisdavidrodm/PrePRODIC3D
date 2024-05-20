@@ -163,6 +163,16 @@
                 <item row="7" column="1">
                  <widget class="QLineEdit" name="le_ixyz"/>
                 </item>
+                <item row="8" column="0">
+                 <widget class="QLabel" name="label_17">
+                  <property name="text">
+                   <string>Ind. correc. bloque</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="8" column="1">
+                 <widget class="QLineEdit" name="le_kblock"/>
+                </item>
                </layout>
               </widget>
              </item>
