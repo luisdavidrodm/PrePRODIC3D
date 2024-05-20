@@ -8,6 +8,7 @@ class InicioWindow(qtw.QDialog, Ui_inicio_window):
         super().__init__()
         self.setupUi(self)
         self.config_manager = config_manager
+        self.config_name = "HEADER"
 
         self.widgets = ["le_titulosimu", "le_tituloimpre", "le_titulograf"]
         for widget_name in self.widgets:
@@ -18,9 +19,12 @@ class InicioWindow(qtw.QDialog, Ui_inicio_window):
 
     def value_changed(self, value):
         sender = self.sender()
-        self.config_manager.config_structure["HEADER"][sender.objectName()] = value
+        if value is None or value == "":
+            self.config_manager.config_structure[self.config_name].pop(sender.objectName(), None)
+        else:
+            self.config_manager.config_structure[self.config_name][sender.objectName()] = value
 
     def load_malla_config(self):
-        config = self.config_manager.config_structure["HEADER"]
+        config = self.config_manager.config_structure[self.config_name]
         for widget_name, value in config.items():
             getattr(self, widget_name).setText(value)

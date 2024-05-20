@@ -211,7 +211,7 @@
          <item row="4" column="4">
           <widget class="QCheckBox" name="chb_kprint4">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Imprimir</string>
@@ -271,7 +271,7 @@
          <item row="3" column="3">
           <widget class="QCheckBox" name="chb_ksolve3">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Resolver</string>
@@ -349,7 +349,7 @@
          <item row="11" column="5">
           <widget class="QLineEdit" name="le_relax11">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -396,7 +396,7 @@
          <item row="4" column="3">
           <widget class="QCheckBox" name="chb_ksolve4">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Resolver</string>
@@ -463,7 +463,7 @@
          <item row="1" column="3">
           <widget class="QCheckBox" name="chb_ksolve1">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Resolver</string>
@@ -473,7 +473,7 @@
          <item row="2" column="3">
           <widget class="QCheckBox" name="chb_ksolve2">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Resolver</string>
@@ -483,7 +483,7 @@
          <item row="5" column="3">
           <widget class="QCheckBox" name="chb_ksolve5">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Resolver</string>
@@ -503,7 +503,7 @@
          <item row="11" column="3">
           <widget class="QCheckBox" name="chb_ksolve11">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Resolver</string>
@@ -637,7 +637,7 @@
          <item row="11" column="4">
           <widget class="QCheckBox" name="chb_kprint11">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="text">
             <string>Imprimir</string>

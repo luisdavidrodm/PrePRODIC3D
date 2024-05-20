@@ -23,7 +23,7 @@
       <item row="0" column="1">
        <widget class="QLineEdit" name="le_value_veloc_u">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
@@ -44,14 +44,14 @@
       <item row="1" column="1">
        <widget class="QLineEdit" name="le_value_veloc_v">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>
       <item row="2" column="1">
        <widget class="QLineEdit" name="le_value_veloc_w">
         <property name="enabled">
-         <bool>false</bool>
+         <bool>true</bool>
         </property>
        </widget>
       </item>

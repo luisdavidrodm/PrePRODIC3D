@@ -95,7 +95,7 @@
                   </property>
                   <layout class="QHBoxLayout" name="horizontalLayout_3">
                    <item>
-                    <widget class="QCheckBox" name="cb_ipun">
+                    <widget class="QCheckBox" name="chb_ipun">
                      <property name="layoutDirection">
                       <enum>Qt::RightToLeft</enum>
                      </property>
@@ -114,7 +114,7 @@
                   </property>
                   <layout class="QGridLayout" name="gridLayout_4">
                    <item row="1" column="0">
-                    <widget class="QCheckBox" name="cb_iborx">
+                    <widget class="QCheckBox" name="chb_iborx">
                      <property name="layoutDirection">
                       <enum>Qt::RightToLeft</enum>
                      </property>
@@ -124,7 +124,7 @@
                     </widget>
                    </item>
                    <item row="1" column="2">
-                    <widget class="QCheckBox" name="cb_iborz">
+                    <widget class="QCheckBox" name="chb_iborz">
                      <property name="layoutDirection">
                       <enum>Qt::RightToLeft</enum>
                      </property>
@@ -134,7 +134,7 @@
                     </widget>
                    </item>
                    <item row="1" column="1">
-                    <widget class="QCheckBox" name="cb_ibory">
+                    <widget class="QCheckBox" name="chb_ibory">
                      <property name="layoutDirection">
                       <enum>Qt::RightToLeft</enum>
                      </property>
@@ -156,7 +156,7 @@
                 <item row="7" column="0">
                  <widget class="QLabel" name="label_16">
                   <property name="text">
-                   <string>Ind Impresión</string>
+                   <string>Ind. Impresión</string>
                   </property>
                  </widget>
                 </item>

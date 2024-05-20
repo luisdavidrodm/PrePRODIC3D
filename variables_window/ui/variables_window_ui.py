@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'variables_window.ui'
+## Form generated from reading UI file 'variables_windowRhwCkk.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -160,7 +160,7 @@ class Ui_variables_window(object):
 
         self.chb_kprint4 = QCheckBox(self.gb_variables2)
         self.chb_kprint4.setObjectName(u"chb_kprint4")
-        self.chb_kprint4.setEnabled(False)
+        self.chb_kprint4.setEnabled(True)
 
         self.gridLayout.addWidget(self.chb_kprint4, 4, 4, 1, 1)
 
@@ -200,7 +200,7 @@ class Ui_variables_window(object):
 
         self.chb_ksolve3 = QCheckBox(self.gb_variables2)
         self.chb_ksolve3.setObjectName(u"chb_ksolve3")
-        self.chb_ksolve3.setEnabled(False)
+        self.chb_ksolve3.setEnabled(True)
 
         self.gridLayout.addWidget(self.chb_ksolve3, 3, 3, 1, 1)
 
@@ -251,7 +251,7 @@ class Ui_variables_window(object):
 
         self.le_relax11 = QLineEdit(self.gb_variables2)
         self.le_relax11.setObjectName(u"le_relax11")
-        self.le_relax11.setEnabled(False)
+        self.le_relax11.setEnabled(True)
         self.le_relax11.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_relax11, 11, 5, 1, 1)
@@ -282,7 +282,7 @@ class Ui_variables_window(object):
 
         self.chb_ksolve4 = QCheckBox(self.gb_variables2)
         self.chb_ksolve4.setObjectName(u"chb_ksolve4")
-        self.chb_ksolve4.setEnabled(False)
+        self.chb_ksolve4.setEnabled(True)
 
         self.gridLayout.addWidget(self.chb_ksolve4, 4, 3, 1, 1)
 
@@ -323,19 +323,19 @@ class Ui_variables_window(object):
 
         self.chb_ksolve1 = QCheckBox(self.gb_variables2)
         self.chb_ksolve1.setObjectName(u"chb_ksolve1")
-        self.chb_ksolve1.setEnabled(False)
+        self.chb_ksolve1.setEnabled(True)
 
         self.gridLayout.addWidget(self.chb_ksolve1, 1, 3, 1, 1)
 
         self.chb_ksolve2 = QCheckBox(self.gb_variables2)
         self.chb_ksolve2.setObjectName(u"chb_ksolve2")
-        self.chb_ksolve2.setEnabled(False)
+        self.chb_ksolve2.setEnabled(True)
 
         self.gridLayout.addWidget(self.chb_ksolve2, 2, 3, 1, 1)
 
         self.chb_ksolve5 = QCheckBox(self.gb_variables2)
         self.chb_ksolve5.setObjectName(u"chb_ksolve5")
-        self.chb_ksolve5.setEnabled(False)
+        self.chb_ksolve5.setEnabled(True)
         self.chb_ksolve5.setChecked(True)
 
         self.gridLayout.addWidget(self.chb_ksolve5, 5, 3, 1, 1)
@@ -347,7 +347,7 @@ class Ui_variables_window(object):
 
         self.chb_ksolve11 = QCheckBox(self.gb_variables2)
         self.chb_ksolve11.setObjectName(u"chb_ksolve11")
-        self.chb_ksolve11.setEnabled(False)
+        self.chb_ksolve11.setEnabled(True)
 
         self.gridLayout.addWidget(self.chb_ksolve11, 11, 3, 1, 1)
 
@@ -434,7 +434,7 @@ class Ui_variables_window(object):
 
         self.chb_kprint11 = QCheckBox(self.gb_variables2)
         self.chb_kprint11.setObjectName(u"chb_kprint11")
-        self.chb_kprint11.setEnabled(False)
+        self.chb_kprint11.setEnabled(True)
 
         self.gridLayout.addWidget(self.chb_kprint11, 11, 4, 1, 1)
 

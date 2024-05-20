@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'malla_window.ui'
+## Form generated from reading UI file 'malla_windowkMUAeO.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -24,7 +24,7 @@ class Ui_malla_window(object):
     def setupUi(self, malla_window):
         if not malla_window.objectName():
             malla_window.setObjectName(u"malla_window")
-        malla_window.resize(861, 556)
+        malla_window.resize(861, 584)
         self.verticalLayout = QVBoxLayout(malla_window)
         self.verticalLayout.setObjectName(u"verticalLayout")
         self.gb_malla1 = QGroupBox(malla_window)
@@ -60,12 +60,12 @@ class Ui_malla_window(object):
 
         self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label)
 
-        self.comboBox = QComboBox(self.gb_malla1)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
+        self.cb_tiposistema = QComboBox(self.gb_malla1)
+        self.cb_tiposistema.addItem("")
+        self.cb_tiposistema.addItem("")
+        self.cb_tiposistema.setObjectName(u"cb_tiposistema")
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.comboBox)
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.cb_tiposistema)
 
 
         self.verticalLayout.addWidget(self.gb_malla1)
@@ -2351,8 +2351,8 @@ class Ui_malla_window(object):
         self.cb_tipozonas.setItemText(1, QCoreApplication.translate("malla_window", u"Varias zonas", None))
 
         self.label.setText(QCoreApplication.translate("malla_window", u"Sistema:", None))
-        self.comboBox.setItemText(0, QCoreApplication.translate("malla_window", u"Abierto", None))
-        self.comboBox.setItemText(1, QCoreApplication.translate("malla_window", u"Cerrado", None))
+        self.cb_tiposistema.setItemText(0, QCoreApplication.translate("malla_window", u"Abierto", None))
+        self.cb_tiposistema.setItemText(1, QCoreApplication.translate("malla_window", u"Cerrado", None))
 
         self.gb_malla2_dirx.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n X", None))
         self.lb_xlon.setText(QCoreApplication.translate("malla_window", u"X Longitud:", None))

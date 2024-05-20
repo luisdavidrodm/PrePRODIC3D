@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'salida_window.ui'
+## Form generated from reading UI file 'salida_windowHGPacM.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -171,11 +171,11 @@ class Ui_salida_window(object):
 
         self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label_4)
 
-        self.lineEdit_4 = QLineEdit(self.groupBox_7)
-        self.lineEdit_4.setObjectName(u"lineEdit_4")
-        self.lineEdit_4.setAlignment(Qt.AlignCenter)
+        self.le_last = QLineEdit(self.groupBox_7)
+        self.le_last.setObjectName(u"le_last")
+        self.le_last.setAlignment(Qt.AlignCenter)
 
-        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.lineEdit_4)
+        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.le_last)
 
         self.label_5 = QLabel(self.groupBox_7)
         self.label_5.setObjectName(u"label_5")
@@ -238,7 +238,7 @@ class Ui_salida_window(object):
         self.checkBox_7.setText(QCoreApplication.translate("salida_window", u"(1, 1, 1)", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("salida_window", u"Otras opciones", None))
         self.label_4.setText(QCoreApplication.translate("salida_window", u"Numero de iteraciones", None))
-        self.lineEdit_4.setText(QCoreApplication.translate("salida_window", u"5", None))
+        self.le_last.setText(QCoreApplication.translate("salida_window", u"5", None))
         self.label_5.setText(QCoreApplication.translate("salida_window", u"\u00cdndice gr\u00e1fico", None))
     # retranslateUi
 

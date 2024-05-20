@@ -25,7 +25,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.lw_regions.currentRowChanged.connect(self.load_volume_config)
         self.lw_volumes.currentRowChanged.connect(self.load_current_config)
 
-        self.variable_widgets = ["le_general_value", "le_k", "chb_local_value"]
+        self.variable_widgets = ["le_general_value", "le_k", "chb_iborx", "chb_ibory", "chb_iborz", "chb_ipun", "chb_local_value", "le_ixyz"]
         self.region_widgets = ["chb_fixed_value", "chb_linear_source", "le_local_value", "le_local_k"]
         self.volume_widgets = ["le_x_start", "le_x_lon", "le_y_start", "le_y_lon", "le_z_start", "le_z_lon"]
         self.widgets = self.variable_widgets + self.region_widgets + self.volume_widgets

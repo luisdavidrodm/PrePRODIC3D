@@ -30,7 +30,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
 
         # Conexion con ConfigManager
         self.widgets = [
-            "cb_tsimu", "cb_tipoflujo", "cb_trataborde", "le_iptm", "le_dt", "checkBox"
+            "cb_tsimu", "cb_tipoflujo", "cb_trataborde", "le_iptm", "le_dt", "le_tol", "checkBox"
             ] 
 
         for i in range(1, 13):
@@ -41,7 +41,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
 
         self.config_manager.connect_config(self)
 
-        self.chb_ksolve_widgets = [ 
+        self.chb_ksolve_widgets = [
             "chb_ksolve1", "chb_ksolve2", "chb_ksolve3", "chb_ksolve5", "chb_ksolve6", 
             "chb_ksolve7", "chb_ksolve8", "chb_ksolve9", "chb_ksolve10", "chb_ksolve11"
         ]
@@ -165,7 +165,10 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
 
     def value_changed(self, value):
         sender = self.sender()
-        self.config_manager.config_structure[self.config_name][sender.objectName()] = value
+        if value is None or value == "":
+            self.config_manager.config_structure[self.config_name].pop(sender.objectName(), None)
+        else:
+            self.config_manager.config_structure[self.config_name][sender.objectName()] = value
 
     def chb_ksolve_changed(self, state):
         """Actualiza el config_structure en el ConfigManager basado en el estado del CheckBox."""

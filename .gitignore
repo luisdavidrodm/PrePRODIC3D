@@ -169,3 +169,7 @@ configuracion.json
 
 # Local py
 migracion.py
+
+# Sync
+desktop.ini
+.megaignore

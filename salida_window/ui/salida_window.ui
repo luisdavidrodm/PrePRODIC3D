@@ -220,7 +220,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="lineEdit_4">
+             <widget class="QLineEdit" name="le_last">
               <property name="text">
                <string>5</string>
               </property>

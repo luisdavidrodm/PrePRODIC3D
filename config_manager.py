@@ -15,7 +15,8 @@ class ConfigManager:
             ])),
             ('GRID', OrderedDict([
                 ('cb_tipocoord', 'Cartesianas'),
-                ('cb_tipozonas', 'Zona única')
+                ('cb_tipozonas', 'Zona única'),
+                ('cb_tiposistema', 'Cerrado')
             ])),
             ('VARIABLES', OrderedDict([
                 ('cb_tsimu', 'Permanente'),
@@ -31,7 +32,7 @@ class ConfigManager:
                 ('chb_ksolve5', 2),
                 ('chb_kprint5', 2),
                 ('le_relax5', '1'),
-                ('checkBox', 2)
+                ('checkBox', 2),
                 ])),
             ('BOUND', OrderedDict([
                 ('X Max', OrderedDict([('Borde base', OrderedDict())])),
@@ -49,7 +50,11 @@ class ConfigManager:
                         ]))
                     ]))
                 ]))
-            ]))])
+            ])),
+            ('OUTPUT', OrderedDict([
+                ('le_last', '5')
+                ])),
+            ])
         # fmt: on
 
     ################################################################################

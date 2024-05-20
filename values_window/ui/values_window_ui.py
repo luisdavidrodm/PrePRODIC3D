@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_window.ui'
+## Form generated from reading UI file 'values_windowsvyzly.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -85,11 +85,11 @@ class Ui_valores_window(object):
         self.groupBox_11.setObjectName(u"groupBox_11")
         self.horizontalLayout_3 = QHBoxLayout(self.groupBox_11)
         self.horizontalLayout_3.setObjectName(u"horizontalLayout_3")
-        self.cb_ipun = QCheckBox(self.groupBox_11)
-        self.cb_ipun.setObjectName(u"cb_ipun")
-        self.cb_ipun.setLayoutDirection(Qt.RightToLeft)
+        self.chb_ipun = QCheckBox(self.groupBox_11)
+        self.chb_ipun.setObjectName(u"chb_ipun")
+        self.chb_ipun.setLayoutDirection(Qt.RightToLeft)
 
-        self.horizontalLayout_3.addWidget(self.cb_ipun)
+        self.horizontalLayout_3.addWidget(self.chb_ipun)
 
 
         self.formLayout_2.setWidget(6, QFormLayout.LabelRole, self.groupBox_11)
@@ -98,23 +98,23 @@ class Ui_valores_window(object):
         self.groupBox_10.setObjectName(u"groupBox_10")
         self.gridLayout_4 = QGridLayout(self.groupBox_10)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.cb_iborx = QCheckBox(self.groupBox_10)
-        self.cb_iborx.setObjectName(u"cb_iborx")
-        self.cb_iborx.setLayoutDirection(Qt.RightToLeft)
+        self.chb_iborx = QCheckBox(self.groupBox_10)
+        self.chb_iborx.setObjectName(u"chb_iborx")
+        self.chb_iborx.setLayoutDirection(Qt.RightToLeft)
 
-        self.gridLayout_4.addWidget(self.cb_iborx, 1, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.chb_iborx, 1, 0, 1, 1)
 
-        self.cb_iborz = QCheckBox(self.groupBox_10)
-        self.cb_iborz.setObjectName(u"cb_iborz")
-        self.cb_iborz.setLayoutDirection(Qt.RightToLeft)
+        self.chb_iborz = QCheckBox(self.groupBox_10)
+        self.chb_iborz.setObjectName(u"chb_iborz")
+        self.chb_iborz.setLayoutDirection(Qt.RightToLeft)
 
-        self.gridLayout_4.addWidget(self.cb_iborz, 1, 2, 1, 1)
+        self.gridLayout_4.addWidget(self.chb_iborz, 1, 2, 1, 1)
 
-        self.cb_ibory = QCheckBox(self.groupBox_10)
-        self.cb_ibory.setObjectName(u"cb_ibory")
-        self.cb_ibory.setLayoutDirection(Qt.RightToLeft)
+        self.chb_ibory = QCheckBox(self.groupBox_10)
+        self.chb_ibory.setObjectName(u"chb_ibory")
+        self.chb_ibory.setLayoutDirection(Qt.RightToLeft)
 
-        self.gridLayout_4.addWidget(self.cb_ibory, 1, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.chb_ibory, 1, 1, 1, 1)
 
 
         self.formLayout_2.setWidget(6, QFormLayout.FieldRole, self.groupBox_10)
@@ -412,13 +412,13 @@ class Ui_valores_window(object):
         self.label_2.setText(QCoreApplication.translate("valores_window", u"Conductividad", None))
         self.label_15.setText(QCoreApplication.translate("valores_window", u"Extrapola excepto", None))
         self.groupBox_11.setTitle("")
-        self.cb_ipun.setText(QCoreApplication.translate("valores_window", u"Esquinas", None))
+        self.chb_ipun.setText(QCoreApplication.translate("valores_window", u"Esquinas", None))
         self.groupBox_10.setTitle("")
-        self.cb_iborx.setText(QCoreApplication.translate("valores_window", u"X", None))
-        self.cb_iborz.setText(QCoreApplication.translate("valores_window", u"Z", None))
-        self.cb_ibory.setText(QCoreApplication.translate("valores_window", u"Y", None))
+        self.chb_iborx.setText(QCoreApplication.translate("valores_window", u"X", None))
+        self.chb_iborz.setText(QCoreApplication.translate("valores_window", u"Z", None))
+        self.chb_ibory.setText(QCoreApplication.translate("valores_window", u"Y", None))
         self.label.setText(QCoreApplication.translate("valores_window", u"Valor general", None))
-        self.label_16.setText(QCoreApplication.translate("valores_window", u"Ind Impresi\u00f3n", None))
+        self.label_16.setText(QCoreApplication.translate("valores_window", u"Ind. Impresi\u00f3n", None))
         self.groupBox_5.setTitle(QCoreApplication.translate("valores_window", u"Flotabilidad", None))
         self.label_3.setText(QCoreApplication.translate("valores_window", u"Coef. exp. term.", None))
         self.label_4.setText(QCoreApplication.translate("valores_window", u"Gravedad", None))

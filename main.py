@@ -99,7 +99,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
     def open_salida(self):
         if self.salida_window is None or not self.salida_window.isVisible():
-            self.salida_window = SalidaWindow()
+            self.salida_window = SalidaWindow(self.config_manager)
             self.salida_window.show()
         else:
             self.salida_window.raise_()

@@ -30,7 +30,7 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
             "le_potenciar", "le_zloncil", "le_nvczcil", "le_potenciazcil",
             "sb_dirx_numz", "sb_diry_numz", "sb_dirz_numz", "sb_dirtita_numz",
             "sb_dirr_numz", "le_dirr_inidom", "sb_dirzcil_numz", "cb_tipocoord",
-            "cb_tipozonas"
+            "cb_tipozonas", "cb_tiposistema"
         ]
 
         self.widgets_to_extend = [
@@ -78,7 +78,10 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
 
     def value_changed(self, value):
         sender = self.sender()
-        self.config_manager.config_structure[self.config_name][sender.objectName()] = value
+        if value is None or value == "":
+            self.config_manager.config_structure[self.config_name].pop(sender.objectName(), None)
+        else:
+            self.config_manager.config_structure[self.config_name][sender.objectName()] = value
 
     def zones_changed(self):
         self.change_zones()

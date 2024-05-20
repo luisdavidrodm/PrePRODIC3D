@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bordes_windowjXIAYb.ui'
+## Form generated from reading UI file 'bordes_windowaRYzHR.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -33,7 +33,7 @@ class Ui_bordes_window(object):
         self.gridLayout_4.setObjectName(u"gridLayout_4")
         self.le_value_veloc_u = QLineEdit(self.groupBox_4)
         self.le_value_veloc_u.setObjectName(u"le_value_veloc_u")
-        self.le_value_veloc_u.setEnabled(False)
+        self.le_value_veloc_u.setEnabled(True)
 
         self.gridLayout_4.addWidget(self.le_value_veloc_u, 0, 1, 1, 1)
 
@@ -49,13 +49,13 @@ class Ui_bordes_window(object):
 
         self.le_value_veloc_v = QLineEdit(self.groupBox_4)
         self.le_value_veloc_v.setObjectName(u"le_value_veloc_v")
-        self.le_value_veloc_v.setEnabled(False)
+        self.le_value_veloc_v.setEnabled(True)
 
         self.gridLayout_4.addWidget(self.le_value_veloc_v, 1, 1, 1, 1)
 
         self.le_value_veloc_w = QLineEdit(self.groupBox_4)
         self.le_value_veloc_w.setObjectName(u"le_value_veloc_w")
-        self.le_value_veloc_w.setEnabled(False)
+        self.le_value_veloc_w.setEnabled(True)
 
         self.gridLayout_4.addWidget(self.le_value_veloc_w, 2, 1, 1, 1)
 
