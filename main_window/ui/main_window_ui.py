@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowQXvqtl.ui'
+## Form generated from reading UI file 'main_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.3
+## Created by: Qt User Interface Compiler version 6.6.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -17,14 +17,14 @@ from PySide6.QtGui import (QAction, QBrush, QColor, QConicalGradient,
     QPainter, QPalette, QPixmap, QRadialGradient,
     QTransform)
 from PySide6.QtWidgets import (QApplication, QMainWindow, QMenu, QMenuBar,
-    QPushButton, QSizePolicy, QSpacerItem, QStatusBar,
-    QVBoxLayout, QWidget)
+    QPushButton, QSizePolicy, QStatusBar, QVBoxLayout,
+    QWidget)
 
 class Ui_main_window(object):
     def setupUi(self, main_window):
         if not main_window.objectName():
             main_window.setObjectName(u"main_window")
-        main_window.resize(301, 280)
+        main_window.resize(301, 265)
         self.action_guardar_datos = QAction(main_window)
         self.action_guardar_datos.setObjectName(u"action_guardar_datos")
         self.action_guardar_datos.setCheckable(False)
@@ -68,14 +68,15 @@ class Ui_main_window(object):
 
         self.verticalLayout.addWidget(self.pb_bordes)
 
+        self.pb_densidad = QPushButton(self.centralwidget)
+        self.pb_densidad.setObjectName(u"pb_densidad")
+
+        self.verticalLayout.addWidget(self.pb_densidad)
+
         self.pb_salida = QPushButton(self.centralwidget)
         self.pb_salida.setObjectName(u"pb_salida")
 
         self.verticalLayout.addWidget(self.pb_salida)
-
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Expanding)
-
-        self.verticalLayout.addItem(self.verticalSpacer)
 
         main_window.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(main_window)
@@ -117,6 +118,7 @@ class Ui_main_window(object):
         self.pb_variables.setText(QCoreApplication.translate("main_window", u"Variables", None))
         self.pb_valores.setText(QCoreApplication.translate("main_window", u"Valores", None))
         self.pb_bordes.setText(QCoreApplication.translate("main_window", u"Bordes", None))
+        self.pb_densidad.setText(QCoreApplication.translate("main_window", u"Densidad", None))
         self.pb_salida.setText(QCoreApplication.translate("main_window", u"Salida", None))
         self.menu_archivo.setTitle(QCoreApplication.translate("main_window", u"Archivo", None))
         self.menu_herramientas.setTitle(QCoreApplication.translate("main_window", u"Herramientas", None))
