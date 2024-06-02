@@ -13,6 +13,7 @@ from malla_window.malla_window import MallaWindow
 from variables_window.variables_window import VariablesWindow
 from values_window.values_window import ValuesWindow
 from bordes_window.bordes_window import BordesWindow
+from densidad_window.densidad_window import DensidadWindow
 from salida_window.salida_window import SalidaWindow
 
 from config_manager import ConfigManager
@@ -30,6 +31,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.variables_window = None
         self.valores_window = None
         self.bordes_window = None
+        self.densidad_window = None
         self.salida_window = None
 
     def setupUi(self, *args):
@@ -45,6 +47,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.pb_variables.clicked.connect(self.open_variables)
         self.pb_valores.clicked.connect(self.open_valores)
         self.pb_bordes.clicked.connect(self.open_bordes)
+        self.pb_densidad.clicked.connect(self.open_densidad)
         self.pb_salida.clicked.connect(self.open_salida)
 
     ################################################################################
@@ -115,6 +118,14 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         else:
             self.bordes_window.raise_()
             self.bordes_window.activateWindow()
+
+    def open_densidad(self):
+        if self.densidad_window is None or not self.densidad_window.isVisible():
+            self.densidad_window = DensidadWindow(self.config_manager)
+            self.densidad_window.show()
+        else:
+            self.densidad_window.raise_()
+            self.densidad_window.activateWindow()
 
     def open_salida(self):
         self.close_open_windows()
