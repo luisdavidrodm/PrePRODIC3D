@@ -16,7 +16,7 @@ from bordes_window.bordes_window import BordesWindow
 from salida_window.salida_window import SalidaWindow
 
 from config_manager import ConfigManager
-from f90_serializer import F90Serializer
+from f90_translator import F90Translator
 
 
 class MainWindow(qtw.QMainWindow, Ui_main_window):
@@ -53,7 +53,22 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     ##
     ################################################################################
 
+    def close_open_windows(self):
+        if self.inicio_window and self.inicio_window.isVisible():
+            self.inicio_window.close()
+        if self.malla_window and self.malla_window.isVisible():
+            self.malla_window.close()
+        if self.variables_window and self.variables_window.isVisible():
+            self.variables_window.close()
+        if self.valores_window and self.valores_window.isVisible():
+            self.valores_window.close()
+        if self.bordes_window and self.bordes_window.isVisible():
+            self.bordes_window.close()
+        if self.salida_window and self.salida_window.isVisible():
+            self.salida_window.close()
+
     def open_inicio(self):
+        self.close_open_windows()
         if self.inicio_window is None or not self.inicio_window.isVisible():
             self.inicio_window = InicioWindow(self.config_manager)
             self.inicio_window.show()
@@ -62,6 +77,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.inicio_window.activateWindow()
 
     def open_malla(self):
+        self.close_open_windows()
         if self.malla_window is None or not self.malla_window.isVisible():
             self.malla_window = MallaWindow(self.config_manager)
             self.malla_window.longitudes_actualizadas_signal.connect(self.actualizar_longitudes_bordes)
@@ -71,6 +87,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.malla_window.activateWindow()
 
     def open_variables(self):
+        self.close_open_windows()
         if self.variables_window is None or not self.variables_window.isVisible():
             self.variables_window = VariablesWindow(self.config_manager)
             self.variables_window.flow_type_change_signal.connect(self.handle_flow_type_signal)
@@ -82,6 +99,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.variables_window.activateWindow()
 
     def open_valores(self):
+        self.close_open_windows()
         if self.valores_window is None or not self.valores_window.isVisible():
             self.valores_window = ValuesWindow(self.config_manager)
             self.valores_window.show()
@@ -90,6 +108,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.valores_window.activateWindow()
 
     def open_bordes(self):
+        self.close_open_windows()
         if self.bordes_window is None or not self.bordes_window.isVisible():
             self.bordes_window = BordesWindow(self.config_manager)
             self.bordes_window.show()
@@ -98,6 +117,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.bordes_window.activateWindow()
 
     def open_salida(self):
+        self.close_open_windows()
         if self.salida_window is None or not self.salida_window.isVisible():
             self.salida_window = SalidaWindow(self.config_manager)
             self.salida_window.show()
@@ -145,7 +165,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.config_manager.load_from_json(filename)
 
     def guardar_datos(self):
-        folder_name = self.config_manager.config_structure["HEADER"].get("le_titulosimu", None)
+        folder_name = self.config_manager.header.get("le_titulosimu", None)
         if folder_name:
             base_dir = os.path.dirname(os.path.realpath(__file__))
             folder_path = os.path.join(base_dir, "Resultados", folder_name)
@@ -178,8 +198,8 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def generar_rutina_fortran(self):
         folder_path = self.guardar_datos()
         if folder_path:
-            serializer = F90Serializer()
-            f90_content = serializer.generate_f90(self.config_manager.config_structure)
+            translator = F90Translator()
+            f90_content = translator.generate_f90(self.config_manager)
             f90_path = os.path.join(folder_path, "datos.f90")
             with open(f90_path, "w", encoding="utf-8") as f:
                 f.write(f90_content)

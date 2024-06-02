@@ -20,11 +20,11 @@ class InicioWindow(qtw.QDialog, Ui_inicio_window):
     def value_changed(self, value):
         sender = self.sender()
         if value is None or value == "":
-            self.config_manager.config_structure[self.config_name].pop(sender.objectName(), None)
+            self.config_manager.header.pop(sender.objectName(), None)
         else:
-            self.config_manager.config_structure[self.config_name][sender.objectName()] = value
+            self.config_manager.header[sender.objectName()] = value
 
     def load_malla_config(self):
-        config = self.config_manager.config_structure[self.config_name]
+        config = self.config_manager.header
         for widget_name, value in config.items():
             getattr(self, widget_name).setText(value)

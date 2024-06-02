@@ -18,11 +18,11 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
     def value_changed(self, value):
         sender = self.sender()
         if value is None or value == "":
-            self.config_manager.config_structure[self.config_name].pop(sender.objectName(), None)
+            self.config_manager.output.pop(sender.objectName(), None)
         else:
-            self.config_manager.config_structure[self.config_name][sender.objectName()] = value
+            self.config_manager.output[sender.objectName()] = value
 
     def load_malla_config(self):
-        config = self.config_manager.config_structure[self.config_name]
+        config = self.config_manager.output
         for widget_name, value in config.items():
             getattr(self, widget_name).setText(value)

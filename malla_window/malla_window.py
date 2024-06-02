@@ -79,9 +79,9 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
     def value_changed(self, value):
         sender = self.sender()
         if value is None or value == "":
-            self.config_manager.config_structure[self.config_name].pop(sender.objectName(), None)
+            self.config_manager.grid.pop(sender.objectName(), None)
         else:
-            self.config_manager.config_structure[self.config_name][sender.objectName()] = value
+            self.config_manager.grid[sender.objectName()] = value
 
     def zones_changed(self):
         self.change_zones()

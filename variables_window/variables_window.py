@@ -1,5 +1,3 @@
-from collections import OrderedDict
-
 from PySide6 import QtWidgets as qtw
 from PySide6.QtCore import Signal
 
@@ -166,9 +164,9 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
     def value_changed(self, value):
         sender = self.sender()
         if value is None or value == "":
-            self.config_manager.config_structure[self.config_name].pop(sender.objectName(), None)
+            self.config_manager.variables.pop(sender.objectName(), None)
         else:
-            self.config_manager.config_structure[self.config_name][sender.objectName()] = value
+            self.config_manager.variables[sender.objectName()] = value
 
     def chb_ksolve_changed(self, state):
         """Actualiza el config_structure en el ConfigManager basado en el estado del CheckBox."""
@@ -179,13 +177,14 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         le_name = f"le_var_title{number}"
         if state == 2:
             widget = getattr(self, le_name)
-            self.config_manager.config_structure["VALUES"][le_name] = OrderedDict(
-                [("name", widget.text()), ("Region 1", OrderedDict([("Volumen 1", OrderedDict([]))]))]
-            )
+            self.config_manager.values[le_name] = {
+                "name": widget.text(),
+                "Region 1": {"Volumen 1": {}},
+            }
         else:
             # Si está desactivado, elimina de VALUES si existe
-            if le_name in self.config_manager.config_structure["VALUES"]:
-                del self.config_manager.config_structure["VALUES"][le_name]
+            if le_name in self.config_manager.values:
+                del self.config_manager.values[le_name]
         # Emitir una señal para actualizar cualquier ventana que dependa de VARIABLES
         self.lw_variables_update_signal.emit(True)
 
@@ -194,8 +193,8 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         sender = self.sender()
         le_name = sender.objectName()
         if sender.text().strip():
-            if le_name in self.config_manager.config_structure["VALUES"]:
-                self.config_manager.config_structure["VALUES"][le_name]["name"] = sender.text()
+            if le_name in self.config_manager.values:
+                self.config_manager.values[le_name]["name"] = sender.text()
         self.lw_variables_update_signal.emit(True)
 
     def load_variable_config(self):

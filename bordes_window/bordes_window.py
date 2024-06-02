@@ -17,17 +17,27 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
         self.lw_bordes.currentRowChanged.connect(self.select_border)
 
-        for axis in ['x', 'y', 'z']:
-            for direction in ['min', 'max']:
-                getattr(self, f'pb_addpatch_{axis}{direction}').clicked.connect(getattr(self, f'add_patch_{axis}_{direction}'))
-                getattr(self, f'pb_rempatch_{axis}{direction}').clicked.connect(getattr(self, f'remove_patch_{axis}_{direction}'))
-                getattr(self, f'lw_patchlist_{axis}{direction}').currentRowChanged.connect(self.select_patch)
-                setattr(self, f'patch_count_{axis}{direction}', 1)
+        self.patches = {
+            "xmax": {"count": 1, "widget": self.lw_patchlist_xmax},
+            "xmin": {"count": 1, "widget": self.lw_patchlist_xmin},
+            "ymax": {"count": 1, "widget": self.lw_patchlist_ymax},
+            "ymin": {"count": 1, "widget": self.lw_patchlist_ymin},
+            "zmax": {"count": 1, "widget": self.lw_patchlist_zmax},
+            "zmin": {"count": 1, "widget": self.lw_patchlist_zmin},
+        }
+
+        for key in self.patches:
+            axis, direction = key[0], key[1:]
+            add_patch_func = self.make_add_patch_func(key)
+            remove_patch_func = self.make_remove_patch_func(key)
+            getattr(self, f'pb_addpatch_{axis}{direction}').clicked.connect(add_patch_func)
+            getattr(self, f'pb_rempatch_{axis}{direction}').clicked.connect(remove_patch_func)
+            getattr(self, f'lw_patchlist_{axis}{direction}').currentRowChanged.connect(self.select_patch)
 
         # Conexion con ConfigManager
         self.widgets = [
-            "le_value", "le_tempamb", "chb_value", "lw_variables", "le_value_veloc_u",
-            "le_value_veloc_v", "le_value_veloc_w", "le_fracmass", "le_transversal_lon",
+            "le_value", "le_tempamb", "chb_value", "chb_inmass", "chb_outmass", "lw_variables", 
+            "le_value_veloc_u", "le_value_veloc_v", "le_value_veloc_w", "le_fracmass", "le_transversal_lon",
             "le_transversal_start", "le_vertical_lon", "le_vertical_start"
         ]
 
@@ -43,6 +53,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         # Cargar configuración inicial
         self.clear_and_disable_fields()
         # fmt: on
+
+    @property
+    def is_diffusive(self):
+        return self.config_manager.variables.get("cb_tipoflujo") == "Difusivo"
 
     ################################################################################
     ##
@@ -68,13 +82,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
     def select_patch(self):
         """Actualiza los campos de longitudes de parches segun la seleccion"""
-        patch_to_index = {
-            "Borde base": 0,
-            "Parche 2": 1,
-            "Parche 3": 2,
-            "Parche 4": 3,
-            "Parche 5": 4,
-        }
         current_patch_list = self.get_current_patch_list()
         if current_patch_list:
             current_patch = current_patch_list.currentItem().text() if current_patch_list.currentItem() else None
@@ -150,71 +157,23 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                         border=border_and_patch_name[0], patch=border_and_patch_name[1], key="le_tempamb", value=None
                     )
 
-    def add_patch_x_max(self):
-        if self.patch_count_xmax < 5:
-            self.patch_count_xmax += 1
-            self.lw_patchlist_xmax.addItem(f"Parche {self.patch_count_xmax}")
+    def make_add_patch_func(self, key):
+        def add_patch():
+            patch_info = self.patches[key]
+            if patch_info["count"] < 5:
+                patch_info["widget"].addItem(f"Parche {patch_info['count']}")
+                patch_info["count"] += 1
 
-    def remove_patch_x_max(self):
-        count_xmax = self.lw_patchlist_xmax.count()
-        if count_xmax > 1:
-            self.lw_patchlist_xmax.takeItem(count_xmax - 1)
-            self.patch_count_xmax -= 1
+        return add_patch
 
-    def add_patch_x_min(self):
-        if self.patch_count_xmin < 5:
-            self.patch_count_xmin += 1
-            self.lw_patchlist_xmin.addItem(f"Parche {self.patch_count_xmin}")
+    def make_remove_patch_func(self, key):
+        def remove_patch():
+            patch_info = self.patches[key]
+            if patch_info["widget"].count() > 1:
+                patch_info["count"] -= 1
+                patch_info["widget"].takeItem(patch_info["widget"].count() - 1)
 
-    def remove_patch_x_min(self):
-        count_xmin = self.lw_patchlist_xmin.count()
-        if count_xmin > 1:
-            self.lw_patchlist_xmin.takeItem(count_xmin - 1)
-            self.patch_count_xmin -= 1
-
-    def add_patch_y_max(self):
-        if self.patch_count_ymax < 5:
-            self.patch_count_ymax += 1
-            self.lw_patchlist_ymax.addItem(f"Parche {self.patch_count_ymax}")
-
-    def remove_patch_y_max(self):
-        count_ymax = self.lw_patchlist_ymax.count()
-        if count_ymax > 1:
-            self.lw_patchlist_ymax.takeItem(count_ymax - 1)
-            self.patch_count_ymax -= 1
-
-    def add_patch_y_min(self):
-        if self.patch_count_ymin < 5:
-            self.patch_count_ymin += 1
-            self.lw_patchlist_ymin.addItem(f"Parche {self.patch_count_ymin}")
-
-    def remove_patch_y_min(self):
-        count_ymin = self.lw_patchlist_ymin.count()
-        if count_ymin > 1:
-            self.lw_patchlist_ymin.takeItem(count_ymin - 1)
-            self.patch_count_ymin -= 1
-
-    def add_patch_z_max(self):
-        if self.patch_count_zmax < 5:
-            self.patch_count_zmax += 1
-            self.lw_patchlist_zmax.addItem(f"Parche {self.patch_count_zmax}")
-
-    def remove_patch_z_max(self):
-        count_zmax = self.lw_patchlist_zmax.count()
-        if count_zmax > 1:
-            self.lw_patchlist_zmax.takeItem(count_zmax - 1)
-            self.patch_count_zmax -= 1
-
-    def add_patch_z_min(self):
-        if self.patch_count_zmin < 5:
-            self.patch_count_zmin += 1
-            self.lw_patchlist_zmin.addItem(f"Parche {self.patch_count_zmin}")
-
-    def remove_patch_z_min(self):
-        count_zmin = self.lw_patchlist_zmin.count()
-        if count_zmin > 1:
-            self.lw_patchlist_zmin.takeItem(count_zmin - 1)
-            self.patch_count_zmin -= 1
+        return remove_patch
 
     ################################################################################
     ##
@@ -246,18 +205,34 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             self.le_vertical_start.setEnabled(True)
             self.le_vertical_lon.setEnabled(True)
             self.chb_value.setEnabled(True)
-            self.chb_value.setChecked(True)
             self.chb_convec.setEnabled(True)
             self.chb_flux.setEnabled(True)
+            self.chb_wall.setEnabled(True)
+            self.chb_inmass.setEnabled(not self.is_diffusive)
+            self.chb_outmass.setEnabled(not self.is_diffusive)
+
             # Carga la configuración para el parche dado
-            patch_config = (
-                self.config_manager.config_structure[self.config_name]
-                .get(border_and_patch_name[0], {})
-                .get(border_and_patch_name[1], None)
+            patch_config = self.config_manager.bound.get(border_and_patch_name[0], {}).get(
+                border_and_patch_name[1], None
             )
             print(patch_config)
             # Actualiza los campos de la UI
             if patch_config:
+                if border_and_patch_name[1] == "Borde base":
+                    self.le_transversal_lon.setEnabled(False)
+                    self.le_transversal_start.setEnabled(False)
+                    self.le_vertical_lon.setEnabled(False)
+                    self.le_vertical_start.setEnabled(False)
+
+                if 2 in [patch_config.get("chb_inmass"), patch_config.get("chb_outmass")]:
+                    self.chb_wall.setChecked(patch_config.get("chb_wall") == 2)
+                else:
+                    self.chb_wall.setChecked(True)
+                self.chb_inmass.setChecked(patch_config.get("chb_inmass") == 2)
+                self.chb_outmass.setChecked(patch_config.get("chb_outmass") == 2)
+                self.chb_value.setChecked(patch_config.get("chb_value") == 2)
+                self.chb_convec.setChecked(patch_config.get("chb_convec") == 2)
+                self.chb_flux.setChecked(patch_config.get("chb_flux") == 2)
                 self.le_value.setText(patch_config.get("le_value", ""))
                 self.le_tempamb.setText(patch_config.get("le_tempamb", ""))
                 self.le_value_veloc_u.setText(patch_config.get("le_value_veloc_u", ""))
@@ -269,9 +244,9 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.le_vertical_start.setText(patch_config.get("le_vertical_start", ""))
                 self.le_vertical_lon.setText(patch_config.get("le_vertical_lon", ""))
             else:
-                self.chb_value.setChecked(patch_config.get("chb_value", ""))
-                self.chb_convec.setChecked(patch_config.get("chb_convec", ""))
-                self.chb_flux.setChecked(patch_config.get("chb_flux", ""))
+                self.chb_value.setChecked(False)
+                self.chb_convec.setChecked(False)
+                self.chb_flux.setChecked(False)
                 self.le_value.clear()
                 self.le_tempamb.clear()
                 self.le_value_veloc_u.clear()
@@ -282,9 +257,16 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
     def clear_and_disable_fields(self):
         """Limpia y deshabilita los campos si es necesario."""
+        self.chb_wall.setChecked(False)
+        self.chb_inmass.setChecked(False)
+        self.chb_outmass.setChecked(False)
         self.chb_value.setChecked(False)
         self.chb_convec.setChecked(False)
         self.chb_flux.setChecked(False)
+
+        self.chb_wall.setEnabled(False)
+        self.chb_inmass.setEnabled(False)
+        self.chb_outmass.setEnabled(False)
         self.chb_value.setEnabled(False)
         self.chb_convec.setEnabled(False)
         self.chb_flux.setEnabled(False)
@@ -326,52 +308,52 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
     def update_entrada_masa(self, es_difusivo: bool):
         print(f"Actualizando Entrada de Masa, es_difusivo: {es_difusivo}")
 
-        # Estado de los checkboxes
-        # state_wall = self.chb_wall.isChecked()
-        state_inmass = self.chb_inmass.isChecked()
-        state_outmass = self.chb_outmass.isChecked()
-        # state_value = self.chb_value.isChecked()
-        state_flux = self.chb_flux.isChecked()
-        state_convec = self.chb_convec.isChecked()
+        # # Estado de los checkboxes
+        # # state_wall = self.chb_wall.isChecked()
+        # state_inmass = self.chb_inmass.isChecked()
+        # state_outmass = self.chb_outmass.isChecked()
+        # # state_value = self.chb_value.isChecked()
+        # state_flux = self.chb_flux.isChecked()
+        # state_convec = self.chb_convec.isChecked()
 
-        # Deshabilitar o habilitar controles basados en condiciones específicas
-        velocidades_habilitadas = not es_difusivo and state_inmass
-        fracmass_habilitada = not es_difusivo and state_outmass
-        flux_convec_deshabilitado = es_difusivo and state_inmass
-        temamb_habilitada = state_convec or state_flux
+        # # Deshabilitar o habilitar controles basados en condiciones específicas
+        # velocidades_habilitadas = not es_difusivo and state_inmass
+        # fracmass_habilitada = not es_difusivo and state_outmass
+        # flux_convec_deshabilitado = es_difusivo and state_inmass
+        # temamb_habilitada = state_convec or state_flux
 
-        # Manejo de condiciones especiales para resetear checkboxes
-        if es_difusivo or not (state_inmass or state_outmass):
-            self.chb_inmass.setChecked(False)
-            self.chb_outmass.setChecked(False)
-        if state_inmass or state_outmass:
-            self.chb_wall.setChecked(False)
+        # # Manejo de condiciones especiales para resetear checkboxes
+        # if es_difusivo or not (state_inmass or state_outmass):
+        #     self.chb_inmass.setChecked(False)
+        #     self.chb_outmass.setChecked(False)
+        # if state_inmass or state_outmass:
+        #     self.chb_wall.setChecked(False)
 
-        if not (state_flux or state_convec):
-            self.chb_convec.setChecked(False)
-            self.chb_flux.setChecked(False)
-        if state_flux or state_convec:
-            self.chb_value.setChecked(False)
+        # if not (state_flux or state_convec):
+        #     self.chb_convec.setChecked(False)
+        #     self.chb_flux.setChecked(False)
+        # if state_flux or state_convec:
+        #     self.chb_value.setChecked(False)
 
-        # Aplicar estados directamente con condiciones
-        self.chb_inmass.setDisabled(es_difusivo)
-        self.chb_outmass.setDisabled(es_difusivo)
-        self.le_value_veloc_u.setDisabled(
-            (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [0, 1])) or state_outmass
-        )
-        self.le_value_veloc_v.setDisabled(
-            (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [2, 3])) or state_outmass
-        )
-        self.le_value_veloc_w.setDisabled(
-            (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [4, 5])) or state_outmass
-        )
+        # # Aplicar estados directamente con condiciones
+        # self.chb_inmass.setDisabled(es_difusivo)
+        # self.chb_outmass.setDisabled(es_difusivo)
+        # self.le_value_veloc_u.setDisabled(
+        #     (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [0, 1])) or state_outmass
+        # )
+        # self.le_value_veloc_v.setDisabled(
+        #     (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [2, 3])) or state_outmass
+        # )
+        # self.le_value_veloc_w.setDisabled(
+        #     (not velocidades_habilitadas and (self.sw_patchlist.currentIndex() in [4, 5])) or state_outmass
+        # )
 
-        # self.le_fracmass.setDisabled(not fracmass_habilitada)
-        self.le_tempamb.setDisabled(not temamb_habilitada)
-        self.le_value.setDisabled(state_outmass)
-        self.chb_value.setDisabled(state_outmass)
-        self.chb_flux.setDisabled(flux_convec_deshabilitado or state_outmass)
-        self.chb_convec.setDisabled(flux_convec_deshabilitado or state_outmass)
+        # # self.le_fracmass.setDisabled(not fracmass_habilitada)
+        # self.le_tempamb.setDisabled(not temamb_habilitada)
+        # self.le_value.setDisabled(state_outmass)
+        # self.chb_value.setDisabled(state_outmass)
+        # self.chb_flux.setDisabled(flux_convec_deshabilitado or state_outmass)
+        # self.chb_convec.setDisabled(flux_convec_deshabilitado or state_outmass)
 
     @Slot()
     def agregar_variables_lista(self, variables: list):

@@ -1,6 +1,5 @@
 # Byte-compiled / optimized / DLL files
 __pycache__/
-Resultados/
 *.py[cod]
 *$py.class
 
@@ -160,16 +159,10 @@ cython_debug/
 #  option (not recommended) you can uncomment the following to ignore the entire idea folder.
 #.idea/
 
-# Local bats
-*.bat
-
-# Results
-configuracion.adapt.f90
-configuracion.json
-
-# Local py
+# Local / Sync
 migracion.py
-
-# Sync
 desktop.ini
 .megaignore
+Resultados/
+Rubbish/
+*.bat

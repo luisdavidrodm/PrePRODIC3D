@@ -1,5 +1,4 @@
 import json
-from collections import OrderedDict
 
 from PySide6.QtWidgets import QLineEdit, QSpinBox, QComboBox, QCheckBox, QListWidget
 
@@ -8,53 +7,64 @@ class ConfigManager:
     def __init__(self):
         # Inicializar la estructura de la configuración con las secciones requeridas
         # fmt: off
-        self.config_structure = OrderedDict([
-            ('HEADER', OrderedDict([
-                ('le_tituloimpre', 'PRINTF'),
-                ('le_titulograf', 'PLOTF')
-            ])),
-            ('GRID', OrderedDict([
-                ('cb_tipocoord', 'Cartesianas'),
-                ('cb_tipozonas', 'Zona única'),
-                ('cb_tiposistema', 'Cerrado')
-            ])),
-            ('VARIABLES', OrderedDict([
-                ('cb_tsimu', 'Permanente'),
-                ('cb_tipoflujo', 'Difusivo'),
-                ('cb_trataborde', 'Esquema de bajo orden'),
-                ('le_var_title1', 'Velocidad U'),
-                ('le_var_title2', 'Velocidad V'),
-                ('le_var_title3', 'Velocidad W'),
-                ('le_var_title4', 'Corrección de presión'),
-                ('le_var_title5', 'Temperatura'),
-                ('le_var_title11', 'Presión'),
-                ('le_var_title12', 'Función de corriente'),
-                ('chb_ksolve5', 2),
-                ('chb_kprint5', 2),
-                ('le_relax5', '1'),
-                ('checkBox', 2),
-                ])),
-            ('BOUND', OrderedDict([
-                ('X Max', OrderedDict([('Borde base', OrderedDict())])),
-                ('X Min', OrderedDict([('Borde base', OrderedDict())])),
-                ('Y Max', OrderedDict([('Borde base', OrderedDict())])),
-                ('Y Min', OrderedDict([('Borde base', OrderedDict())])),
-                ('Z Max', OrderedDict([('Borde base', OrderedDict())])),
-                ('Z Min', OrderedDict([('Borde base', OrderedDict())]))
-            ])),
-            ('VALUES', OrderedDict([
-                ('le_var_title5', OrderedDict([
-                    ('name', 'Temperatura'),
-                    ('Region 1', OrderedDict([
-                        ('Volumen 1', OrderedDict([
-                        ]))
-                    ]))
-                ]))
-            ])),
-            ('OUTPUT', OrderedDict([
-                ('le_last', '5')
-                ])),
-            ])
+        self._config_structure = {
+            'HEADER': {
+                'le_tituloimpre': 'PRINTF',
+                'le_titulograf': 'PLOTF'
+            },
+            'GRID': {
+                'cb_tipocoord': 'Cartesianas',
+                'cb_tipozonas': 'Zona única',
+                'cb_tiposistema': 'Cerrado'
+            },
+            'VARIABLES': {
+                'cb_tsimu': 'Permanente',
+                'cb_tipoflujo': 'Difusivo',
+                'cb_trataborde': 'Esquema de bajo orden',
+                'le_var_title1': 'Velocidad U',
+                'le_var_title2': 'Velocidad V',
+                'le_var_title3': 'Velocidad W',
+                'le_var_title4': 'Corrección de presión',
+                'le_var_title5': 'Temperatura',
+                'le_var_title11': 'Presión',
+                'le_var_title12': 'Función de corriente',
+                'chb_ksolve5': 2,
+                'chb_kprint5': 2,
+                'le_relax5': '1',
+                'checkBox': 2,
+            },
+            'BOUND': {
+                'X Max': {
+                    'Borde base': {}
+                },
+                'X Min': {
+                    'Borde base': {}
+                },
+                'Y Max': {
+                    'Borde base': {}
+                },
+                'Y Min': {
+                    'Borde base': {}
+                },
+                'Z Max': {
+                    'Borde base': {}
+                },
+                'Z Min': {
+                    'Borde base': {}
+                }
+            },
+            'VALUES': {
+                'le_var_title5': {
+                    'name': 'Temperatura',
+                    'Region 1': {
+                        'Volumen 1': {}
+                    }
+                }
+            },
+            'OUTPUT': {
+                'le_last': '5'
+            }
+        }
         # fmt: on
 
     ################################################################################
@@ -65,20 +75,20 @@ class ConfigManager:
 
     def load_from_json(self, filename):
         with open(filename, "r", encoding="utf8") as f:
-            self.config_structure = json.load(f, object_pairs_hook=OrderedDict)
+            self._config_structure = json.load(f)
 
     def save_to_json(self, filename):
         with open(filename, "w", encoding="utf8") as f:
-            json.dump(self.config_structure, f, ensure_ascii=False, indent=4)
+            json.dump(self._config_structure, f, ensure_ascii=False, indent=4)
 
     def load_config(self, window, config=None):
         # Carga la configuración de una ventana desde config_manager
         if config is None:
-            config = window.config_manager.config_structure[window.config_name]
+            config = window.config_manager._config_structure[window.config_name]
         # print(f"LOAD_CONFIG: {config}")
         for widget_name, value in config.items():
             try:
-                if not isinstance(value, OrderedDict):
+                if not isinstance(value, dict):
                     widget = getattr(window, widget_name)
                     if isinstance(widget, QLineEdit):
                         widget.setText(value)
@@ -130,12 +140,36 @@ class ConfigManager:
         """
         if value is not None:
             # Asegurarse de que la estructura de borde y parche exista
-            if border not in self.config_structure["BOUND"]:
-                self.config_structure["BOUND"][border] = OrderedDict()
-            if patch not in self.config_structure["BOUND"][border]:
-                self.config_structure["BOUND"][border][patch] = OrderedDict()
-            self.config_structure["BOUND"][border][patch][key] = value
+            if border not in self.bound:
+                self.bound[border] = {}
+            if patch not in self.bound[border]:
+                self.bound[border][patch] = {}
+            self.bound[border][patch][key] = value
         else:
-            self.config_structure["BOUND"][border][patch].pop(key, None)
-            if len(self.config_structure["BOUND"][border][patch]) == 0 and patch != "Borde base":
-                self.config_structure["BOUND"][border].pop(patch, None)
+            self.bound[border][patch].pop(key, None)
+            if len(self.bound[border][patch]) == 0 and patch != "Borde base":
+                self.bound[border].pop(patch, None)
+
+    @property
+    def header(self):
+        return self._config_structure["HEADER"]
+
+    @property
+    def grid(self):
+        return self._config_structure["GRID"]
+
+    @property
+    def variables(self):
+        return self._config_structure["VARIABLES"]
+
+    @property
+    def bound(self):
+        return self._config_structure["BOUND"]
+
+    @property
+    def values(self):
+        return self._config_structure["VALUES"]
+
+    @property
+    def output(self):
+        return self._config_structure["OUTPUT"]
