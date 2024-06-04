@@ -232,98 +232,6 @@
       <string>División de bordes</string>
      </property>
      <layout class="QGridLayout" name="gridLayout">
-      <item row="2" column="3">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Segmento</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QStackedWidget" name="sw_patchlist">
-        <property name="currentIndex">
-         <number>0</number>
-        </property>
-        <widget class="QWidget" name="sw_patchlist_xmax">
-         <layout class="QVBoxLayout" name="verticalLayout_4">
-          <item>
-           <widget class="QListWidget" name="lw_patchlist_xmax">
-            <item>
-             <property name="text">
-              <string>Borde base</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patchlist_xmin">
-         <layout class="QHBoxLayout" name="horizontalLayout_2">
-          <item>
-           <widget class="QListWidget" name="lw_patchlist_xmin">
-            <item>
-             <property name="text">
-              <string>Borde base</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patchlist_ymax">
-         <layout class="QHBoxLayout" name="horizontalLayout_3">
-          <item>
-           <widget class="QListWidget" name="lw_patchlist_ymax">
-            <item>
-             <property name="text">
-              <string>Borde base</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patchlist_ymin">
-         <layout class="QVBoxLayout" name="verticalLayout_11">
-          <item>
-           <widget class="QListWidget" name="lw_patchlist_ymin">
-            <item>
-             <property name="text">
-              <string>Borde base</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patchlist_zmax">
-         <layout class="QHBoxLayout" name="horizontalLayout_4">
-          <item>
-           <widget class="QListWidget" name="lw_patchlist_zmax">
-            <item>
-             <property name="text">
-              <string>Borde base</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patchlist_zmin">
-         <layout class="QVBoxLayout" name="verticalLayout_12">
-          <item>
-           <widget class="QListWidget" name="lw_patchlist_zmin">
-            <item>
-             <property name="text">
-              <string>Borde base</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
       <item row="3" column="0" colspan="3">
        <widget class="QListWidget" name="lw_bordes">
         <item>
@@ -358,125 +266,10 @@
         </item>
        </widget>
       </item>
-      <item row="5" column="0" colspan="4">
-       <widget class="QStackedWidget" name="sw_patch_addremove">
-        <property name="currentIndex">
-         <number>5</number>
-        </property>
-        <widget class="QWidget" name="sw_patch_addremove_xmax">
-         <layout class="QVBoxLayout" name="verticalLayout_5">
-          <item>
-           <widget class="QPushButton" name="pb_addpatch_xmax">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_rempatch_xmax">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patch_addremove_xmin">
-         <layout class="QVBoxLayout" name="verticalLayout_6">
-          <item>
-           <widget class="QPushButton" name="pb_addpatch_xmin">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_rempatch_xmin">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patch_addremove_ymax">
-         <layout class="QVBoxLayout" name="verticalLayout_7">
-          <item>
-           <widget class="QPushButton" name="pb_addpatch_ymax">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_rempatch_ymax">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patch_addremove_ymin">
-         <layout class="QVBoxLayout" name="verticalLayout_8">
-          <item>
-           <widget class="QPushButton" name="pb_addpatch_ymin">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_rempatch_ymin">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patch_addremove_zmax">
-         <layout class="QVBoxLayout" name="verticalLayout_9">
-          <item>
-           <widget class="QPushButton" name="pb_addpatch_zmax">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_rempatch_zmax">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-        <widget class="QWidget" name="sw_patch_addremove_zmin">
-         <layout class="QVBoxLayout" name="verticalLayout_10">
-          <item>
-           <widget class="QPushButton" name="pb_addpatch_zmin">
-            <property name="text">
-             <string>Agregar un segmento</string>
-            </property>
-           </widget>
-          </item>
-          <item>
-           <widget class="QPushButton" name="pb_rempatch_zmin">
-            <property name="text">
-             <string>Eliminar un segmento</string>
-            </property>
-           </widget>
-          </item>
-         </layout>
-        </widget>
-       </widget>
-      </item>
-      <item row="2" column="0" colspan="2">
-       <widget class="QLabel" name="label_2">
+      <item row="2" column="3">
+       <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Borde</string>
+         <string>Segmento</string>
         </property>
        </widget>
       </item>
@@ -536,6 +329,45 @@
           </widget>
          </item>
         </layout>
+       </widget>
+      </item>
+      <item row="2" column="0" colspan="2">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Borde</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0" colspan="4">
+       <widget class="QGroupBox" name="groupBox_7">
+        <property name="title">
+         <string/>
+        </property>
+        <layout class="QVBoxLayout" name="verticalLayout_5">
+         <item>
+          <widget class="QPushButton" name="pb_addpatch">
+           <property name="text">
+            <string>Agregar un segmento</string>
+           </property>
+          </widget>
+         </item>
+         <item>
+          <widget class="QPushButton" name="pb_rempatch">
+           <property name="text">
+            <string>Eliminar un segmento</string>
+           </property>
+          </widget>
+         </item>
+        </layout>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QListWidget" name="lw_patchlist">
+        <item>
+         <property name="text">
+          <string>Borde base</string>
+         </property>
+        </item>
        </widget>
       </item>
      </layout>

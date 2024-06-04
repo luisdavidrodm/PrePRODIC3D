@@ -40,8 +40,8 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         self.config_manager.connect_config(self)
 
         self.chb_ksolve_widgets = [
-            "chb_ksolve1", "chb_ksolve2", "chb_ksolve3", "chb_ksolve5", "chb_ksolve6", 
-            "chb_ksolve7", "chb_ksolve8", "chb_ksolve9", "chb_ksolve10", "chb_ksolve11"
+            "chb_ksolve1", "chb_ksolve2", "chb_ksolve3", "chb_ksolve4", "chb_ksolve5", 
+            "chb_ksolve6", "chb_ksolve7", "chb_ksolve8", "chb_ksolve9", "chb_ksolve10", "chb_ksolve11"
         ]
         for widget_name in self.chb_ksolve_widgets:
             getattr(self, widget_name).stateChanged.connect(self.chb_ksolve_changed)
@@ -188,7 +188,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         # Emitir una señal para actualizar cualquier ventana que dependa de VARIABLES
         self.lw_variables_update_signal.emit(True)
 
-    def le_var_title_changed(self, text):
+    def le_var_title_changed(self, _):
         """Actualiza el config_structure en el ConfigManager basado en el texto del LineEdit."""
         sender = self.sender()
         le_name = sender.objectName()

@@ -295,9 +295,6 @@
                   </property>
                  </widget>
                 </item>
-                <item row="11" column="0">
-                 <widget class="QLineEdit" name="lineEdit_7"/>
-                </item>
                 <item row="11" column="1">
                  <widget class="QLabel" name="label_7">
                   <property name="text">
@@ -309,7 +306,7 @@
                  </widget>
                 </item>
                 <item row="14" column="0">
-                 <widget class="QLineEdit" name="lineEdit_8"/>
+                 <widget class="QLineEdit" name="le_local_sp"/>
                 </item>
                 <item row="14" column="1">
                  <widget class="QLabel" name="label_8">
@@ -347,6 +344,9 @@
                    <string>Fuente lineal</string>
                   </property>
                  </widget>
+                </item>
+                <item row="11" column="0">
+                 <widget class="QLineEdit" name="le_local_sc"/>
                 </item>
                </layout>
               </widget>

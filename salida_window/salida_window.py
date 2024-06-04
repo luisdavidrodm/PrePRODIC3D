@@ -10,10 +10,9 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
         self.config_manager = config_manager
         self.config_name = "OUTPUT"
 
-        self.widgets = ["le_last"]
-        for widget_name in self.widgets:
-            getattr(self, widget_name).textChanged.connect(self.value_changed)
-        self.load_malla_config()
+        self.widgets = ["le_last", "checkBox_4"]
+        self.config_manager.connect_config(self)
+        self.load_config()
 
     def value_changed(self, value):
         sender = self.sender()
@@ -22,7 +21,7 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
         else:
             self.config_manager.output[sender.objectName()] = value
 
-    def load_malla_config(self):
+    def load_config(self):
         config = self.config_manager.output
         for widget_name, value in config.items():
             getattr(self, widget_name).setText(value)

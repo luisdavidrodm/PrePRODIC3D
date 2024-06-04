@@ -173,3 +173,11 @@ class ConfigManager:
     @property
     def output(self):
         return self._config_structure["OUTPUT"]
+
+    @property
+    def is_cartesian(self):
+        return self.grid.get("cb_tipocoord") == "Cartesianas"
+
+    @property
+    def is_diffusive(self):
+        return self.variables.get("cb_tipoflujo") == "Difusivo"

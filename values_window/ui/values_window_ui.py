@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_window.ui'
+## Form generated from reading UI file 'values_windowuIrvBK.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -237,21 +237,16 @@ class Ui_valores_window(object):
 
         self.formLayout_3.setWidget(10, QFormLayout.FieldRole, self.label_6)
 
-        self.lineEdit_7 = QLineEdit(self.groupBox_7)
-        self.lineEdit_7.setObjectName(u"lineEdit_7")
-
-        self.formLayout_3.setWidget(11, QFormLayout.LabelRole, self.lineEdit_7)
-
         self.label_7 = QLabel(self.groupBox_7)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setAlignment(Qt.AlignCenter)
 
         self.formLayout_3.setWidget(11, QFormLayout.FieldRole, self.label_7)
 
-        self.lineEdit_8 = QLineEdit(self.groupBox_7)
-        self.lineEdit_8.setObjectName(u"lineEdit_8")
+        self.le_local_sp = QLineEdit(self.groupBox_7)
+        self.le_local_sp.setObjectName(u"le_local_sp")
 
-        self.formLayout_3.setWidget(14, QFormLayout.LabelRole, self.lineEdit_8)
+        self.formLayout_3.setWidget(14, QFormLayout.LabelRole, self.le_local_sp)
 
         self.label_8 = QLabel(self.groupBox_7)
         self.label_8.setObjectName(u"label_8")
@@ -279,6 +274,11 @@ class Ui_valores_window(object):
         self.chb_linear_source.setObjectName(u"chb_linear_source")
 
         self.formLayout_3.setWidget(8, QFormLayout.LabelRole, self.chb_linear_source)
+
+        self.le_local_sc = QLineEdit(self.groupBox_7)
+        self.le_local_sc.setObjectName(u"le_local_sc")
+
+        self.formLayout_3.setWidget(11, QFormLayout.LabelRole, self.le_local_sc)
 
 
         self.horizontalLayout_2.addWidget(self.groupBox_7)

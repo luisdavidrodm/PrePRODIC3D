@@ -120,6 +120,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.bordes_window.activateWindow()
 
     def open_densidad(self):
+        self.close_open_windows()
         if self.densidad_window is None or not self.densidad_window.isVisible():
             self.densidad_window = DensidadWindow(self.config_manager)
             self.densidad_window.show()

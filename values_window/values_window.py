@@ -1,5 +1,4 @@
 from PySide6 import QtWidgets as qtw
-from PySide6.QtWidgets import QLineEdit, QCheckBox, QListWidgetItem
 from PySide6.QtCore import Qt
 
 from values_window.ui.values_window_ui import Ui_valores_window
@@ -24,21 +23,17 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.lw_volumes.currentRowChanged.connect(self.load_current_config)
 
         self.variable_widgets = ["le_general_value", "le_k", "le_kblock", "chb_iborx", "chb_ibory", "chb_iborz", "chb_ipun", "chb_local_value", "le_ixyz"]
-        self.region_widgets = ["chb_fixed_value", "chb_linear_source", "le_local_value", "le_local_k"]
+        self.region_widgets = ["chb_fixed_value", "chb_linear_source", "le_local_value", "le_local_sc", "le_local_sp", "le_local_k"]
         self.volume_widgets = ["le_x_start", "le_x_lon", "le_y_start", "le_y_lon", "le_z_start", "le_z_lon"]
         self.widgets = self.variable_widgets + self.region_widgets + self.volume_widgets
 
         self.config_manager.connect_config(self)
         self.chb_local_value.stateChanged.connect(self.load_current_config)
-        self.load_values_list()
+        self.load_variables_list()
         # fmt: on
 
-    @property
-    def is_cartesian(self):
-        return self.config_manager.grid.get("cb_tipocoord") == "Cartesianas"
-
     def is_mesh_info_complete(self):
-        if self.is_cartesian:
+        if self.config_manager.is_cartesian:
             required_keys = ["le_xlon", "le_ylon", "le_zlon"]
         else:
             required_keys = ["le_titalon", "le_rini", "le_rlon", "le_zloncil"]
@@ -110,7 +105,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             self.pb_remove_volume.setEnabled(False)
             self.chb_local_value.setEnabled(False)
 
-    def load_values_list(self):
+    def load_variables_list(self):
         """Carga y actualiza la lista de variables considerando el orden y permitiendo duplicados."""
         current_items = [
             (self.lw_variables.item(i).text(), self.lw_variables.item(i).data(Qt.UserRole))
@@ -118,11 +113,10 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         ]
         new_items = [(data["name"], key) for key, data in self.config_manager.values.items() if "name" in data]
         print("CURRENT VS NEW:", current_items, new_items)
-        # Verificar si las listas son diferentes en contenido o en orden
         if new_items != current_items:
             self.lw_variables.clear()
             for name, tech_name in new_items:
-                item = QListWidgetItem(name)
+                item = qtw.QListWidgetItem(name)
                 item.setData(Qt.UserRole, tech_name)
                 self.lw_variables.addItem(item)
         self.load_current_config()
@@ -157,18 +151,16 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
     def toggle_widget_list(self, widgets, toggle):
         """"""
         for widget_name in widgets:
-            try:
-                widget = getattr(self, widget_name)
+            widget = getattr(self, widget_name, None)
+            if widget:
                 widget.setEnabled(toggle)
-                if not toggle and isinstance(widget, QLineEdit):
-                    if widget.text():
+                if not toggle:
+                    if isinstance(widget, qtw.QLineEdit):
                         widget.clear()
-                elif not toggle and isinstance(widget, QCheckBox):
-                    widget.setChecked(toggle)
-                else:
-                    continue
-            except Exception as e:
-                print(f"ERROR AL LIMPIAR: {e}")
+                    elif isinstance(widget, qtw.QCheckBox):
+                        widget.setChecked(toggle)
+            else:
+                print(f"ERROR AL LIMPIAR: {widget_name} en {widgets}")
 
     def value_changed(self, value):
         """
@@ -182,51 +174,52 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         variable = self.lw_variables.currentItem()
         region = self.lw_regions.currentItem()
         volume = self.lw_volumes.currentItem()
+        variable_key = variable.data(Qt.UserRole)
         if value is not None and value != "":
             # Si hay un valor nuevo válido
             if region and volume and sender.objectName() in self.volume_widgets:
                 # Si el cambio es en un widget de volumen
-                if variable.data(Qt.UserRole) not in self.config_manager.values:
-                    self.config_manager.values[variable.data(Qt.UserRole)] = {}
-                if region.text() not in self.config_manager.values[variable.data(Qt.UserRole)]:
-                    self.config_manager.values[variable.data(Qt.UserRole)][region.text()] = {}
-                if volume.text() not in self.config_manager.values[variable.data(Qt.UserRole)][region.text()]:
-                    self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume.text()] = {}
-                self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume.text()][sender.objectName()] = value
+                if variable_key not in self.config_manager.values:
+                    self.config_manager.values[variable_key] = {}
+                if region.text() not in self.config_manager.values[variable_key]:
+                    self.config_manager.values[variable_key][region.text()] = {}
+                if volume.text() not in self.config_manager.values[variable_key][region.text()]:
+                    self.config_manager.values[variable_key][region.text()][volume.text()] = {}
+                self.config_manager.values[variable_key][region.text()][volume.text()][sender.objectName()] = value
             elif region and sender.objectName() in self.region_widgets:
                 # Si el cambio es en un widget de región
-                if variable.data(Qt.UserRole) not in self.config_manager.values:
-                    self.config_manager.values[variable.data(Qt.UserRole)] = {}
-                if region.text() not in self.config_manager.values[variable.data(Qt.UserRole)]:
-                    self.config_manager.values[variable.data(Qt.UserRole)][region.text()] = {}
-                self.config_manager.values[variable.data(Qt.UserRole)][region.text()][sender.objectName()] = value
+                if variable_key not in self.config_manager.values:
+                    self.config_manager.values[variable_key] = {}
+                if region.text() not in self.config_manager.values[variable_key]:
+                    self.config_manager.values[variable_key][region.text()] = {}
+                self.config_manager.values[variable_key][region.text()][sender.objectName()] = value
             elif variable and sender.objectName() in self.variable_widgets:
                 # Si el cambio es en un widget de variable
-                if variable.data(Qt.UserRole) not in self.config_manager.values:
-                    self.config_manager.values[variable.data(Qt.UserRole)] = {}
-                self.config_manager.values[variable.data(Qt.UserRole)][sender.objectName()] = value
+                if variable_key not in self.config_manager.values:
+                    self.config_manager.values[variable_key] = {}
+                self.config_manager.values[variable_key][sender.objectName()] = value
         else:
             # Si el valor es None o vacío, eliminar el valor del diccionario
             if region and volume and sender.objectName() in self.volume_widgets:
                 # Eliminar valor del widget de volumen
-                self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume.text()].pop(sender.objectName(), None)
+                self.config_manager.values[variable_key][region.text()][volume.text()].pop(sender.objectName(), None)
                 # Limpiar diccionarios vacíos
-                if not self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume.text()]:
-                    del self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume.text()]
-                if not self.config_manager.values[variable.data(Qt.UserRole)][region.text()]:
-                    del self.config_manager.values[variable.data(Qt.UserRole)][region.text()]
+                if not self.config_manager.values[variable_key][region.text()][volume.text()]:
+                    del self.config_manager.values[variable_key][region.text()][volume.text()]
+                if not self.config_manager.values[variable_key][region.text()]:
+                    del self.config_manager.values[variable_key][region.text()]
             elif region and sender.objectName() in self.region_widgets:
                 # Eliminar valor del widget de región
-                self.config_manager.values[variable.data(Qt.UserRole)][region.text()].pop(sender.objectName(), None)
+                self.config_manager.values[variable_key][region.text()].pop(sender.objectName(), None)
                 # Limpiar diccionarios vacíos
-                if not self.config_manager.values[variable.data(Qt.UserRole)][region.text()]:
-                    del self.config_manager.values[variable.data(Qt.UserRole)][region.text()]
+                if not self.config_manager.values[variable_key][region.text()]:
+                    del self.config_manager.values[variable_key][region.text()]
             elif variable and sender.objectName() in self.variable_widgets:
                 # Eliminar valor del widget de variable
-                self.config_manager.values[variable.data(Qt.UserRole)].pop(sender.objectName(), None)
+                self.config_manager.values[variable_key].pop(sender.objectName(), None)
             # Limpieza adicional para asegurar que no queden diccionarios vacíos
-            if variable and not self.config_manager.values[variable.data(Qt.UserRole)]:
-                del self.config_manager.values[variable.data(Qt.UserRole)]
+            if variable and not self.config_manager.values[variable_key]:
+                del self.config_manager.values[variable_key]
 
     def add_region(self):
         """"""
@@ -240,8 +233,8 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         """"""
         region_count = self.lw_regions.count()
         if region_count > 1:
-            self.lw_regions.takeItem(region_count - 1)
             last_region = self.lw_regions.item(region_count - 1)
+            self.lw_regions.takeItem(region_count - 1)
             variable = self.lw_variables.currentItem()
             if variable is not None:
                 self.config_manager.values[variable.data(Qt.UserRole)].pop(last_region.text(), None)
@@ -259,9 +252,20 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 volume_data = self.initialize_volume_data()
                 self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume_key].update(volume_data)
 
+    def remove_volume(self):
+        """"""
+        volume_count = self.lw_volumes.count()
+        if volume_count > 1:
+            last_volume = self.lw_regions.item(volume_count - 1)
+            self.lw_volumes.takeItem(volume_count - 1)
+            variable = self.lw_variables.currentItem()
+            region = self.lw_regions.currentItem()
+            if variable is not None and region is not None:
+                self.config_manager.values[variable.data(Qt.UserRole)][region.text()].pop(last_volume.text(), None)
+
     def initialize_volume_data(self):
         """Inicializa los valores de malla para un volumen nuevo"""
-        if self.is_cartesian:
+        if self.config_manager.is_cartesian:
             volume_data = {
                 "le_x_start": 0,
                 "le_x_lon": self.config_manager.grid["le_xlon"],
@@ -280,17 +284,6 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 "le_z_lon": self.config_manager.grid["le_zloncil"],
             }
         return volume_data
-
-    def remove_volume(self):
-        """"""
-        volume_count = self.lw_volumes.count()
-        if volume_count > 1:
-            self.lw_volumes.takeItem(volume_count - 1)
-            last_volume = self.lw_regions.item(volume_count - 1)
-            variable = self.lw_variables.currentItem()
-            region = self.lw_regions.currentItem()
-            if variable is not None and region is not None:
-                self.config_manager.values[variable.data(Qt.UserRole)][region.text()].pop(last_volume.text(), None)
 
     def print_dict(self, od, indent=0, show_markers=False):
         # Create an indentation space based on the current level

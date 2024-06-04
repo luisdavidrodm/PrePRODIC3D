@@ -46,6 +46,32 @@ class F90Translator:
         W(I,J,N1)=(W(I,J,N2)+WMIN)*FACTOR
        ENDDO
       ENDDO"""
+        self.dimensionless = "DIMENSION  WSUM(25), TSUM(25), TB(25), WBAR(25), AREA(25)"
+        self.dimensionless_output = """IF (ITER.EQ.LAST) THEN
+        DO K=2,N2
+         DO J=2,M2
+           DO I=2,L2
+              WSUM(K)=WSUM(K)+W(I,J,K)*ARZ(I,J)
+              TSUM(K)=TSUM(K)+T(I,J,K)*W(I,J,K)*ARZ(I,J)
+              AREA(K)=AREA(K)+ARZ(I,J)
+              WBAR(K)=WSUM(K)/AREA(K)
+           ENDDO
+         ENDDO
+        ENDDO
+        DO K=2,N2
+           TB(K)=TSUM(K)/(WSUM(K)+SMALL)
+        ENDDO
+        DO K=2,N2
+          DO J=2,M2
+            DO I=2,L2
+               T(I,J,K)=(T(I,J,K)-TW)/(TB(K)-TW)
+               T(I,J,N1)=T(I,J,N2)
+               W(I,J,K)=W(I,J,K)/WBAR(K)
+               W(I,J,N1)=W(I,J,N2)
+            ENDDO
+          ENDDO
+        ENDDO
+       ENDIF"""
 
     def translate_grid_section(self, grid, header):
         """
@@ -173,14 +199,11 @@ class F90Translator:
                 ]
             )
         for boundary, patchs in bound.items():
-            for patch, values in patchs.items():
-                value_condition = values.get("chb_value", None)
-                border_value = values.get("le_value", None)
-                velocity_u = values.get("le_value_veloc_u", None)
-                velocity_v = values.get("le_value_veloc_v", None)
-                velocity_w = values.get("le_value_veloc_w", None)
-                conditions = [border_value, velocity_u, velocity_v, velocity_w]
-                if value_condition == 2 and any(conditions):
+            for patch, patch_values in patchs.items():
+                velocity_u = patch_values.get("le_value_veloc_u", None)
+                velocity_v = patch_values.get("le_value_veloc_v", None)
+                velocity_w = patch_values.get("le_value_veloc_w", None)
+                if any([velocity_u, velocity_v, velocity_w]):
                     _, loop_var_1, loop_limit_1, loop_var_2, loop_limit_2, indexes = self.loop_mapping[boundary]
                     f90_lines.extend(
                         [
@@ -194,14 +217,32 @@ class F90Translator:
                         f90_lines.append(f"{i}{i}V{indexes}={velocity_v}")
                     if velocity_w:
                         f90_lines.append(f"{i}{i}W{indexes}={velocity_w}")
-                    if border_value:
-                        f90_lines.append(f"{i}{i}T{indexes}={border_value}")
                     f90_lines.extend(
                         [
                             f"{i}ENDDO",
                             "ENDDO",
                         ]
                     )
+                variables = {key: value for key, value in patch_values.items() if isinstance(value, dict)}
+                for variable, values in variables.items():
+                    value_condition = values.get("chb_value", None)
+                    border_value = values.get("le_value", None)
+                    if value_condition == 2 and border_value and variable == "le_var_title5":
+                        _, loop_var_1, loop_limit_1, loop_var_2, loop_limit_2, indexes = self.loop_mapping[boundary]
+                        f90_lines.extend(
+                            [
+                                f"DO {loop_var_1}=1,{loop_limit_1}",
+                                f"{i}DO {loop_var_2}=1,{loop_limit_2}",
+                            ]
+                        )
+                        if border_value:
+                            f90_lines.append(f"{i}{i}T{indexes}={border_value}")
+                        f90_lines.extend(
+                            [
+                                f"{i}ENDDO",
+                                "ENDDO",
+                            ]
+                        )
         f90_lines.append("RETURN")
         return f90_lines
 
@@ -221,14 +262,18 @@ class F90Translator:
 
     def translate_output_section(self, output):
         f90_lines = ["ENTRY OUTPUT"]
+        if "checkBox_4" in output and output["checkBox_4"] == 2:
+            f90_lines.append(self.dimensionless_output)
         f90_lines.append("RETURN")
         return f90_lines
 
-    def translate_phi_section(self, variables, bound, values):
+    def translate_phi_section(self, bound, values):
         f90_lines = ["ENTRY PHI"]
         added_if = False
 
         for var, nf_value in self.variables_map.items():
+
+            #### GAM(I,J,K)=le_k
             if var in values and "le_k" in values[var]:
                 if not added_if:
                     f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
@@ -244,13 +289,15 @@ class F90Translator:
                         f"{i}ENDDO",
                     ]
                 )
+
+            #### SC(I,J,K)=le_local_sc y GAM(I,J,K)=le_local_k
             if var in values and "chb_local_value" in values[var]:
                 regions = {key: value for key, value in values[var].items() if isinstance(value, dict)}
                 for region, region_values in regions.items():
                     volumes = {key: value for key, value in region_values.items() if isinstance(value, dict)}
                     for volume, volume_values in volumes.items():
-                        if all(key in volume_values for key in self.volume_widgets):
-                            if "le_local_value" in region_values or "le_local_k" in region_values:
+                        if "le_local_sc" in region_values or "le_local_k" in region_values:
+                            if all(key in volume_values for key in self.volume_widgets):
                                 if not added_if:
                                     f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
                                     added_if = True
@@ -263,32 +310,52 @@ class F90Translator:
                                 f90_lines.append(f"{i}DO I={x_start},{x_lon}")
                                 f90_lines.append(f"{i}{i}DO J={y_start},{y_lon}")
                                 f90_lines.append(f"{I}DO K={z_start},{z_lon}")
-                                if "le_local_value" in region_values:
-                                    f90_lines.append(f"{I}{i}SC(I,J,K)={region_values['le_local_value']}")
+                                if "le_local_sc" in region_values:
+                                    f90_lines.append(f"{I}{i}SC(I,J,K)={region_values['le_local_sc']}")
                                 if "le_local_k" in region_values:
                                     f90_lines.append(f"{I}{i}GAM(I,J,K)={region_values['le_local_k']}")
                                 f90_lines.append(f"{I}ENDDO")
                                 f90_lines.append(f"{i}{i}ENDDO")
                                 f90_lines.append(f"{i}ENDDO")
+                            else:
+                                if not added_if:
+                                    f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
+                                    added_if = True
+                                f90_lines.append(f"{i}DO I=2,L2")
+                                f90_lines.append(f"{i}{i}DO J=2,M2")
+                                f90_lines.append(f"{I}DO K=2,2")
+                                if "le_local_sc" in region_values:
+                                    f90_lines.append(f"{I}{i}SC(I,J,K)={region_values['le_local_sc']}")
+                                if "le_local_k" in region_values:
+                                    f90_lines.append(f"{I}{i}GAM(I,J,K)={region_values['le_local_k']}")
+                                f90_lines.append(f"{I}ENDDO")
+                                f90_lines.append(f"{i}{i}ENDDO")
+                                f90_lines.append(f"{i}ENDDO")
+
+            #### KBC=chb_flux, FLXC=le_value y FLXP=le_tempamb
+            for boundary, patches in bound.items():
+                for patch, patch_values in patches.items():
+                    if var in patch_values and "chb_flux" in patch_values[var] and patch_values[var]["chb_flux"] == 2:
+                        if not added_if:
+                            f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
+                            added_if = True
+                        phi_var, loop_var_1, loop_limit_1, loop_var_2, loop_limit_2, _ = self.loop_mapping[boundary]
+                        f90_lines.append(f"{i}DO {loop_var_1}=1,{loop_limit_1}")
+                        f90_lines.append(f"{i}{i}DO {loop_var_2}=1,{loop_limit_2}")
+                        f90_lines.append(f"{I}KBC{phi_var}({loop_var_1},{loop_var_2})=2")
+                        if "le_value" in patch_values[var]:
+                            le_value = patch_values[var]["le_value"]
+                            f90_lines.append(f"{I}FLXC{phi_var}({loop_var_1},{loop_var_2})={le_value}")
+                        if "le_tempamb" in patch_values[var]:
+                            le_tempamb = patch_values[var]["le_tempamb"]
+                            f90_lines.append(f"{I}FLXP{phi_var}({loop_var_1},{loop_var_2})={le_tempamb}")
+                        f90_lines.append(f"{i}{i}ENDDO")
+                        f90_lines.append(f"{i}ENDDO")
+
             if added_if:
                 f90_lines.append("ENDIF")
                 added_if = False
-        for boundary, patches in bound.items():
-            for patch, values in patches.items():
-                flux_condition = values.get("chb_flux", 0)
-                if flux_condition == 2:
-                    phi_var, loop_var_1, loop_limit_1, loop_var_2, loop_limit_2, _ = self.loop_mapping[boundary]
-                    ambient_temp = values.get("le_tempamb")
-                    f90_lines.append(f"DO {loop_var_1}=1,{loop_limit_1}")
-                    f90_lines.append(f"{i}DO {loop_var_2}=1,{loop_limit_2}")
-                    if ambient_temp is not None:
-                        f90_lines.append(
-                            f"{i}{i}KBC{phi_var}({loop_var_1},{loop_var_2})=2; FLXC{phi_var}({loop_var_1},{loop_var_2})={ambient_temp}"
-                        )
-                    else:
-                        f90_lines.append(f"{i}{i}KBC{phi_var}({loop_var_1},{loop_var_2})=2")
-                    f90_lines.append(f"{i}ENDDO")
-                    f90_lines.append("ENDDO")
+
         f90_lines.append("RETURN")
         f90_lines.append("END")
         return f90_lines
@@ -296,6 +363,8 @@ class F90Translator:
     def generate_f90(self, config_manager):
         self.extend_f90(["SUBROUTINE ADAPT"])
         self.extend_f90(["INCLUDE '3DCOMMON.F90'"])
+        if "checkBox_4" in config_manager.output and config_manager.output["checkBox_4"] == 2:
+            self.extend_f90([self.dimensionless])
 
         # HEADER y GRID section - Usando la función definida anteriormente
         grid_section_lines = self.translate_grid_section(config_manager.grid, config_manager.header)
@@ -314,11 +383,9 @@ class F90Translator:
             config_manager.bound,
         )
         self.extend_f90(bound_section_lines)
-        output_section_lines = self.translate_output_section("")
+        output_section_lines = self.translate_output_section(config_manager.output)
         self.extend_f90(output_section_lines)
-        phi_section_lines = self.translate_phi_section(
-            config_manager.variables, config_manager.bound, config_manager.values
-        )
+        phi_section_lines = self.translate_phi_section(config_manager.bound, config_manager.values)
         self.extend_f90(phi_section_lines)
 
         print(self.f90_lines)
