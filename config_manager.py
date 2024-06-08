@@ -62,6 +62,7 @@ class ConfigManager:
                 }
             },
             'OUTPUT': {
+                'le_var_title5': {},
                 'le_last': '5'
             }
         }

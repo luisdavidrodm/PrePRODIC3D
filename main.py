@@ -95,7 +95,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.variables_window = VariablesWindow(self.config_manager)
             self.variables_window.flow_type_change_signal.connect(self.handle_flow_type_signal)
             self.variables_window.variables_signal.connect(self.handle_variables_signal)
-            self.variables_window.lw_variables_update_signal.connect(self.handle_lw_variables_update_signal)
             self.variables_window.show()
         else:
             self.variables_window.raise_()
@@ -153,14 +152,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         if self.bordes_window:
             print(f"Recibiendo señal en MainWindow, variables: {variables}")  # Impresión de depuración
             self.bordes_window.agregar_variables_lista(variables)
-
-    def handle_lw_variables_update_signal(self, state: bool):
-        if self.bordes_window:
-            # TODO
-            print("TODO")
-        if self.valores_window:
-            self.valores_window.load_values_list()
-            print()
 
     def actualizar_longitudes_bordes(self, longitudes: list):
         self.bordes_window.actualizar_longitudes(longitudes)

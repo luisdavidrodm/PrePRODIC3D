@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'salida_windowHGPacM.ui'
+## Form generated from reading UI file 'salida_windowykkLBU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -39,11 +39,11 @@ class Ui_salida_window(object):
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.formLayout = QFormLayout(self.groupBox_3)
         self.formLayout.setObjectName(u"formLayout")
-        self.listWidget = QListWidget(self.groupBox_3)
-        QListWidgetItem(self.listWidget)
-        self.listWidget.setObjectName(u"listWidget")
+        self.lw_variables = QListWidget(self.groupBox_3)
+        QListWidgetItem(self.lw_variables)
+        self.lw_variables.setObjectName(u"lw_variables")
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.listWidget)
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.lw_variables)
 
 
         self.horizontalLayout.addWidget(self.groupBox_3)
@@ -52,26 +52,26 @@ class Ui_salida_window(object):
         self.groupBox_4.setObjectName(u"groupBox_4")
         self.gridLayout = QGridLayout(self.groupBox_4)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.lineEdit_2 = QLineEdit(self.groupBox_4)
-        self.lineEdit_2.setObjectName(u"lineEdit_2")
+        self.le_y = QLineEdit(self.groupBox_4)
+        self.le_y.setObjectName(u"le_y")
 
-        self.gridLayout.addWidget(self.lineEdit_2, 3, 1, 1, 1)
+        self.gridLayout.addWidget(self.le_y, 3, 1, 1, 1)
 
-        self.lineEdit = QLineEdit(self.groupBox_4)
-        self.lineEdit.setObjectName(u"lineEdit")
+        self.le_x = QLineEdit(self.groupBox_4)
+        self.le_x.setObjectName(u"le_x")
 
-        self.gridLayout.addWidget(self.lineEdit, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.le_x, 2, 1, 1, 1)
 
-        self.checkBox = QCheckBox(self.groupBox_4)
-        self.checkBox.setObjectName(u"checkBox")
-        self.checkBox.setTristate(True)
+        self.chb_common_node = QCheckBox(self.groupBox_4)
+        self.chb_common_node.setObjectName(u"chb_common_node")
+        self.chb_common_node.setTristate(False)
 
-        self.gridLayout.addWidget(self.checkBox, 0, 0, 1, 2)
+        self.gridLayout.addWidget(self.chb_common_node, 0, 0, 1, 2)
 
-        self.checkBox_2 = QCheckBox(self.groupBox_4)
-        self.checkBox_2.setObjectName(u"checkBox_2")
+        self.chb_different_nodes = QCheckBox(self.groupBox_4)
+        self.chb_different_nodes.setObjectName(u"chb_different_nodes")
 
-        self.gridLayout.addWidget(self.checkBox_2, 1, 0, 1, 2)
+        self.gridLayout.addWidget(self.chb_different_nodes, 1, 0, 1, 2)
 
         self.label = QLabel(self.groupBox_4)
         self.label.setObjectName(u"label")
@@ -88,10 +88,10 @@ class Ui_salida_window(object):
 
         self.gridLayout.addWidget(self.label_3, 4, 0, 1, 1)
 
-        self.lineEdit_3 = QLineEdit(self.groupBox_4)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
+        self.le_z = QLineEdit(self.groupBox_4)
+        self.le_z.setObjectName(u"le_z")
 
-        self.gridLayout.addWidget(self.lineEdit_3, 4, 1, 1, 1)
+        self.gridLayout.addWidget(self.le_z, 4, 1, 1, 1)
 
 
         self.horizontalLayout.addWidget(self.groupBox_4)
@@ -209,21 +209,21 @@ class Ui_salida_window(object):
         self.groupBox_2.setTitle("")
         self.groupBox_3.setTitle(QCoreApplication.translate("salida_window", u"Variables", None))
 
-        __sortingEnabled = self.listWidget.isSortingEnabled()
-        self.listWidget.setSortingEnabled(False)
-        ___qlistwidgetitem = self.listWidget.item(0)
+        __sortingEnabled = self.lw_variables.isSortingEnabled()
+        self.lw_variables.setSortingEnabled(False)
+        ___qlistwidgetitem = self.lw_variables.item(0)
         ___qlistwidgetitem.setText(QCoreApplication.translate("salida_window", u"Temperatura", None));
-        self.listWidget.setSortingEnabled(__sortingEnabled)
+        self.lw_variables.setSortingEnabled(__sortingEnabled)
 
         self.groupBox_4.setTitle(QCoreApplication.translate("salida_window", u"Puntos de monitoreo", None))
-        self.lineEdit_2.setText(QCoreApplication.translate("salida_window", u"0", None))
-        self.lineEdit.setText(QCoreApplication.translate("salida_window", u"0", None))
-        self.checkBox.setText(QCoreApplication.translate("salida_window", u"Nodo com\u00fan", None))
-        self.checkBox_2.setText(QCoreApplication.translate("salida_window", u"Distintos nodos", None))
+        self.le_y.setText(QCoreApplication.translate("salida_window", u"0", None))
+        self.le_x.setText(QCoreApplication.translate("salida_window", u"0", None))
+        self.chb_common_node.setText(QCoreApplication.translate("salida_window", u"Nodo com\u00fan", None))
+        self.chb_different_nodes.setText(QCoreApplication.translate("salida_window", u"Distintos nodos", None))
         self.label.setText(QCoreApplication.translate("salida_window", u"X", None))
         self.label_2.setText(QCoreApplication.translate("salida_window", u"Y", None))
         self.label_3.setText(QCoreApplication.translate("salida_window", u"Z", None))
-        self.lineEdit_3.setText(QCoreApplication.translate("salida_window", u"0", None))
+        self.le_z.setText(QCoreApplication.translate("salida_window", u"0", None))
         self.groupBox_5.setTitle("")
         self.groupBox_6.setTitle(QCoreApplication.translate("salida_window", u"Promedio en las esquinas", None))
         self.checkBox_4.setText(QCoreApplication.translate("salida_window", u"Todas las esquinas", None))

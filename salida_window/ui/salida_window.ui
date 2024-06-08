@@ -33,7 +33,7 @@
            </property>
            <layout class="QFormLayout" name="formLayout">
             <item row="0" column="1">
-             <widget class="QListWidget" name="listWidget">
+             <widget class="QListWidget" name="lw_variables">
               <item>
                <property name="text">
                 <string>Temperatura</string>
@@ -51,31 +51,31 @@
            </property>
            <layout class="QGridLayout" name="gridLayout">
             <item row="3" column="1">
-             <widget class="QLineEdit" name="lineEdit_2">
+             <widget class="QLineEdit" name="le_y">
               <property name="text">
                <string>0</string>
               </property>
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="lineEdit">
+             <widget class="QLineEdit" name="le_x">
               <property name="text">
                <string>0</string>
               </property>
              </widget>
             </item>
             <item row="0" column="0" colspan="2">
-             <widget class="QCheckBox" name="checkBox">
+             <widget class="QCheckBox" name="chb_common_node">
               <property name="text">
                <string>Nodo común</string>
               </property>
               <property name="tristate">
-               <bool>true</bool>
+               <bool>false</bool>
               </property>
              </widget>
             </item>
             <item row="1" column="0" colspan="2">
-             <widget class="QCheckBox" name="checkBox_2">
+             <widget class="QCheckBox" name="chb_different_nodes">
               <property name="text">
                <string>Distintos nodos</string>
               </property>
@@ -103,7 +103,7 @@
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QLineEdit" name="lineEdit_3">
+             <widget class="QLineEdit" name="le_z">
               <property name="text">
                <string>0</string>
               </property>

@@ -7,7 +7,6 @@ from variables_window.ui.variables_window_ui import Ui_variables_window
 class VariablesWindow(qtw.QDialog, Ui_variables_window):
 
     flow_type_change_signal = Signal(bool)
-    lw_variables_update_signal = Signal(bool)
     variables_signal = Signal(list)
 
     def __init__(self, config_manager):
@@ -181,12 +180,12 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
                 "name": widget.text(),
                 "Region 1": {"Volumen 1": {}},
             }
+            self.config_manager.output[le_name] = {"name": widget.text()}
         else:
             # Si está desactivado, elimina de VALUES si existe
             if le_name in self.config_manager.values:
                 del self.config_manager.values[le_name]
-        # Emitir una señal para actualizar cualquier ventana que dependa de VARIABLES
-        self.lw_variables_update_signal.emit(True)
+                del self.config_manager.output[le_name]
 
     def le_var_title_changed(self, _):
         """Actualiza el config_structure en el ConfigManager basado en el texto del LineEdit."""
@@ -195,7 +194,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         if sender.text().strip():
             if le_name in self.config_manager.values:
                 self.config_manager.values[le_name]["name"] = sender.text()
-        self.lw_variables_update_signal.emit(True)
+                self.config_manager.output[le_name]["name"] = sender.text()
 
     def load_variable_config(self):
         self.config_manager.load_config(self)
