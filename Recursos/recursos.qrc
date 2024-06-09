@@ -1,0 +1,5 @@
+<RCC>
+  <qresource prefix="Icon">
+    <file>icon/prodic_icon.jpg</file>
+  </qresource>
+</RCC>

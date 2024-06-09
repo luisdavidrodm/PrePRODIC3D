@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Variables - PrePRODIC3D</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../Recursos/recursos.qrc">
+    <normaloff>:/Icon/icon/prodic_icon.jpg</normaloff>:/Icon/icon/prodic_icon.jpg</iconset>
+  </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
     <widget class="QGroupBox" name="gb_variables">
@@ -748,6 +752,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../Recursos/recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>

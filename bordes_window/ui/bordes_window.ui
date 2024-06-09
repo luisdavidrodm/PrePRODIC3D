@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>445</width>
-    <height>637</height>
+    <height>603</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Bordes - PrePRODIC3D</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../Recursos/recursos.qrc">
+    <normaloff>:/Icon/icon/prodic_icon.jpg</normaloff>:/Icon/icon/prodic_icon.jpg</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="2" column="0">
@@ -20,45 +24,66 @@
       <string>Velocidad</string>
      </property>
      <layout class="QGridLayout" name="gridLayout_4">
-      <item row="0" column="1">
-       <widget class="QLineEdit" name="le_value_veloc_u">
-        <property name="enabled">
-         <bool>true</bool>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Velocidad U</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="0">
-       <widget class="QLabel" name="label_5">
-        <property name="text">
-         <string>Velocidad V</string>
-        </property>
-       </widget>
-      </item>
-      <item row="1" column="1">
+      <item row="1" column="2">
        <widget class="QLineEdit" name="le_value_veloc_v">
         <property name="enabled">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="2" column="1">
+      <item row="0" column="1">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Velocidad U</string>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="1">
+       <widget class="QLabel" name="label_5">
+        <property name="text">
+         <string>Velocidad V</string>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="2">
        <widget class="QLineEdit" name="le_value_veloc_w">
         <property name="enabled">
          <bool>true</bool>
         </property>
        </widget>
       </item>
-      <item row="2" column="0">
+      <item row="0" column="2">
+       <widget class="QLineEdit" name="le_value_veloc_u">
+        <property name="enabled">
+         <bool>true</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="1">
        <widget class="QLabel" name="label_9">
         <property name="text">
          <string>Velocidad W</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="3">
+       <widget class="QCheckBox" name="chb_ex_veloc_u">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="1" column="3">
+       <widget class="QCheckBox" name="chb_ex_veloc_v">
+        <property name="text">
+         <string/>
+        </property>
+       </widget>
+      </item>
+      <item row="2" column="3">
+       <widget class="QCheckBox" name="chb_ex_veloc_w">
+        <property name="text">
+         <string/>
         </property>
        </widget>
       </item>
@@ -130,28 +155,42 @@
         <property name="title">
          <string/>
         </property>
-        <layout class="QVBoxLayout" name="verticalLayout_3">
-         <item>
-          <widget class="QLabel" name="lb_value">
-           <property name="text">
-            <string>Valor</string>
+        <layout class="QGridLayout" name="gridLayout_6">
+         <item row="4" column="0">
+          <widget class="QLineEdit" name="le_tempamb">
+           <property name="enabled">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLineEdit" name="le_value"/>
-         </item>
-         <item>
+         <item row="3" column="0">
           <widget class="QLabel" name="lb_variable">
            <property name="text">
             <string>Temp. ambiente</string>
            </property>
           </widget>
          </item>
-         <item>
-          <widget class="QLineEdit" name="le_tempamb">
-           <property name="enabled">
-            <bool>false</bool>
+         <item row="2" column="0">
+          <widget class="QLineEdit" name="le_value"/>
+         </item>
+         <item row="0" column="0">
+          <widget class="QLabel" name="lb_value">
+           <property name="text">
+            <string>Valor</string>
+           </property>
+          </widget>
+         </item>
+         <item row="2" column="1">
+          <widget class="QCheckBox" name="chb_ex_value">
+           <property name="text">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="1">
+          <widget class="QCheckBox" name="chb_ex_tempamb">
+           <property name="text">
+            <string/>
            </property>
           </widget>
          </item>
@@ -375,6 +414,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../Recursos/recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>

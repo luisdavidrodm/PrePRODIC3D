@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Salida - PrePRODIC3D</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../Recursos/recursos.qrc">
+    <normaloff>:/Icon/icon/prodic_icon.jpg</normaloff>:/Icon/icon/prodic_icon.jpg</iconset>
+  </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="0" column="0">
     <widget class="QGroupBox" name="groupBox">
@@ -254,6 +258,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../Recursos/recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>
