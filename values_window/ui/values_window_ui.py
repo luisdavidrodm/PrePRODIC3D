@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windowuIrvBK.ui'
+## Form generated from reading UI file 'values_windowOjqQTO.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -316,15 +316,15 @@ class Ui_valores_window(object):
 
         self.gridLayout.addWidget(self.label_10, 2, 0, 1, 1)
 
-        self.le_y_lon = QLineEdit(self.groupBox_9)
-        self.le_y_lon.setObjectName(u"le_y_lon")
+        self.le_y_end = QLineEdit(self.groupBox_9)
+        self.le_y_end.setObjectName(u"le_y_end")
         sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.le_y_lon.sizePolicy().hasHeightForWidth())
-        self.le_y_lon.setSizePolicy(sizePolicy)
+        sizePolicy.setHeightForWidth(self.le_y_end.sizePolicy().hasHeightForWidth())
+        self.le_y_end.setSizePolicy(sizePolicy)
 
-        self.gridLayout.addWidget(self.le_y_lon, 2, 2, 1, 1)
+        self.gridLayout.addWidget(self.le_y_end, 2, 2, 1, 1)
 
         self.le_x_start = QLineEdit(self.groupBox_9)
         self.le_x_start.setObjectName(u"le_x_start")
@@ -340,12 +340,12 @@ class Ui_valores_window(object):
 
         self.gridLayout.addWidget(self.le_y_start, 1, 2, 1, 1)
 
-        self.le_x_lon = QLineEdit(self.groupBox_9)
-        self.le_x_lon.setObjectName(u"le_x_lon")
-        sizePolicy.setHeightForWidth(self.le_x_lon.sizePolicy().hasHeightForWidth())
-        self.le_x_lon.setSizePolicy(sizePolicy)
+        self.le_x_end = QLineEdit(self.groupBox_9)
+        self.le_x_end.setObjectName(u"le_x_end")
+        sizePolicy.setHeightForWidth(self.le_x_end.sizePolicy().hasHeightForWidth())
+        self.le_x_end.setSizePolicy(sizePolicy)
 
-        self.gridLayout.addWidget(self.le_x_lon, 2, 1, 1, 1)
+        self.gridLayout.addWidget(self.le_x_end, 2, 1, 1, 1)
 
         self.label_12 = QLabel(self.groupBox_9)
         self.label_12.setObjectName(u"label_12")
@@ -377,12 +377,12 @@ class Ui_valores_window(object):
 
         self.gridLayout.addWidget(self.le_z_start, 1, 3, 1, 1)
 
-        self.le_z_lon = QLineEdit(self.groupBox_9)
-        self.le_z_lon.setObjectName(u"le_z_lon")
-        sizePolicy.setHeightForWidth(self.le_z_lon.sizePolicy().hasHeightForWidth())
-        self.le_z_lon.setSizePolicy(sizePolicy)
+        self.le_z_end = QLineEdit(self.groupBox_9)
+        self.le_z_end.setObjectName(u"le_z_end")
+        sizePolicy.setHeightForWidth(self.le_z_end.sizePolicy().hasHeightForWidth())
+        self.le_z_end.setSizePolicy(sizePolicy)
 
-        self.gridLayout.addWidget(self.le_z_lon, 2, 3, 1, 1)
+        self.gridLayout.addWidget(self.le_z_end, 2, 3, 1, 1)
 
 
         self.verticalLayout.addWidget(self.groupBox_9)
@@ -464,10 +464,10 @@ class Ui_valores_window(object):
         self.pb_add_volume.setText(QCoreApplication.translate("valores_window", u"Agregar un volumen", None))
         self.pb_remove_volume.setText(QCoreApplication.translate("valores_window", u"Eliminar \u00faltimo volumen", None))
         self.groupBox_9.setTitle("")
-        self.label_10.setText(QCoreApplication.translate("valores_window", u"Longitud", None))
+        self.label_10.setText(QCoreApplication.translate("valores_window", u"Termina", None))
         self.label_12.setText(QCoreApplication.translate("valores_window", u"X", None))
         self.label_13.setText(QCoreApplication.translate("valores_window", u"Y", None))
-        self.label_11.setText(QCoreApplication.translate("valores_window", u"Inicio", None))
+        self.label_11.setText(QCoreApplication.translate("valores_window", u"Empieza", None))
         self.label_14.setText(QCoreApplication.translate("valores_window", u"Z", None))
     # retranslateUi
 

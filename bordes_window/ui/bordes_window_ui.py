@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bordes_windowBSLjJW.ui'
+## Form generated from reading UI file 'bordes_windowVOJWan.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -24,45 +24,60 @@ class Ui_bordes_window(object):
     def setupUi(self, bordes_window):
         if not bordes_window.objectName():
             bordes_window.setObjectName(u"bordes_window")
-        bordes_window.resize(445, 637)
+        bordes_window.resize(445, 603)
         self.gridLayout_3 = QGridLayout(bordes_window)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.groupBox_4 = QGroupBox(bordes_window)
         self.groupBox_4.setObjectName(u"groupBox_4")
         self.gridLayout_4 = QGridLayout(self.groupBox_4)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.le_value_veloc_u = QLineEdit(self.groupBox_4)
-        self.le_value_veloc_u.setObjectName(u"le_value_veloc_u")
-        self.le_value_veloc_u.setEnabled(True)
-
-        self.gridLayout_4.addWidget(self.le_value_veloc_u, 0, 1, 1, 1)
-
-        self.label_4 = QLabel(self.groupBox_4)
-        self.label_4.setObjectName(u"label_4")
-
-        self.gridLayout_4.addWidget(self.label_4, 0, 0, 1, 1)
-
-        self.label_5 = QLabel(self.groupBox_4)
-        self.label_5.setObjectName(u"label_5")
-
-        self.gridLayout_4.addWidget(self.label_5, 1, 0, 1, 1)
-
         self.le_value_veloc_v = QLineEdit(self.groupBox_4)
         self.le_value_veloc_v.setObjectName(u"le_value_veloc_v")
         self.le_value_veloc_v.setEnabled(True)
 
-        self.gridLayout_4.addWidget(self.le_value_veloc_v, 1, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.le_value_veloc_v, 1, 2, 1, 1)
+
+        self.label_4 = QLabel(self.groupBox_4)
+        self.label_4.setObjectName(u"label_4")
+
+        self.gridLayout_4.addWidget(self.label_4, 0, 1, 1, 1)
+
+        self.label_5 = QLabel(self.groupBox_4)
+        self.label_5.setObjectName(u"label_5")
+
+        self.gridLayout_4.addWidget(self.label_5, 1, 1, 1, 1)
 
         self.le_value_veloc_w = QLineEdit(self.groupBox_4)
         self.le_value_veloc_w.setObjectName(u"le_value_veloc_w")
         self.le_value_veloc_w.setEnabled(True)
 
-        self.gridLayout_4.addWidget(self.le_value_veloc_w, 2, 1, 1, 1)
+        self.gridLayout_4.addWidget(self.le_value_veloc_w, 2, 2, 1, 1)
+
+        self.le_value_veloc_u = QLineEdit(self.groupBox_4)
+        self.le_value_veloc_u.setObjectName(u"le_value_veloc_u")
+        self.le_value_veloc_u.setEnabled(True)
+
+        self.gridLayout_4.addWidget(self.le_value_veloc_u, 0, 2, 1, 1)
 
         self.label_9 = QLabel(self.groupBox_4)
         self.label_9.setObjectName(u"label_9")
 
-        self.gridLayout_4.addWidget(self.label_9, 2, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.label_9, 2, 1, 1, 1)
+
+        self.chb_ex_veloc_u = QCheckBox(self.groupBox_4)
+        self.chb_ex_veloc_u.setObjectName(u"chb_ex_veloc_u")
+
+        self.gridLayout_4.addWidget(self.chb_ex_veloc_u, 0, 3, 1, 1)
+
+        self.chb_ex_veloc_v = QCheckBox(self.groupBox_4)
+        self.chb_ex_veloc_v.setObjectName(u"chb_ex_veloc_v")
+
+        self.gridLayout_4.addWidget(self.chb_ex_veloc_v, 1, 3, 1, 1)
+
+        self.chb_ex_veloc_w = QCheckBox(self.groupBox_4)
+        self.chb_ex_veloc_w.setObjectName(u"chb_ex_veloc_w")
+
+        self.gridLayout_4.addWidget(self.chb_ex_veloc_w, 2, 3, 1, 1)
 
 
         self.gridLayout_3.addWidget(self.groupBox_4, 2, 0, 1, 1)
@@ -110,28 +125,38 @@ class Ui_bordes_window(object):
 
         self.groupBox_8 = QGroupBox(self.groupBox_3)
         self.groupBox_8.setObjectName(u"groupBox_8")
-        self.verticalLayout_3 = QVBoxLayout(self.groupBox_8)
-        self.verticalLayout_3.setObjectName(u"verticalLayout_3")
-        self.lb_value = QLabel(self.groupBox_8)
-        self.lb_value.setObjectName(u"lb_value")
-
-        self.verticalLayout_3.addWidget(self.lb_value)
-
-        self.le_value = QLineEdit(self.groupBox_8)
-        self.le_value.setObjectName(u"le_value")
-
-        self.verticalLayout_3.addWidget(self.le_value)
-
-        self.lb_variable = QLabel(self.groupBox_8)
-        self.lb_variable.setObjectName(u"lb_variable")
-
-        self.verticalLayout_3.addWidget(self.lb_variable)
-
+        self.gridLayout_6 = QGridLayout(self.groupBox_8)
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.le_tempamb = QLineEdit(self.groupBox_8)
         self.le_tempamb.setObjectName(u"le_tempamb")
         self.le_tempamb.setEnabled(False)
 
-        self.verticalLayout_3.addWidget(self.le_tempamb)
+        self.gridLayout_6.addWidget(self.le_tempamb, 4, 0, 1, 1)
+
+        self.lb_variable = QLabel(self.groupBox_8)
+        self.lb_variable.setObjectName(u"lb_variable")
+
+        self.gridLayout_6.addWidget(self.lb_variable, 3, 0, 1, 1)
+
+        self.le_value = QLineEdit(self.groupBox_8)
+        self.le_value.setObjectName(u"le_value")
+
+        self.gridLayout_6.addWidget(self.le_value, 2, 0, 1, 1)
+
+        self.lb_value = QLabel(self.groupBox_8)
+        self.lb_value.setObjectName(u"lb_value")
+
+        self.gridLayout_6.addWidget(self.lb_value, 0, 0, 1, 1)
+
+        self.chb_ex_value = QCheckBox(self.groupBox_8)
+        self.chb_ex_value.setObjectName(u"chb_ex_value")
+
+        self.gridLayout_6.addWidget(self.chb_ex_value, 2, 1, 1, 1)
+
+        self.chb_ex_tempamb = QCheckBox(self.groupBox_8)
+        self.chb_ex_tempamb.setObjectName(u"chb_ex_tempamb")
+
+        self.gridLayout_6.addWidget(self.chb_ex_tempamb, 4, 1, 1, 1)
 
 
         self.horizontalLayout.addWidget(self.groupBox_8)
@@ -207,15 +232,15 @@ class Ui_bordes_window(object):
         self.groupBox_2.setObjectName(u"groupBox_2")
         self.gridLayout_5 = QGridLayout(self.groupBox_2)
         self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.le_vertical_lon = QLineEdit(self.groupBox_2)
-        self.le_vertical_lon.setObjectName(u"le_vertical_lon")
+        self.le_vertical_start = QLineEdit(self.groupBox_2)
+        self.le_vertical_start.setObjectName(u"le_vertical_start")
 
-        self.gridLayout_5.addWidget(self.le_vertical_lon, 1, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.le_vertical_start, 1, 2, 1, 1)
 
-        self.le_transversal_start = QLineEdit(self.groupBox_2)
-        self.le_transversal_start.setObjectName(u"le_transversal_start")
+        self.le_transversal_end = QLineEdit(self.groupBox_2)
+        self.le_transversal_end.setObjectName(u"le_transversal_end")
 
-        self.gridLayout_5.addWidget(self.le_transversal_start, 3, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.le_transversal_end, 3, 1, 1, 1)
 
         self.label = QLabel(self.groupBox_2)
         self.label.setObjectName(u"label")
@@ -227,15 +252,15 @@ class Ui_bordes_window(object):
 
         self.gridLayout_5.addWidget(self.label_10, 3, 0, 1, 1)
 
-        self.le_transversal_lon = QLineEdit(self.groupBox_2)
-        self.le_transversal_lon.setObjectName(u"le_transversal_lon")
+        self.le_transversal_start = QLineEdit(self.groupBox_2)
+        self.le_transversal_start.setObjectName(u"le_transversal_start")
 
-        self.gridLayout_5.addWidget(self.le_transversal_lon, 1, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.le_transversal_start, 1, 1, 1, 1)
 
-        self.le_vertical_start = QLineEdit(self.groupBox_2)
-        self.le_vertical_start.setObjectName(u"le_vertical_start")
+        self.le_vertical_end = QLineEdit(self.groupBox_2)
+        self.le_vertical_end.setObjectName(u"le_vertical_end")
 
-        self.gridLayout_5.addWidget(self.le_vertical_start, 3, 2, 1, 1)
+        self.gridLayout_5.addWidget(self.le_vertical_end, 3, 2, 1, 1)
 
         self.lb_transversal = QLabel(self.groupBox_2)
         self.lb_transversal.setObjectName(u"lb_transversal")
@@ -296,6 +321,9 @@ class Ui_bordes_window(object):
         self.label_4.setText(QCoreApplication.translate("bordes_window", u"Velocidad U", None))
         self.label_5.setText(QCoreApplication.translate("bordes_window", u"Velocidad V", None))
         self.label_9.setText(QCoreApplication.translate("bordes_window", u"Velocidad W", None))
+        self.chb_ex_veloc_u.setText("")
+        self.chb_ex_veloc_v.setText("")
+        self.chb_ex_veloc_w.setText("")
         self.groupBox_3.setTitle(QCoreApplication.translate("bordes_window", u"Variables escalares", None))
         self.groupBox_6.setTitle("")
 
@@ -310,8 +338,10 @@ class Ui_bordes_window(object):
         self.chb_flux.setText(QCoreApplication.translate("bordes_window", u"Flujo", None))
         self.chb_convec.setText(QCoreApplication.translate("bordes_window", u"Convecci\u00f3n", None))
         self.groupBox_8.setTitle("")
-        self.lb_value.setText(QCoreApplication.translate("bordes_window", u"Valor", None))
         self.lb_variable.setText(QCoreApplication.translate("bordes_window", u"Temp. ambiente", None))
+        self.lb_value.setText(QCoreApplication.translate("bordes_window", u"Valor", None))
+        self.chb_ex_value.setText("")
+        self.chb_ex_tempamb.setText("")
         self.gb_tipo_segment.setTitle(QCoreApplication.translate("bordes_window", u"Tipo de segmento", None))
         self.chb_wall.setText(QCoreApplication.translate("bordes_window", u"Pared", None))
         self.chb_inmass.setText(QCoreApplication.translate("bordes_window", u"Entrada de la masa", None))
@@ -338,8 +368,8 @@ class Ui_bordes_window(object):
 
         self.label_3.setText(QCoreApplication.translate("bordes_window", u"Segmento", None))
         self.groupBox_2.setTitle("")
-        self.label.setText(QCoreApplication.translate("bordes_window", u"Longitud", None))
-        self.label_10.setText(QCoreApplication.translate("bordes_window", u"Empieza", None))
+        self.label.setText(QCoreApplication.translate("bordes_window", u"Empieza", None))
+        self.label_10.setText(QCoreApplication.translate("bordes_window", u"Termina", None))
         self.lb_transversal.setText(QCoreApplication.translate("bordes_window", u"Y", None))
         self.lb_vertical.setText(QCoreApplication.translate("bordes_window", u"Z", None))
         self.label_2.setText(QCoreApplication.translate("bordes_window", u"Borde", None))

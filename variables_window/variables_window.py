@@ -28,7 +28,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         # Conexion con ConfigManager
         self.widgets = [
             "cb_tsimu", "cb_tipoflujo", "cb_trataborde", "le_iptm", "le_dt", "le_tol", "checkBox"
-            ] 
+            ]
 
         for i in range(1, 13):
             self.widgets.extend([f"le_var_title{i}", f"chb_kprint{i}"])
@@ -42,11 +42,11 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             "chb_ksolve1", "chb_ksolve2", "chb_ksolve3", "chb_ksolve4", "chb_ksolve5", 
             "chb_ksolve6", "chb_ksolve7", "chb_ksolve8", "chb_ksolve9", "chb_ksolve10", "chb_ksolve11"
         ]
-        for widget_name in self.chb_ksolve_widgets:
-            getattr(self, widget_name).stateChanged.connect(self.chb_ksolve_changed)
+        # for widget_name in self.chb_ksolve_widgets:
+        #     getattr(self, widget_name).stateChanged.connect(self.chb_ksolve_changed)
 
         self.le_var_title_widgets = [
-            "le_var_title1", "le_var_title2", "le_var_title3", "le_var_title5", "le_var_title6", 
+            "le_var_title1", "le_var_title2", "le_var_title3", "le_var_title4", "le_var_title5", "le_var_title6", 
             "le_var_title7", "le_var_title8", "le_var_title9", "le_var_title10", "le_var_title11"
         ]
         for widget_name in self.le_var_title_widgets:
@@ -66,7 +66,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
     def send_variables_data(self):
         # fmt: off
         datos_variables = [
-            self.le_var_title5.text(), self.le_var_title6.text(), self.le_var_title7.text(), self.le_var_title8.text(), 
+            self.le_var_title5.text(), self.le_var_title6.text(), self.le_var_title7.text(), self.le_var_title8.text(),
             self.le_var_title9.text(), self.le_var_title10.text(), self.le_var_title11.text(), self.le_var_title12.text(),
         ]  # fmt: on
         self.variables_signal.emit(datos_variables)
@@ -87,7 +87,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             # Habilitar widgets y establecer valor en LineEdits
             for le_name in ["le_relax1", "le_relax2", "le_relax3"]:
                 getattr(self, le_name).setEnabled(True)
-                getattr(self, le_name).setText("1")
+                # getattr(self, le_name).setText("1")
             self.chb_kprint11.setEnabled(True)
         # Si el flujo es Difusivo, revierte las acciones
         elif text == "Difusivo":
@@ -102,7 +102,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             for le_name in ["le_relax1", "le_relax2", "le_relax3"]:
                 le_widget = getattr(self, le_name)
                 le_widget.setEnabled(False)
-                le_widget.setText("")
+                # le_widget.setText("")
             self.chb_kprint11.setEnabled(False)
 
     def control_widgets_titles(self):
@@ -167,25 +167,25 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         else:
             self.config_manager.variables[sender.objectName()] = value
 
-    def chb_ksolve_changed(self, state):
-        """Actualiza el config_structure en el ConfigManager basado en el estado del CheckBox."""
-        sender = self.sender()
-        number = sender.objectName()[
-            sender.objectName().rfind("e") + 1 :
-        ]  # Esto obtiene todo después de la última 'e' en "ksolve"
-        le_name = f"le_var_title{number}"
-        if state == 2:
-            widget = getattr(self, le_name)
-            self.config_manager.values[le_name] = {
-                "name": widget.text(),
-                "Region 1": {"Volumen 1": {}},
-            }
-            self.config_manager.output[le_name] = {"name": widget.text()}
-        else:
-            # Si está desactivado, elimina de VALUES si existe
-            if le_name in self.config_manager.values:
-                del self.config_manager.values[le_name]
-                del self.config_manager.output[le_name]
+    # def chb_ksolve_changed(self, state):
+    #     """Actualiza el config_structure en el ConfigManager basado en el estado del CheckBox."""
+    #     sender = self.sender()
+    #     number = sender.objectName()[
+    #         sender.objectName().rfind("e") + 1 :
+    #     ]  # Esto obtiene todo después de la última 'e' en "ksolve"
+    #     le_name = f"le_var_title{number}"
+    #     if state == 2:
+    #         widget = getattr(self, le_name)
+    #         self.config_manager.values[le_name] = {
+    #             "name": widget.text(),
+    #             "Region 1": {"Volumen 1": {}},
+    #         }
+    #         self.config_manager.output[le_name] = {"name": widget.text()}
+    #     else:
+    #         # Si está desactivado, elimina de VALUES si existe
+    #         if le_name in self.config_manager.values:
+    #             del self.config_manager.values[le_name]
+    #             del self.config_manager.output[le_name]
 
     def le_var_title_changed(self, _):
         """Actualiza el config_structure en el ConfigManager basado en el texto del LineEdit."""
@@ -194,7 +194,20 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         if sender.text().strip():
             if le_name in self.config_manager.values:
                 self.config_manager.values[le_name]["name"] = sender.text()
+            else:
+                self.config_manager.values[le_name] = {
+                    "name": sender.text(),
+                    "Region 1": {"Volumen 1": {}},
+                }
+            if le_name in self.config_manager.output:
                 self.config_manager.output[le_name]["name"] = sender.text()
+            else:
+                self.config_manager.output[le_name] = {"name": sender.text()}
+        else:
+            if le_name in self.config_manager.values:
+                del self.config_manager.values[le_name]
+            if le_name in self.config_manager.output:
+                del self.config_manager.output[le_name]
 
     def load_variable_config(self):
         self.config_manager.load_config(self)

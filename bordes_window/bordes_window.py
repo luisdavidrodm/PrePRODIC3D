@@ -1,5 +1,3 @@
-from typing import Union
-
 from PySide6 import QtWidgets as qtw
 from PySide6.QtCore import Qt
 
@@ -26,28 +24,14 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.patch_widgets = [
             "le_value", "le_tempamb", "chb_wall", "chb_inmass", "chb_outmass",
             "le_value_veloc_u", "le_value_veloc_v", "le_value_veloc_w",
-            "le_fracmass", "le_transversal_lon", "le_transversal_start",
-            "le_vertical_lon", "le_vertical_start"
+            "le_fracmass", "le_transversal_start", "le_transversal_end",
+            "le_vertical_start", "le_vertical_end", "chb_ex_veloc_u", 
+            "chb_ex_veloc_v", "chb_ex_veloc_w"
         ]
-        self.variable_widgets = ["le_value", "le_tempamb", "chb_value", "chb_flux", "chb_convec"]
+        self.variable_widgets = [
+            "le_value", "le_tempamb", "chb_value", "chb_flux", 
+            "chb_convec", "chb_ex_value", "chb_ex_tempamb"]
         self.widgets = self.patch_widgets + self.variable_widgets
-
-        # self.patches = {
-        #     "xmax": {"count": 1, "widget": self.lw_patchlist_xmax},
-        #     "xmin": {"count": 1, "widget": self.lw_patchlist_xmin},
-        #     "ymax": {"count": 1, "widget": self.lw_patchlist_ymax},
-        #     "ymin": {"count": 1, "widget": self.lw_patchlist_ymin},
-        #     "zmax": {"count": 1, "widget": self.lw_patchlist_zmax},
-        #     "zmin": {"count": 1, "widget": self.lw_patchlist_zmin},
-        # }
-
-        # for key, patch_info in self.patches.items():
-        #     axis, direction = key[0], key[1:]
-        #     add_button = getattr(self, f'pb_addpatch_{axis}{direction}')
-        #     remove_button = getattr(self, f'pb_rempatch_{axis}{direction}')
-        #     add_button.clicked.connect(self.make_patch_handler(patch_info, add=True))
-        #     remove_button.clicked.connect(self.make_patch_handler(patch_info, add=False))
-        #     patch_info["widget"].currentRowChanged.connect(self.load_patch_config)
 
         for chb_name in ['wall', 'inmass', 'outmass', 'value', 'flux', 'convec']:
             checkbox = getattr(self, f'chb_{chb_name}')
@@ -56,6 +40,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.config_manager.connect_config(self)
         self.lw_bordes.setCurrentItem(self.lw_bordes.item(0))
         self.load_variables_list()
+        self.initialize_patch_labels()
         # fmt: on
 
     def toggle_widget_list(self, widgets, toggle):
@@ -144,13 +129,19 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         if border and patch:
             config = self.config_manager.bound[border.text()][patch.text()]
             self.toggle_widget_list(self.patch_widgets, True)
-            if patch.text() == "Borde base":
-                self.le_transversal_lon.setEnabled(False)
-                self.le_transversal_start.setEnabled(False)
-                self.le_vertical_lon.setEnabled(False)
-                self.le_vertical_start.setEnabled(False)
             self.config_manager.load_config(self, config)
             self.lw_variables.setEnabled(True)
+            if patch.text() == "Borde base":
+                self.le_transversal_start.setEnabled(False)
+                self.le_transversal_end.setEnabled(False)
+                self.le_vertical_start.setEnabled(False)
+                self.le_vertical_end.setEnabled(False)
+                if self.config_manager.is_mesh_info_complete:
+                    patch_data = self.initialize_patch_data()
+                    self.le_transversal_start.setText(patch_data["transversal_start"])
+                    self.le_transversal_end.setText(patch_data["transversal_end"])
+                    self.le_vertical_start.setText(patch_data["vertical_start"])
+                    self.le_vertical_end.setText(patch_data["vertical_end"])
             if variable is not None:
                 self.toggle_widget_list(self.variable_widgets, True)
                 self.config_manager.load_config(self, config[variable.data(Qt.UserRole)])
@@ -171,12 +162,30 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 if isinstance(value, dict):
                     self.lw_patchlist.addItem(key)
             self.load_current_config()
+            self.initialize_patch_labels()
 
     def load_patch_config(self):
         """"""
         border = self.lw_bordes.currentItem()
         patch = self.lw_patchlist.currentItem()
         if border is not None and patch is not None:
+            border_text = border.text()
+            patch_text = patch.text()
+            if self.config_manager.is_mesh_info_complete and patch_text != "Borde base":
+                patch_data = self.initialize_patch_data()
+                # Verificar si alguno de los valores ya está definido
+                keys = ["le_transversal_start", "le_transversal_end", "le_vertical_start", "le_vertical_end"]
+                if not any(key in self.config_manager.bound[border_text][patch_text] for key in keys):
+                    self.config_manager.bound[border_text][patch_text]["le_transversal_start"] = patch_data[
+                        "transversal_start"
+                    ]
+                    self.config_manager.bound[border_text][patch_text]["le_transversal_end"] = patch_data[
+                        "transversal_end"
+                    ]
+                    self.config_manager.bound[border_text][patch_text]["le_vertical_start"] = patch_data[
+                        "vertical_start"
+                    ]
+                    self.config_manager.bound[border_text][patch_text]["le_vertical_end"] = patch_data["vertical_end"]
             self.lw_variables.clearSelection()
             self.load_variables_list()
 
@@ -196,46 +205,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             self.lw_variables.addItem(item)
         self.load_current_config()
 
-    ########################
-
-    # @property
-    # def current_border(self):
-    #     return self.lw_bordes.currentItem() if self.lw_bordes.currentItem() else None
-
-    # @property
-    # def current_patch(self):
-    #     return self.lw_patchlist.currentItem() if self.lw_patchlist.currentItem() else None
-
-    # @property
-    # def current_patchlist(self):
-    #     patch_lists = [
-    #         self.lw_patchlist_xmax,
-    #         self.lw_patchlist_xmin,
-    #         self.lw_patchlist_ymax,
-    #         self.lw_patchlist_ymin,
-    #         self.lw_patchlist_zmax,
-    #         self.lw_patchlist_zmin,
-    #     ]
-    #     current_index = self.sw_patchlist.currentIndex()
-    #     if 0 <= current_index < len(patch_lists):
-    #         selected_items = patch_lists[current_index].selectedItems()
-    #         return patch_lists[current_index] if selected_items else None
-    #     return None
-
-    # def get_current_border_and_patch_name(self) -> Union[tuple[str, str], None]:
-    #     """"""
-    #     current_border_item = self.current_border
-    #     if current_border_item:
-    #         current_border = current_border_item.text()
-    #         current_patch_list = self._get_current_patch_list()
-    #         if current_patch_list:
-    #             current_patch_item = current_patch_list.currentItem()
-    #             if current_patch_item:
-    #                 return current_border, current_patch_item.text()
-    #     return None
-
-    ########################
-
     def handle_checkbox_state_changed(self, state: int):
         """"""
         sender = self.sender()
@@ -248,18 +217,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.chb_value.setChecked(sender == self.chb_value)
                 self.chb_flux.setChecked(sender == self.chb_flux)
                 self.chb_convec.setChecked(sender == self.chb_convec)
-                # self.le_tempamb.setEnabled(sender in [self.chb_convec, self.chb_flux])
-                # if sender != self.chb_convec:
-                #     self.le_tempamb.clear()
-                #     border_and_patch_name = self.get_current_border_and_patch_name()
-                #     if border_and_patch_name:
-                #         self.config_manager.set_patch_config(
-                #             border=border,
-                #             patch=patch,
-                #             variable="default",
-                #             key="le_tempamb",
-                #             value=None,
-                #         )
 
     def add_patch(self):
         """"""
@@ -279,24 +236,113 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.lw_patchlist.takeItem(patch_count - 1)
                 self.config_manager.bound[border.text()].pop(last_patch.text(), None)
 
+    def initialize_patch_labels(self):
+        """
+        Initialize patch labels based on the selected patch.
+        """
+        transversal_label = ""
+        vertical_label = ""
+        border = self.lw_bordes.currentItem()
+        if border is not None:
+            border_text = border.text()
+            if self.config_manager.is_cartesian:
+                if border_text in {"X Max", "X Min"}:
+                    transversal_label = "Y"
+                    vertical_label = "Z"
+                elif border_text in {"Y Max", "Y Min"}:
+                    transversal_label = "X"
+                    vertical_label = "Z"
+                elif border_text in {"Z Max", "Z Min"}:
+                    transversal_label = "X"
+                    vertical_label = "Y"
+            else:
+                if border_text in {"X Max", "X Min"}:
+                    transversal_label = "Y"
+                    vertical_label = "Z"
+                elif border_text in {"Y Max", "Y Min"}:
+                    transversal_label = "X"
+                    vertical_label = "Z"
+                elif border_text in {"Z Max", "Z Min"}:
+                    transversal_label = "X"
+                    vertical_label = "Y"
+        self.lb_transversal.setText(transversal_label)
+        self.lb_vertical.setText(vertical_label)
+
     def initialize_patch_data(self):
-        """"""
-        if self.config_manager.is_cartesian:
-            volume_data = {
-                "le_x_start": 0,
-                "le_x_lon": self.config_manager.grid["le_xlon"],
-                "le_y_start": 0,
-                "le_y_lon": self.config_manager.grid["le_ylon"],
-                "le_z_start": 0,
-                "le_z_lon": self.config_manager.grid["le_zlon"],
-            }
-        else:
-            volume_data = {
-                "le_x_start": 0,
-                "le_x_lon": self.config_manager.grid["le_titalon"],
-                "le_y_start": self.config_manager.grid["le_rini"],
-                "le_y_lon": self.config_manager.grid["le_rlon"],
-                "le_z_start": 0,
-                "le_z_lon": self.config_manager.grid["le_zloncil"],
-            }
-        return volume_data
+        """
+        Initialize patch data based on the selected patch.
+        """
+        patch_data = {}
+        border = self.lw_bordes.currentItem()
+        patch = self.lw_patchlist.currentItem()
+        if border is not None and patch is not None:
+            border_text = border.text()
+            if self.config_manager.is_cartesian:
+                if border_text in {"X Max", "X Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": self.config_manager.grid["le_ylon"],
+                        "vertical_start": "0",
+                        "vertical_end": self.config_manager.grid["le_zlon"],
+                    }
+                elif border_text in {"Y Max", "Y Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": self.config_manager.grid["le_xlon"],
+                        "vertical_start": "0",
+                        "vertical_end": self.config_manager.grid["le_zlon"],
+                    }
+                elif border_text in {"Z Max", "Z Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": self.config_manager.grid["le_xlon"],
+                        "vertical_start": "0",
+                        "vertical_end": self.config_manager.grid["le_ylon"],
+                    }
+            else:
+                if border_text in {"X Max", "X Min"}:
+                    patch_data = {
+                        "transversal_start": self.config_manager.grid["le_rini"],
+                        "transversal_end": self.config_manager.grid["le_rlon"],
+                        "vertical_start": "0",
+                        "vertical_end": self.config_manager.grid["le_zloncil"],
+                    }
+                elif border_text in {"Y Max", "Y Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": self.config_manager.grid["le_titalon"],
+                        "vertical_start": "0",
+                        "vertical_end": self.config_manager.grid["le_zloncil"],
+                    }
+                elif border_text in {"Z Max", "Z Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": self.config_manager.grid["le_titalon"],
+                        "vertical_start": self.config_manager.grid["le_rini"],
+                        "vertical_end": self.config_manager.grid["le_rlon"],
+                    }
+        print("patch_data", patch_data)
+        print(border.text(), patch.text())
+        return patch_data
+
+    # def initialize_patch_data(self):
+    #     """"""
+    #     if self.config_manager.is_cartesian:
+    #         volume_data = {
+    #             "le_x_start": 0,
+    #             "le_x_lon": self.config_manager.grid["le_xlon"],
+    #             "le_y_start": 0,
+    #             "le_y_lon": self.config_manager.grid["le_ylon"],
+    #             "le_z_start": 0,
+    #             "le_z_lon": self.config_manager.grid["le_zlon"],
+    #         }
+    #     else:
+    #         volume_data = {
+    #             "le_x_start": 0,
+    #             "le_x_lon": self.config_manager.grid["le_titalon"],
+    #             "le_y_start": self.config_manager.grid["le_rini"],
+    #             "le_y_lon": self.config_manager.grid["le_rlon"],
+    #             "le_z_start": 0,
+    #             "le_z_lon": self.config_manager.grid["le_zloncil"],
+    #         }
+    #     return volume_data

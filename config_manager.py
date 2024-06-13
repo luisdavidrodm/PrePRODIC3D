@@ -182,3 +182,11 @@ class ConfigManager:
     @property
     def is_diffusive(self):
         return self.variables.get("cb_tipoflujo") == "Difusivo"
+
+    @property
+    def is_mesh_info_complete(self):
+        if self.is_cartesian:
+            required_keys = ["le_xlon", "le_ylon", "le_zlon"]
+        else:
+            required_keys = ["le_titalon", "le_rini", "le_rlon", "le_zloncil"]
+        return all(self.grid.get(key) is not None for key in required_keys)

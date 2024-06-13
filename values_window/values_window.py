@@ -22,22 +22,21 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.lw_regions.currentRowChanged.connect(self.load_volume_config)
         self.lw_volumes.currentRowChanged.connect(self.load_current_config)
 
-        self.variable_widgets = ["le_general_value", "le_k", "le_kblock", "chb_iborx", "chb_ibory", "chb_iborz", "chb_ipun", "chb_local_value", "le_ixyz"]
-        self.region_widgets = ["chb_fixed_value", "chb_linear_source", "le_local_value", "le_local_sc", "le_local_sp", "le_local_k"]
-        self.volume_widgets = ["le_x_start", "le_x_lon", "le_y_start", "le_y_lon", "le_z_start", "le_z_lon"]
+        self.variable_widgets = [
+            "le_general_value", "le_k", "le_kblock", "chb_iborx", "chb_ibory",
+            "chb_iborz", "chb_ipun", "chb_local_value", "le_ixyz",
+        ]
+        self.region_widgets = [
+            "chb_fixed_value", "chb_linear_source", "le_local_value",
+            "le_local_sc", "le_local_sp", "le_local_k",
+        ]
+        self.volume_widgets = ["le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end"]
         self.widgets = self.variable_widgets + self.region_widgets + self.volume_widgets
 
         self.config_manager.connect_config(self)
         self.chb_local_value.stateChanged.connect(self.load_current_config)
         self.load_variables_list()
         # fmt: on
-
-    def is_mesh_info_complete(self):
-        if self.config_manager.is_cartesian:
-            required_keys = ["le_xlon", "le_ylon", "le_zlon"]
-        else:
-            required_keys = ["le_titalon", "le_rini", "le_rlon", "le_zloncil"]
-        return all(self.config_manager.grid.get(key) is not None for key in required_keys)
 
     def get_configured_widgets(self, variable, region, volume):
         """"""
@@ -75,13 +74,15 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 self.pb_remove_region.setEnabled(True)
                 # Seleccionada una region
                 if region is not None:
-                    self.toggle_widget_list(self.region_widgets, True)
-                    self.config_manager.load_config(self, config[region.text()])
+                    # self.toggle_widget_list(self.region_widgets, True)
+                    # self.config_manager.load_config(self, config[region.text()])
                     self.lw_volumes.setEnabled(True)
                     self.pb_add_volume.setEnabled(True)
                     self.pb_remove_volume.setEnabled(True)
                     # Seleccionado un volumen
-                    if volume is not None and self.is_mesh_info_complete():
+                    if volume is not None and self.config_manager.is_mesh_info_complete:
+                        self.toggle_widget_list(self.region_widgets, True)
+                        self.config_manager.load_config(self, config[region.text()])
                         self.toggle_widget_list(self.volume_widgets, True)
                         self.config_manager.load_config(self, config[region.text()][volume.text()])
                     else:
@@ -144,7 +145,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 if isinstance(value, dict):
                     self.lw_volumes.addItem(key)
                     # Si el diccionario está vacío, inicializar con los valores de malla
-                    if not value:
+                    if not value and self.config_manager.is_mesh_info_complete:
                         config[key] = self.initialize_volume_data()
             self.load_current_config()
 
@@ -227,6 +228,8 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.lw_regions.addItem(f"Region {region_number}")
         variable = self.lw_variables.currentItem()
         if variable is not None:
+            if f"Region {region_number}" not in self.config_manager.values[variable.data(Qt.UserRole)]:
+                self.config_manager.values[variable.data(Qt.UserRole)][f"Region {region_number}"] = {}
             self.config_manager.values[variable.data(Qt.UserRole)][f"Region {region_number}"]["Volumen 1"] = {}
 
     def remove_region(self):
@@ -247,7 +250,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         if variable is not None and region is not None:
             volume_key = f"Volumen {volume_number}"
             self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume_key] = {}
-            if self.is_mesh_info_complete():
+            if self.config_manager.is_mesh_info_complete:
                 # Definir los valores iniciales y finales de las longitudes para este volumen
                 volume_data = self.initialize_volume_data()
                 self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume_key].update(volume_data)
@@ -267,21 +270,21 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         """Inicializa los valores de malla para un volumen nuevo"""
         if self.config_manager.is_cartesian:
             volume_data = {
-                "le_x_start": 0,
-                "le_x_lon": self.config_manager.grid["le_xlon"],
-                "le_y_start": 0,
-                "le_y_lon": self.config_manager.grid["le_ylon"],
-                "le_z_start": 0,
-                "le_z_lon": self.config_manager.grid["le_zlon"],
+                "le_x_start": "0",
+                "le_x_end": self.config_manager.grid["le_xlon"],
+                "le_y_start": "0",
+                "le_y_end": self.config_manager.grid["le_ylon"],
+                "le_z_start": "0",
+                "le_z_end": self.config_manager.grid["le_zlon"],
             }
         else:
             volume_data = {
-                "le_x_start": 0,
-                "le_x_lon": self.config_manager.grid["le_titalon"],
+                "le_x_start": "0",
+                "le_x_end": self.config_manager.grid["le_titalon"],
                 "le_y_start": self.config_manager.grid["le_rini"],
-                "le_y_lon": self.config_manager.grid["le_rlon"],
-                "le_z_start": 0,
-                "le_z_lon": self.config_manager.grid["le_zloncil"],
+                "le_y_end": self.config_manager.grid["le_rlon"],
+                "le_z_start": "0",
+                "le_z_end": self.config_manager.grid["le_zloncil"],
             }
         return volume_data
 
