@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>Inicio - PrePRODIC3D</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../Recursos/recursos.qrc">
-    <normaloff>:/Icon/icon/prodic_icon.jpg</normaloff>:/Icon/icon/prodic_icon.jpg</iconset>
-  </property>
   <layout class="QVBoxLayout" name="verticalLayout_5">
    <item>
     <widget class="QGroupBox" name="gb_inicio">
@@ -80,8 +76,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../Recursos/recursos.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

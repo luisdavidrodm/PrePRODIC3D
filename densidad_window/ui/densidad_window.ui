@@ -13,10 +13,6 @@
   <property name="windowTitle">
    <string>Densidad - PrePRODIC3D</string>
   </property>
-  <property name="windowIcon">
-   <iconset resource="../../Recursos/recursos.qrc">
-    <normaloff>:/Icon/icon/prodic_icon.jpg</normaloff>:/Icon/icon/prodic_icon.jpg</iconset>
-  </property>
   <layout class="QGridLayout" name="gridLayout_2">
    <item row="2" column="0">
     <widget class="QGroupBox" name="groupBox_2">
@@ -238,8 +234,6 @@
    </item>
   </layout>
  </widget>
- <resources>
-  <include location="../../Recursos/recursos.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>
