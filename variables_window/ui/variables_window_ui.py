@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'variables_windowRhwCkk.ui'
+## Form generated from reading UI file 'variables_windowEPEeAs.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -206,6 +206,7 @@ class Ui_variables_window(object):
 
         self.le_var_title6 = QLineEdit(self.gb_variables2)
         self.le_var_title6.setObjectName(u"le_var_title6")
+        self.le_var_title6.setEnabled(False)
         self.le_var_title6.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_var_title6, 6, 2, 1, 1)
@@ -234,7 +235,8 @@ class Ui_variables_window(object):
 
         self.chb_kprint5 = QCheckBox(self.gb_variables2)
         self.chb_kprint5.setObjectName(u"chb_kprint5")
-        self.chb_kprint5.setChecked(True)
+        self.chb_kprint5.setEnabled(False)
+        self.chb_kprint5.setChecked(False)
 
         self.gridLayout.addWidget(self.chb_kprint5, 5, 4, 1, 1)
 
@@ -335,8 +337,8 @@ class Ui_variables_window(object):
 
         self.chb_ksolve5 = QCheckBox(self.gb_variables2)
         self.chb_ksolve5.setObjectName(u"chb_ksolve5")
-        self.chb_ksolve5.setEnabled(True)
-        self.chb_ksolve5.setChecked(True)
+        self.chb_ksolve5.setEnabled(False)
+        self.chb_ksolve5.setChecked(False)
 
         self.gridLayout.addWidget(self.chb_ksolve5, 5, 3, 1, 1)
 
@@ -471,7 +473,7 @@ class Ui_variables_window(object):
 
         self.le_relax5 = QLineEdit(self.gb_variables2)
         self.le_relax5.setObjectName(u"le_relax5")
-        self.le_relax5.setEnabled(True)
+        self.le_relax5.setEnabled(False)
         self.le_relax5.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_relax5, 5, 5, 1, 1)
@@ -576,10 +578,10 @@ class Ui_variables_window(object):
         self.chb_kprint6.setText(QCoreApplication.translate("variables_window", u"Imprimir", None))
         self.chb_ksolve7.setText(QCoreApplication.translate("variables_window", u"Resolver", None))
         self.chb_kprint11.setText(QCoreApplication.translate("variables_window", u"Imprimir", None))
-        self.le_var_title5.setText(QCoreApplication.translate("variables_window", u"Temperatura", None))
+        self.le_var_title5.setText("")
         self.chb_kprint2.setText(QCoreApplication.translate("variables_window", u"Imprimir", None))
         self.chb_ksolve9.setText(QCoreApplication.translate("variables_window", u"Resolver", None))
-        self.le_relax5.setText(QCoreApplication.translate("variables_window", u"1", None))
+        self.le_relax5.setText("")
         self.le_var_title1.setText(QCoreApplication.translate("variables_window", u"Velocidad U", None))
         self.checkBox.setText(QCoreApplication.translate("variables_window", u"Tratar variable 5 como temperatura:", None))
         self.label_21.setText(QCoreApplication.translate("variables_window", u"Tolerancia", None))

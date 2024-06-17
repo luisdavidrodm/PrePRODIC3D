@@ -1,12 +1,9 @@
 from PySide6 import QtWidgets as qtw
-from PySide6.QtCore import Signal
 
 from malla_window.ui.malla_window_ui import Ui_malla_window
 
 
 class MallaWindow(qtw.QDialog, Ui_malla_window):
-
-    longitudes_actualizadas_signal = Signal(list)
 
     def __init__(self, config_manager):
         # fmt: off

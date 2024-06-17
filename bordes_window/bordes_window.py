@@ -195,9 +195,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         for key, value in self.config_manager.variables.items():
             if key.startswith("le_var_title"):
                 number = key[len("le_var_title") :]
-                ksolve_key = f"chb_ksolve{number}"
-                if self.config_manager.variables.get(ksolve_key) == 2:
-                    new_items.append((value, key))
+                new_items.append((value, key))
         self.lw_variables.clear()
         for name, tech_name in new_items:
             item = qtw.QListWidgetItem(name)

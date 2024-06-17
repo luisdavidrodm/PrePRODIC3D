@@ -67,6 +67,8 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self.valores_window.close()
         if self.bordes_window and self.bordes_window.isVisible():
             self.bordes_window.close()
+        if self.densidad_window and self.densidad_window.isVisible():
+            self.densidad_window.close()
         if self.salida_window and self.salida_window.isVisible():
             self.salida_window.close()
 
@@ -83,7 +85,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.malla_window is None or not self.malla_window.isVisible():
             self.malla_window = MallaWindow(self.config_manager)
-            self.malla_window.longitudes_actualizadas_signal.connect(self.actualizar_longitudes_bordes)
             self.malla_window.show()
         else:
             self.malla_window.raise_()
@@ -93,8 +94,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.variables_window is None or not self.variables_window.isVisible():
             self.variables_window = VariablesWindow(self.config_manager)
-            self.variables_window.flow_type_change_signal.connect(self.handle_flow_type_signal)
-            self.variables_window.variables_signal.connect(self.handle_variables_signal)
             self.variables_window.show()
         else:
             self.variables_window.raise_()
@@ -135,26 +134,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         else:
             self.salida_window.raise_()
             self.salida_window.activateWindow()
-
-    ################################################################################
-    ##
-    ## Funciones de señales
-    ##
-    ################################################################################
-
-    def handle_flow_type_signal(self, es_difusivo: bool):
-        if self.bordes_window:
-            # Llamar a un método que actualice el estado del campo 'Entrada de la masa'
-            print(f"Recibiendo señal en MainWindow, es_difusivo: {es_difusivo}")  # Impresión de depuración
-            self.bordes_window.update_entrada_masa(es_difusivo)
-
-    def handle_variables_signal(self, variables: list):
-        if self.bordes_window:
-            print(f"Recibiendo señal en MainWindow, variables: {variables}")  # Impresión de depuración
-            self.bordes_window.agregar_variables_lista(variables)
-
-    def actualizar_longitudes_bordes(self, longitudes: list):
-        self.bordes_window.actualizar_longitudes(longitudes)
 
     ################################################################################
     ##

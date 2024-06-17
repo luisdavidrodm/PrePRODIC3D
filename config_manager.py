@@ -54,6 +54,30 @@ class ConfigManager:
                 }
             },
             'VALUES': {
+                'le_var_title1': {
+                    'name': 'Velocidad U',
+                    'Region 1': {
+                        'Volumen 1': {}
+                    }
+                },
+                'le_var_title2': {
+                    'name': 'Velocidad V',
+                    'Region 1': {
+                        'Volumen 1': {}
+                    }
+                },
+                'le_var_title3': {
+                    'name': 'Velocidad W',
+                    'Region 1': {
+                        'Volumen 1': {}
+                    }
+                },
+                'le_var_title4': {
+                    'name': 'Corrección de presión',
+                    'Region 1': {
+                        'Volumen 1': {}
+                    }
+                },
                 'le_var_title5': {
                     'name': 'Temperatura',
                     'Region 1': {
