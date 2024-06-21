@@ -30,7 +30,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         ]
         self.variable_widgets = [
             "le_value", "le_tempamb", "chb_value", "chb_flux", 
-            "chb_convec", "chb_ex_value", "chb_ex_tempamb"]
+            "chb_convec", "chb_ex_value"]
         self.widgets = self.patch_widgets + self.variable_widgets
 
         for chb_name in ['wall', 'inmass', 'outmass', 'value', 'flux', 'convec']:

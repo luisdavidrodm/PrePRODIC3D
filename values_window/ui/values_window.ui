@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>664</width>
-    <height>762</height>
+    <height>788</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,8 +24,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>644</width>
-        <height>742</height>
+        <width>627</width>
+        <height>769</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -65,10 +65,17 @@
                 <string/>
                </property>
                <layout class="QFormLayout" name="formLayout_2">
+                <item row="0" column="0">
+                 <widget class="QLabel" name="label">
+                  <property name="text">
+                   <string>Valor general</string>
+                  </property>
+                 </widget>
+                </item>
                 <item row="0" column="1">
                  <widget class="QLineEdit" name="le_general_value"/>
                 </item>
-                <item row="1" column="0">
+                <item row="2" column="0">
                  <widget class="QLabel" name="label_2">
                   <property name="text">
                    <string>Conductividad</string>
@@ -78,17 +85,17 @@
                   </property>
                  </widget>
                 </item>
-                <item row="1" column="1">
+                <item row="2" column="1">
                  <widget class="QLineEdit" name="le_k"/>
                 </item>
-                <item row="5" column="0">
+                <item row="6" column="0">
                  <widget class="QLabel" name="label_15">
                   <property name="text">
                    <string>Extrapola excepto</string>
                   </property>
                  </widget>
                 </item>
-                <item row="6" column="0">
+                <item row="7" column="0">
                  <widget class="QGroupBox" name="groupBox_11">
                   <property name="title">
                    <string/>
@@ -107,7 +114,7 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="6" column="1">
+                <item row="7" column="1">
                  <widget class="QGroupBox" name="groupBox_10">
                   <property name="title">
                    <string/>
@@ -146,32 +153,39 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="0" column="0">
-                 <widget class="QLabel" name="label">
-                  <property name="text">
-                   <string>Valor general</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="7" column="0">
+                <item row="8" column="0">
                  <widget class="QLabel" name="label_16">
                   <property name="text">
                    <string>Ind. Impresión</string>
                   </property>
                  </widget>
                 </item>
-                <item row="7" column="1">
+                <item row="8" column="1">
                  <widget class="QLineEdit" name="le_ixyz"/>
                 </item>
-                <item row="8" column="0">
+                <item row="9" column="0">
                  <widget class="QLabel" name="label_17">
                   <property name="text">
                    <string>Ind. correc. bloque</string>
                   </property>
                  </widget>
                 </item>
-                <item row="8" column="1">
+                <item row="9" column="1">
                  <widget class="QLineEdit" name="le_kblock"/>
+                </item>
+                <item row="3" column="1">
+                 <widget class="QCheckBox" name="chb_ex_k">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="1" column="1">
+                 <widget class="QCheckBox" name="chb_ex_value">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </widget>
@@ -503,6 +517,13 @@
                        <horstretch>0</horstretch>
                        <verstretch>0</verstretch>
                       </sizepolicy>
+                     </property>
+                    </widget>
+                   </item>
+                   <item row="0" column="0">
+                    <widget class="QCheckBox" name="chb_exclude_borders">
+                     <property name="text">
+                      <string>Bordes</string>
                      </property>
                     </widget>
                    </item>

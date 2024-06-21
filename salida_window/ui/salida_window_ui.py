@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'salida_windowykkLBU.ui'
+## Form generated from reading UI file 'salida_windowcwvalT.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -188,6 +188,11 @@ class Ui_salida_window(object):
 
         self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.lineEdit_5)
 
+        self.chb_dimensionless = QCheckBox(self.groupBox_7)
+        self.chb_dimensionless.setObjectName(u"chb_dimensionless")
+
+        self.formLayout_2.setWidget(2, QFormLayout.SpanningRole, self.chb_dimensionless)
+
 
         self.horizontalLayout_2.addWidget(self.groupBox_7)
 
@@ -240,5 +245,6 @@ class Ui_salida_window(object):
         self.label_4.setText(QCoreApplication.translate("salida_window", u"Numero de iteraciones", None))
         self.le_last.setText(QCoreApplication.translate("salida_window", u"5", None))
         self.label_5.setText(QCoreApplication.translate("salida_window", u"\u00cdndice gr\u00e1fico", None))
+        self.chb_dimensionless.setText(QCoreApplication.translate("salida_window", u"C\u00e1lculos adimensionales", None))
     # retranslateUi
 

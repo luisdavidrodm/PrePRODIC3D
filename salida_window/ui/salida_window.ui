@@ -243,6 +243,13 @@
               </property>
              </widget>
             </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QCheckBox" name="chb_dimensionless">
+              <property name="text">
+               <string>Cálculos adimensionales</string>
+              </property>
+             </widget>
+            </item>
            </layout>
           </widget>
          </item>

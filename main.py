@@ -271,7 +271,7 @@ class Worker(qtc.QThread):
     def run(self):
         try:
             self.output.emit("Copiando archivos f90 si no existen...\n")
-            exe_path = os.path.join(self.folder_path, "resultados.exe").replace("\\", "/")
+            exe_path = os.path.join(self.folder_path, "ejecutable.exe").replace("\\", "/")
             prodic3d_path = os.path.join(self.base_dir, "prodic3d.f90")
             common_path = os.path.join(self.base_dir, "3dcommon.f90")
             if not os.path.exists(os.path.join(self.folder_path, "prodic3d.f90")):
@@ -280,7 +280,7 @@ class Worker(qtc.QThread):
                 shutil.copy(common_path, self.folder_path)
 
             self.output.emit("Compilando y ejecutando...\n")
-            compile_command = "gfortran -o resultados.exe prodic3d.f90 adapt.f90"
+            compile_command = "gfortran -o ejecutable.exe prodic3d.f90 adapt.f90"
             self.run_command(compile_command, self.folder_path)
             self.run_command(str(exe_path), self.folder_path)
 
