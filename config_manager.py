@@ -9,7 +9,7 @@ class ConfigManager:
         # fmt: off
         self._config_structure = {
             'HEADER': {
-                'le_tituloimpre': 'PRINTF',
+                'le_tituloimpre': 'PRINTF.out',
                 'le_titulograf': 'PLOTF'
             },
             'GRID': {

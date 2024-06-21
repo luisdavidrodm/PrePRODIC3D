@@ -293,11 +293,14 @@ class Worker(qtc.QThread):
 
             tecplot_path = os.path.join(self.folder_path, tecplot_files[0])
             os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
+            self.output.emit(f"Los resultados numéricos se guardaron en el archivo PRINTF en {self.folder_path}\n")
+            self.output.emit(f"Los resultados gráficos se guardaron en los archivos PLOTF en {self.folder_path}\n")
             self.output.emit("Ejecutando ParaView...\n")
             paraview_command = f'"{self.paraview_path}" --script="{self.script_path}"'
             self.run_command(paraview_command, wait=False)
             del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
             time.sleep(10)
+            self.output.emit("Proceso finalizado.\n")
             self.finished.emit()
         except Exception as e:
             self.error.emit(str(e))
