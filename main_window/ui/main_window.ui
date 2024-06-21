@@ -79,11 +79,13 @@
     <property name="title">
      <string>Archivo</string>
     </property>
-    <addaction name="action_guardar_datos"/>
-    <addaction name="action_cargar_datos"/>
-    <addaction name="action_generar_rutina_fortran"/>
-    <addaction name="action_generar_y_visualizar_resultados"/>
-    <addaction name="action_salir"/>
+    <addaction name="action_load_data"/>
+    <addaction name="action_save_data"/>
+    <addaction name="action_generate_fortran_file"/>
+    <addaction name="action_generate_and_view_results"/>
+    <addaction name="action_generate_and_view_results_from_f90"/>
+    <addaction name="action_view_results_from_tecplot"/>
+    <addaction name="action_exit"/>
    </widget>
    <widget class="QMenu" name="menu_herramientas">
     <property name="title">
@@ -95,7 +97,7 @@
    <addaction name="menu_herramientas"/>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
-  <action name="action_guardar_datos">
+  <action name="action_save_data">
    <property name="checkable">
     <bool>false</bool>
    </property>
@@ -106,7 +108,7 @@
     <string>Guardar datos</string>
    </property>
   </action>
-  <action name="action_salir">
+  <action name="action_exit">
    <property name="text">
     <string>Salir</string>
    </property>
@@ -116,19 +118,29 @@
     <string>Manual de usuario</string>
    </property>
   </action>
-  <action name="action_generar_rutina_fortran">
+  <action name="action_generate_fortran_file">
    <property name="text">
-    <string>Generar rutina FORTRAN</string>
+    <string>Generar archivo Fortran</string>
    </property>
   </action>
-  <action name="action_generar_y_visualizar_resultados">
+  <action name="action_generate_and_view_results">
    <property name="text">
-    <string>Generar y visualiza resultados</string>
+    <string>Generar y visualizar resultados</string>
    </property>
   </action>
-  <action name="action_cargar_datos">
+  <action name="action_load_data">
    <property name="text">
     <string>Cargar datos</string>
+   </property>
+  </action>
+  <action name="action_generate_and_view_results_from_f90">
+   <property name="text">
+    <string>Generar y visualizar resultados a partir de archivo Fortran</string>
+   </property>
+  </action>
+  <action name="action_view_results_from_tecplot">
+   <property name="text">
+    <string>Visualizar resultados a partir de archivo Tecplot</string>
    </property>
   </action>
  </widget>

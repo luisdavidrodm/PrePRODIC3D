@@ -36,11 +36,13 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
     def setupUi(self, *args):
         super().setupUi(self, *args)
-        self.action_cargar_datos.triggered.connect(self.cargar_datos)
-        self.action_guardar_datos.triggered.connect(self.guardar_datos)
-        self.action_generar_rutina_fortran.triggered.connect(self.generar_rutina_fortran)
-        self.action_generar_y_visualizar_resultados.triggered.connect(self.generar_y_visualizar_resultados)
-        self.action_salir.triggered.connect(self.close)
+        self.action_load_data.triggered.connect(self.load_data)
+        self.action_save_data.triggered.connect(self.save_data)
+        self.action_generate_fortran_file.triggered.connect(self.generate_fortran_file)
+        self.action_generate_and_view_results.triggered.connect(self.generate_and_view_results)
+        self.action_generate_and_view_results_from_f90.triggered.connect(self.generate_and_view_results_from_f90)
+        self.action_view_results_from_tecplot.triggered.connect(self.view_results_from_tecplot)
+        self.action_exit.triggered.connect(self.close)
 
         self.pb_inicio.clicked.connect(self.open_inicio)
         self.pb_malla.clicked.connect(self.open_malla)
@@ -141,12 +143,18 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     ##
     ################################################################################
 
-    def cargar_datos(self):
-        filename, _ = qtw.QFileDialog.getOpenFileName(self, "Seleccionar archivo", "", "Todos los archivos (*)")
+    def load_data(self):
+        current_dir = os.getcwd()
+        results_dir = os.path.join(current_dir, "Resultados")
+        if not os.path.exists(results_dir):
+            os.makedirs(results_dir)
+        filename, _ = qtw.QFileDialog.getOpenFileName(
+            self, "Seleccionar archivo de datos para cargar...", results_dir, "Archivos JSON (*.json)"
+        )
         if filename:
             self.config_manager.load_from_json(filename)
 
-    def guardar_datos(self):
+    def save_data(self):
         folder_name = self.config_manager.header.get("le_titulosimu", None)
         if folder_name:
             base_dir = os.path.dirname(os.path.realpath(__file__))
@@ -177,12 +185,12 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         )
         return folder_path
 
-    def generar_rutina_fortran(self):
-        folder_path = self.guardar_datos()
+    def generate_fortran_file(self):
+        folder_path = self.save_data()
         if folder_path:
             translator = F90Translator()
             f90_content = translator.generate_f90(self.config_manager)
-            f90_path = os.path.join(folder_path, "datos.f90")
+            f90_path = os.path.join(folder_path, "adapt.f90")
             with open(f90_path, "w", encoding="utf-8") as f:
                 f.write(f90_content)
             qtw.QMessageBox.information(
@@ -194,10 +202,9 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         else:
             return False, False
 
-    def generar_y_visualizar_resultados(self):
-        folder_path = self.generar_rutina_fortran()
+    def generate_and_view_results(self):
+        folder_path = self.generate_fortran_file()
         if folder_path:
-
             # Compilando y ejecutando
             base_dir = os.path.dirname(os.path.realpath(__file__))
             exe_path = os.path.join(folder_path, "resultados.exe").replace("\\", "/")
@@ -208,7 +215,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
                 shutil.copy(prodic3d_path, folder_path)
             if not os.path.exists(os.path.join(folder_path, "3dcommon.f90")):
                 shutil.copy(common_path, folder_path)
-            compile_command = "gfortran -o resultados.exe prodic3d.f90 datos.f90"
+            compile_command = "gfortran -o resultados.exe prodic3d.f90 adapt.f90"
             subprocess.run(compile_command, check=True, shell=True, cwd=folder_path)
             subprocess.run(str(exe_path), check=False, shell=True, cwd=folder_path)
 
@@ -250,6 +257,12 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             return True
         else:
             return False
+
+    def generate_and_view_results_from_f90(self):
+        pass
+
+    def view_results_from_tecplot(self):
+        pass
 
 
 if __name__ == "__main__":

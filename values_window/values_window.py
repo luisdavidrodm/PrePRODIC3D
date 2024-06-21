@@ -112,11 +112,16 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             (self.lw_variables.item(i).text(), self.lw_variables.item(i).data(Qt.UserRole))
             for i in range(self.lw_variables.count())
         ]
-        new_items = [(data["name"], key) for key, data in self.config_manager.values.items() if "name" in data]
-        print("CURRENT VS NEW:", current_items, new_items)
-        if new_items != current_items:
+        new_items = []
+        for key, data in self.config_manager.values.items():
+            if "name" in data:
+                number = int(key[len("le_var_title") :]) if key.startswith("le_var_title") else float("inf")
+                new_items.append((number, data["name"], key))
+        new_items.sort()
+        print("CURRENT VS NEW:", current_items, [(name, tech_name) for _, name, tech_name in new_items])
+        if [(name, tech_name) for _, name, tech_name in new_items] != current_items:
             self.lw_variables.clear()
-            for name, tech_name in new_items:
+            for _, name, tech_name in new_items:
                 item = qtw.QListWidgetItem(name)
                 item.setData(Qt.UserRole, tech_name)
                 self.lw_variables.addItem(item)

@@ -194,10 +194,11 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         new_items = []
         for key, value in self.config_manager.variables.items():
             if key.startswith("le_var_title"):
-                number = key[len("le_var_title") :]
-                new_items.append((value, key))
+                number = int(key[len("le_var_title") :])
+                new_items.append((number, value, key))
+        new_items.sort()
         self.lw_variables.clear()
-        for name, tech_name in new_items:
+        for _, name, tech_name in new_items:
             item = qtw.QListWidgetItem(name)
             item.setData(Qt.UserRole, tech_name)
             self.lw_variables.addItem(item)

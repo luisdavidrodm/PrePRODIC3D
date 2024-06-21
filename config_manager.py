@@ -83,10 +83,28 @@ class ConfigManager:
                     'Region 1': {
                         'Volumen 1': {}
                     }
+                },
+                'le_var_title11': {
+                    'name': 'Presión',
+                    'Region 1': {
+                        'Volumen 1': {}
+                    }
+                },
+                'le_var_title12': {
+                    'name': 'Función de corriente',
+                    'Region 1': {
+                        'Volumen 1': {}
+                    }
                 }
             },
             'OUTPUT': {
+                'le_var_title1': {},
+                'le_var_title2': {},
+                'le_var_title3': {},
+                'le_var_title4': {},
                 'le_var_title5': {},
+                'le_var_title11': {},
+                'le_var_title12': {},
                 'le_last': '5'
             }
         }
