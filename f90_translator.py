@@ -396,7 +396,7 @@ class F90Translator:
         if monitored_variables:
             iteration = int(output.get("le_last", 5)) - 5
             standard_space = "5X"
-            format_string = "3X,'ITER',"
+            format_string = "1X,'ITER',"
             format_values = ["ITER"]
             for var, coords in monitored_variables.items():
                 format_string += f"{standard_space},'{var}{coords}',"
@@ -621,7 +621,6 @@ class F90Translator:
         phi_section_lines = self.translate_phi_section(config_manager.bound, config_manager.values)
         self.extend_f90(phi_section_lines)
 
-        print(self.f90_lines)
         return "\n".join(self.f90_lines)
 
     def extend_f90(self, new_f90_lines):
@@ -630,18 +629,18 @@ class F90Translator:
 
 
 if __name__ == "__main__":
-    working_directory = Path("C:/PRODIC3D/Utilidades/F90/dona")
+    working_directory = Path("C:/PRODIC3D/Utilidades/F90/A1")
     os.chdir(working_directory)
-    with open("dona.json", "r", encoding="utf-8") as f:
+    with open("A1.json", "r", encoding="utf-8") as f:
         json_data = json.load(f)
     translator = F90Translator()
     f90_code = translator.generate_f90(json_data)
-    with open(working_directory / "output.f90", "w", encoding="utf-8") as f:
+    with open(working_directory / "adapt.f90", "w", encoding="utf-8") as f:
         f.write(f90_code)
     exe_path = working_directory / "myprogram.exe"
     if exe_path.exists():
         exe_path.unlink()
-    compile_command = "gfortran -o myprogram.exe prodic3d.f90 output.f90"
+    compile_command = "gfortran -o myprogram.exe prodic3d.f90 adapt.f90"
     subprocess.run(compile_command, check=True, shell=True, cwd=working_directory)
     subprocess.run(str(exe_path), shell=True, check=False)
     ruta_paraview = "C:/Program Files/ParaView 5.12.0/bin/paraview.exe"

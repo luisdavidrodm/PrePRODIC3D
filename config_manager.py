@@ -168,10 +168,6 @@ class ConfigManager:
             except Exception as e:
                 print(f"ERROR AL CONECTAR: {e}")
 
-    def load_patch_config(self):
-        # TODO
-        return None
-
     def set_patch_config(self, border, patch, key, value):
         """
         Establece la configuración para un parche específico.

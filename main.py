@@ -4,8 +4,10 @@ import sys
 import os
 import subprocess
 import shutil
+import time
 
 from PySide6 import QtWidgets as qtw
+from PySide6 import QtCore as qtc
 
 from main_window.ui.main_window_ui import Ui_main_window
 from inicio_window.inicio_window import InicioWindow
@@ -33,6 +35,8 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.bordes_window = None
         self.densidad_window = None
         self.salida_window = None
+
+        self.worker = None
 
     def setupUi(self, *args):
         super().setupUi(self, *args)
@@ -205,19 +209,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def generate_and_view_results(self):
         folder_path = self.generate_fortran_file()
         if folder_path:
-            # Compilando y ejecutando
             base_dir = os.path.dirname(os.path.realpath(__file__))
-            exe_path = os.path.join(folder_path, "resultados.exe").replace("\\", "/")
-            # Verificando si estan ubicados los archivos f90
-            prodic3d_path = os.path.join(base_dir, "prodic3d.f90")
-            common_path = os.path.join(base_dir, "3dcommon.f90")
-            if not os.path.exists(os.path.join(folder_path, "prodic3d.f90")):
-                shutil.copy(prodic3d_path, folder_path)
-            if not os.path.exists(os.path.join(folder_path, "3dcommon.f90")):
-                shutil.copy(common_path, folder_path)
-            compile_command = "gfortran -o resultados.exe prodic3d.f90 adapt.f90"
-            subprocess.run(compile_command, check=True, shell=True, cwd=folder_path)
-            subprocess.run(str(exe_path), check=False, shell=True, cwd=folder_path)
 
             # Buscando ubicación de Paraview
             try:
@@ -227,34 +219,33 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
                 if not paraview_path:
                     raise ValueError("La ruta de ParaView no está definida en la configuración.")
             except FileNotFoundError:
-                qtw.QMessageBox.critical(None, "Error de Configuración", "El archivo de configuración no se encuentra.")
+                qtw.QMessageBox.critical(self, "Error de Configuración", "El archivo de configuración no se encuentra.")
                 return False
             except json.JSONDecodeError:
                 qtw.QMessageBox.critical(
-                    None, "Error de Configuración", "Error en el formato del archivo de configuración."
+                    self, "Error de Configuración", "Error en el formato del archivo de configuración."
                 )
                 return False
             except Exception as e:
-                qtw.QMessageBox.critical(None, "Error de Configuración", str(e))
+                qtw.QMessageBox.critical(self, "Error de Configuración", str(e))
                 return False
 
-            # Buscando ubicacion de archivo grafico
+            # Ruta del script de ParaView
             script_path = os.path.join(base_dir, "tecplot.py")
-            search_pattern = os.path.join(folder_path, "*.000")
-            tecplot_files = glob.glob(search_pattern)
-            if tecplot_files:
-                tecplot_path = os.path.join(folder_path, tecplot_files[0])
-            else:
-                qtw.QMessageBox.critical(
-                    self,
-                    "Error al abrir Archivo Gráfico",
-                    "No se encontro el archivo de salida gráfica de la simulación",
-                )
-                return False
-            os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
-            subprocess.run([paraview_path, "--script=" + script_path], check=True)
-            del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
-            return True
+
+            # Salida de la terminal
+            terminal_dialog = TerminalOutputDialog(self)
+            title = self.config_manager.header.get("le_titulosimu", None)
+            terminal_dialog.setWindowTitle(f"Resultados de Simulación: {title}")
+
+            # Worker en segundo plano
+            self.worker = Worker(folder_path, base_dir, paraview_path, script_path)
+            self.worker.error.connect(lambda msg: qtw.QMessageBox.critical(self, "Error", msg))
+            self.worker.finished.connect(terminal_dialog.enable_close_button)
+            self.worker.output.connect(terminal_dialog.append_text)
+
+            self.worker.start()
+            terminal_dialog.exec()
         else:
             return False
 
@@ -263,6 +254,100 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
 
     def view_results_from_tecplot(self):
         pass
+
+
+class Worker(qtc.QThread):
+    error = qtc.Signal(str)
+    finished = qtc.Signal()
+    output = qtc.Signal(str)
+
+    def __init__(self, folder_path, base_dir, paraview_path, script_path):
+        super().__init__()
+        self.folder_path = folder_path
+        self.base_dir = base_dir
+        self.paraview_path = paraview_path
+        self.script_path = script_path
+
+    def run(self):
+        try:
+            self.output.emit("Copiando archivos f90 si no existen...\n")
+            exe_path = os.path.join(self.folder_path, "resultados.exe").replace("\\", "/")
+            prodic3d_path = os.path.join(self.base_dir, "prodic3d.f90")
+            common_path = os.path.join(self.base_dir, "3dcommon.f90")
+            if not os.path.exists(os.path.join(self.folder_path, "prodic3d.f90")):
+                shutil.copy(prodic3d_path, self.folder_path)
+            if not os.path.exists(os.path.join(self.folder_path, "3dcommon.f90")):
+                shutil.copy(common_path, self.folder_path)
+
+            self.output.emit("Compilando y ejecutando...\n")
+            compile_command = "gfortran -o resultados.exe prodic3d.f90 adapt.f90"
+            self.run_command(compile_command, self.folder_path)
+            self.run_command(str(exe_path), self.folder_path)
+
+            self.output.emit("Buscando archivo gráfico...\n")
+            search_pattern = os.path.join(self.folder_path, "*.000")
+            tecplot_files = glob.glob(search_pattern)
+            if not tecplot_files:
+                self.error.emit("No se encontró el archivo de salida gráfica de la simulación")
+                return
+
+            tecplot_path = os.path.join(self.folder_path, tecplot_files[0])
+            os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
+            self.output.emit("Ejecutando ParaView...\n")
+            paraview_command = f'"{self.paraview_path}" --script="{self.script_path}"'
+            self.run_command(paraview_command, wait=False)
+            del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
+            time.sleep(10)
+            self.finished.emit()
+        except Exception as e:
+            self.error.emit(str(e))
+
+    def run_command(self, command, cwd=None, wait=True):
+        process = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE, shell=True, cwd=cwd)
+        if wait:
+            while True:
+                output = process.stdout.readline().decode()
+                if output == "" and process.poll() is not None:
+                    break
+                if output:
+                    self.output.emit(output)
+            stderr = process.stderr.read().decode()
+            if stderr:
+                self.output.emit(stderr)
+            rc = process.poll()
+            return rc
+        else:
+            # Si no esperamos, simplemente lanzamos el proceso y no esperamos a que termine
+            return None
+
+
+class TerminalOutputDialog(qtw.QDialog):
+    def __init__(self, parent=None):
+        super().__init__(parent)
+        self.setWindowTitle("Resultados")
+        self.resize(800, 600)
+
+        # Crear el layout
+        layout = qtw.QVBoxLayout(self)
+
+        # Crear el QPlainTextEdit para mostrar la salida
+        self.output_text_edit = qtw.QPlainTextEdit(self)
+        self.output_text_edit.setReadOnly(True)
+        layout.addWidget(self.output_text_edit)
+
+        # Crear el botón de cerrar
+        self.close_button = qtw.QPushButton("Cerrar", self)
+        self.close_button.setEnabled(False)
+        layout.addWidget(self.close_button)
+
+        # Conectar el botón de cerrar a la acción de cerrar el diálogo
+        self.close_button.clicked.connect(self.accept)
+
+    def append_text(self, text):
+        self.output_text_edit.appendPlainText(text)
+
+    def enable_close_button(self):
+        self.close_button.setEnabled(True)
 
 
 if __name__ == "__main__":
