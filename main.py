@@ -312,10 +312,11 @@ class Worker(qtc.QThread):
                     shutil.copy(common_path, self.folder_path)
 
                 self.output.emit("Compilando y ejecutando...\n")
-                compile_command = f"gfortran -o ejecutable.exe prodic3d.f90 {self.adapt_file}"
+                cwd_prodic3d = os.path.join(self.folder_path, "prodic3d.f90").replace("\\", "/")
+                compile_command = f'gfortran -o "{exe_path}" "{cwd_prodic3d}" "{self.adapt_file}"'
+                print(compile_command, self.folder_path)
                 self.run_command(compile_command, self.folder_path)
                 self.run_command(str(exe_path), self.folder_path)
-
                 self.output.emit("Buscando archivo gráfico...\n")
                 search_pattern = os.path.join(self.folder_path, "*.000")
                 tecplot_files = glob.glob(search_pattern)
@@ -335,7 +336,7 @@ class Worker(qtc.QThread):
             paraview_command = f'"{self.paraview_path}" --script="{self.script_path}"'
             self.run_command(paraview_command, wait=False)
             del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
-            time.sleep(8)
+            time.sleep(5)
             self.output.emit("Proceso finalizado.\n")
             self.finished.emit()
         except Exception as e:
