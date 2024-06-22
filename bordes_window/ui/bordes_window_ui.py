@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bordes_window.ui'
+## Form generated from reading UI file 'bordes_windowYnorHe.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.6.1
+## Created by: Qt User Interface Compiler version 6.4.3
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -146,21 +146,21 @@ class Ui_bordes_window(object):
 
         self.gridLayout_5.addWidget(self.le_vertical_end, 4, 5, 1, 1)
 
-        self.comboBox_4 = QComboBox(self.groupBox_2)
-        self.comboBox_4.addItem("")
-        self.comboBox_4.addItem("")
-        self.comboBox_4.addItem("")
-        self.comboBox_4.setObjectName(u"comboBox_4")
+        self.cb_ex_vertical_end = QComboBox(self.groupBox_2)
+        self.cb_ex_vertical_end.addItem("")
+        self.cb_ex_vertical_end.addItem("")
+        self.cb_ex_vertical_end.addItem("")
+        self.cb_ex_vertical_end.setObjectName(u"cb_ex_vertical_end")
 
-        self.gridLayout_5.addWidget(self.comboBox_4, 4, 4, 1, 1)
+        self.gridLayout_5.addWidget(self.cb_ex_vertical_end, 4, 4, 1, 1)
 
-        self.comboBox_3 = QComboBox(self.groupBox_2)
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.addItem("")
-        self.comboBox_3.setObjectName(u"comboBox_3")
+        self.cb_ex_vertical_start = QComboBox(self.groupBox_2)
+        self.cb_ex_vertical_start.addItem("")
+        self.cb_ex_vertical_start.addItem("")
+        self.cb_ex_vertical_start.addItem("")
+        self.cb_ex_vertical_start.setObjectName(u"cb_ex_vertical_start")
 
-        self.gridLayout_5.addWidget(self.comboBox_3, 2, 4, 1, 1)
+        self.gridLayout_5.addWidget(self.cb_ex_vertical_start, 2, 4, 1, 1)
 
         self.lb_transversal = QLabel(self.groupBox_2)
         self.lb_transversal.setObjectName(u"lb_transversal")
@@ -169,21 +169,21 @@ class Ui_bordes_window(object):
 
         self.gridLayout_5.addWidget(self.lb_transversal, 0, 2, 1, 1)
 
-        self.comboBox = QComboBox(self.groupBox_2)
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.addItem("")
-        self.comboBox.setObjectName(u"comboBox")
+        self.cb_ex_transversal_start = QComboBox(self.groupBox_2)
+        self.cb_ex_transversal_start.addItem("")
+        self.cb_ex_transversal_start.addItem("")
+        self.cb_ex_transversal_start.addItem("")
+        self.cb_ex_transversal_start.setObjectName(u"cb_ex_transversal_start")
 
-        self.gridLayout_5.addWidget(self.comboBox, 2, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.cb_ex_transversal_start, 2, 1, 1, 1)
 
-        self.comboBox_2 = QComboBox(self.groupBox_2)
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.addItem("")
-        self.comboBox_2.setObjectName(u"comboBox_2")
+        self.cb_ex_transversal_end = QComboBox(self.groupBox_2)
+        self.cb_ex_transversal_end.addItem("")
+        self.cb_ex_transversal_end.addItem("")
+        self.cb_ex_transversal_end.addItem("")
+        self.cb_ex_transversal_end.setObjectName(u"cb_ex_transversal_end")
 
-        self.gridLayout_5.addWidget(self.comboBox_2, 4, 1, 1, 1)
+        self.gridLayout_5.addWidget(self.cb_ex_transversal_end, 4, 1, 1, 1)
 
         self.lb_vertical = QLabel(self.groupBox_2)
         self.lb_vertical.setObjectName(u"lb_vertical")
@@ -385,22 +385,22 @@ class Ui_bordes_window(object):
         self.lw_patchlist.setSortingEnabled(__sortingEnabled)
 
         self.groupBox_2.setTitle("")
-        self.comboBox_4.setItemText(0, "")
-        self.comboBox_4.setItemText(1, QCoreApplication.translate("bordes_window", u"<", None))
-        self.comboBox_4.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2264", None))
+        self.cb_ex_vertical_end.setItemText(0, "")
+        self.cb_ex_vertical_end.setItemText(1, QCoreApplication.translate("bordes_window", u"<", None))
+        self.cb_ex_vertical_end.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2264", None))
 
-        self.comboBox_3.setItemText(0, "")
-        self.comboBox_3.setItemText(1, QCoreApplication.translate("bordes_window", u">", None))
-        self.comboBox_3.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2265", None))
+        self.cb_ex_vertical_start.setItemText(0, "")
+        self.cb_ex_vertical_start.setItemText(1, QCoreApplication.translate("bordes_window", u">", None))
+        self.cb_ex_vertical_start.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2265", None))
 
         self.lb_transversal.setText(QCoreApplication.translate("bordes_window", u"Y", None))
-        self.comboBox.setItemText(0, "")
-        self.comboBox.setItemText(1, QCoreApplication.translate("bordes_window", u">", None))
-        self.comboBox.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2265", None))
+        self.cb_ex_transversal_start.setItemText(0, "")
+        self.cb_ex_transversal_start.setItemText(1, QCoreApplication.translate("bordes_window", u">", None))
+        self.cb_ex_transversal_start.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2265", None))
 
-        self.comboBox_2.setItemText(0, "")
-        self.comboBox_2.setItemText(1, QCoreApplication.translate("bordes_window", u"<", None))
-        self.comboBox_2.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2264", None))
+        self.cb_ex_transversal_end.setItemText(0, "")
+        self.cb_ex_transversal_end.setItemText(1, QCoreApplication.translate("bordes_window", u"<", None))
+        self.cb_ex_transversal_end.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2264", None))
 
         self.lb_vertical.setText(QCoreApplication.translate("bordes_window", u"Z", None))
         self.chb_exclude_borders.setText(QCoreApplication.translate("bordes_window", u"V.C. Excluir bordes", None))
