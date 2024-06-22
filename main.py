@@ -36,8 +36,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.densidad_window = None
         self.salida_window = None
 
-        self.worker = None
-
     def setupUi(self, *args):
         super().setupUi(self, *args)
         self.action_load_data.triggered.connect(self.load_data)
@@ -193,7 +191,15 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         folder_path = self.save_data()
         if folder_path:
             translator = F90Translator()
-            f90_content = translator.generate_f90(self.config_manager)
+            try:
+                f90_content = translator.generate_f90(self.config_manager)
+            except Exception as e:
+                qtw.QMessageBox.critical(
+                    self,
+                    "Error al guardar configuración",
+                    f"No se pudo generar el archivo adapt.f90 en '{folder_path}': {e}",
+                )
+                return False
             f90_path = os.path.join(folder_path, "adapt.f90")
             with open(f90_path, "w", encoding="utf-8") as f:
                 f.write(f90_content)
@@ -204,56 +210,79 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             )
             return folder_path
         else:
-            return False, False
+            return False
 
     def generate_and_view_results(self):
         folder_path = self.generate_fortran_file()
         if folder_path:
             base_dir = os.path.dirname(os.path.realpath(__file__))
-
-            # Buscando ubicación de Paraview
-            try:
-                with open("user_config.json", "r", encoding="utf-8") as f:
-                    config = json.load(f)
-                paraview_path = config.get("ruta_paraview")
-                if not paraview_path:
-                    raise ValueError("La ruta de ParaView no está definida en la configuración.")
-            except FileNotFoundError:
-                qtw.QMessageBox.critical(self, "Error de Configuración", "El archivo de configuración no se encuentra.")
-                return False
-            except json.JSONDecodeError:
-                qtw.QMessageBox.critical(
-                    self, "Error de Configuración", "Error en el formato del archivo de configuración."
-                )
-                return False
-            except Exception as e:
-                qtw.QMessageBox.critical(self, "Error de Configuración", str(e))
-                return False
-
-            # Ruta del script de ParaView
-            script_path = os.path.join(base_dir, "tecplot.py")
-
-            # Salida de la terminal
-            terminal_dialog = TerminalOutputDialog(self)
-            title = self.config_manager.header.get("le_titulosimu", None)
-            terminal_dialog.setWindowTitle(f"Resultados de Simulación: {title}")
-
-            # Worker en segundo plano
-            self.worker = Worker(folder_path, base_dir, paraview_path, script_path)
-            self.worker.error.connect(lambda msg: qtw.QMessageBox.critical(self, "Error", msg))
-            self.worker.finished.connect(terminal_dialog.enable_close_button)
-            self.worker.output.connect(terminal_dialog.append_text)
-
-            self.worker.start()
-            terminal_dialog.exec()
-        else:
-            return False
+            paraview_path = self.load_paraview_config()
+            if paraview_path:
+                script_path = os.path.join(base_dir, "tecplot.py")
+                self.run_worker(folder_path, base_dir, paraview_path, script_path)
 
     def generate_and_view_results_from_f90(self):
-        pass
+        current_dir = os.getcwd()
+        results_dir = os.path.join(current_dir, "Resultados")
+        if not os.path.exists(results_dir):
+            os.makedirs(results_dir)
+        adapt_file, _ = qtw.QFileDialog.getOpenFileName(
+            self, "Seleccionar archivo Fortran (.f90) para cargar...", results_dir, "Archivos Fortran (*.f90)"
+        )
+        if adapt_file:
+            folder_path = os.path.dirname(adapt_file)
+            base_dir = os.path.dirname(os.path.realpath(__file__))
+            paraview_path = self.load_paraview_config()
+            if paraview_path:
+                script_path = os.path.join(base_dir, "tecplot.py")
+                self.run_worker(folder_path, base_dir, paraview_path, script_path, adapt_file=adapt_file)
 
     def view_results_from_tecplot(self):
-        pass
+        current_dir = os.getcwd()
+        results_dir = os.path.join(current_dir, "Resultados")
+        if not os.path.exists(results_dir):
+            os.makedirs(results_dir)
+        tecplot_file, _ = qtw.QFileDialog.getOpenFileName(
+            self, "Seleccionar archivo Tecplot para cargar...", results_dir, "Todos los archivos (*)"
+        )
+        if tecplot_file:
+            folder_path = os.path.dirname(tecplot_file)
+            base_dir = os.path.dirname(os.path.realpath(__file__))
+            paraview_path = self.load_paraview_config()
+            if paraview_path:
+                script_path = os.path.join(base_dir, "tecplot.py")
+                self.run_worker(folder_path, base_dir, paraview_path, script_path, tecplot_file=tecplot_file)
+
+    def load_paraview_config(self):
+        try:
+            with open("user_config.json", "r", encoding="utf-8") as f:
+                config = json.load(f)
+            paraview_path = config.get("ruta_paraview")
+            if not paraview_path:
+                raise ValueError("La ruta de ParaView no está definida en la configuración.")
+            return paraview_path
+        except FileNotFoundError:
+            qtw.QMessageBox.critical(self, "Error de Configuración", "El archivo de configuración no se encuentra.")
+        except json.JSONDecodeError:
+            qtw.QMessageBox.critical(
+                self, "Error de Configuración", "Error en el formato del archivo de configuración."
+            )
+        except Exception as e:
+            qtw.QMessageBox.critical(self, "Error de Configuración", str(e))
+        return None
+
+    def run_worker(self, folder_path, base_dir, paraview_path, script_path, adapt_file="adapt.f90", tecplot_file=None):
+        terminal_dialog = TerminalOutputDialog(self)
+        title = self.config_manager.header.get("le_titulosimu", None)
+        terminal_dialog.setWindowTitle(f"Resultados de Simulación: {title}")
+
+        worker = Worker(folder_path, base_dir, paraview_path, script_path, adapt_file, tecplot_file)
+        worker.error.connect(lambda msg: qtw.QMessageBox.critical(self, "Error", msg))
+        worker.finished.connect(terminal_dialog.enable_close_button)
+        worker.output.connect(terminal_dialog.append_text)
+
+        worker.start()
+        terminal_dialog.exec()
 
 
 class Worker(qtc.QThread):
@@ -261,45 +290,52 @@ class Worker(qtc.QThread):
     finished = qtc.Signal()
     output = qtc.Signal(str)
 
-    def __init__(self, folder_path, base_dir, paraview_path, script_path):
+    def __init__(self, folder_path, base_dir, paraview_path, script_path, adapt_file="adapt.f90", tecplot_file=None):
         super().__init__()
         self.folder_path = folder_path
         self.base_dir = base_dir
         self.paraview_path = paraview_path
         self.script_path = script_path
+        self.adapt_file = adapt_file
+        self.tecplot_file = tecplot_file
 
     def run(self):
         try:
-            self.output.emit("Copiando archivos f90 si no existen...\n")
-            exe_path = os.path.join(self.folder_path, "ejecutable.exe").replace("\\", "/")
-            prodic3d_path = os.path.join(self.base_dir, "prodic3d.f90")
-            common_path = os.path.join(self.base_dir, "3dcommon.f90")
-            if not os.path.exists(os.path.join(self.folder_path, "prodic3d.f90")):
-                shutil.copy(prodic3d_path, self.folder_path)
-            if not os.path.exists(os.path.join(self.folder_path, "3dcommon.f90")):
-                shutil.copy(common_path, self.folder_path)
+            if not self.tecplot_file:
+                self.output.emit("Copiando archivos f90 si no existen...\n")
+                exe_path = os.path.join(self.folder_path, "ejecutable.exe").replace("\\", "/")
+                prodic3d_path = os.path.join(self.base_dir, "prodic3d.f90")
+                common_path = os.path.join(self.base_dir, "3dcommon.f90")
+                if not os.path.exists(os.path.join(self.folder_path, "prodic3d.f90")):
+                    shutil.copy(prodic3d_path, self.folder_path)
+                if not os.path.exists(os.path.join(self.folder_path, "3dcommon.f90")):
+                    shutil.copy(common_path, self.folder_path)
 
-            self.output.emit("Compilando y ejecutando...\n")
-            compile_command = "gfortran -o ejecutable.exe prodic3d.f90 adapt.f90"
-            self.run_command(compile_command, self.folder_path)
-            self.run_command(str(exe_path), self.folder_path)
+                self.output.emit("Compilando y ejecutando...\n")
+                compile_command = f"gfortran -o ejecutable.exe prodic3d.f90 {self.adapt_file}"
+                self.run_command(compile_command, self.folder_path)
+                self.run_command(str(exe_path), self.folder_path)
 
-            self.output.emit("Buscando archivo gráfico...\n")
-            search_pattern = os.path.join(self.folder_path, "*.000")
-            tecplot_files = glob.glob(search_pattern)
-            if not tecplot_files:
-                self.error.emit("No se encontró el archivo de salida gráfica de la simulación")
-                return
+                self.output.emit("Buscando archivo gráfico...\n")
+                search_pattern = os.path.join(self.folder_path, "*.000")
+                tecplot_files = glob.glob(search_pattern)
+                if not tecplot_files:
+                    self.error.emit("No se encontró el archivo de salida gráfica de la simulación")
+                    return
+                tecplot_path = os.path.join(self.folder_path, tecplot_files[0])
+                os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
+                self.output.emit(f"Los resultados numéricos se guardaron en el archivo PRINTF en {self.folder_path}\n")
+                self.output.emit(f"Los resultados gráficos se guardaron en los archivos PLOTF en {self.folder_path}\n")
+            else:
+                tecplot_path = os.path.join(self.folder_path, self.tecplot_file)
+                print(tecplot_path)
+                os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
 
-            tecplot_path = os.path.join(self.folder_path, tecplot_files[0])
-            os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
-            self.output.emit(f"Los resultados numéricos se guardaron en el archivo PRINTF en {self.folder_path}\n")
-            self.output.emit(f"Los resultados gráficos se guardaron en los archivos PLOTF en {self.folder_path}\n")
             self.output.emit("Ejecutando ParaView...\n")
             paraview_command = f'"{self.paraview_path}" --script="{self.script_path}"'
             self.run_command(paraview_command, wait=False)
             del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
-            time.sleep(10)
+            time.sleep(8)
             self.output.emit("Proceso finalizado.\n")
             self.finished.emit()
         except Exception as e:
@@ -330,20 +366,16 @@ class TerminalOutputDialog(qtw.QDialog):
         self.setWindowTitle("Resultados")
         self.resize(800, 600)
 
-        # Crear el layout
         layout = qtw.QVBoxLayout(self)
 
-        # Crear el QPlainTextEdit para mostrar la salida
         self.output_text_edit = qtw.QPlainTextEdit(self)
         self.output_text_edit.setReadOnly(True)
         layout.addWidget(self.output_text_edit)
 
-        # Crear el botón de cerrar
         self.close_button = qtw.QPushButton("Cerrar", self)
         self.close_button.setEnabled(False)
         layout.addWidget(self.close_button)
 
-        # Conectar el botón de cerrar a la acción de cerrar el diálogo
         self.close_button.clicked.connect(self.accept)
 
     def append_text(self, text):
