@@ -35,22 +35,22 @@ class ConfigManager:
             },
             'BOUND': {
                 'X Max': {
-                    'Borde base': {}
+                    'Borde base': {'chb_wall': 2}
                 },
                 'X Min': {
-                    'Borde base': {}
+                    'Borde base': {'chb_wall': 2}
                 },
                 'Y Max': {
-                    'Borde base': {}
+                    'Borde base': {'chb_wall': 2}
                 },
                 'Y Min': {
-                    'Borde base': {}
+                    'Borde base': {'chb_wall': 2}
                 },
                 'Z Max': {
-                    'Borde base': {}
+                    'Borde base': {'chb_wall': 2}
                 },
                 'Z Min': {
-                    'Borde base': {}
+                    'Borde base': {'chb_wall': 2}
                 }
             },
             'VALUES': {

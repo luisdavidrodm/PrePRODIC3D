@@ -24,13 +24,13 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
 
         self.variable_widgets = [
             "le_general_value", "le_k", "le_kblock", "chb_iborx", "chb_ibory",
-            "chb_iborz", "chb_ipun", "chb_local_value", "le_ixyz",
+            "chb_iborz", "chb_ipun", "chb_local_value", "le_ixyz", "chb_ex_value", "chb_ex_k"
         ]
         self.region_widgets = [
             "chb_fixed_value", "chb_linear_source", "le_local_value",
             "le_local_sc", "le_local_sp", "le_local_k",
         ]
-        self.volume_widgets = ["le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end"]
+        self.volume_widgets = ["le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end", "chb_exclude_borders"]
         self.widgets = self.variable_widgets + self.region_widgets + self.volume_widgets
 
         self.config_manager.connect_config(self)

@@ -26,11 +26,11 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             "le_value_veloc_u", "le_value_veloc_v", "le_value_veloc_w",
             "le_fracmass", "le_transversal_start", "le_transversal_end",
             "le_vertical_start", "le_vertical_end", "chb_ex_veloc_u", 
-            "chb_ex_veloc_v", "chb_ex_veloc_w"
+            "chb_ex_veloc_v", "chb_ex_veloc_w", "chb_exclude_borders"
         ]
         self.variable_widgets = [
             "le_value", "le_tempamb", "chb_value", "chb_flux", 
-            "chb_convec", "chb_ex_value"]
+            "chb_convec", "chb_ex_value", "le_k", "chb_ex_k"]
         self.widgets = self.patch_widgets + self.variable_widgets
 
         for chb_name in ['wall', 'inmass', 'outmass', 'value', 'flux', 'convec']:
@@ -195,6 +195,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         for key, value in self.config_manager.variables.items():
             if key.startswith("le_var_title"):
                 number = int(key[len("le_var_title") :])
+                if number < 4:  # Excluir le_var_title1 a le_var_title3
+                    continue
                 new_items.append((number, value, key))
         new_items.sort()
         self.lw_variables.clear()

@@ -1,7 +1,8 @@
 import json
 import subprocess
 import os
-import sympy as sp
+
+# import sympy as sp
 from pathlib import Path
 
 # I de identacion mayor, i de identación menor, s de separador
@@ -17,20 +18,12 @@ class F90Translator:
         self.variables_map = {f"le_var_title{i}": i for i in range(1, 13)}
         self.volume_widgets = ["le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end"]
         self.loop_mapping = {
-            "X Max": ("L1", "J", "M1", "K", "N1", "(L1,J,K)"),
-            "X Min": ("I1", "J", "M1", "K", "N1", "(1,J,K)"),
-            "Y Max": ("M1", "I", "L1", "K", "N1", "(I,M1,K)"),
-            "Y Min": ("J1", "I", "L1", "K", "N1", "(I,1,K)"),
-            "Z Max": ("N1", "I", "L1", "J", "M1", "(I,J,N1)"),
-            "Z Min": ("K1", "I", "L1", "J", "M1", "(I,J,1)"),
-        }
-        self.loop_mapping2 = {
-            "X Max": ("J", "K", "(L1,J,K)"),
-            "X Min": ("J", "K", "(1,J,K)"),
-            "Y Max": ("I", "K", "(I,M1,K)"),
-            "Y Min": ("I", "K", "(I,1,K)"),
-            "Z Max": ("I", "J", "(I,J,N1)"),
-            "Z Min": ("I", "J", "(I,J,1)"),
+            "X Max": ("J", "K", "M{}", "N{}", "(L{},J,K)", "L1"),
+            "X Min": ("J", "K", "M{}", "N{}", "({},J,K)", "I1"),
+            "Y Max": ("I", "K", "L{}", "N{}", "(I,M{},K)", "M1"),
+            "Y Min": ("I", "K", "L{}", "N{}", "(I,{},K)", "J1"),
+            "Z Max": ("I", "J", "L{}", "M{}", "(I,J,N{})", "N1"),
+            "Z Min": ("I", "J", "L{}", "M{}", "(I,J,{})", "K1"),
         }
         self.custom_titles = {
             1: " VEL U ",
@@ -196,14 +189,15 @@ class F90Translator:
             "le_var_title3": "W",
         }
         #### le_general_value
-        for var_title, var_name in variables.items():
+        for var_title, var_info in variables.items():
             if var_title in values and "le_general_value" in values[var_title]:
+                cvi = 2 if values.get(var_title, {}).get("chb_ex_value", 1) == 2 else 1  # cvi: control_volume_index
                 f90_lines.extend(
                     [
-                        "DO I=1,L1",
-                        f"{i}DO J=1,M1",
-                        f"{i}{i}DO K=1,N1",
-                        f"{i}{i}{i}{var_name}(I,J,K)={values[var_title]['le_general_value']}",
+                        f"DO I={cvi},L{cvi}",
+                        f"{i}DO J={cvi},M{cvi}",
+                        f"{i}{i}DO K={cvi},N{cvi}",
+                        f"{I}{var_name}(I,J,K)={values[var_title]['le_general_value']}",
                         f"{i}{i}ENDDO",
                         f"{i}ENDDO",
                         "ENDDO",
@@ -218,64 +212,84 @@ class F90Translator:
                     if "le_local_value" in region_values:
                         volumes = {key: value for key, value in region_values.items() if isinstance(value, dict)}
                         for volume, volume_values in volumes.items():
-                            if all(key in volume_values for key in self.volume_widgets):
-                                x_start, x_end, y_start, y_end, z_start, z_end = self.adjust_volume_limits(
-                                    volume_values
-                                )
-                                print(values[var_title])
-                                f90_lines.extend(
-                                    [
-                                        f"DO I={x_start},{x_end}",
-                                        f"{i}DO J={y_start},{y_end}",
-                                        f"{i}{i}DO K={z_start},{z_end}",
-                                        f"{i}{i}{i}{var_name}(I,J,K)={region_values['le_local_value']}",
-                                        f"{i}{i}ENDDO",
-                                        f"{i}ENDDO",
-                                        "ENDDO",
-                                    ]
-                                )
-                            else:
-                                f90_lines.extend(
-                                    [
-                                        "DO I=1,L1",
-                                        f"{i}DO J=1,M1",
-                                        f"{i}{i}DO K=1,N1",
-                                        f"{i}{i}{i}{var_name}(I,J,K)={region_values['le_local_value']}",
-                                        f"{i}{i}ENDDO",
-                                        f"{i}ENDDO",
-                                        "ENDDO",
-                                    ]
-                                )
+                            cvi = 2 if volume_values.get("chb_exclude_borders", 1) == 2 else 1  # control_volume_index
+                            x_start = volume_values.get("le_x_start", None)
+                            x_end = volume_values.get("le_x_end", None)
+                            y_start = volume_values.get("le_y_start", None)
+                            y_end = volume_values.get("le_y_end", None)
+                            z_start = volume_values.get("le_z_start", None)
+                            z_end = volume_values.get("le_z_end", None)
+                            conditions = []
+                            if x_start is not None:
+                                conditions.append(f"X(I).GE.{x_start}")
+                            if x_end is not None:
+                                conditions.append(f"X(I).LE.{x_end}")
+                            if y_start is not None:
+                                conditions.append(f"Y(J).GE.{y_start}")
+                            if y_end is not None:
+                                conditions.append(f"Y(J).LE.{y_end}")
+                            if z_start is not None:
+                                conditions.append(f"Z(K).GE.{z_start}")
+                            if z_end is not None:
+                                conditions.append(f"Z(K).LE.{z_end}")
+                            condition_str = " .AND. ".join(conditions)
+                            f90_lines.extend(
+                                [
+                                    f"DO I={cvi},L{cvi}",
+                                    f"{i}DO J={cvi},M{cvi}",
+                                    f"{i}{i}DO K={cvi},N{cvi}",
+                                    f"{i}{i}{i}IF({condition_str}) {var_name}(I,J,K)={region_values['le_local_value']}",
+                                    f"{i}{i}ENDDO",
+                                    f"{i}ENDDO",
+                                    "ENDDO",
+                                ]
+                            )
+                        # else:
+                        #     f90_lines.extend(
+                        #         [
+                        #             "DO I=1,L1",
+                        #             f"{i}DO J=1,M1",
+                        #             f"{i}{i}DO K=1,N1",
+                        #             f"{i}{i}{i}{var_name}(I,J,K)={region_values['le_local_value']}",
+                        #             f"{i}{i}ENDDO",
+                        #             f"{i}ENDDO",
+                        #             "ENDDO",
+                        #         ]
+                        #     )
 
         for boundary, patchs in bound.items():
             for patch, patch_values in patchs.items():
-                transversal_var, vertical_var, indexes = self.loop_mapping2[boundary]
+                transversal_var, vertical_var, transversal_end, vertical_end, indexes, _ = self.loop_mapping[boundary]
                 velocity_u = patch_values.get("le_value_veloc_u", None)
                 velocity_v = patch_values.get("le_value_veloc_v", None)
                 velocity_w = patch_values.get("le_value_veloc_w", None)
-
+                cvi = 2 if patch_values.get("chb_exclude_borders", 1) == 2 else 1  # cvi: control_volume_index
                 if any([velocity_u, velocity_v, velocity_w]):
-                    transversal_start = patch_values.get("le_transversal_start", 1)
-                    transversal_end = patch_values.get("le_transversal_end", None)
-                    vertical_start = patch_values.get("le_vertical_start", 1)
-                    vertical_end = patch_values.get("le_vertical_end", None)
-                    print("XXX", boundary, patch, transversal_start, transversal_end, vertical_start, vertical_end)
-                    transversal_start, transversal_end, vertical_start, vertical_end = self.adjust_border_limits(
-                        transversal_start, transversal_end, vertical_start, vertical_end, boundary
-                    )
-                    print("XXX", boundary, patch, transversal_start, transversal_end, vertical_start, vertical_end)
+                    # transversal_start = patch_values.get("le_transversal_start", 1)
+                    # transversal_end = patch_values.get("le_transversal_end", None)
+                    # vertical_start = patch_values.get("le_vertical_start", 1)
+                    # vertical_end = patch_values.get("le_vertical_end", None)
+                    # print("XXX", boundary, patch, transversal_start, transversal_end, vertical_start, vertical_end)
+                    # transversal_start, transversal_end, vertical_start, vertical_end = self.adjust_border_limits(
+                    #     transversal_start, transversal_end, vertical_start, vertical_end, boundary
+                    # )
+                    # print("XXX", boundary, patch, transversal_start, transversal_end, vertical_start, vertical_end)
+
                     f90_lines.extend(
                         [
-                            f"DO {transversal_var}={transversal_start},{transversal_end}",
-                            f"{i}DO {vertical_var}={vertical_start},{vertical_end}",
+                            f"DO {transversal_var}={cvi},{transversal_end.format(cvi)}",
+                            f"{i}DO {vertical_var}={cvi},{vertical_end.format(cvi)}",
                         ]
                     )
                     if velocity_u:
-                        f90_lines.append(f"{i}{i}U{indexes}={velocity_u}")
+                        cvi = 2 if patch_values.get("chb_ex_veloc_u", 1) == 2 else 1
+                        f90_lines.append(f"{i}{i}U{indexes.format(cvi)}={velocity_u}")
                     if velocity_v:
-                        f90_lines.append(f"{i}{i}V{indexes}={velocity_v}")
+                        cvi = 2 if patch_values.get("chb_ex_veloc_v", 1) == 2 else 1
+                        f90_lines.append(f"{i}{i}V{indexes.format(cvi)}={velocity_v}")
                     if velocity_w:
-                        f90_lines.append(f"{i}{i}W{indexes}={velocity_w}")
+                        cvi = 2 if patch_values.get("chb_ex_veloc_w", 1) == 2 else 1
+                        f90_lines.append(f"{i}{i}W{indexes.format(cvi)}={velocity_w}")
                     f90_lines.extend(
                         [
                             f"{i}ENDDO",
@@ -284,27 +298,28 @@ class F90Translator:
                     )
 
                 variables = {key: value for key, value in patch_values.items() if isinstance(value, dict)}
-                for variable, values in variables.items():
-                    value_condition = values.get("chb_value", None)
-                    border_value = values.get("le_value", None)
+                for variable, variable_values in variables.items():
+                    value_condition = variable_values.get("chb_value", None)
+                    border_value = variable_values.get("le_value", None)
                     if value_condition == 2 and border_value and variable == "le_var_title5":
-                        transversal_start = patch_values.get("le_transversal_start", 1)
-                        transversal_end = patch_values.get("le_transversal_end", None)
-                        vertical_start = patch_values.get("le_vertical_start", 1)
-                        vertical_end = patch_values.get("le_vertical_end", None)
-                        print("XXX", boundary, patch, transversal_start, transversal_end, vertical_start, vertical_end)
-                        transversal_start, transversal_end, vertical_start, vertical_end = self.adjust_border_limits(
-                            transversal_start, transversal_end, vertical_start, vertical_end, boundary
-                        )
-                        print("XXX", boundary, patch, transversal_start, transversal_end, vertical_start, vertical_end)
+                        # transversal_start = patch_values.get("le_transversal_start", 1)
+                        # transversal_end = patch_values.get("le_transversal_end", None)
+                        # vertical_start = patch_values.get("le_vertical_start", 1)
+                        # vertical_end = patch_values.get("le_vertical_end", None)
+                        # print("XXX", boundary, patch, transversal_start, transversal_end, vertical_start, vertical_end)
+                        # transversal_start, transversal_end, vertical_start, vertical_end = self.adjust_border_limits(
+                        #     transversal_start, transversal_end, vertical_start, vertical_end, boundary
+                        # )
+                        # print("XXX", boundary, patch, transversal_start, transversal_end, vertical_start, vertical_end)
                         f90_lines.extend(
                             [
-                                f"DO {transversal_var}={transversal_start},{transversal_end}",
-                                f"{i}DO {vertical_var}={vertical_start},{vertical_end}",
+                                f"DO {transversal_var}={cvi},{transversal_end.format(cvi)}",
+                                f"{i}DO {vertical_var}={cvi},{vertical_end.format(cvi)}",
                             ]
                         )
                         if border_value:
-                            f90_lines.append(f"{i}{i}T{indexes}={border_value}")
+                            cvi = 2 if variable_values.get("chb_ex_value", 1) == 2 else 1
+                            f90_lines.append(f"{i}{i}T{indexes.format(cvi)}={border_value}")
                         f90_lines.extend(
                             [
                                 f"{i}ENDDO",
@@ -415,7 +430,7 @@ class F90Translator:
                 )
             )
 
-        if "checkBox_4" in output and output["checkBox_4"] == 2:
+        if "chb_dimensionless" in output and output["chb_dimensionless"] == 2:
             f90_lines.append(self.dimensionless_output)
         f90_lines.append("RETURN")
         return f90_lines
@@ -431,11 +446,12 @@ class F90Translator:
                 if not added_if:
                     f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
                     added_if = True
+                cvi = 2 if values[var].get("chb_ex_k", 1) == 2 else 1  # cvi: control_volume_index
                 f90_lines.extend(
                     [
-                        f"{i}DO I=2,L2",
-                        f"{i}{i}DO J=2,M2",
-                        f"{I}DO K=2,N2",
+                        f"{i}DO I={cvi},L{cvi}",
+                        f"{i}{i}DO J={cvi},M{cvi}",
+                        f"{I}DO K={cvi},N{cvi}",
                         f"{I}{i}GAM(I,J,K)={values[var]['le_k']}",
                         f"{I}ENDDO",
                         f"{i}{i}ENDDO",
@@ -447,69 +463,74 @@ class F90Translator:
             if var in values and "chb_local_value" in values[var]:
                 regions = {key: value for key, value in values[var].items() if isinstance(value, dict)}
                 for region, region_values in regions.items():
-                    if "le_local_sc" in region_values or "le_local_k" in region_values:
+                    if any(key in region_values for key in ("le_local_sc", "le_local_sp", "le_local_k")):
                         volumes = {key: value for key, value in region_values.items() if isinstance(value, dict)}
                         for volume, volume_values in volumes.items():
-                            if all(key in volume_values for key in self.volume_widgets):
-                                if not added_if:
-                                    f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
-                                    added_if = True
-                                # x_start = int(sp.sympify(volume_values["le_x_start"]).evalf())
-                                # x_end = int(sp.sympify(volume_values["le_x_end"]).evalf())
-                                # y_start = int(sp.sympify(volume_values["le_y_start"]).evalf())
-                                # y_end = int(sp.sympify(volume_values["le_y_end"]).evalf())
-                                # z_start = int(sp.sympify(volume_values["le_z_start"]).evalf())
-                                # z_end = int(sp.sympify(volume_values["le_z_end"]).evalf())
-                                x_start, x_end, y_start, y_end, z_start, z_end = self.adjust_volume_limits(
-                                    volume_values
-                                )
-                                f90_lines.append(f"{i}DO I={x_start},{x_end}")
-                                f90_lines.append(f"{i}{i}DO J={y_start},{y_end}")
-                                f90_lines.append(f"{I}DO K={z_start},{z_end}")
-                                if "le_local_sc" in region_values:
-                                    f90_lines.append(f"{I}{i}SC(I,J,K)={region_values['le_local_sc']}")
-                                if "le_local_k" in region_values:
-                                    f90_lines.append(f"{I}{i}GAM(I,J,K)={region_values['le_local_k']}")
-                                f90_lines.append(f"{I}ENDDO")
-                                f90_lines.append(f"{i}{i}ENDDO")
-                                f90_lines.append(f"{i}ENDDO")
-                            else:
-                                if not added_if:
-                                    f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
-                                    added_if = True
-                                f90_lines.append(f"{i}DO I=2,L2")
-                                f90_lines.append(f"{i}{i}DO J=2,M2")
-                                f90_lines.append(f"{I}DO K=2,2")
-                                if "le_local_sc" in region_values:
-                                    f90_lines.append(f"{I}{i}SC(I,J,K)={region_values['le_local_sc']}")
-                                if "le_local_k" in region_values:
-                                    f90_lines.append(f"{I}{i}GAM(I,J,K)={region_values['le_local_k']}")
-                                f90_lines.append(f"{I}ENDDO")
-                                f90_lines.append(f"{i}{i}ENDDO")
-                                f90_lines.append(f"{i}ENDDO")
+                            # if all(key in volume_values for key in self.volume_widgets):
+                            if not added_if:
+                                f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
+                                added_if = True
+                            # x_start = int(sp.sympify(volume_values["le_x_start"]).evalf())
+                            # x_end = int(sp.sympify(volume_values["le_x_end"]).evalf())
+                            # y_start = int(sp.sympify(volume_values["le_y_start"]).evalf())
+                            # y_end = int(sp.sympify(volume_values["le_y_end"]).evalf())
+                            # z_start = int(sp.sympify(volume_values["le_z_start"]).evalf())
+                            # z_end = int(sp.sympify(volume_values["le_z_end"]).evalf())
+                            # x_start, x_end, y_start, y_end, z_start, z_end = self.adjust_volume_limits(
+                            #     volume_values
+                            # )
+                            cvi = (
+                                2 if volume_values.get("chb_exclude_borders", 1) == 2 else 1
+                            )  # cvi: control_volume_index
+                            f90_lines.append(f"{i}DO I={cvi},{cvi}")
+                            f90_lines.append(f"{i}{i}DO J={cvi},{cvi}")
+                            f90_lines.append(f"{I}DO K={cvi},{cvi}")
+                            if "le_local_sc" in region_values:
+                                f90_lines.append(f"{I}{i}SC(I,J,K)={region_values['le_local_sc']}")
+                            if "le_local_sp" in region_values:
+                                f90_lines.append(f"{I}{i}SP(I,J,K)={region_values['le_local_sp']}")
+                            if "le_local_k" in region_values:
+                                f90_lines.append(f"{I}{i}GAM(I,J,K)={region_values['le_local_k']}")
+                            f90_lines.append(f"{I}ENDDO")
+                            f90_lines.append(f"{i}{i}ENDDO")
+                            f90_lines.append(f"{i}ENDDO")
+                        # else:
+                        #     if not added_if:
+                        #         f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
+                        #         added_if = True
+                        #     f90_lines.append(f"{i}DO I=2,L2")
+                        #     f90_lines.append(f"{i}{i}DO J=2,M2")
+                        #     f90_lines.append(f"{I}DO K=2,2")
+                        #     if "le_local_sc" in region_values:
+                        #         f90_lines.append(f"{I}{i}SC(I,J,K)={region_values['le_local_sc']}")
+                        #     if "le_local_k" in region_values:
+                        #         f90_lines.append(f"{I}{i}GAM(I,J,K)={region_values['le_local_k']}")
+                        #     f90_lines.append(f"{I}ENDDO")
+                        #     f90_lines.append(f"{i}{i}ENDDO")
+                        #     f90_lines.append(f"{i}ENDDO")
 
             #### KBC=chb_flux, FLXC=le_value y FLXP=le_tempamb
             for boundary, patches in bound.items():
                 for patch, patch_values in patches.items():
-                    # TODO 1
-                    transversal_var, vertical_var, indexes = self.loop_mapping2[boundary]
                     if var in patch_values and "chb_flux" in patch_values[var] and patch_values[var]["chb_flux"] == 2:
                         if not added_if:
                             f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
                             added_if = True
-                        # TODO 2
-                        phi_var, loop_var_1, loop_limit_1, loop_var_2, loop_limit_2, _ = self.loop_mapping[boundary]
-                        transversal_start = patch_values.get("le_transversal_start", 1)
-                        transversal_end = patch_values.get("le_transversal_end", None)
-                        vertical_start = patch_values.get("le_vertical_start", 1)
-                        vertical_end = patch_values.get("le_vertical_end", None)
-                        transversal_start, transversal_end, vertical_start, vertical_end = self.adjust_border_limits(
-                            transversal_start, transversal_end, vertical_start, vertical_end, boundary
-                        )
+                        transversal_var, vertical_var, transversal_end, vertical_end, _, phi_var = self.loop_mapping[
+                            boundary
+                        ]
+                        # transversal_start = patch_values.get("le_transversal_start", 1)
+                        # transversal_end = patch_values.get("le_transversal_end", None)
+                        # vertical_start = patch_values.get("le_vertical_start", 1)
+                        # vertical_end = patch_values.get("le_vertical_end", None)
+                        # transversal_start, transversal_end, vertical_start, vertical_end = self.adjust_border_limits(
+                        #     transversal_start, transversal_end, vertical_start, vertical_end, boundary
+                        # )
+                        cvi = 2 if patch_values.get("chb_exclude_borders", 1) == 2 else 1  # cvi: control_volume_index
                         f90_lines.extend(
                             [
-                                f"{i}DO {transversal_var}={transversal_start},{transversal_end}",
-                                f"{i}{i}DO {vertical_var}={vertical_start},{vertical_end}",
+                                f"{i}DO {transversal_var}={cvi},{transversal_end.format(cvi)}",
+                                f"{i}{i}DO {vertical_var}={cvi},{vertical_end.format(cvi)}",
                             ]
                         )
                         f90_lines.append(f"{I}KBC{phi_var}({transversal_var},{vertical_var})=2")
@@ -591,7 +612,7 @@ class F90Translator:
     def generate_f90(self, config_manager):
         self.extend_f90(["SUBROUTINE ADAPT"])
         self.extend_f90(["INCLUDE '3DCOMMON.F90'", self.dimensionless_common])
-        if "checkBox_4" in config_manager.output and config_manager.output["checkBox_4"] == 2:
+        if "chb_dimensionless" in config_manager.output and config_manager.output["chb_dimensionless"] == 2:
             self.extend_f90([self.dimensionless])
 
         # HEADER y GRID section - Usando la función definida anteriormente
