@@ -6,16 +6,28 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>664</width>
-    <height>788</height>
+    <width>646</width>
+    <height>554</height>
    </rect>
+  </property>
+  <property name="sizePolicy">
+   <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+    <horstretch>0</horstretch>
+    <verstretch>0</verstretch>
+   </sizepolicy>
   </property>
   <property name="windowTitle">
    <string>Valores - PrePRODIC3D</string>
   </property>
-  <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="0">
+  <layout class="QVBoxLayout" name="verticalLayout_2">
+   <item>
     <widget class="QScrollArea" name="scrollArea">
+     <property name="sizePolicy">
+      <sizepolicy hsizetype="Preferred" vsizetype="Preferred">
+       <horstretch>0</horstretch>
+       <verstretch>0</verstretch>
+      </sizepolicy>
+     </property>
      <property name="widgetResizable">
       <bool>true</bool>
      </property>
@@ -23,9 +35,9 @@
       <property name="geometry">
        <rect>
         <x>0</x>
-        <y>0</y>
-        <width>627</width>
-        <height>769</height>
+        <y>-258</y>
+        <width>621</width>
+        <height>775</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -34,14 +46,14 @@
          <property name="title">
           <string>Valores</string>
          </property>
-         <layout class="QVBoxLayout" name="verticalLayout_2">
-          <item>
+         <layout class="QFormLayout" name="formLayout_3">
+          <item row="0" column="0" colspan="2">
            <widget class="QGroupBox" name="groupBox_2">
             <property name="title">
              <string>Valores generales del dominio por variable</string>
             </property>
-            <layout class="QHBoxLayout" name="horizontalLayout">
-             <item>
+            <layout class="QGridLayout" name="gridLayout_7">
+             <item row="0" column="0">
               <widget class="QGroupBox" name="groupBox_3">
                <property name="title">
                 <string/>
@@ -59,21 +71,18 @@
                </layout>
               </widget>
              </item>
-             <item>
+             <item row="0" column="1">
               <widget class="QGroupBox" name="groupBox_4">
                <property name="title">
                 <string/>
                </property>
-               <layout class="QFormLayout" name="formLayout_2">
+               <layout class="QGridLayout" name="gridLayout_8">
                 <item row="0" column="0">
                  <widget class="QLabel" name="label">
                   <property name="text">
                    <string>Valor general</string>
                   </property>
                  </widget>
-                </item>
-                <item row="0" column="1">
-                 <widget class="QLineEdit" name="le_general_value"/>
                 </item>
                 <item row="2" column="0">
                  <widget class="QLabel" name="label_2">
@@ -88,14 +97,31 @@
                 <item row="2" column="1">
                  <widget class="QLineEdit" name="le_k"/>
                 </item>
-                <item row="6" column="0">
+                <item row="7" column="0">
+                 <widget class="QLabel" name="label_17">
+                  <property name="text">
+                   <string>Ind. correc. bloque</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
                  <widget class="QLabel" name="label_15">
                   <property name="text">
                    <string>Extrapola excepto</string>
                   </property>
                  </widget>
                 </item>
-                <item row="7" column="0">
+                <item row="0" column="1">
+                 <widget class="QLineEdit" name="le_general_value"/>
+                </item>
+                <item row="6" column="0">
+                 <widget class="QLabel" name="label_16">
+                  <property name="text">
+                   <string>Ind. Impresión</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="0">
                  <widget class="QGroupBox" name="groupBox_11">
                   <property name="title">
                    <string/>
@@ -114,7 +140,21 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="7" column="1">
+                <item row="0" column="2">
+                 <widget class="QCheckBox" name="chb_ex_value">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="2" column="2">
+                 <widget class="QCheckBox" name="chb_ex_k">
+                  <property name="text">
+                   <string/>
+                  </property>
+                 </widget>
+                </item>
+                <item row="5" column="1" colspan="2">
                  <widget class="QGroupBox" name="groupBox_10">
                   <property name="title">
                    <string/>
@@ -153,44 +193,16 @@
                   </layout>
                  </widget>
                 </item>
-                <item row="8" column="0">
-                 <widget class="QLabel" name="label_16">
-                  <property name="text">
-                   <string>Ind. Impresión</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="1">
+                <item row="6" column="1" colspan="2">
                  <widget class="QLineEdit" name="le_ixyz"/>
                 </item>
-                <item row="9" column="0">
-                 <widget class="QLabel" name="label_17">
-                  <property name="text">
-                   <string>Ind. correc. bloque</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="9" column="1">
+                <item row="7" column="1" colspan="2">
                  <widget class="QLineEdit" name="le_kblock"/>
-                </item>
-                <item row="3" column="1">
-                 <widget class="QCheckBox" name="chb_ex_k">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
-                </item>
-                <item row="1" column="1">
-                 <widget class="QCheckBox" name="chb_ex_value">
-                  <property name="text">
-                   <string/>
-                  </property>
-                 </widget>
                 </item>
                </layout>
               </widget>
              </item>
-             <item>
+             <item row="0" column="2">
               <widget class="QGroupBox" name="groupBox_5">
                <property name="title">
                 <string>Flotabilidad</string>
@@ -248,14 +260,14 @@
             </layout>
            </widget>
           </item>
-          <item>
+          <item row="2" column="0" colspan="2">
            <widget class="QCheckBox" name="chb_local_value">
             <property name="text">
              <string>Para aplicar valores locales para alguna variable, active la siguiente casilla</string>
             </property>
            </widget>
           </item>
-          <item>
+          <item row="3" column="0">
            <widget class="QGroupBox" name="groupBox_6">
             <property name="title">
              <string>Valores locales por variable</string>
@@ -269,21 +281,7 @@
                <property name="title">
                 <string>Regiones</string>
                </property>
-               <layout class="QFormLayout" name="formLayout_3">
-                <item row="2" column="0" colspan="2">
-                 <widget class="QPushButton" name="pb_add_region">
-                  <property name="text">
-                   <string>Agregar una región</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="4" column="0" colspan="2">
-                 <widget class="QPushButton" name="pb_remove_region">
-                  <property name="text">
-                   <string>Eliminar última región</string>
-                  </property>
-                 </widget>
-                </item>
+               <layout class="QGridLayout" name="gridLayout_6">
                 <item row="0" column="0" colspan="2">
                  <widget class="QListWidget" name="lw_regions">
                   <property name="layoutDirection">
@@ -296,20 +294,7 @@
                   </item>
                  </widget>
                 </item>
-                <item row="10" column="0">
-                 <widget class="QLineEdit" name="le_local_value"/>
-                </item>
-                <item row="10" column="1">
-                 <widget class="QLabel" name="label_6">
-                  <property name="text">
-                   <string>Valor local</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
-                  </property>
-                 </widget>
-                </item>
-                <item row="11" column="1">
+                <item row="5" column="0">
                  <widget class="QLabel" name="label_7">
                   <property name="text">
                    <string>Sc</string>
@@ -319,23 +304,17 @@
                   </property>
                  </widget>
                 </item>
-                <item row="14" column="0">
-                 <widget class="QLineEdit" name="le_local_sp"/>
+                <item row="3" column="1">
+                 <widget class="QLineEdit" name="le_local_value"/>
                 </item>
-                <item row="14" column="1">
-                 <widget class="QLabel" name="label_8">
+                <item row="2" column="0" colspan="2">
+                 <widget class="QPushButton" name="pb_remove_region">
                   <property name="text">
-                   <string>Sp</string>
-                  </property>
-                  <property name="alignment">
-                   <set>Qt::AlignCenter</set>
+                   <string>Eliminar última región</string>
                   </property>
                  </widget>
                 </item>
-                <item row="17" column="0">
-                 <widget class="QLineEdit" name="le_local_k"/>
-                </item>
-                <item row="17" column="1">
+                <item row="9" column="0">
                  <widget class="QLabel" name="label_9">
                   <property name="text">
                    <string>k local</string>
@@ -345,192 +324,330 @@
                   </property>
                  </widget>
                 </item>
-                <item row="8" column="1">
-                 <widget class="QCheckBox" name="chb_fixed_value">
-                  <property name="text">
-                   <string>Valor fijo</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="8" column="0">
-                 <widget class="QCheckBox" name="chb_linear_source">
-                  <property name="text">
-                   <string>Fuente lineal</string>
-                  </property>
-                 </widget>
-                </item>
-                <item row="11" column="0">
+                <item row="5" column="1">
                  <widget class="QLineEdit" name="le_local_sc"/>
+                </item>
+                <item row="7" column="1">
+                 <widget class="QLineEdit" name="le_local_sp"/>
+                </item>
+                <item row="9" column="1">
+                 <widget class="QLineEdit" name="le_local_k"/>
+                </item>
+                <item row="1" column="0" colspan="2">
+                 <widget class="QPushButton" name="pb_add_region">
+                  <property name="text">
+                   <string>Agregar una región</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="3" column="0">
+                 <widget class="QLabel" name="label_6">
+                  <property name="text">
+                   <string>Valor local</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
+                </item>
+                <item row="7" column="0">
+                 <widget class="QLabel" name="label_8">
+                  <property name="text">
+                   <string>Sp</string>
+                  </property>
+                  <property name="alignment">
+                   <set>Qt::AlignCenter</set>
+                  </property>
+                 </widget>
                 </item>
                </layout>
               </widget>
              </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QGroupBox" name="groupBox_8">
+            <property name="title">
+             <string>Conformación de la región</string>
+            </property>
+            <layout class="QVBoxLayout" name="verticalLayout">
              <item>
-              <widget class="QGroupBox" name="groupBox_8">
-               <property name="title">
-                <string>Conformación de la región</string>
+              <spacer name="verticalSpacer_2">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
                </property>
-               <layout class="QVBoxLayout" name="verticalLayout">
-                <item>
-                 <widget class="QListWidget" name="lw_volumes">
-                  <item>
-                   <property name="text">
-                    <string>Volumen 1</string>
-                   </property>
-                  </item>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pb_add_volume">
-                  <property name="text">
-                   <string>Agregar un volumen</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <widget class="QPushButton" name="pb_remove_volume">
-                  <property name="text">
-                   <string>Eliminar último volumen</string>
-                  </property>
-                 </widget>
-                </item>
-                <item>
-                 <spacer name="verticalSpacer">
-                  <property name="orientation">
-                   <enum>Qt::Vertical</enum>
-                  </property>
-                  <property name="sizeType">
-                   <enum>QSizePolicy::Fixed</enum>
-                  </property>
-                  <property name="sizeHint" stdset="0">
-                   <size>
-                    <width>20</width>
-                    <height>40</height>
-                   </size>
-                  </property>
-                 </spacer>
-                </item>
-                <item>
-                 <widget class="QGroupBox" name="groupBox_9">
-                  <property name="title">
-                   <string/>
-                  </property>
-                  <layout class="QGridLayout" name="gridLayout">
-                   <item row="2" column="0">
-                    <widget class="QLabel" name="label_10">
-                     <property name="text">
-                      <string>Termina</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="2">
-                    <widget class="QLineEdit" name="le_y_end">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="1">
-                    <widget class="QLineEdit" name="le_x_start">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="2">
-                    <widget class="QLineEdit" name="le_y_start">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="1">
-                    <widget class="QLineEdit" name="le_x_end">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="1">
-                    <widget class="QLabel" name="label_12">
-                     <property name="text">
-                      <string>X</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="2">
-                    <widget class="QLabel" name="label_13">
-                     <property name="text">
-                      <string>Y</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="0">
-                    <widget class="QLabel" name="label_11">
-                     <property name="text">
-                      <string>Empieza</string>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="3">
-                    <widget class="QLabel" name="label_14">
-                     <property name="text">
-                      <string>Z</string>
-                     </property>
-                     <property name="alignment">
-                      <set>Qt::AlignCenter</set>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="1" column="3">
-                    <widget class="QLineEdit" name="le_z_start">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="2" column="3">
-                    <widget class="QLineEdit" name="le_z_end">
-                     <property name="sizePolicy">
-                      <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                       <horstretch>0</horstretch>
-                       <verstretch>0</verstretch>
-                      </sizepolicy>
-                     </property>
-                    </widget>
-                   </item>
-                   <item row="0" column="0">
-                    <widget class="QCheckBox" name="chb_exclude_borders">
-                     <property name="text">
-                      <string>Bordes</string>
-                     </property>
-                    </widget>
-                   </item>
-                  </layout>
-                 </widget>
-                </item>
-               </layout>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>135</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+             <item>
+              <widget class="QListWidget" name="lw_volumes">
+               <item>
+                <property name="text">
+                 <string>Volumen 1</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_add_volume">
+               <property name="text">
+                <string>Agregar un volumen</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <widget class="QPushButton" name="pb_remove_volume">
+               <property name="text">
+                <string>Eliminar último volumen</string>
+               </property>
+              </widget>
+             </item>
+             <item>
+              <spacer name="verticalSpacer">
+               <property name="orientation">
+                <enum>Qt::Vertical</enum>
+               </property>
+               <property name="sizeType">
+                <enum>QSizePolicy::Expanding</enum>
+               </property>
+               <property name="sizeHint" stdset="0">
+                <size>
+                 <width>20</width>
+                 <height>230</height>
+                </size>
+               </property>
+              </spacer>
+             </item>
+            </layout>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QCheckBox" name="chb_exclude_borders">
+            <property name="text">
+             <string>V.C. Excluir bordes</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0" colspan="2">
+           <widget class="QGroupBox" name="groupBox_9">
+            <property name="title">
+             <string/>
+            </property>
+            <layout class="QGridLayout" name="gridLayout">
+             <item row="0" column="3">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QLineEdit" name="le_y_end">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="5">
+              <widget class="QLineEdit" name="le_z_end">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="2">
+              <widget class="QComboBox" name="comboBox_4">
+               <item>
+                <property name="text">
+                 <string/>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>&lt;</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>≤</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="0">
+              <widget class="QComboBox" name="comboBox_2">
+               <item>
+                <property name="text">
+                 <string/>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>&lt;</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>≤</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="2" column="4">
+              <widget class="QComboBox" name="comboBox_6">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+               <item>
+                <property name="text">
+                 <string/>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>&lt;</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>≤</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="0">
+              <widget class="QComboBox" name="comboBox">
+               <item>
+                <property name="text">
+                 <string/>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>&gt;</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>≥</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLineEdit" name="le_y_start">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QComboBox" name="comboBox_5">
+               <item>
+                <property name="text">
+                 <string/>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>&gt;</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>≥</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="1" column="5">
+              <widget class="QLineEdit" name="le_z_start">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="0" column="5">
+              <widget class="QLabel" name="label_14">
+               <property name="text">
+                <string>Z</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="le_x_start">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="1">
+              <widget class="QLineEdit" name="le_x_end">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="2">
+              <widget class="QComboBox" name="comboBox_3">
+               <item>
+                <property name="text">
+                 <string/>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>&gt;</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>≥</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_12">
+               <property name="text">
+                <string>X</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
               </widget>
              </item>
             </layout>

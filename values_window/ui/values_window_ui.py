@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windownyLYdH.ui'
+## Form generated from reading UI file 'values_window.ui'
 ##
-## Created by: Qt User Interface Compiler version 6.4.3
+## Created by: Qt User Interface Compiler version 6.6.1
 ##
 ## WARNING! All changes made in this file will be lost when recompiling UI file!
 ################################################################################
@@ -15,34 +15,45 @@ from PySide6.QtGui import (QBrush, QColor, QConicalGradient, QCursor,
     QFont, QFontDatabase, QGradient, QIcon,
     QImage, QKeySequence, QLinearGradient, QPainter,
     QPalette, QPixmap, QRadialGradient, QTransform)
-from PySide6.QtWidgets import (QApplication, QCheckBox, QFormLayout, QGridLayout,
-    QGroupBox, QHBoxLayout, QLabel, QLineEdit,
-    QListWidget, QListWidgetItem, QPushButton, QScrollArea,
-    QSizePolicy, QSpacerItem, QVBoxLayout, QWidget)
+from PySide6.QtWidgets import (QApplication, QCheckBox, QComboBox, QFormLayout,
+    QGridLayout, QGroupBox, QHBoxLayout, QLabel,
+    QLineEdit, QListWidget, QListWidgetItem, QPushButton,
+    QScrollArea, QSizePolicy, QSpacerItem, QVBoxLayout,
+    QWidget)
 
 class Ui_valores_window(object):
     def setupUi(self, valores_window):
         if not valores_window.objectName():
             valores_window.setObjectName(u"valores_window")
-        valores_window.resize(664, 788)
-        self.gridLayout_3 = QGridLayout(valores_window)
-        self.gridLayout_3.setObjectName(u"gridLayout_3")
+        valores_window.resize(646, 554)
+        sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
+        sizePolicy.setHorizontalStretch(0)
+        sizePolicy.setVerticalStretch(0)
+        sizePolicy.setHeightForWidth(valores_window.sizePolicy().hasHeightForWidth())
+        valores_window.setSizePolicy(sizePolicy)
+        self.verticalLayout_2 = QVBoxLayout(valores_window)
+        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
         self.scrollArea = QScrollArea(valores_window)
         self.scrollArea.setObjectName(u"scrollArea")
+        sizePolicy1 = QSizePolicy(QSizePolicy.Preferred, QSizePolicy.Preferred)
+        sizePolicy1.setHorizontalStretch(0)
+        sizePolicy1.setVerticalStretch(0)
+        sizePolicy1.setHeightForWidth(self.scrollArea.sizePolicy().hasHeightForWidth())
+        self.scrollArea.setSizePolicy(sizePolicy1)
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 627, 769))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, -258, 621, 775))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.groupBox = QGroupBox(self.scrollAreaWidgetContents)
         self.groupBox.setObjectName(u"groupBox")
-        self.verticalLayout_2 = QVBoxLayout(self.groupBox)
-        self.verticalLayout_2.setObjectName(u"verticalLayout_2")
+        self.formLayout_3 = QFormLayout(self.groupBox)
+        self.formLayout_3.setObjectName(u"formLayout_3")
         self.groupBox_2 = QGroupBox(self.groupBox)
         self.groupBox_2.setObjectName(u"groupBox_2")
-        self.horizontalLayout = QHBoxLayout(self.groupBox_2)
-        self.horizontalLayout.setObjectName(u"horizontalLayout")
+        self.gridLayout_7 = QGridLayout(self.groupBox_2)
+        self.gridLayout_7.setObjectName(u"gridLayout_7")
         self.groupBox_3 = QGroupBox(self.groupBox_2)
         self.groupBox_3.setObjectName(u"groupBox_3")
         self.gridLayout_2 = QGridLayout(self.groupBox_3)
@@ -54,37 +65,47 @@ class Ui_valores_window(object):
         self.gridLayout_2.addWidget(self.lw_variables, 0, 0, 1, 1)
 
 
-        self.horizontalLayout.addWidget(self.groupBox_3)
+        self.gridLayout_7.addWidget(self.groupBox_3, 0, 0, 1, 1)
 
         self.groupBox_4 = QGroupBox(self.groupBox_2)
         self.groupBox_4.setObjectName(u"groupBox_4")
-        self.formLayout_2 = QFormLayout(self.groupBox_4)
-        self.formLayout_2.setObjectName(u"formLayout_2")
+        self.gridLayout_8 = QGridLayout(self.groupBox_4)
+        self.gridLayout_8.setObjectName(u"gridLayout_8")
         self.label = QLabel(self.groupBox_4)
         self.label.setObjectName(u"label")
 
-        self.formLayout_2.setWidget(0, QFormLayout.LabelRole, self.label)
-
-        self.le_general_value = QLineEdit(self.groupBox_4)
-        self.le_general_value.setObjectName(u"le_general_value")
-
-        self.formLayout_2.setWidget(0, QFormLayout.FieldRole, self.le_general_value)
+        self.gridLayout_8.addWidget(self.label, 0, 0, 1, 1)
 
         self.label_2 = QLabel(self.groupBox_4)
         self.label_2.setObjectName(u"label_2")
         self.label_2.setAlignment(Qt.AlignCenter)
 
-        self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.label_2)
+        self.gridLayout_8.addWidget(self.label_2, 2, 0, 1, 1)
 
         self.le_k = QLineEdit(self.groupBox_4)
         self.le_k.setObjectName(u"le_k")
 
-        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.le_k)
+        self.gridLayout_8.addWidget(self.le_k, 2, 1, 1, 1)
+
+        self.label_17 = QLabel(self.groupBox_4)
+        self.label_17.setObjectName(u"label_17")
+
+        self.gridLayout_8.addWidget(self.label_17, 7, 0, 1, 1)
 
         self.label_15 = QLabel(self.groupBox_4)
         self.label_15.setObjectName(u"label_15")
 
-        self.formLayout_2.setWidget(6, QFormLayout.LabelRole, self.label_15)
+        self.gridLayout_8.addWidget(self.label_15, 4, 0, 1, 1)
+
+        self.le_general_value = QLineEdit(self.groupBox_4)
+        self.le_general_value.setObjectName(u"le_general_value")
+
+        self.gridLayout_8.addWidget(self.le_general_value, 0, 1, 1, 1)
+
+        self.label_16 = QLabel(self.groupBox_4)
+        self.label_16.setObjectName(u"label_16")
+
+        self.gridLayout_8.addWidget(self.label_16, 6, 0, 1, 1)
 
         self.groupBox_11 = QGroupBox(self.groupBox_4)
         self.groupBox_11.setObjectName(u"groupBox_11")
@@ -97,7 +118,17 @@ class Ui_valores_window(object):
         self.horizontalLayout_3.addWidget(self.chb_ipun)
 
 
-        self.formLayout_2.setWidget(7, QFormLayout.LabelRole, self.groupBox_11)
+        self.gridLayout_8.addWidget(self.groupBox_11, 5, 0, 1, 1)
+
+        self.chb_ex_value = QCheckBox(self.groupBox_4)
+        self.chb_ex_value.setObjectName(u"chb_ex_value")
+
+        self.gridLayout_8.addWidget(self.chb_ex_value, 0, 2, 1, 1)
+
+        self.chb_ex_k = QCheckBox(self.groupBox_4)
+        self.chb_ex_k.setObjectName(u"chb_ex_k")
+
+        self.gridLayout_8.addWidget(self.chb_ex_k, 2, 2, 1, 1)
 
         self.groupBox_10 = QGroupBox(self.groupBox_4)
         self.groupBox_10.setObjectName(u"groupBox_10")
@@ -122,40 +153,20 @@ class Ui_valores_window(object):
         self.gridLayout_4.addWidget(self.chb_ibory, 1, 1, 1, 1)
 
 
-        self.formLayout_2.setWidget(7, QFormLayout.FieldRole, self.groupBox_10)
-
-        self.label_16 = QLabel(self.groupBox_4)
-        self.label_16.setObjectName(u"label_16")
-
-        self.formLayout_2.setWidget(8, QFormLayout.LabelRole, self.label_16)
+        self.gridLayout_8.addWidget(self.groupBox_10, 5, 1, 1, 2)
 
         self.le_ixyz = QLineEdit(self.groupBox_4)
         self.le_ixyz.setObjectName(u"le_ixyz")
 
-        self.formLayout_2.setWidget(8, QFormLayout.FieldRole, self.le_ixyz)
-
-        self.label_17 = QLabel(self.groupBox_4)
-        self.label_17.setObjectName(u"label_17")
-
-        self.formLayout_2.setWidget(9, QFormLayout.LabelRole, self.label_17)
+        self.gridLayout_8.addWidget(self.le_ixyz, 6, 1, 1, 2)
 
         self.le_kblock = QLineEdit(self.groupBox_4)
         self.le_kblock.setObjectName(u"le_kblock")
 
-        self.formLayout_2.setWidget(9, QFormLayout.FieldRole, self.le_kblock)
-
-        self.chb_ex_k = QCheckBox(self.groupBox_4)
-        self.chb_ex_k.setObjectName(u"chb_ex_k")
-
-        self.formLayout_2.setWidget(3, QFormLayout.FieldRole, self.chb_ex_k)
-
-        self.chb_ex_value = QCheckBox(self.groupBox_4)
-        self.chb_ex_value.setObjectName(u"chb_ex_value")
-
-        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.chb_ex_value)
+        self.gridLayout_8.addWidget(self.le_kblock, 7, 1, 1, 2)
 
 
-        self.horizontalLayout.addWidget(self.groupBox_4)
+        self.gridLayout_7.addWidget(self.groupBox_4, 0, 1, 1, 1)
 
         self.groupBox_5 = QGroupBox(self.groupBox_2)
         self.groupBox_5.setObjectName(u"groupBox_5")
@@ -200,15 +211,15 @@ class Ui_valores_window(object):
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.checkBox)
 
 
-        self.horizontalLayout.addWidget(self.groupBox_5)
+        self.gridLayout_7.addWidget(self.groupBox_5, 0, 2, 1, 1)
 
 
-        self.verticalLayout_2.addWidget(self.groupBox_2)
+        self.formLayout_3.setWidget(0, QFormLayout.SpanningRole, self.groupBox_2)
 
         self.chb_local_value = QCheckBox(self.groupBox)
         self.chb_local_value.setObjectName(u"chb_local_value")
 
-        self.verticalLayout_2.addWidget(self.chb_local_value)
+        self.formLayout_3.setWidget(2, QFormLayout.SpanningRole, self.chb_local_value)
 
         self.groupBox_6 = QGroupBox(self.groupBox)
         self.groupBox_6.setObjectName(u"groupBox_6")
@@ -217,86 +228,83 @@ class Ui_valores_window(object):
         self.groupBox_7 = QGroupBox(self.groupBox_6)
         self.groupBox_7.setObjectName(u"groupBox_7")
         self.groupBox_7.setLayoutDirection(Qt.LeftToRight)
-        self.formLayout_3 = QFormLayout(self.groupBox_7)
-        self.formLayout_3.setObjectName(u"formLayout_3")
-        self.pb_add_region = QPushButton(self.groupBox_7)
-        self.pb_add_region.setObjectName(u"pb_add_region")
-
-        self.formLayout_3.setWidget(2, QFormLayout.SpanningRole, self.pb_add_region)
-
-        self.pb_remove_region = QPushButton(self.groupBox_7)
-        self.pb_remove_region.setObjectName(u"pb_remove_region")
-
-        self.formLayout_3.setWidget(4, QFormLayout.SpanningRole, self.pb_remove_region)
-
+        self.gridLayout_6 = QGridLayout(self.groupBox_7)
+        self.gridLayout_6.setObjectName(u"gridLayout_6")
         self.lw_regions = QListWidget(self.groupBox_7)
         QListWidgetItem(self.lw_regions)
         self.lw_regions.setObjectName(u"lw_regions")
         self.lw_regions.setLayoutDirection(Qt.LeftToRight)
 
-        self.formLayout_3.setWidget(0, QFormLayout.SpanningRole, self.lw_regions)
-
-        self.le_local_value = QLineEdit(self.groupBox_7)
-        self.le_local_value.setObjectName(u"le_local_value")
-
-        self.formLayout_3.setWidget(10, QFormLayout.LabelRole, self.le_local_value)
-
-        self.label_6 = QLabel(self.groupBox_7)
-        self.label_6.setObjectName(u"label_6")
-        self.label_6.setAlignment(Qt.AlignCenter)
-
-        self.formLayout_3.setWidget(10, QFormLayout.FieldRole, self.label_6)
+        self.gridLayout_6.addWidget(self.lw_regions, 0, 0, 1, 2)
 
         self.label_7 = QLabel(self.groupBox_7)
         self.label_7.setObjectName(u"label_7")
         self.label_7.setAlignment(Qt.AlignCenter)
 
-        self.formLayout_3.setWidget(11, QFormLayout.FieldRole, self.label_7)
+        self.gridLayout_6.addWidget(self.label_7, 5, 0, 1, 1)
 
-        self.le_local_sp = QLineEdit(self.groupBox_7)
-        self.le_local_sp.setObjectName(u"le_local_sp")
+        self.le_local_value = QLineEdit(self.groupBox_7)
+        self.le_local_value.setObjectName(u"le_local_value")
 
-        self.formLayout_3.setWidget(14, QFormLayout.LabelRole, self.le_local_sp)
+        self.gridLayout_6.addWidget(self.le_local_value, 3, 1, 1, 1)
 
-        self.label_8 = QLabel(self.groupBox_7)
-        self.label_8.setObjectName(u"label_8")
-        self.label_8.setAlignment(Qt.AlignCenter)
+        self.pb_remove_region = QPushButton(self.groupBox_7)
+        self.pb_remove_region.setObjectName(u"pb_remove_region")
 
-        self.formLayout_3.setWidget(14, QFormLayout.FieldRole, self.label_8)
-
-        self.le_local_k = QLineEdit(self.groupBox_7)
-        self.le_local_k.setObjectName(u"le_local_k")
-
-        self.formLayout_3.setWidget(17, QFormLayout.LabelRole, self.le_local_k)
+        self.gridLayout_6.addWidget(self.pb_remove_region, 2, 0, 1, 2)
 
         self.label_9 = QLabel(self.groupBox_7)
         self.label_9.setObjectName(u"label_9")
         self.label_9.setAlignment(Qt.AlignCenter)
 
-        self.formLayout_3.setWidget(17, QFormLayout.FieldRole, self.label_9)
-
-        self.chb_fixed_value = QCheckBox(self.groupBox_7)
-        self.chb_fixed_value.setObjectName(u"chb_fixed_value")
-
-        self.formLayout_3.setWidget(8, QFormLayout.FieldRole, self.chb_fixed_value)
-
-        self.chb_linear_source = QCheckBox(self.groupBox_7)
-        self.chb_linear_source.setObjectName(u"chb_linear_source")
-
-        self.formLayout_3.setWidget(8, QFormLayout.LabelRole, self.chb_linear_source)
+        self.gridLayout_6.addWidget(self.label_9, 9, 0, 1, 1)
 
         self.le_local_sc = QLineEdit(self.groupBox_7)
         self.le_local_sc.setObjectName(u"le_local_sc")
 
-        self.formLayout_3.setWidget(11, QFormLayout.LabelRole, self.le_local_sc)
+        self.gridLayout_6.addWidget(self.le_local_sc, 5, 1, 1, 1)
+
+        self.le_local_sp = QLineEdit(self.groupBox_7)
+        self.le_local_sp.setObjectName(u"le_local_sp")
+
+        self.gridLayout_6.addWidget(self.le_local_sp, 7, 1, 1, 1)
+
+        self.le_local_k = QLineEdit(self.groupBox_7)
+        self.le_local_k.setObjectName(u"le_local_k")
+
+        self.gridLayout_6.addWidget(self.le_local_k, 9, 1, 1, 1)
+
+        self.pb_add_region = QPushButton(self.groupBox_7)
+        self.pb_add_region.setObjectName(u"pb_add_region")
+
+        self.gridLayout_6.addWidget(self.pb_add_region, 1, 0, 1, 2)
+
+        self.label_6 = QLabel(self.groupBox_7)
+        self.label_6.setObjectName(u"label_6")
+        self.label_6.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_6.addWidget(self.label_6, 3, 0, 1, 1)
+
+        self.label_8 = QLabel(self.groupBox_7)
+        self.label_8.setObjectName(u"label_8")
+        self.label_8.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_6.addWidget(self.label_8, 7, 0, 1, 1)
 
 
         self.horizontalLayout_2.addWidget(self.groupBox_7)
 
-        self.groupBox_8 = QGroupBox(self.groupBox_6)
+
+        self.formLayout_3.setWidget(3, QFormLayout.LabelRole, self.groupBox_6)
+
+        self.groupBox_8 = QGroupBox(self.groupBox)
         self.groupBox_8.setObjectName(u"groupBox_8")
         self.verticalLayout = QVBoxLayout(self.groupBox_8)
         self.verticalLayout.setObjectName(u"verticalLayout")
+        self.verticalSpacer_2 = QSpacerItem(20, 135, QSizePolicy.Minimum, QSizePolicy.Expanding)
+
+        self.verticalLayout.addItem(self.verticalSpacer_2)
+
         self.lw_volumes = QListWidget(self.groupBox_8)
         QListWidgetItem(self.lw_volumes)
         self.lw_volumes.setObjectName(u"lw_volumes")
@@ -313,49 +321,128 @@ class Ui_valores_window(object):
 
         self.verticalLayout.addWidget(self.pb_remove_volume)
 
-        self.verticalSpacer = QSpacerItem(20, 40, QSizePolicy.Minimum, QSizePolicy.Fixed)
+        self.verticalSpacer = QSpacerItem(20, 230, QSizePolicy.Minimum, QSizePolicy.Expanding)
 
         self.verticalLayout.addItem(self.verticalSpacer)
 
-        self.groupBox_9 = QGroupBox(self.groupBox_8)
+
+        self.formLayout_3.setWidget(3, QFormLayout.FieldRole, self.groupBox_8)
+
+        self.chb_exclude_borders = QCheckBox(self.groupBox)
+        self.chb_exclude_borders.setObjectName(u"chb_exclude_borders")
+
+        self.formLayout_3.setWidget(4, QFormLayout.LabelRole, self.chb_exclude_borders)
+
+        self.groupBox_9 = QGroupBox(self.groupBox)
         self.groupBox_9.setObjectName(u"groupBox_9")
         self.gridLayout = QGridLayout(self.groupBox_9)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.label_10 = QLabel(self.groupBox_9)
-        self.label_10.setObjectName(u"label_10")
+        self.label_13 = QLabel(self.groupBox_9)
+        self.label_13.setObjectName(u"label_13")
+        self.label_13.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_10, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.label_13, 0, 3, 1, 1)
 
         self.le_y_end = QLineEdit(self.groupBox_9)
         self.le_y_end.setObjectName(u"le_y_end")
-        sizePolicy = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed)
-        sizePolicy.setHorizontalStretch(0)
-        sizePolicy.setVerticalStretch(0)
-        sizePolicy.setHeightForWidth(self.le_y_end.sizePolicy().hasHeightForWidth())
-        self.le_y_end.setSizePolicy(sizePolicy)
+        sizePolicy2 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.le_y_end.sizePolicy().hasHeightForWidth())
+        self.le_y_end.setSizePolicy(sizePolicy2)
 
-        self.gridLayout.addWidget(self.le_y_end, 2, 2, 1, 1)
+        self.gridLayout.addWidget(self.le_y_end, 2, 3, 1, 1)
 
-        self.le_x_start = QLineEdit(self.groupBox_9)
-        self.le_x_start.setObjectName(u"le_x_start")
-        sizePolicy.setHeightForWidth(self.le_x_start.sizePolicy().hasHeightForWidth())
-        self.le_x_start.setSizePolicy(sizePolicy)
+        self.le_z_end = QLineEdit(self.groupBox_9)
+        self.le_z_end.setObjectName(u"le_z_end")
+        sizePolicy2.setHeightForWidth(self.le_z_end.sizePolicy().hasHeightForWidth())
+        self.le_z_end.setSizePolicy(sizePolicy2)
 
-        self.gridLayout.addWidget(self.le_x_start, 1, 1, 1, 1)
+        self.gridLayout.addWidget(self.le_z_end, 2, 5, 1, 1)
+
+        self.comboBox_4 = QComboBox(self.groupBox_9)
+        self.comboBox_4.addItem("")
+        self.comboBox_4.addItem("")
+        self.comboBox_4.addItem("")
+        self.comboBox_4.setObjectName(u"comboBox_4")
+
+        self.gridLayout.addWidget(self.comboBox_4, 2, 2, 1, 1)
+
+        self.comboBox_2 = QComboBox(self.groupBox_9)
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.addItem("")
+        self.comboBox_2.setObjectName(u"comboBox_2")
+
+        self.gridLayout.addWidget(self.comboBox_2, 2, 0, 1, 1)
+
+        self.comboBox_6 = QComboBox(self.groupBox_9)
+        self.comboBox_6.addItem("")
+        self.comboBox_6.addItem("")
+        self.comboBox_6.addItem("")
+        self.comboBox_6.setObjectName(u"comboBox_6")
+        sizePolicy.setHeightForWidth(self.comboBox_6.sizePolicy().hasHeightForWidth())
+        self.comboBox_6.setSizePolicy(sizePolicy)
+
+        self.gridLayout.addWidget(self.comboBox_6, 2, 4, 1, 1)
+
+        self.comboBox = QComboBox(self.groupBox_9)
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.addItem("")
+        self.comboBox.setObjectName(u"comboBox")
+
+        self.gridLayout.addWidget(self.comboBox, 1, 0, 1, 1)
 
         self.le_y_start = QLineEdit(self.groupBox_9)
         self.le_y_start.setObjectName(u"le_y_start")
-        sizePolicy.setHeightForWidth(self.le_y_start.sizePolicy().hasHeightForWidth())
-        self.le_y_start.setSizePolicy(sizePolicy)
+        sizePolicy2.setHeightForWidth(self.le_y_start.sizePolicy().hasHeightForWidth())
+        self.le_y_start.setSizePolicy(sizePolicy2)
 
-        self.gridLayout.addWidget(self.le_y_start, 1, 2, 1, 1)
+        self.gridLayout.addWidget(self.le_y_start, 1, 3, 1, 1)
+
+        self.comboBox_5 = QComboBox(self.groupBox_9)
+        self.comboBox_5.addItem("")
+        self.comboBox_5.addItem("")
+        self.comboBox_5.addItem("")
+        self.comboBox_5.setObjectName(u"comboBox_5")
+
+        self.gridLayout.addWidget(self.comboBox_5, 1, 4, 1, 1)
+
+        self.le_z_start = QLineEdit(self.groupBox_9)
+        self.le_z_start.setObjectName(u"le_z_start")
+        sizePolicy2.setHeightForWidth(self.le_z_start.sizePolicy().hasHeightForWidth())
+        self.le_z_start.setSizePolicy(sizePolicy2)
+
+        self.gridLayout.addWidget(self.le_z_start, 1, 5, 1, 1)
+
+        self.label_14 = QLabel(self.groupBox_9)
+        self.label_14.setObjectName(u"label_14")
+        self.label_14.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout.addWidget(self.label_14, 0, 5, 1, 1)
+
+        self.le_x_start = QLineEdit(self.groupBox_9)
+        self.le_x_start.setObjectName(u"le_x_start")
+        sizePolicy2.setHeightForWidth(self.le_x_start.sizePolicy().hasHeightForWidth())
+        self.le_x_start.setSizePolicy(sizePolicy2)
+
+        self.gridLayout.addWidget(self.le_x_start, 1, 1, 1, 1)
 
         self.le_x_end = QLineEdit(self.groupBox_9)
         self.le_x_end.setObjectName(u"le_x_end")
-        sizePolicy.setHeightForWidth(self.le_x_end.sizePolicy().hasHeightForWidth())
-        self.le_x_end.setSizePolicy(sizePolicy)
+        sizePolicy2.setHeightForWidth(self.le_x_end.sizePolicy().hasHeightForWidth())
+        self.le_x_end.setSizePolicy(sizePolicy2)
 
         self.gridLayout.addWidget(self.le_x_end, 2, 1, 1, 1)
+
+        self.comboBox_3 = QComboBox(self.groupBox_9)
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.addItem("")
+        self.comboBox_3.setObjectName(u"comboBox_3")
+
+        self.gridLayout.addWidget(self.comboBox_3, 1, 2, 1, 1)
 
         self.label_12 = QLabel(self.groupBox_9)
         self.label_12.setObjectName(u"label_12")
@@ -363,57 +450,15 @@ class Ui_valores_window(object):
 
         self.gridLayout.addWidget(self.label_12, 0, 1, 1, 1)
 
-        self.label_13 = QLabel(self.groupBox_9)
-        self.label_13.setObjectName(u"label_13")
-        self.label_13.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_13, 0, 2, 1, 1)
-
-        self.label_11 = QLabel(self.groupBox_9)
-        self.label_11.setObjectName(u"label_11")
-
-        self.gridLayout.addWidget(self.label_11, 1, 0, 1, 1)
-
-        self.label_14 = QLabel(self.groupBox_9)
-        self.label_14.setObjectName(u"label_14")
-        self.label_14.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout.addWidget(self.label_14, 0, 3, 1, 1)
-
-        self.le_z_start = QLineEdit(self.groupBox_9)
-        self.le_z_start.setObjectName(u"le_z_start")
-        sizePolicy.setHeightForWidth(self.le_z_start.sizePolicy().hasHeightForWidth())
-        self.le_z_start.setSizePolicy(sizePolicy)
-
-        self.gridLayout.addWidget(self.le_z_start, 1, 3, 1, 1)
-
-        self.le_z_end = QLineEdit(self.groupBox_9)
-        self.le_z_end.setObjectName(u"le_z_end")
-        sizePolicy.setHeightForWidth(self.le_z_end.sizePolicy().hasHeightForWidth())
-        self.le_z_end.setSizePolicy(sizePolicy)
-
-        self.gridLayout.addWidget(self.le_z_end, 2, 3, 1, 1)
-
-        self.chb_exclude_borders = QCheckBox(self.groupBox_9)
-        self.chb_exclude_borders.setObjectName(u"chb_exclude_borders")
-
-        self.gridLayout.addWidget(self.chb_exclude_borders, 0, 0, 1, 1)
-
-
-        self.verticalLayout.addWidget(self.groupBox_9)
-
-
-        self.horizontalLayout_2.addWidget(self.groupBox_8)
-
-
-        self.verticalLayout_2.addWidget(self.groupBox_6)
+        self.formLayout_3.setWidget(5, QFormLayout.SpanningRole, self.groupBox_9)
 
 
         self.verticalLayout_3.addWidget(self.groupBox)
 
         self.scrollArea.setWidget(self.scrollAreaWidgetContents)
 
-        self.gridLayout_3.addWidget(self.scrollArea, 0, 0, 1, 1)
+        self.verticalLayout_2.addWidget(self.scrollArea)
 
 
         self.retranslateUi(valores_window)
@@ -436,17 +481,17 @@ class Ui_valores_window(object):
         self.groupBox_4.setTitle("")
         self.label.setText(QCoreApplication.translate("valores_window", u"Valor general", None))
         self.label_2.setText(QCoreApplication.translate("valores_window", u"Conductividad", None))
+        self.label_17.setText(QCoreApplication.translate("valores_window", u"Ind. correc. bloque", None))
         self.label_15.setText(QCoreApplication.translate("valores_window", u"Extrapola excepto", None))
+        self.label_16.setText(QCoreApplication.translate("valores_window", u"Ind. Impresi\u00f3n", None))
         self.groupBox_11.setTitle("")
         self.chb_ipun.setText(QCoreApplication.translate("valores_window", u"Esquinas", None))
+        self.chb_ex_value.setText("")
+        self.chb_ex_k.setText("")
         self.groupBox_10.setTitle("")
         self.chb_iborx.setText(QCoreApplication.translate("valores_window", u"X", None))
         self.chb_iborz.setText(QCoreApplication.translate("valores_window", u"Z", None))
         self.chb_ibory.setText(QCoreApplication.translate("valores_window", u"Y", None))
-        self.label_16.setText(QCoreApplication.translate("valores_window", u"Ind. Impresi\u00f3n", None))
-        self.label_17.setText(QCoreApplication.translate("valores_window", u"Ind. correc. bloque", None))
-        self.chb_ex_k.setText("")
-        self.chb_ex_value.setText("")
         self.groupBox_5.setTitle(QCoreApplication.translate("valores_window", u"Flotabilidad", None))
         self.label_3.setText(QCoreApplication.translate("valores_window", u"Coef. exp. term.", None))
         self.label_4.setText(QCoreApplication.translate("valores_window", u"Gravedad", None))
@@ -455,8 +500,6 @@ class Ui_valores_window(object):
         self.chb_local_value.setText(QCoreApplication.translate("valores_window", u"Para aplicar valores locales para alguna variable, active la siguiente casilla", None))
         self.groupBox_6.setTitle(QCoreApplication.translate("valores_window", u"Valores locales por variable", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("valores_window", u"Regiones", None))
-        self.pb_add_region.setText(QCoreApplication.translate("valores_window", u"Agregar una regi\u00f3n", None))
-        self.pb_remove_region.setText(QCoreApplication.translate("valores_window", u"Eliminar \u00faltima regi\u00f3n", None))
 
         __sortingEnabled1 = self.lw_regions.isSortingEnabled()
         self.lw_regions.setSortingEnabled(False)
@@ -464,12 +507,12 @@ class Ui_valores_window(object):
         ___qlistwidgetitem1.setText(QCoreApplication.translate("valores_window", u"Region 1", None));
         self.lw_regions.setSortingEnabled(__sortingEnabled1)
 
-        self.label_6.setText(QCoreApplication.translate("valores_window", u"Valor local", None))
         self.label_7.setText(QCoreApplication.translate("valores_window", u"Sc", None))
-        self.label_8.setText(QCoreApplication.translate("valores_window", u"Sp", None))
+        self.pb_remove_region.setText(QCoreApplication.translate("valores_window", u"Eliminar \u00faltima regi\u00f3n", None))
         self.label_9.setText(QCoreApplication.translate("valores_window", u"k local", None))
-        self.chb_fixed_value.setText(QCoreApplication.translate("valores_window", u"Valor fijo", None))
-        self.chb_linear_source.setText(QCoreApplication.translate("valores_window", u"Fuente lineal", None))
+        self.pb_add_region.setText(QCoreApplication.translate("valores_window", u"Agregar una regi\u00f3n", None))
+        self.label_6.setText(QCoreApplication.translate("valores_window", u"Valor local", None))
+        self.label_8.setText(QCoreApplication.translate("valores_window", u"Sp", None))
         self.groupBox_8.setTitle(QCoreApplication.translate("valores_window", u"Conformaci\u00f3n de la regi\u00f3n", None))
 
         __sortingEnabled2 = self.lw_volumes.isSortingEnabled()
@@ -480,12 +523,34 @@ class Ui_valores_window(object):
 
         self.pb_add_volume.setText(QCoreApplication.translate("valores_window", u"Agregar un volumen", None))
         self.pb_remove_volume.setText(QCoreApplication.translate("valores_window", u"Eliminar \u00faltimo volumen", None))
+        self.chb_exclude_borders.setText(QCoreApplication.translate("valores_window", u"V.C. Excluir bordes", None))
         self.groupBox_9.setTitle("")
-        self.label_10.setText(QCoreApplication.translate("valores_window", u"Termina", None))
-        self.label_12.setText(QCoreApplication.translate("valores_window", u"X", None))
         self.label_13.setText(QCoreApplication.translate("valores_window", u"Y", None))
-        self.label_11.setText(QCoreApplication.translate("valores_window", u"Empieza", None))
+        self.comboBox_4.setItemText(0, "")
+        self.comboBox_4.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
+        self.comboBox_4.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
+
+        self.comboBox_2.setItemText(0, "")
+        self.comboBox_2.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
+        self.comboBox_2.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
+
+        self.comboBox_6.setItemText(0, "")
+        self.comboBox_6.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
+        self.comboBox_6.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
+
+        self.comboBox.setItemText(0, "")
+        self.comboBox.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
+        self.comboBox.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
+
+        self.comboBox_5.setItemText(0, "")
+        self.comboBox_5.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
+        self.comboBox_5.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
+
         self.label_14.setText(QCoreApplication.translate("valores_window", u"Z", None))
-        self.chb_exclude_borders.setText(QCoreApplication.translate("valores_window", u"Bordes", None))
+        self.comboBox_3.setItemText(0, "")
+        self.comboBox_3.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
+        self.comboBox_3.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
+
+        self.label_12.setText(QCoreApplication.translate("valores_window", u"X", None))
     # retranslateUi
 
