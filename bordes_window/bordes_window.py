@@ -225,7 +225,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         if border:
             patch_number = self.lw_patchlist.count()
             self.lw_patchlist.addItem(f"Parche {patch_number}")
-            self.config_manager.bound[border.text()][f"Parche {patch_number}"] = {}
+            self.config_manager.bound[border.text()][f"Parche {patch_number}"] = {"chb_wall": 2}
 
     def remove_patch(self):
         """"""
