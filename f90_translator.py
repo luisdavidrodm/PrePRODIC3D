@@ -183,14 +183,8 @@ class F90Translator:
         f90_lines.append(f"KORD={kord}")
         f90_lines.append(f"LAST={last}")
 
-        variables = {
-            "le_var_title5": "T",
-            "le_var_title1": "U",
-            "le_var_title2": "V",
-            "le_var_title3": "W",
-        }
         #### le_general_value
-        for var_title, var_info in variables.items():
+        for var_title, var_number in self.variables_map.items():
             if var_title in values and "le_general_value" in values[var_title]:
                 cvi = 2 if values.get(var_title, {}).get("chb_ex_value", 1) == 2 else 1  # cvi: control_volume_index
                 f90_lines.extend(
@@ -198,7 +192,7 @@ class F90Translator:
                         f"DO I={cvi},L{cvi}",
                         f"{i}DO J={cvi},M{cvi}",
                         f"{i}{i}DO K={cvi},N{cvi}",
-                        f"{I}{var_name}(I,J,K)={values[var_title]['le_general_value']}",
+                        f"{I}F(I,J,K,{var_number})={values[var_title]['le_general_value']}",
                         f"{i}{i}ENDDO",
                         f"{i}ENDDO",
                         "ENDDO",
@@ -206,7 +200,7 @@ class F90Translator:
                 )
 
         #### le_local_value
-        for var_title, var_name in variables.items():
+        for var_title, var_number in self.variables_map.items():
             if var_title in values:
                 regions = {key: value for key, value in values[var_title].items() if isinstance(value, dict)}
                 for region, region_values in regions.items():
@@ -224,7 +218,7 @@ class F90Translator:
                                     f"DO I={cvi},L{cvi}",
                                     f"{i}DO J={cvi},M{cvi}",
                                     f"{i}{i}DO K={cvi},N{cvi}",
-                                    f"{I}IF({condition_str}) {var_name}(I,J,K)={region_values['le_local_value']}",
+                                    f"{I}IF({condition_str}) F(I,J,K,{var_number})={region_values['le_local_value']}",
                                     f"{i}{i}ENDDO",
                                     f"{i}ENDDO",
                                     "ENDDO",
@@ -234,43 +228,15 @@ class F90Translator:
         for boundary, patchs in bound.items():
             for patch, patch_values in patchs.items():
                 transversal_var, vertical_var, transversal_end, vertical_end, indexes, _ = self.loop_mapping[boundary]
-                velocity_u = patch_values.get("le_value_veloc_u", None)
-                velocity_v = patch_values.get("le_value_veloc_v", None)
-                velocity_w = patch_values.get("le_value_veloc_w", None)
                 cvi = 2 if patch_values.get("chb_exclude_borders", 1) == 2 else 1  # cvi: control_volume_index
 
                 condition_str = self.border_operator_conditions(patch_values, transversal_var, vertical_var)
-
-                if any([velocity_u, velocity_v, velocity_w]):
-                    f90_lines.extend(
-                        [
-                            f"DO {transversal_var}={cvi},{transversal_end.format(cvi)}",
-                            f"{i}DO {vertical_var}={cvi},{vertical_end.format(cvi)}",
-                        ]
-                    )
-                    if velocity_u:
-                        vcvi = (
-                            2 if patch_values.get("chb_ex_veloc_u", 1) == 2 else 1
-                        )  # vcvi: variable_control_volume_index
-                        f90_lines.append(f"{i}{i}IF({condition_str}) U{indexes.format(vcvi)}={velocity_u}")
-                    if velocity_v:
-                        vcvi = 2 if patch_values.get("chb_ex_veloc_v", 1) == 2 else 1
-                        f90_lines.append(f"{i}{i}IF({condition_str}) V{indexes.format(vcvi)}={velocity_v}")
-                    if velocity_w:
-                        vcvi = 2 if patch_values.get("chb_ex_veloc_w", 1) == 2 else 1
-                        f90_lines.append(f"{i}{i}IF({condition_str}) W{indexes.format(vcvi)}={velocity_w}")
-                    f90_lines.extend(
-                        [
-                            f"{i}ENDDO",
-                            "ENDDO",
-                        ]
-                    )
 
                 variables = {key: value for key, value in patch_values.items() if isinstance(value, dict)}
                 for variable, variable_values in variables.items():
                     value_condition = variable_values.get("chb_value", None)
                     border_value = variable_values.get("le_value", None)
-                    if value_condition == 2 and border_value and variable == "le_var_title5":
+                    if value_condition == 2 and border_value:
                         f90_lines.extend(
                             [
                                 f"DO {transversal_var}={cvi},{transversal_end.format(cvi)}",
@@ -279,7 +245,9 @@ class F90Translator:
                         )
                         if border_value:
                             vcvi = 2 if variable_values.get("chb_ex_value", 1) == 2 else 1
-                            f90_lines.append(f"{i}{i}IF({condition_str}) T{indexes.format(vcvi)}={border_value}")
+                            var_number = "".join(filter(str.isdigit, variable))
+                            formatted_indexes = indexes.format(vcvi).rstrip(")") + f",{var_number})"
+                            f90_lines.append(f"{i}{i}IF({condition_str}) F{formatted_indexes}={border_value}")
                         f90_lines.extend(
                             [
                                 f"{i}ENDDO",

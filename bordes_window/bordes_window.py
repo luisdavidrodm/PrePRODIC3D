@@ -195,8 +195,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         for key, value in self.config_manager.variables.items():
             if key.startswith("le_var_title"):
                 number = int(key[len("le_var_title") :])
-                if number < 4:  # Excluir le_var_title1 a le_var_title3
-                    continue
                 new_items.append((number, value, key))
         new_items.sort()
         self.lw_variables.clear()
