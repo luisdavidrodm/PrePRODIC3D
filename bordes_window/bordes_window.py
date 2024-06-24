@@ -22,11 +22,11 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
         # Definir widgets de parches y listas de widgets
         self.patch_widgets = [
-            "le_value", "le_tempamb", "chb_wall", "chb_inmass", "chb_outmass",
-            "le_value_veloc_u", "le_value_veloc_v", "le_value_veloc_w",
-            "le_fracmass", "le_transversal_start", "le_transversal_end",
-            "le_vertical_start", "le_vertical_end", "chb_ex_veloc_u", 
-            "chb_ex_veloc_v", "chb_ex_veloc_w", "chb_exclude_borders"
+            "le_value", "le_tempamb", "chb_wall", "chb_inmass", "chb_outmass", "le_value_veloc_u", 
+            "le_value_veloc_v", "le_value_veloc_w", "le_fracmass", "le_transversal_start", 
+            "le_transversal_end", "le_vertical_start", "le_vertical_end", "chb_ex_veloc_u", 
+            "chb_ex_veloc_v", "chb_ex_veloc_w", "chb_exclude_borders", "cb_ex_transversal_start", 
+            "cb_ex_transversal_end", "cb_ex_vertical_start", "cb_ex_vertical_end"
         ]
         self.variable_widgets = [
             "le_value", "le_tempamb", "chb_value", "chb_flux", 
@@ -52,6 +52,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 if not toggle:
                     if isinstance(widget, qtw.QLineEdit):
                         widget.clear()
+                    elif isinstance(widget, qtw.QComboBox):
+                        widget.setCurrentText(None)
                     elif isinstance(widget, qtw.QCheckBox):
                         widget.setChecked(False)
             else:
@@ -123,9 +125,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         configured_widgets = self.get_configured_widgets(border, patch, variable)
         not_configured_widgets = [widget for widget in self.widgets if widget not in configured_widgets]
         self.toggle_widget_list(not_configured_widgets, False)
-        print(
-            f"{border.text() if border else None}, {patch.text() if patch else None}, {variable.text() if variable else None}"
-        )
         if border and patch:
             config = self.config_manager.bound[border.text()][patch.text()]
             self.toggle_widget_list(self.patch_widgets, True)
@@ -136,6 +135,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.le_transversal_end.setEnabled(False)
                 self.le_vertical_start.setEnabled(False)
                 self.le_vertical_end.setEnabled(False)
+                self.cb_ex_transversal_start.setEnabled(False)
+                self.cb_ex_transversal_end.setEnabled(False)
+                self.cb_ex_vertical_start.setEnabled(False)
+                self.cb_ex_vertical_end.setEnabled(False)
                 if self.config_manager.is_mesh_info_complete:
                     patch_data = self.initialize_patch_data()
                     self.le_transversal_start.setText(patch_data["transversal_start"])
@@ -145,8 +148,9 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             if variable is not None:
                 self.toggle_widget_list(self.variable_widgets, True)
                 self.config_manager.load_config(self, config[variable.data(Qt.UserRole)])
-                print(self.chb_convec.isChecked(), self.chb_flux.isChecked())
                 self.le_tempamb.setEnabled(self.chb_convec.isChecked() or self.chb_flux.isChecked())
+                if not any([self.chb_value.isChecked(), self.chb_convec.isChecked(), self.chb_flux.isChecked()]):
+                    self.chb_value.setChecked(True)
             else:
                 self.toggle_widget_list(self.variable_widgets, False)
         else:
@@ -276,7 +280,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         patch = self.lw_patchlist.currentItem()
         if border is not None and patch is not None:
             border_text = border.text()
-            if self.config_manager.is_cartesian:
+            if self.config_manager.is_cartesian and self.config_manager.is_ezgrid:
                 if border_text in {"X Max", "X Min"}:
                     patch_data = {
                         "transversal_start": "0",
@@ -298,7 +302,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                         "vertical_start": "0",
                         "vertical_end": self.config_manager.grid["le_ylon"],
                     }
-            else:
+            elif not self.config_manager.is_cartesian and self.config_manager.is_ezgrid:
                 if border_text in {"X Max", "X Min"}:
                     patch_data = {
                         "transversal_start": self.config_manager.grid["le_rini"],
@@ -320,28 +324,73 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                         "vertical_start": self.config_manager.grid["le_rini"],
                         "vertical_end": self.config_manager.grid["le_rlon"],
                     }
-        print("patch_data", patch_data)
-        print(border.text(), patch.text())
+            elif self.config_manager.is_cartesian and not self.config_manager.is_ezgrid:
+                x_end = sum(
+                    int(self.config_manager.grid.get(f"le_dirx_lon_zon{i}", 0))
+                    for i in range(1, self.config_manager.grid["sb_dirx_numz"] + 1)
+                )
+                y_end = sum(
+                    int(self.config_manager.grid.get(f"le_diry_lon_zon{i}", 0))
+                    for i in range(1, self.config_manager.grid["sb_diry_numz"] + 1)
+                )
+                z_end = sum(
+                    int(self.config_manager.grid.get(f"le_dirz_lon_zon{i}", 0))
+                    for i in range(1, self.config_manager.grid["sb_dirz_numz"] + 1)
+                )
+                if border_text in {"X Max", "X Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": str(y_end),
+                        "vertical_start": "0",
+                        "vertical_end": str(z_end),
+                    }
+                elif border_text in {"Y Max", "Y Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": str(x_end),
+                        "vertical_start": "0",
+                        "vertical_end": str(z_end),
+                    }
+                elif border_text in {"Z Max", "Z Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": str(x_end),
+                        "vertical_start": "0",
+                        "vertical_end": str(y_end),
+                    }
+            else:  # if not self.config_manager.is_cartesian and not self.config_manager.is_ezgrid
+                x_end = sum(
+                    int(self.config_manager.grid.get(f"le_dirtita_lon_zon{i}", 0))
+                    for i in range(1, self.config_manager.grid["sb_dirtita_numz"] + 1)
+                )
+                y_end = sum(
+                    int(self.config_manager.grid.get(f"le_dirr_lon_zon{i}", 0))
+                    for i in range(1, self.config_manager.grid["sb_dirr_numz"] + 1)
+                )
+                z_end = sum(
+                    int(self.config_manager.grid.get(f"le_dirzcil_lon_zon{i}", 0))
+                    for i in range(1, self.config_manager.grid["sb_dirzcil_numz"] + 1)
+                )
+                y_start = self.config_manager.grid.get("le_dirr_inidom", 0)
+                if border_text in {"X Max", "X Min"}:
+                    patch_data = {
+                        "transversal_start": str(y_start),
+                        "transversal_end": str(y_end),
+                        "vertical_start": "0",
+                        "vertical_end": str(z_end),
+                    }
+                elif border_text in {"Y Max", "Y Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": str(x_end),
+                        "vertical_start": "0",
+                        "vertical_end": str(z_end),
+                    }
+                elif border_text in {"Z Max", "Z Min"}:
+                    patch_data = {
+                        "transversal_start": "0",
+                        "transversal_end": str(x_end),
+                        "vertical_start": str(y_start),
+                        "vertical_end": str(y_end),
+                    }
         return patch_data
-
-    # def initialize_patch_data(self):
-    #     """"""
-    #     if self.config_manager.is_cartesian:
-    #         volume_data = {
-    #             "le_x_start": 0,
-    #             "le_x_lon": self.config_manager.grid["le_xlon"],
-    #             "le_y_start": 0,
-    #             "le_y_lon": self.config_manager.grid["le_ylon"],
-    #             "le_z_start": 0,
-    #             "le_z_lon": self.config_manager.grid["le_zlon"],
-    #         }
-    #     else:
-    #         volume_data = {
-    #             "le_x_start": 0,
-    #             "le_x_lon": self.config_manager.grid["le_titalon"],
-    #             "le_y_start": self.config_manager.grid["le_rini"],
-    #             "le_y_lon": self.config_manager.grid["le_rlon"],
-    #             "le_z_start": 0,
-    #             "le_z_lon": self.config_manager.grid["le_zloncil"],
-    #         }
-    #     return volume_data

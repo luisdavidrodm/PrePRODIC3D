@@ -27,10 +27,12 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             "chb_iborz", "chb_ipun", "chb_local_value", "le_ixyz", "chb_ex_value", "chb_ex_k"
         ]
         self.region_widgets = [
-            "chb_fixed_value", "chb_linear_source", "le_local_value",
-            "le_local_sc", "le_local_sp", "le_local_k",
+            "le_local_value", "le_local_sc", "le_local_sp", "le_local_k",
         ]
-        self.volume_widgets = ["le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end", "chb_exclude_borders"]
+        self.volume_widgets = [
+            "le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end", 
+            "chb_exclude_borders", "cb_ex_x_start", "cb_ex_x_end", "cb_ex_y_start", "cb_ex_y_end",
+            "cb_ex_z_start", "cb_ex_z_end"]
         self.widgets = self.variable_widgets + self.region_widgets + self.volume_widgets
 
         self.config_manager.connect_config(self)
@@ -118,7 +120,6 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 number = int(key[len("le_var_title") :]) if key.startswith("le_var_title") else float("inf")
                 new_items.append((number, data["name"], key))
         new_items.sort()
-        print("CURRENT VS NEW:", current_items, [(name, tech_name) for _, name, tech_name in new_items])
         if [(name, tech_name) for _, name, tech_name in new_items] != current_items:
             self.lw_variables.clear()
             for _, name, tech_name in new_items:
@@ -142,7 +143,6 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         """"""
         variable = self.lw_variables.currentItem()
         region = self.lw_regions.currentItem()
-        # self.print_dict(self.config_manager._config_structure, show_markers=True)
         if region is not None:
             self.lw_volumes.clear()
             config = self.config_manager.values[variable.data(Qt.UserRole)][region.text()]
@@ -163,6 +163,8 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 if not toggle:
                     if isinstance(widget, qtw.QLineEdit):
                         widget.clear()
+                    elif isinstance(widget, qtw.QComboBox):
+                        widget.setCurrentText(None)
                     elif isinstance(widget, qtw.QCheckBox):
                         widget.setChecked(toggle)
             else:
@@ -273,7 +275,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
 
     def initialize_volume_data(self):
         """Inicializa los valores de malla para un volumen nuevo"""
-        if self.config_manager.is_cartesian:
+        if self.config_manager.is_cartesian and self.config_manager.is_ezgrid:
             volume_data = {
                 "le_x_start": "0",
                 "le_x_end": self.config_manager.grid["le_xlon"],
@@ -282,7 +284,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 "le_z_start": "0",
                 "le_z_end": self.config_manager.grid["le_zlon"],
             }
-        else:
+        elif not self.config_manager.is_cartesian and self.config_manager.is_ezgrid:
             volume_data = {
                 "le_x_start": "0",
                 "le_x_end": self.config_manager.grid["le_titalon"],
@@ -290,6 +292,49 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 "le_y_end": self.config_manager.grid["le_rlon"],
                 "le_z_start": "0",
                 "le_z_end": self.config_manager.grid["le_zloncil"],
+            }
+        elif self.config_manager.is_cartesian and not self.config_manager.is_ezgrid:
+            x_end = sum(
+                int(self.config_manager.grid.get(f"le_dirx_lon_zon{i}", 0))
+                for i in range(1, self.config_manager.grid["sb_dirx_numz"] + 1)
+            )
+            y_end = sum(
+                int(self.config_manager.grid.get(f"le_diry_lon_zon{i}", 0))
+                for i in range(1, self.config_manager.grid["sb_diry_numz"] + 1)
+            )
+            z_end = sum(
+                int(self.config_manager.grid.get(f"le_dirz_lon_zon{i}", 0))
+                for i in range(1, self.config_manager.grid["sb_dirz_numz"] + 1)
+            )
+            volume_data = {
+                "le_x_start": "0",
+                "le_x_end": str(x_end),
+                "le_y_start": "0",
+                "le_y_end": str(y_end),
+                "le_z_start": "0",
+                "le_z_end": str(z_end),
+            }
+        else:  # if not self.config_manager.is_cartesian and not self.config_manager.is_ezgrid
+            x_end = sum(
+                int(self.config_manager.grid.get(f"le_dirtita_lon_zon{i}", 0))
+                for i in range(1, self.config_manager.grid["sb_dirtita_numz"] + 1)
+            )
+            y_end = sum(
+                int(self.config_manager.grid.get(f"le_dirr_lon_zon{i}", 0))
+                for i in range(1, self.config_manager.grid["sb_dirr_numz"] + 1)
+            )
+            z_end = sum(
+                int(self.config_manager.grid.get(f"le_dirzcil_lon_zon{i}", 0))
+                for i in range(1, self.config_manager.grid["sb_dirzcil_numz"] + 1)
+            )
+            y_start = self.config_manager.grid.get("le_dirr_inidom", 0)
+            volume_data = {
+                "le_x_start": "0",
+                "le_x_end": str(x_end),
+                "le_y_start": str(y_start),
+                "le_y_end": str(y_end),
+                "le_z_start": "0",
+                "le_z_end": str(z_end),
             }
         return volume_data
 
@@ -299,10 +344,10 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         if show_markers:
             print(f"{indent_space}INICIO ######################")
         for key, value in od.items():
-            if isinstance(value, dict):  # If the value is a dictionary, print the key and then the nested dictionary
+            if isinstance(value, dict):
                 print(f"{indent_space}{key}:")
                 self.print_dict(value, indent + 1, show_markers=False)
-            else:  # If the value is not a dictionary, print key-value pair
+            else:
                 print(f"{indent_space}{key}: {value}")
         if show_markers:
             print(f"{indent_space}FINAL ######################")

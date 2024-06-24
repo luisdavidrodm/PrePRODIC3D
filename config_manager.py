@@ -13,9 +13,16 @@ class ConfigManager:
                 'le_titulograf': 'PLOTF'
             },
             'GRID': {
-                'cb_tipocoord': 'Cartesianas',
-                'cb_tipozonas': 'Zona única',
-                'cb_tiposistema': 'Cerrado'
+                'cb_coord_type': 'Cartesianas',
+                'cb_zone_type': 'Zona única',
+                'cb_system_type': 'Cerrado', 
+                'sb_dirx_numz': 1,
+                'sb_diry_numz': 1,
+                'sb_dirz_numz': 1,
+                'sb_dirtita_numz': 1,
+                'sb_dirr_numz': 1,
+                'sb_dirzcil_numz': 1,
+                'le_dirr_inidom': "0"
             },
             'VARIABLES': {
                 'cb_tsimu': 'Permanente',
@@ -31,7 +38,7 @@ class ConfigManager:
                 'chb_ksolve5': 2,
                 'chb_kprint5': 2,
                 'le_relax5': '1',
-                'checkBox': 2,
+                'checkBox': 2
             },
             'BOUND': {
                 'X Max': {
@@ -128,7 +135,6 @@ class ConfigManager:
         # Carga la configuración de una ventana desde config_manager
         if config is None:
             config = window.config_manager._config_structure[window.config_name]
-        # print(f"LOAD_CONFIG: {config}")
         for widget_name, value in config.items():
             try:
                 if not isinstance(value, dict):
@@ -215,16 +221,42 @@ class ConfigManager:
 
     @property
     def is_cartesian(self):
-        return self.grid.get("cb_tipocoord") == "Cartesianas"
+        return self.grid.get("cb_coord_type") == "Cartesianas"
 
     @property
     def is_diffusive(self):
         return self.variables.get("cb_tipoflujo") == "Difusivo"
 
     @property
+    def is_ezgrid(self):
+        return self.grid.get("cb_zone_type") == "Zona única"
+
+    @property
     def is_mesh_info_complete(self):
-        if self.is_cartesian:
-            required_keys = ["le_xlon", "le_ylon", "le_zlon"]
-        else:
-            required_keys = ["le_titalon", "le_rini", "le_rlon", "le_zloncil"]
+        if self.is_cartesian and self.is_ezgrid:
+            required_keys = ["le_xlon", "le_ylon", "le_zlon", "le_nvcx", "le_nvcy", "le_nvcz"]
+        elif not self.is_cartesian and self.is_ezgrid:
+            required_keys = ["le_titalon", "le_rini", "le_rlon", "le_zloncil", "le_nvctita", "le_nvcr", "le_nvczcil"]
+        elif self.is_cartesian and not self.is_ezgrid:
+            required_keys = []
+            for i in range(1, self.grid["sb_dirx_numz"] + 1):
+                required_keys.append(f"le_dirx_lon_zon{i}")
+                required_keys.append(f"le_dirtita_lon_zon{i}")
+            for i in range(1, self.grid["sb_diry_numz"] + 1):
+                required_keys.append(f"le_diry_lon_zon{i}")
+                required_keys.append(f"le_diry_nvcy_zon{i}")
+            for i in range(1, self.grid["sb_dirz_numz"] + 1):
+                required_keys.append(f"le_dirz_lon_zon{i}")
+                required_keys.append(f"le_dirz_nvcz_zon{i}")
+        else:  # if not self.is_cartesian and not self.is_ezgrid
+            required_keys = []
+            for i in range(1, self.grid["sb_dirtita_numz"] + 1):
+                required_keys.append(f"le_dirtita_lon_zon{i}")
+                required_keys.append(f"le_dirtita_nvctita_zon{i}")
+            for i in range(1, self.grid["sb_dirr_numz"] + 1):
+                required_keys.append(f"le_dirr_lon_zon{i}")
+                required_keys.append(f"le_dirr_nvcr_zon{i}")
+            for i in range(1, self.grid["sb_dirzcil_numz"] + 1):
+                required_keys.append(f"le_dirzcil_lon_zon{i}")
+                required_keys.append(f"le_dirzcil_nvczcil_zon{i}")
         return all(self.grid.get(key) is not None for key in required_keys)

@@ -15,7 +15,7 @@
   </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
-    <widget class="QGroupBox" name="gb_malla1">
+    <widget class="QGroupBox" name="gb_malla">
      <property name="title">
       <string>Malla</string>
      </property>
@@ -28,7 +28,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="cb_tipocoord">
+       <widget class="QComboBox" name="cb_coord_type">
         <item>
          <property name="text">
           <string>Cartesianas</string>
@@ -49,7 +49,7 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QComboBox" name="cb_tipozonas">
+       <widget class="QComboBox" name="cb_zone_type">
         <item>
          <property name="text">
           <string>Zona única</string>
@@ -70,7 +70,7 @@
        </widget>
       </item>
       <item row="2" column="1">
-       <widget class="QComboBox" name="cb_tiposistema">
+       <widget class="QComboBox" name="cb_system_type">
         <item>
          <property name="text">
           <string>Abierto</string>
@@ -87,7 +87,7 @@
     </widget>
    </item>
    <item>
-    <widget class="QStackedWidget" name="gbsw_malla2">
+    <widget class="QStackedWidget" name="gbsw_malla">
      <property name="currentIndex">
       <number>0</number>
      </property>
@@ -367,10 +367,13 @@
              <item>
               <widget class="QSpinBox" name="sb_dirx_numz">
                <property name="minimum">
-                <number>2</number>
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>10</number>
+               </property>
+               <property name="value">
+                <number>1</number>
                </property>
               </widget>
              </item>
@@ -449,6 +452,9 @@
              </item>
              <item row="2" column="2">
               <widget class="QLineEdit" name="le_dirx_nvcx_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -459,6 +465,9 @@
              </item>
              <item row="2" column="3">
               <widget class="QLineEdit" name="le_dirx_poten_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -523,6 +532,9 @@
              </item>
              <item row="2" column="1">
               <widget class="QLineEdit" name="le_dirx_lon_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1139,10 +1151,13 @@
              <item>
               <widget class="QSpinBox" name="sb_diry_numz">
                <property name="minimum">
-                <number>2</number>
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>10</number>
+               </property>
+               <property name="value">
+                <number>1</number>
                </property>
               </widget>
              </item>
@@ -1203,6 +1218,9 @@
              </item>
              <item row="2" column="2">
               <widget class="QLineEdit" name="le_diry_nvcy_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1213,6 +1231,9 @@
              </item>
              <item row="2" column="3">
               <widget class="QLineEdit" name="le_diry_poten_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1259,6 +1280,9 @@
              </item>
              <item row="2" column="1">
               <widget class="QLineEdit" name="le_diry_lon_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1695,10 +1719,13 @@
              <item>
               <widget class="QSpinBox" name="sb_dirz_numz">
                <property name="minimum">
-                <number>2</number>
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>10</number>
+               </property>
+               <property name="value">
+                <number>1</number>
                </property>
               </widget>
              </item>
@@ -1759,6 +1786,9 @@
              </item>
              <item row="2" column="2">
               <widget class="QLineEdit" name="le_dirz_nvcz_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1769,6 +1799,9 @@
              </item>
              <item row="2" column="3">
               <widget class="QLineEdit" name="le_dirz_poten_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -1815,6 +1848,9 @@
              </item>
              <item row="2" column="1">
               <widget class="QLineEdit" name="le_dirz_lon_zon2">
+               <property name="enabled">
+                <bool>false</bool>
+               </property>
                <property name="text">
                 <string/>
                </property>
@@ -2255,10 +2291,13 @@
              <item>
               <widget class="QSpinBox" name="sb_dirtita_numz">
                <property name="minimum">
-                <number>2</number>
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>10</number>
+               </property>
+               <property name="value">
+                <number>1</number>
                </property>
               </widget>
              </item>
@@ -2320,7 +2359,7 @@
              <item row="2" column="2">
               <widget class="QLineEdit" name="le_dirtita_nvctita_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="inputMask">
                 <string/>
@@ -2336,7 +2375,7 @@
              <item row="2" column="3">
               <widget class="QLineEdit" name="le_dirtita_poten_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="inputMask">
                 <string/>
@@ -2388,7 +2427,7 @@
              <item row="2" column="1">
               <widget class="QLineEdit" name="le_dirtita_lon_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="inputMask">
                 <string/>
@@ -2847,10 +2886,13 @@
              <item row="0" column="1">
               <widget class="QSpinBox" name="sb_dirr_numz">
                <property name="minimum">
-                <number>2</number>
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>10</number>
+               </property>
+               <property name="value">
+                <number>1</number>
                </property>
               </widget>
              </item>
@@ -2929,7 +2971,7 @@
              <item row="2" column="2">
               <widget class="QLineEdit" name="le_dirr_nvcr_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="text">
                 <string/>
@@ -2942,7 +2984,7 @@
              <item row="2" column="3">
               <widget class="QLineEdit" name="le_dirr_poten_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="text">
                 <string/>
@@ -2991,7 +3033,7 @@
              <item row="2" column="1">
               <widget class="QLineEdit" name="le_dirr_lon_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="text">
                 <string/>
@@ -3438,10 +3480,13 @@
              <item>
               <widget class="QSpinBox" name="sb_dirzcil_numz">
                <property name="minimum">
-                <number>2</number>
+                <number>1</number>
                </property>
                <property name="maximum">
                 <number>10</number>
+               </property>
+               <property name="value">
+                <number>1</number>
                </property>
               </widget>
              </item>
@@ -3503,7 +3548,7 @@
              <item row="2" column="2">
               <widget class="QLineEdit" name="le_dirzcil_nvczcil_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="text">
                 <string/>
@@ -3516,7 +3561,7 @@
              <item row="2" column="3">
               <widget class="QLineEdit" name="le_dirzcil_poten_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="text">
                 <string/>
@@ -3565,7 +3610,7 @@
              <item row="2" column="1">
               <widget class="QLineEdit" name="le_dirzcil_lon_zon2">
                <property name="enabled">
-                <bool>true</bool>
+                <bool>false</bool>
                </property>
                <property name="text">
                 <string/>

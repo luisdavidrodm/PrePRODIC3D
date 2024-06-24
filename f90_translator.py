@@ -110,25 +110,92 @@ class F90Translator:
         for key, f90_key in [("le_titulosimu", "HEADER"), ("le_tituloimpre", "PRINTF"), ("le_titulograf", "PLOTF")]:
             if key in header:
                 f90_lines.append(f"{f90_key}='{header[key]}'")
-        mode = {"Cartesianas": 1, "Cilindricas": 2}.get(grid.get("cb_tipocoord", "Cartesianas"))
-        kcy = 1 if grid.get("cb_tiposistema", "Cerrado") == "Abierto" else 0
+
+        zone_type = grid.get("cb_zone_type", "Zona única")
+        coord_type = grid.get("cb_coord_type", "Cartesianas")
+        layer_index = {
+            ("Zona única", "Cartesianas"): 0,
+            ("Zona única", "Cilindricas"): 1,
+            ("Varias zonas", "Cartesianas"): 2,
+            ("Varias zonas", "Cilindricas"): 3,
+        }.get((zone_type, coord_type), 0)
+
+        mode = {"Cartesianas": 1, "Cilindricas": 2}.get(coord_type)
+        kcy = 1 if grid.get("cb_system_type", "Cerrado") == "Abierto" else 0
         f90_lines.append(f"MODE={mode} ; KCY={kcy}")
-        coord_vars = {
-            1: {"XL": "le_xlon", "YL": "le_ylon", "ZL": "le_zlon"},
-            2: {"XL": "le_titalon", "R(1)": "le_rini", "YL": "le_rlon", "ZL": "le_zloncil"},
+
+        coord_variables = {
+            0: {"XL": "le_xlon", "YL": "le_ylon", "ZL": "le_zlon"},
+            1: {"XL": "le_titalon", "R(1)": "le_rini", "YL": "le_rlon", "ZL": "le_zloncil"},
+            2: {
+                "XZONE({0})": "le_dirx_lon_zon{0}",
+                "YZONE({0})": "le_diry_lon_zon{0}",
+                "ZZONE({0})": "le_dirz_lon_zon{0}",
+            },
+            3: {
+                "XZONE({0})": "le_dirtita_lon_zon{0}",
+                "R(1)": "le_dirr_inidom",
+                "YZONE({0})": "le_dirr_lon_zon{0}",
+                "ZZONE({0})": "le_dirzcil_lon_zon{0}",
+            },
         }
-        nvc_vars = {
-            1: {"NCVLX": "le_nvcx", "NCVLY": "le_nvcy", "NCVLZ": "le_nvcz"},
-            2: {"NCVLX": "le_nvctita", "NCVLY": "le_nvcr", "NCVLZ": "le_nvczcil"},
+        nvc_variables = {
+            0: {"NCVLX": "le_nvcx", "NCVLY": "le_nvcy", "NCVLZ": "le_nvcz"},
+            1: {"NCVLX": "le_nvctita", "NCVLY": "le_nvcr", "NCVLZ": "le_nvczcil"},
+            2: {
+                "NCVX({0})": "le_dirx_nvcx_zon{0}",
+                "NCVY({0})": "le_diry_nvcy_zon{0}",
+                "NCVZ({0})": "le_dirz_nvcz_zon{0}",
+            },
+            3: {
+                "NCVX({0})": "le_dirtita_nvctita_zon{0}",
+                "NCVY({0})": "le_dirr_nvcr_zon{0}",
+                "NCVZ({0})": "le_dirzcil_nvczcil_zon{0}",
+            },
         }
-        for group in (coord_vars, nvc_vars):
+        powr_variables = {
+            0: {"POWERX": "le_potenciax", "POWERY": "le_potenciay", "POWERZ": "le_potenciaz"},
+            1: {"POWERX": "le_potenciatita", "POWERY": "le_potenciar", "POWERZ": "le_potenciazcil"},
+            2: {
+                "POWRX({0})": "le_dirx_poten_zon{0}",
+                "POWRY({0})": "le_diry_poten_zon{0}",
+                "POWRZ({0})": "le_dirz_poten_zon{0}",
+            },
+            3: {
+                "POWRX({0})": "le_dirtita_poten_zon{0}",
+                "POWRY({0})": "le_dirr_poten_zon{0}",
+                "POWRZ({0})": "le_dirzcil_poten_zon{0}",
+            },
+        }
+        coord_variables = self.extend_variables(coord_variables, 1, 10)
+        nvc_variables = self.extend_variables(nvc_variables, 1, 10)
+        powr_variables = self.extend_variables(powr_variables, 1, 10)
+
+        if layer_index in (2, 3):
+            nz_widgets_dict = {
+                2: ["sb_dirx_numz", "sb_diry_numz", "sb_dirz_numz"],
+                3: ["sb_dirtita_numz", "sb_dirr_numz", "sb_dirzcil_numz"],
+            }
+            nz_widgets = nz_widgets_dict[layer_index]
+            f90_lines.append(f"NZX={grid[nz_widgets[0]]} ; NZY={grid[nz_widgets[1]]}; NZZ={grid[nz_widgets[2]]}")
+
+        if "le_dirr_inidom" not in grid:
+            grid["le_dirr_inidom"] = 0
+
+        if "le_rini" not in grid:
+            grid["le_rini"] = 0
+
+        for group in (coord_variables, nvc_variables, powr_variables):
             group_lines = []
-            for var, key in group[mode].items():
+            for var, key in group[layer_index].items():
                 if key and key in grid:
                     group_lines.append(f"{var}={grid[key]}")
             if group_lines:
-                f90_lines.append(" ; ".join(group_lines))
-        grid_function = "ZGRID" if grid.get("cb_tipozonas", "") == "Varias zonas" else "EZGRID"
+                for j in range(0, len(group_lines), 5):
+                    segment = group_lines[j : j + 5]
+                    f90_lines.append(" ; ".join(segment))
+
+        grid_function = "ZGRID" if grid.get("cb_zone_type", "") == "Varias zonas" else "EZGRID"
         f90_lines.append(f"CALL {grid_function}")
         f90_lines.append("RETURN")
         return f90_lines
@@ -247,7 +314,10 @@ class F90Translator:
                             vcvi = 2 if variable_values.get("chb_ex_value", 1) == 2 else 1
                             var_number = "".join(filter(str.isdigit, variable))
                             formatted_indexes = indexes.format(vcvi).rstrip(")") + f",{var_number})"
-                            f90_lines.append(f"{i}{i}IF({condition_str}) F{formatted_indexes}={border_value}")
+                            if patch == "Borde base":
+                                f90_lines.append(f"{i}{i}F{formatted_indexes}={border_value}")
+                            else:
+                                f90_lines.append(f"{i}{i}IF({condition_str}) F{formatted_indexes}={border_value}")
                         f90_lines.extend(
                             [
                                 f"{i}ENDDO",
@@ -275,6 +345,7 @@ class F90Translator:
         f90_lines = ["ENTRY OUTPUT"]
         monitored_variables = {}
         for key, value in output.items():
+            # TODO
             if key in self.variable_map and all(k in value for k in ["le_x", "le_y", "le_z"]):
                 var_name = self.variable_map[key]
                 coords = f"({value['le_x']},{value['le_y']},{value['le_z']})"
@@ -376,17 +447,26 @@ class F90Translator:
                                 f"{i}{i}DO {vertical_var}={cvi},{vertical_end.format(cvi)}",
                             ]
                         )
-                        f90_lines.append(f"{I}IF({condition_str}) KBC{phi_var}({transversal_var},{vertical_var})=2")
+                        if patch == "Borde base":
+                            f90_lines.append(f"{I}KBC{phi_var}({transversal_var},{vertical_var})=2")
+                        else:
+                            f90_lines.append(f"{I}IF({condition_str}) KBC{phi_var}({transversal_var},{vertical_var})=2")
                         if "le_value" in patch_values[var]:
                             le_value = patch_values[var]["le_value"]
-                            f90_lines.append(
-                                f"{I}IF({condition_str}) FLXC{phi_var}({transversal_var},{vertical_var})={le_value}"
-                            )
+                            if patch == "Borde base":
+                                f90_lines.append(f"{I}FLXC{phi_var}({transversal_var},{vertical_var})={le_value}")
+                            else:
+                                f90_lines.append(
+                                    f"{I}IF({condition_str}) FLXC{phi_var}({transversal_var},{vertical_var})={le_value}"
+                                )
                         if "le_tempamb" in patch_values[var]:
                             le_tempamb = patch_values[var]["le_tempamb"]
-                            f90_lines.append(
-                                f"{I}IF({condition_str}) FLXP{phi_var}({transversal_var},{vertical_var})={le_tempamb}"
-                            )
+                            if patch == "Borde base":
+                                f90_lines.append(f"{I}FLXP{phi_var}({transversal_var},{vertical_var})={le_tempamb}")
+                            else:
+                                f90_lines.append(
+                                    f"{I}IF({condition_str}) FLXP{phi_var}({transversal_var},{vertical_var})={le_tempamb}"
+                                )
                         f90_lines.extend(
                             [
                                 f"{i}{i}ENDDO",
@@ -405,7 +485,10 @@ class F90Translator:
                         )
                         le_k = patch_values[var]["le_k"]
                         vcvi = 2 if patch_values[var].get("chb_ex_k", 1) == 2 else 1
-                        f90_lines.append(f"{I}IF({condition_str}) GAM{indexes.format(vcvi)}={le_k}")
+                        if patch == "Borde base":
+                            f90_lines.append(f"{I}GAM{indexes.format(vcvi)}={le_k}")
+                        else:
+                            f90_lines.append(f"{I}IF({condition_str}) GAM{indexes.format(vcvi)}={le_k}")
                         f90_lines.extend(
                             [
                                 f"{i}{i}ENDDO",
@@ -498,6 +581,19 @@ class F90Translator:
             conditions.append(f"Z(K).{z_end_op}.{z_end}")
 
         return " .AND. ".join(conditions) if conditions else "1 .EQ. 1"
+
+    def extend_variables(self, variables, start, end):
+        extended_variables = variables.copy()
+        for key in [2, 3]:
+            new_entries = {}
+            for j in range(start, end + 1):
+                for var_key, value in variables[key].items():
+                    if "{0}" in var_key:
+                        new_entries[var_key.format(j)] = value.format(j)
+                    else:
+                        new_entries[var_key] = value
+                extended_variables[key] = new_entries
+        return extended_variables
 
     def generate_f90(self, config_manager):
         self.extend_f90(["SUBROUTINE ADAPT"])

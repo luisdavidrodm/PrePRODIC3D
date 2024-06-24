@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'malla_windowkMUAeO.ui'
+## Form generated from reading UI file 'malla_windowsEfKoM.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -27,51 +27,51 @@ class Ui_malla_window(object):
         malla_window.resize(861, 584)
         self.verticalLayout = QVBoxLayout(malla_window)
         self.verticalLayout.setObjectName(u"verticalLayout")
-        self.gb_malla1 = QGroupBox(malla_window)
-        self.gb_malla1.setObjectName(u"gb_malla1")
-        self.formLayout = QFormLayout(self.gb_malla1)
+        self.gb_malla = QGroupBox(malla_window)
+        self.gb_malla.setObjectName(u"gb_malla")
+        self.formLayout = QFormLayout(self.gb_malla)
         self.formLayout.setObjectName(u"formLayout")
-        self.lb_tipocoord = QLabel(self.gb_malla1)
+        self.lb_tipocoord = QLabel(self.gb_malla)
         self.lb_tipocoord.setObjectName(u"lb_tipocoord")
 
         self.formLayout.setWidget(0, QFormLayout.LabelRole, self.lb_tipocoord)
 
-        self.cb_tipocoord = QComboBox(self.gb_malla1)
-        self.cb_tipocoord.addItem("")
-        self.cb_tipocoord.addItem("")
-        self.cb_tipocoord.setObjectName(u"cb_tipocoord")
+        self.cb_coord_type = QComboBox(self.gb_malla)
+        self.cb_coord_type.addItem("")
+        self.cb_coord_type.addItem("")
+        self.cb_coord_type.setObjectName(u"cb_coord_type")
 
-        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.cb_tipocoord)
+        self.formLayout.setWidget(0, QFormLayout.FieldRole, self.cb_coord_type)
 
-        self.lb_tipozonas = QLabel(self.gb_malla1)
+        self.lb_tipozonas = QLabel(self.gb_malla)
         self.lb_tipozonas.setObjectName(u"lb_tipozonas")
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.lb_tipozonas)
 
-        self.cb_tipozonas = QComboBox(self.gb_malla1)
-        self.cb_tipozonas.addItem("")
-        self.cb_tipozonas.addItem("")
-        self.cb_tipozonas.setObjectName(u"cb_tipozonas")
+        self.cb_zone_type = QComboBox(self.gb_malla)
+        self.cb_zone_type.addItem("")
+        self.cb_zone_type.addItem("")
+        self.cb_zone_type.setObjectName(u"cb_zone_type")
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.cb_tipozonas)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.cb_zone_type)
 
-        self.label = QLabel(self.gb_malla1)
+        self.label = QLabel(self.gb_malla)
         self.label.setObjectName(u"label")
 
         self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label)
 
-        self.cb_tiposistema = QComboBox(self.gb_malla1)
-        self.cb_tiposistema.addItem("")
-        self.cb_tiposistema.addItem("")
-        self.cb_tiposistema.setObjectName(u"cb_tiposistema")
+        self.cb_system_type = QComboBox(self.gb_malla)
+        self.cb_system_type.addItem("")
+        self.cb_system_type.addItem("")
+        self.cb_system_type.setObjectName(u"cb_system_type")
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.cb_tiposistema)
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.cb_system_type)
 
 
-        self.verticalLayout.addWidget(self.gb_malla1)
+        self.verticalLayout.addWidget(self.gb_malla)
 
-        self.gbsw_malla2 = QStackedWidget(malla_window)
-        self.gbsw_malla2.setObjectName(u"gbsw_malla2")
+        self.gbsw_malla = QStackedWidget(malla_window)
+        self.gbsw_malla.setObjectName(u"gbsw_malla")
         self.gbsw_cart_zu = QWidget()
         self.gbsw_cart_zu.setObjectName(u"gbsw_cart_zu")
         self.horizontalLayout = QHBoxLayout(self.gbsw_cart_zu)
@@ -187,7 +187,7 @@ class Ui_malla_window(object):
 
         self.horizontalLayout.addWidget(self.gb_malla2_dirz)
 
-        self.gbsw_malla2.addWidget(self.gbsw_cart_zu)
+        self.gbsw_malla.addWidget(self.gbsw_cart_zu)
         self.gbsw_cil_zu = QWidget()
         self.gbsw_cil_zu.setObjectName(u"gbsw_cil_zu")
         self.horizontalLayout_2 = QHBoxLayout(self.gbsw_cil_zu)
@@ -313,7 +313,7 @@ class Ui_malla_window(object):
 
         self.horizontalLayout_2.addWidget(self.gb_dirz)
 
-        self.gbsw_malla2.addWidget(self.gbsw_cil_zu)
+        self.gbsw_malla.addWidget(self.gbsw_cil_zu)
         self.gbsw_cart_vz = QWidget()
         self.gbsw_cart_vz.setObjectName(u"gbsw_cart_vz")
         self.horizontalLayout_3 = QHBoxLayout(self.gbsw_cart_vz)
@@ -333,8 +333,9 @@ class Ui_malla_window(object):
 
         self.sb_dirx_numz = QSpinBox(self.gb_dirx_vz1)
         self.sb_dirx_numz.setObjectName(u"sb_dirx_numz")
-        self.sb_dirx_numz.setMinimum(2)
+        self.sb_dirx_numz.setMinimum(1)
         self.sb_dirx_numz.setMaximum(10)
+        self.sb_dirx_numz.setValue(1)
 
         self.horizontalLayout_5.addWidget(self.sb_dirx_numz)
 
@@ -377,12 +378,14 @@ class Ui_malla_window(object):
 
         self.le_dirx_nvcx_zon2 = QLineEdit(self.gb_dirx_vz2)
         self.le_dirx_nvcx_zon2.setObjectName(u"le_dirx_nvcx_zon2")
+        self.le_dirx_nvcx_zon2.setEnabled(False)
         self.le_dirx_nvcx_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_dirx_nvcx_zon2, 2, 2, 1, 1)
 
         self.le_dirx_poten_zon2 = QLineEdit(self.gb_dirx_vz2)
         self.le_dirx_poten_zon2.setObjectName(u"le_dirx_poten_zon2")
+        self.le_dirx_poten_zon2.setEnabled(False)
         self.le_dirx_poten_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_dirx_poten_zon2, 2, 3, 1, 1)
@@ -413,6 +416,7 @@ class Ui_malla_window(object):
 
         self.le_dirx_lon_zon2 = QLineEdit(self.gb_dirx_vz2)
         self.le_dirx_lon_zon2.setObjectName(u"le_dirx_lon_zon2")
+        self.le_dirx_lon_zon2.setEnabled(False)
         self.le_dirx_lon_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_dirx_lon_zon2, 2, 1, 1, 1)
@@ -702,8 +706,9 @@ class Ui_malla_window(object):
 
         self.sb_diry_numz = QSpinBox(self.gb_diry_vz1)
         self.sb_diry_numz.setObjectName(u"sb_diry_numz")
-        self.sb_diry_numz.setMinimum(2)
+        self.sb_diry_numz.setMinimum(1)
         self.sb_diry_numz.setMaximum(10)
+        self.sb_diry_numz.setValue(1)
 
         self.horizontalLayout_6.addWidget(self.sb_diry_numz)
 
@@ -742,12 +747,14 @@ class Ui_malla_window(object):
 
         self.le_diry_nvcy_zon2 = QLineEdit(self.gb_diry_vz2)
         self.le_diry_nvcy_zon2.setObjectName(u"le_diry_nvcy_zon2")
+        self.le_diry_nvcy_zon2.setEnabled(False)
         self.le_diry_nvcy_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_2.addWidget(self.le_diry_nvcy_zon2, 2, 2, 1, 1)
 
         self.le_diry_poten_zon2 = QLineEdit(self.gb_diry_vz2)
         self.le_diry_poten_zon2.setObjectName(u"le_diry_poten_zon2")
+        self.le_diry_poten_zon2.setEnabled(False)
         self.le_diry_poten_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_2.addWidget(self.le_diry_poten_zon2, 2, 3, 1, 1)
@@ -774,6 +781,7 @@ class Ui_malla_window(object):
 
         self.le_diry_lon_zon2 = QLineEdit(self.gb_diry_vz2)
         self.le_diry_lon_zon2.setObjectName(u"le_diry_lon_zon2")
+        self.le_diry_lon_zon2.setEnabled(False)
         self.le_diry_lon_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_2.addWidget(self.le_diry_lon_zon2, 2, 1, 1, 1)
@@ -1023,8 +1031,9 @@ class Ui_malla_window(object):
 
         self.sb_dirz_numz = QSpinBox(self.gb_dirz_vz1)
         self.sb_dirz_numz.setObjectName(u"sb_dirz_numz")
-        self.sb_dirz_numz.setMinimum(2)
+        self.sb_dirz_numz.setMinimum(1)
         self.sb_dirz_numz.setMaximum(10)
+        self.sb_dirz_numz.setValue(1)
 
         self.horizontalLayout_7.addWidget(self.sb_dirz_numz)
 
@@ -1063,12 +1072,14 @@ class Ui_malla_window(object):
 
         self.le_dirz_nvcz_zon2 = QLineEdit(self.gb_dirz_vz2)
         self.le_dirz_nvcz_zon2.setObjectName(u"le_dirz_nvcz_zon2")
+        self.le_dirz_nvcz_zon2.setEnabled(False)
         self.le_dirz_nvcz_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.le_dirz_nvcz_zon2, 2, 2, 1, 1)
 
         self.le_dirz_poten_zon2 = QLineEdit(self.gb_dirz_vz2)
         self.le_dirz_poten_zon2.setObjectName(u"le_dirz_poten_zon2")
+        self.le_dirz_poten_zon2.setEnabled(False)
         self.le_dirz_poten_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.le_dirz_poten_zon2, 2, 3, 1, 1)
@@ -1095,6 +1106,7 @@ class Ui_malla_window(object):
 
         self.le_dirz_lon_zon2 = QLineEdit(self.gb_dirz_vz2)
         self.le_dirz_lon_zon2.setObjectName(u"le_dirz_lon_zon2")
+        self.le_dirz_lon_zon2.setEnabled(False)
         self.le_dirz_lon_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_3.addWidget(self.le_dirz_lon_zon2, 2, 1, 1, 1)
@@ -1329,7 +1341,7 @@ class Ui_malla_window(object):
 
         self.horizontalLayout_3.addWidget(self.gb_dirz_vz)
 
-        self.gbsw_malla2.addWidget(self.gbsw_cart_vz)
+        self.gbsw_malla.addWidget(self.gbsw_cart_vz)
         self.gbsw_cil_vz = QWidget()
         self.gbsw_cil_vz.setObjectName(u"gbsw_cil_vz")
         self.horizontalLayout_4 = QHBoxLayout(self.gbsw_cil_vz)
@@ -1349,8 +1361,9 @@ class Ui_malla_window(object):
 
         self.sb_dirtita_numz = QSpinBox(self.gb_dirtita_vz1)
         self.sb_dirtita_numz.setObjectName(u"sb_dirtita_numz")
-        self.sb_dirtita_numz.setMinimum(2)
+        self.sb_dirtita_numz.setMinimum(1)
         self.sb_dirtita_numz.setMaximum(10)
+        self.sb_dirtita_numz.setValue(1)
 
         self.horizontalLayout_8.addWidget(self.sb_dirtita_numz)
 
@@ -1389,14 +1402,14 @@ class Ui_malla_window(object):
 
         self.le_dirtita_nvctita_zon2 = QLineEdit(self.gb_dirtita_vz2)
         self.le_dirtita_nvctita_zon2.setObjectName(u"le_dirtita_nvctita_zon2")
-        self.le_dirtita_nvctita_zon2.setEnabled(True)
+        self.le_dirtita_nvctita_zon2.setEnabled(False)
         self.le_dirtita_nvctita_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_4.addWidget(self.le_dirtita_nvctita_zon2, 2, 2, 1, 1)
 
         self.le_dirtita_poten_zon2 = QLineEdit(self.gb_dirtita_vz2)
         self.le_dirtita_poten_zon2.setObjectName(u"le_dirtita_poten_zon2")
-        self.le_dirtita_poten_zon2.setEnabled(True)
+        self.le_dirtita_poten_zon2.setEnabled(False)
         self.le_dirtita_poten_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_4.addWidget(self.le_dirtita_poten_zon2, 2, 3, 1, 1)
@@ -1423,7 +1436,7 @@ class Ui_malla_window(object):
 
         self.le_dirtita_lon_zon2 = QLineEdit(self.gb_dirtita_vz2)
         self.le_dirtita_lon_zon2.setObjectName(u"le_dirtita_lon_zon2")
-        self.le_dirtita_lon_zon2.setEnabled(True)
+        self.le_dirtita_lon_zon2.setEnabled(False)
         self.le_dirtita_lon_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_4.addWidget(self.le_dirtita_lon_zon2, 2, 1, 1, 1)
@@ -1676,8 +1689,9 @@ class Ui_malla_window(object):
 
         self.sb_dirr_numz = QSpinBox(self.gb_dirr_vz1)
         self.sb_dirr_numz.setObjectName(u"sb_dirr_numz")
-        self.sb_dirr_numz.setMinimum(2)
+        self.sb_dirr_numz.setMinimum(1)
         self.sb_dirr_numz.setMaximum(10)
+        self.sb_dirr_numz.setValue(1)
 
         self.formLayout_12.setWidget(0, QFormLayout.FieldRole, self.sb_dirr_numz)
 
@@ -1727,14 +1741,14 @@ class Ui_malla_window(object):
 
         self.le_dirr_nvcr_zon2 = QLineEdit(self.gb_dirr_vz2)
         self.le_dirr_nvcr_zon2.setObjectName(u"le_dirr_nvcr_zon2")
-        self.le_dirr_nvcr_zon2.setEnabled(True)
+        self.le_dirr_nvcr_zon2.setEnabled(False)
         self.le_dirr_nvcr_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_5.addWidget(self.le_dirr_nvcr_zon2, 2, 2, 1, 1)
 
         self.le_dirr_poten_zon2 = QLineEdit(self.gb_dirr_vz2)
         self.le_dirr_poten_zon2.setObjectName(u"le_dirr_poten_zon2")
-        self.le_dirr_poten_zon2.setEnabled(True)
+        self.le_dirr_poten_zon2.setEnabled(False)
         self.le_dirr_poten_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_5.addWidget(self.le_dirr_poten_zon2, 2, 3, 1, 1)
@@ -1761,7 +1775,7 @@ class Ui_malla_window(object):
 
         self.le_dirr_lon_zon2 = QLineEdit(self.gb_dirr_vz2)
         self.le_dirr_lon_zon2.setObjectName(u"le_dirr_lon_zon2")
-        self.le_dirr_lon_zon2.setEnabled(True)
+        self.le_dirr_lon_zon2.setEnabled(False)
         self.le_dirr_lon_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_5.addWidget(self.le_dirr_lon_zon2, 2, 1, 1, 1)
@@ -2014,8 +2028,9 @@ class Ui_malla_window(object):
 
         self.sb_dirzcil_numz = QSpinBox(self.gb_dirzcil_vz1)
         self.sb_dirzcil_numz.setObjectName(u"sb_dirzcil_numz")
-        self.sb_dirzcil_numz.setMinimum(2)
+        self.sb_dirzcil_numz.setMinimum(1)
         self.sb_dirzcil_numz.setMaximum(10)
+        self.sb_dirzcil_numz.setValue(1)
 
         self.horizontalLayout_9.addWidget(self.sb_dirzcil_numz)
 
@@ -2054,14 +2069,14 @@ class Ui_malla_window(object):
 
         self.le_dirzcil_nvczcil_zon2 = QLineEdit(self.gb_dirzcil_vz2)
         self.le_dirzcil_nvczcil_zon2.setObjectName(u"le_dirzcil_nvczcil_zon2")
-        self.le_dirzcil_nvczcil_zon2.setEnabled(True)
+        self.le_dirzcil_nvczcil_zon2.setEnabled(False)
         self.le_dirzcil_nvczcil_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_6.addWidget(self.le_dirzcil_nvczcil_zon2, 2, 2, 1, 1)
 
         self.le_dirzcil_poten_zon2 = QLineEdit(self.gb_dirzcil_vz2)
         self.le_dirzcil_poten_zon2.setObjectName(u"le_dirzcil_poten_zon2")
-        self.le_dirzcil_poten_zon2.setEnabled(True)
+        self.le_dirzcil_poten_zon2.setEnabled(False)
         self.le_dirzcil_poten_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_6.addWidget(self.le_dirzcil_poten_zon2, 2, 3, 1, 1)
@@ -2088,7 +2103,7 @@ class Ui_malla_window(object):
 
         self.le_dirzcil_lon_zon2 = QLineEdit(self.gb_dirzcil_vz2)
         self.le_dirzcil_lon_zon2.setObjectName(u"le_dirzcil_lon_zon2")
-        self.le_dirzcil_lon_zon2.setEnabled(True)
+        self.le_dirzcil_lon_zon2.setEnabled(False)
         self.le_dirzcil_lon_zon2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout_6.addWidget(self.le_dirzcil_lon_zon2, 2, 1, 1, 1)
@@ -2326,14 +2341,14 @@ class Ui_malla_window(object):
 
         self.horizontalLayout_4.addWidget(self.gb_dirzvz_vz)
 
-        self.gbsw_malla2.addWidget(self.gbsw_cil_vz)
+        self.gbsw_malla.addWidget(self.gbsw_cil_vz)
 
-        self.verticalLayout.addWidget(self.gbsw_malla2)
+        self.verticalLayout.addWidget(self.gbsw_malla)
 
 
         self.retranslateUi(malla_window)
 
-        self.gbsw_malla2.setCurrentIndex(0)
+        self.gbsw_malla.setCurrentIndex(0)
 
 
         QMetaObject.connectSlotsByName(malla_window)
@@ -2341,18 +2356,18 @@ class Ui_malla_window(object):
 
     def retranslateUi(self, malla_window):
         malla_window.setWindowTitle(QCoreApplication.translate("malla_window", u"Malla - PrePRODIC3D", None))
-        self.gb_malla1.setTitle(QCoreApplication.translate("malla_window", u"Malla", None))
+        self.gb_malla.setTitle(QCoreApplication.translate("malla_window", u"Malla", None))
         self.lb_tipocoord.setText(QCoreApplication.translate("malla_window", u"Coordenadas:", None))
-        self.cb_tipocoord.setItemText(0, QCoreApplication.translate("malla_window", u"Cartesianas", None))
-        self.cb_tipocoord.setItemText(1, QCoreApplication.translate("malla_window", u"Cilindricas", None))
+        self.cb_coord_type.setItemText(0, QCoreApplication.translate("malla_window", u"Cartesianas", None))
+        self.cb_coord_type.setItemText(1, QCoreApplication.translate("malla_window", u"Cilindricas", None))
 
         self.lb_tipozonas.setText(QCoreApplication.translate("malla_window", u"Numero de zonas:  ", None))
-        self.cb_tipozonas.setItemText(0, QCoreApplication.translate("malla_window", u"Zona \u00fanica", None))
-        self.cb_tipozonas.setItemText(1, QCoreApplication.translate("malla_window", u"Varias zonas", None))
+        self.cb_zone_type.setItemText(0, QCoreApplication.translate("malla_window", u"Zona \u00fanica", None))
+        self.cb_zone_type.setItemText(1, QCoreApplication.translate("malla_window", u"Varias zonas", None))
 
         self.label.setText(QCoreApplication.translate("malla_window", u"Sistema:", None))
-        self.cb_tiposistema.setItemText(0, QCoreApplication.translate("malla_window", u"Abierto", None))
-        self.cb_tiposistema.setItemText(1, QCoreApplication.translate("malla_window", u"Cerrado", None))
+        self.cb_system_type.setItemText(0, QCoreApplication.translate("malla_window", u"Abierto", None))
+        self.cb_system_type.setItemText(1, QCoreApplication.translate("malla_window", u"Cerrado", None))
 
         self.gb_malla2_dirx.setTitle(QCoreApplication.translate("malla_window", u"Direcci\u00f3n X", None))
         self.lb_xlon.setText(QCoreApplication.translate("malla_window", u"X Longitud:", None))

@@ -18,16 +18,15 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         self.sb_dirtita_numz.valueChanged.connect(lambda value: self.handle_generic_numz_change(value, "le_dirtita", "nvctita"))
         self.sb_dirr_numz.valueChanged.connect(lambda value: self.handle_generic_numz_change(value, "le_dirr", "nvcr"))
         self.sb_dirzcil_numz.valueChanged.connect(lambda value: self.handle_generic_numz_change(value, "le_dirzcil", "nvczcil"))
-
-        # Conexion con ConfigManager
+    
         self.widgets = [
             "le_xlon", "le_nvcx", "le_potenciax", "le_ylon", "le_nvcy",
             "le_potenciay", "le_zlon", "le_nvcz", "le_potenciaz", "le_titalon",
             "le_nvctita", "le_potenciatita", "le_rini", "le_rlon", "le_nvcr",
             "le_potenciar", "le_zloncil", "le_nvczcil", "le_potenciazcil",
             "sb_dirx_numz", "sb_diry_numz", "sb_dirz_numz", "sb_dirtita_numz",
-            "sb_dirr_numz", "le_dirr_inidom", "sb_dirzcil_numz", "cb_tipocoord",
-            "cb_tipozonas", "cb_tiposistema"
+            "sb_dirr_numz", "le_dirr_inidom", "sb_dirzcil_numz", "cb_coord_type",
+            "cb_zone_type", "cb_system_type"
         ]
 
         self.widgets_to_extend = [
@@ -43,35 +42,38 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
             for widget_name in self.widgets_to_extend:
                 self.widgets.append(widget_name.format(i))
 
-        self.config_manager.connect_config(self)
-        # Cargar configuración inicial
-        self.initialize_spin_boxes()
-        # TODO Cambiar para que se cargue bien la primera vez
-        self.load_malla_config()
-        self.change_zones()
-        self.load_malla_config()
-
-        self.cb_tipocoord.currentTextChanged.connect(self.zones_changed)
-        self.cb_tipozonas.currentTextChanged.connect(self.zones_changed)
-        # fmt: on
-
-    def initialize_spin_boxes(self):
         for direction in ["dirx", "diry", "dirz", "dirtita", "dirr", "dirzcil"]:
             spin_box = getattr(self, f"sb_{direction}_numz")
-            spin_box.setMinimum(2)
+            spin_box.setMinimum(1)
             spin_box.setMaximum(10)
+    
+        self.config_manager.connect_config(self)
+        self.load_malla_config()
+
+        self.cb_coord_type.currentTextChanged.connect(self.load_malla_config)
+        self.cb_zone_type.currentTextChanged.connect(self.load_malla_config)
+        # fmt: on
 
     def load_malla_config(self):
-        # Carga la configuración desde config_manager
         self.config_manager.load_config(self)
+        zone_type = self.cb_zone_type.currentText()
+        coord_type = self.cb_coord_type.currentText()
+        layer_index = {
+            ("Zona única", "Cartesianas"): 0,
+            ("Zona única", "Cilindricas"): 1,
+            ("Varias zonas", "Cartesianas"): 2,
+            ("Varias zonas", "Cilindricas"): 3,
+        }.get((zone_type, coord_type), 0)
+        self.gbsw_malla.setCurrentIndex(layer_index)
 
-        # Para asegurar que al abrir la ventana se habiliten los LineEdit dependiendo del NZ cargados
-        self.handle_generic_numz_change(self.sb_dirx_numz.value(), "le_dirx", "nvcx")
-        self.handle_generic_numz_change(self.sb_diry_numz.value(), "le_diry", "nvcy")
-        self.handle_generic_numz_change(self.sb_dirz_numz.value(), "le_dirz", "nvcz")
-        self.handle_generic_numz_change(self.sb_dirtita_numz.value(), "le_dirtita", "nvctita")
-        self.handle_generic_numz_change(self.sb_dirr_numz.value(), "le_dirr", "nvcr")
-        self.handle_generic_numz_change(self.sb_dirzcil_numz.value(), "le_dirzcil", "nvczcil")
+        if layer_index == 2:
+            self.handle_generic_numz_change(self.sb_dirx_numz.value(), "le_dirx", "nvcx")
+            self.handle_generic_numz_change(self.sb_diry_numz.value(), "le_diry", "nvcy")
+            self.handle_generic_numz_change(self.sb_dirz_numz.value(), "le_dirz", "nvcz")
+        elif layer_index == 3:
+            self.handle_generic_numz_change(self.sb_dirtita_numz.value(), "le_dirtita", "nvctita")
+            self.handle_generic_numz_change(self.sb_dirr_numz.value(), "le_dirr", "nvcr")
+            self.handle_generic_numz_change(self.sb_dirzcil_numz.value(), "le_dirzcil", "nvczcil")
 
     def value_changed(self, value):
         sender = self.sender()
@@ -80,38 +82,14 @@ class MallaWindow(qtw.QDialog, Ui_malla_window):
         else:
             self.config_manager.grid[sender.objectName()] = value
 
-    def zones_changed(self):
-        self.change_zones()
-        self.load_malla_config()
-
-    def change_zones(self):
-        current_text_coord = self.cb_tipocoord.currentText()
-        current_text_zona = self.cb_tipozonas.currentText()
-        capa_index = {
-            ("Zona única", "Cartesianas"): 0,
-            ("Zona única", "Cilindricas"): 1,
-            ("Varias zonas", "Cartesianas"): 2,
-            ("Varias zonas", "Cilindricas"): 3,
-        }.get((current_text_zona, current_text_coord), 0)
-        self.gbsw_malla2.setCurrentIndex(capa_index)
-
     def handle_generic_numz_change(self, value, prefix, ncv_prefix):
+        attribute_prefixes = [f"{prefix}_lon_zon", f"{prefix}_{ncv_prefix}_zon", f"{prefix}_poten_zon"]
         for i in range(1, 11):
-            le_lon = getattr(self, f"{prefix}_lon_zon{i}", None)
-            le_ncv = getattr(self, f"{prefix}_{ncv_prefix}_zon{i}", None)
-            le_pot = getattr(self, f"{prefix}_poten_zon{i}", None)
-
-            if i <= value:
-                if le_lon:
-                    le_lon.setEnabled(True)
-                if le_ncv:
-                    le_ncv.setEnabled(True)
-                if le_pot:
-                    le_pot.setEnabled(True)
-            else:
-                if le_lon:
-                    le_lon.setEnabled(False)
-                if le_ncv:
-                    le_ncv.setEnabled(False)
-                if le_pot:
-                    le_pot.setEnabled(False)
+            for attr_prefix in attribute_prefixes:
+                le = getattr(self, f"{attr_prefix}{i}", None)
+                if le:
+                    if i <= value:
+                        le.setEnabled(True)
+                    else:
+                        le.setEnabled(False)
+                        le.clear()
