@@ -14,209 +14,24 @@
    <string>Densidad - PrePRODIC3D</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="2" column="0">
-    <widget class="QGroupBox" name="groupBox_2">
-     <property name="title">
-      <string>Regiones</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QListWidget" name="lw_regions">
-        <item>
-         <property name="text">
-          <string>Región 1</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_add_region">
-        <property name="text">
-         <string>Agregar una región</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_remove_region">
-        <property name="text">
-         <string>Eliminar última región</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QGroupBox" name="groupBox_5">
-        <property name="title">
-         <string/>
-        </property>
-        <layout class="QFormLayout" name="formLayout_2">
-         <item row="0" column="0">
-          <widget class="QLabel" name="label_5">
-           <property name="text">
-            <string>Densidad local</string>
-           </property>
-          </widget>
-         </item>
-         <item row="0" column="1">
-          <widget class="QLineEdit" name="le_local_value"/>
-         </item>
-        </layout>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="2" column="1">
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="title">
-      <string>Conformación de la región</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QListWidget" name="lw_volumes">
-        <item>
-         <property name="text">
-          <string>Volumen 1</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>220</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_add_volume">
-        <property name="text">
-         <string>Agregar un volumen</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_remove_volume">
-        <property name="text">
-         <string>Eliminar último volumen</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <spacer name="verticalSpacer_2">
-        <property name="orientation">
-         <enum>Qt::Vertical</enum>
-        </property>
-        <property name="sizeHint" stdset="0">
-         <size>
-          <width>20</width>
-          <height>250</height>
-         </size>
-        </property>
-       </spacer>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="1" column="0" colspan="2">
-    <widget class="QCheckBox" name="chb_local_value">
-     <property name="contextMenuPolicy">
-      <enum>Qt::CustomContextMenu</enum>
-     </property>
-     <property name="layoutDirection">
-      <enum>Qt::LeftToRight</enum>
-     </property>
-     <property name="text">
-      <string>Activar variables locales:</string>
-     </property>
-     <property name="tristate">
-      <bool>false</bool>
-     </property>
-    </widget>
-   </item>
-   <item row="0" column="0" colspan="2">
-    <widget class="QGroupBox" name="groupBox">
-     <property name="title">
-      <string>Densidad general del dominio</string>
-     </property>
-     <layout class="QFormLayout" name="formLayout">
-      <item row="3" column="0">
-       <widget class="QLabel" name="label_2">
-        <property name="text">
-         <string>Valor de densidad</string>
-        </property>
-       </widget>
-      </item>
-      <item row="3" column="1">
-       <widget class="QLineEdit" name="le_general_value"/>
-      </item>
-      <item row="5" column="0">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Densidad de referencia</string>
-        </property>
-       </widget>
-      </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="le_ref_rho"/>
-      </item>
-      <item row="6" column="0">
-       <widget class="QLabel" name="label_4">
-        <property name="text">
-         <string>Temperatura de referencia</string>
-        </property>
-       </widget>
-      </item>
-      <item row="6" column="1">
-       <widget class="QLineEdit" name="le_ref_temp"/>
-      </item>
-      <item row="0" column="0">
-       <widget class="QLabel" name="label">
-        <property name="text">
-         <string>Condición</string>
-        </property>
-       </widget>
-      </item>
-      <item row="0" column="1">
-       <widget class="QComboBox" name="cb_condition">
-        <item>
-         <property name="text">
-          <string>Valor constante</string>
-         </property>
-        </item>
-        <item>
-         <property name="text">
-          <string>Dependiente de la temperatura</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="4" column="1">
-       <widget class="QCheckBox" name="chb_ex_value">
-        <property name="text">
-         <string/>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
-   <item row="3" column="0" colspan="2">
+   <item row="4" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBox_4">
      <property name="title">
       <string/>
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="2" column="1">
-       <widget class="QLineEdit" name="le_x_end"/>
+       <widget class="QLineEdit" name="le_x_end">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="2" column="4">
        <widget class="QComboBox" name="cb_ex_z_end">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <item>
          <property name="text">
           <string/>
@@ -224,18 +39,21 @@
         </item>
         <item>
          <property name="text">
-          <string>Mayor a</string>
+          <string>&lt;</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Menor a</string>
+          <string>≤</string>
          </property>
         </item>
        </widget>
       </item>
       <item row="2" column="0">
        <widget class="QComboBox" name="cb_ex_x_end">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <item>
          <property name="text">
           <string/>
@@ -255,6 +73,9 @@
       </item>
       <item row="1" column="2">
        <widget class="QComboBox" name="cb_ex_y_start">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <item>
          <property name="text">
           <string/>
@@ -273,10 +94,17 @@
        </widget>
       </item>
       <item row="2" column="5">
-       <widget class="QLineEdit" name="le_z_end"/>
+       <widget class="QLineEdit" name="le_z_end">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="2" column="2">
        <widget class="QComboBox" name="cb_ex_y_end">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <item>
          <property name="text">
           <string/>
@@ -284,18 +112,21 @@
         </item>
         <item>
          <property name="text">
-          <string>Mayor a</string>
+          <string>&lt;</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Menor a</string>
+          <string>≤</string>
          </property>
         </item>
        </widget>
       </item>
       <item row="1" column="0">
        <widget class="QComboBox" name="cb_ex_x_start">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <item>
          <property name="text">
           <string/>
@@ -334,10 +165,17 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="le_x_start"/>
+       <widget class="QLineEdit" name="le_x_start">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="1" column="4">
        <widget class="QComboBox" name="cb_ex_z_start">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <item>
          <property name="text">
           <string/>
@@ -345,18 +183,22 @@
         </item>
         <item>
          <property name="text">
-          <string>Mayor a</string>
+          <string>&gt;</string>
          </property>
         </item>
         <item>
          <property name="text">
-          <string>Menor a</string>
+          <string>≥</string>
          </property>
         </item>
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QLineEdit" name="le_y_end"/>
+       <widget class="QLineEdit" name="le_y_end">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="0" column="5">
        <widget class="QLabel" name="label_10">
@@ -369,19 +211,173 @@
        </widget>
       </item>
       <item row="1" column="5">
-       <widget class="QLineEdit" name="le_z_start"/>
+       <widget class="QLineEdit" name="le_z_start">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
       <item row="1" column="3">
-       <widget class="QLineEdit" name="le_y_start"/>
+       <widget class="QLineEdit" name="le_y_start">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="4" column="0">
+   <item row="3" column="0">
     <widget class="QCheckBox" name="chb_exclude_borders">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
      <property name="text">
       <string>V.C Excluir Bordes</string>
      </property>
+    </widget>
+   </item>
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="groupBox_3">
+     <property name="title">
+      <string>Conformación de la región</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout_2">
+      <item>
+       <widget class="QListWidget" name="lw_volumes">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_add_volume">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Agregar un volumen</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_remove_volume">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Eliminar último volumen</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="2" column="0" colspan="2">
+    <widget class="QGroupBox" name="groupBox">
+     <property name="title">
+      <string>Densidad de la región</string>
+     </property>
+     <layout class="QFormLayout" name="formLayout">
+      <item row="0" column="0">
+       <widget class="QLabel" name="label">
+        <property name="text">
+         <string>Condición</string>
+        </property>
+       </widget>
+      </item>
+      <item row="0" column="1">
+       <widget class="QComboBox" name="cb_condition">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <item>
+         <property name="text">
+          <string>Valor constante</string>
+         </property>
+        </item>
+        <item>
+         <property name="text">
+          <string>Dependiente de la temperatura</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="0">
+       <widget class="QLabel" name="label_2">
+        <property name="text">
+         <string>Valor de densidad</string>
+        </property>
+       </widget>
+      </item>
+      <item row="3" column="1">
+       <widget class="QLineEdit" name="le_local_value">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="0">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Densidad de referencia</string>
+        </property>
+       </widget>
+      </item>
+      <item row="4" column="1">
+       <widget class="QLineEdit" name="le_ref_rho">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="0">
+       <widget class="QLabel" name="label_4">
+        <property name="text">
+         <string>Temperatura de referencia</string>
+        </property>
+       </widget>
+      </item>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="le_ref_temp">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Regiones</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QListWidget" name="lw_regions">
+        <item>
+         <property name="text">
+          <string>Región 1</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_add_region">
+        <property name="text">
+         <string>Agregar una región</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_remove_region">
+        <property name="text">
+         <string>Eliminar última región</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
     </widget>
    </item>
   </layout>

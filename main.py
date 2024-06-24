@@ -350,14 +350,17 @@ class Worker(qtc.QThread):
                 if output == "" and process.poll() is not None:
                     break
                 if output:
+                    # if output.strip():
+                    #     output = output.rstrip("\r\n")
                     self.output.emit(output)
             stderr = process.stderr.read().decode()
             if stderr:
+                # if stderr.strip():
+                #     stderr = stderr.rstrip("\r\n")
                 self.output.emit(stderr)
             rc = process.poll()
             return rc
         else:
-            # Si no esperamos, simplemente lanzamos el proceso y no esperamos a que termine
             return None
 
 
@@ -380,6 +383,8 @@ class TerminalOutputDialog(qtw.QDialog):
         self.close_button.clicked.connect(self.accept)
 
     def append_text(self, text):
+        # if text.strip():
+        #     text = text.rstrip("\r\n")
         self.output_text_edit.appendPlainText(text)
 
     def enable_close_button(self):

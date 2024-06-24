@@ -12,6 +12,8 @@ class DensidadWindow(qtw.QDialog, Ui_densidad_window):
         self.config_manager = config_manager
         self.config_name = "DENSE"
 
+        self.cb_condition.currentTextChanged.connect(self.condition_change)
+
         self.pb_add_region.clicked.connect(self.add_region)
         self.pb_remove_region.clicked.connect(self.remove_region)
         self.pb_add_volume.clicked.connect(self.add_volume)
@@ -20,19 +22,18 @@ class DensidadWindow(qtw.QDialog, Ui_densidad_window):
         self.lw_regions.currentRowChanged.connect(self.load_volume_config)
         self.lw_volumes.currentRowChanged.connect(self.load_current_config)
 
-        self.general_widgets = [
-            "cb_condition", "le_general_value", "le_ref_rho", 
-            "le_ref_temp", "chb_ex_value", "chb_local_value",
+        self.region_widgets = [
+            "cb_condition", "le_local_value", "le_ref_rho", "le_ref_temp"
         ]
-        self.region_widgets = ["le_local_value"]
         self.volume_widgets = [
-            "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end", 
+            "le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end", 
             "chb_exclude_borders", "cb_ex_x_start", "cb_ex_x_end", "cb_ex_y_start", 
             "cb_ex_y_end", "cb_ex_z_start", "cb_ex_z_end"]
-        self.widgets = self.general_widgets + self.region_widgets + self.volume_widgets
+        self.widgets = self.region_widgets + self.volume_widgets
 
         self.config_manager.connect_config(self)
-        self.chb_local_value.stateChanged.connect(self.load_region_config)
+        self.lw_regions.setCurrentItem(self.lw_regions.item(0))
+        self.lw_volumes.setCurrentItem(self.lw_volumes.item(0))
         # fmt: on
 
     def get_configured_widgets(self, region, volume):
@@ -40,7 +41,6 @@ class DensidadWindow(qtw.QDialog, Ui_densidad_window):
         # Esta función busca en la configuración y recoge todos los widgets configurados
         config = self.config_manager.dense
         configured_widgets = set()
-        configured_widgets.update(key for key, value in config.items() if not isinstance(value, dict))
         if region:
             region_config = config[region.text()]
             configured_widgets.update(key for key, value in region_config.items() if not isinstance(value, dict))
@@ -56,59 +56,40 @@ class DensidadWindow(qtw.QDialog, Ui_densidad_window):
         configured_widgets = self.get_configured_widgets(region, volume)
         not_configured_widgets = [widget for widget in self.widgets if widget not in configured_widgets]
         self.toggle_widget_list(not_configured_widgets, False)
+        if "cb_condition" not in configured_widgets:
+            self.cb_condition.setCurrentText("Valor constante")
         config = self.config_manager.dense
-        self.toggle_widget_list(self.general_widgets, True)
-        self.config_manager.load_config(self, config)
-        if config.get("chb_local_value") == 2:
-            self.lw_regions.setEnabled(True)
-            self.pb_add_region.setEnabled(True)
-            self.pb_remove_region.setEnabled(True)
-            # Seleccionada una region
-            if region is not None:
-                self.lw_volumes.setEnabled(True)
-                self.pb_add_volume.setEnabled(True)
-                self.pb_remove_volume.setEnabled(True)
-                # Seleccionado un volumen
-                if volume is not None:
-                    self.toggle_widget_list(self.region_widgets, True)
-                    self.config_manager.load_config(self, config[region.text()])
-                    self.toggle_widget_list(self.volume_widgets, True)
-                    self.config_manager.load_config(self, config[region.text()][volume.text()])
-                    if self.config_manager.is_mesh_info_complete:
-                        volume_data = self.initialize_volume_data()
-                        # Verificar si alguno de los valores ya está definido
-                        keys = ["le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end"]
-                        if not any(key in config[region.text()][volume.text()] for key in keys):
-                            self.le_x_start.setText(volume_data["le_x_start"])
-                            self.le_x_end.setText(volume_data["le_x_end"])
-                            self.le_y_start.setText(volume_data["le_y_start"])
-                            self.le_y_end.setText(volume_data["le_y_end"])
-                            self.le_z_start.setText(volume_data["le_z_start"])
-                            self.le_z_end.setText(volume_data["le_z_end"])
-                else:
-                    self.toggle_widget_list(self.volume_widgets, False)
+        # Seleccionada una region
+        if region is not None:
+            self.lw_volumes.setEnabled(True)
+            self.pb_add_volume.setEnabled(True)
+            self.pb_remove_volume.setEnabled(True)
+            # Seleccionado un volumen
+            if volume is not None:
+                self.toggle_widget_list(self.region_widgets, True)
+                self.config_manager.load_config(self, config[region.text()])
+                self.condition_change(self.cb_condition.currentText())
+                self.toggle_widget_list(self.volume_widgets, True)
+                self.config_manager.load_config(self, config[region.text()][volume.text()])
+                if self.config_manager.is_mesh_info_complete:
+                    volume_data = self.initialize_volume_data()
+                    # Verificar si alguno de los valores ya está definido
+                    keys = ["le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end"]
+                    if not any(key in config[region.text()][volume.text()] for key in keys):
+                        self.le_x_start.setText(volume_data["le_x_start"])
+                        self.le_x_end.setText(volume_data["le_x_end"])
+                        self.le_y_start.setText(volume_data["le_y_start"])
+                        self.le_y_end.setText(volume_data["le_y_end"])
+                        self.le_z_start.setText(volume_data["le_z_start"])
+                        self.le_z_end.setText(volume_data["le_z_end"])
             else:
                 self.toggle_widget_list(self.region_widgets + self.volume_widgets, False)
-                self.lw_volumes.setEnabled(False)
-                self.lw_volumes.clear()
         else:
-            self.lw_regions.setEnabled(False)
-            self.lw_regions.clear()
-            self.pb_add_region.setEnabled(False)
-            self.pb_remove_region.setEnabled(False)
+            self.toggle_widget_list(self.region_widgets + self.volume_widgets, False)
             self.lw_volumes.setEnabled(False)
             self.lw_volumes.clear()
             self.pb_add_volume.setEnabled(False)
             self.pb_remove_volume.setEnabled(False)
-
-    def load_region_config(self):
-        """Carga la configuración de la región basada en la región seleccionada."""
-        self.lw_regions.clear()
-        config = self.config_manager.dense
-        for key, value in config.items():
-            if isinstance(value, dict):
-                self.lw_regions.addItem(key)
-        self.load_current_config()
 
     def load_volume_config(self):
         """"""
@@ -149,41 +130,23 @@ class DensidadWindow(qtw.QDialog, Ui_densidad_window):
         region = self.lw_regions.currentItem()
         volume = self.lw_volumes.currentItem()
         if value is not None and value != "":
-            # Si hay un valor nuevo válido
-            if region and volume and sender.objectName() in self.volume_widgets:
-                # Si el cambio es en un widget de volumen
-                if region.text() not in self.config_manager.dense:
-                    self.config_manager.dense[region.text()] = {}
-                if volume.text() not in self.config_manager.dense[region.text()]:
-                    self.config_manager.dense[region.text()][volume.text()] = {}
-                self.config_manager.dense[region.text()][volume.text()][sender.objectName()] = value
-            elif region and sender.objectName() in self.region_widgets:
-                # Si el cambio es en un widget de región
-                if region.text() not in self.config_manager.dense:
-                    self.config_manager.dense[region.text()] = {}
-                self.config_manager.dense[region.text()][sender.objectName()] = value
-            elif sender.objectName() in self.general_widgets:
-                # Si el cambio es en un widget general
-                self.config_manager.dense[sender.objectName()] = value
+            if region and volume:
+                if sender.objectName() in self.volume_widgets:
+                    if region.text() not in self.config_manager.dense:
+                        self.config_manager.dense[region.text()] = {}
+                    if volume.text() not in self.config_manager.dense[region.text()]:
+                        self.config_manager.dense[region.text()][volume.text()] = {}
+                    self.config_manager.dense[region.text()][volume.text()][sender.objectName()] = value
+                elif sender.objectName() in self.region_widgets:
+                    if region.text() not in self.config_manager.dense:
+                        self.config_manager.dense[region.text()] = {}
+                    self.config_manager.dense[region.text()][sender.objectName()] = value
         else:
-            # Si el valor es None o vacío, eliminar el valor del diccionario
-            if region and volume and sender.objectName() in self.volume_widgets:
-                # Eliminar valor del widget de volumen
-                self.config_manager.dense[region.text()][volume.text()].pop(sender.objectName(), None)
-                # Limpiar diccionarios vacíos
-                if not self.config_manager.dense[region.text()][volume.text()]:
-                    del self.config_manager.dense[region.text()][volume.text()]
-                    if not self.config_manager.dense[region.text()]:
-                        del self.config_manager.dense[region.text()]
-            elif region and sender.objectName() in self.region_widgets:
-                # Eliminar valor del widget de región
-                self.config_manager.dense[region.text()].pop(sender.objectName(), None)
-                # Limpiar diccionarios vacíos
-                if not self.config_manager.dense[region.text()]:
-                    del self.config_manager.dense[region.text()]
-            elif sender.objectName() in self.general_widgets:
-                # Eliminar valor del widget de general
-                self.config_manager.dense.pop(sender.objectName(), None)
+            if region and volume:
+                if sender.objectName() in self.volume_widgets:
+                    self.config_manager.dense[region.text()][volume.text()].pop(sender.objectName(), None)
+                elif sender.objectName() in self.region_widgets:
+                    self.config_manager.dense[region.text()].pop(sender.objectName(), None)
 
     def add_region(self):
         """"""
@@ -213,11 +176,24 @@ class DensidadWindow(qtw.QDialog, Ui_densidad_window):
         """"""
         volume_count = self.lw_volumes.count()
         if volume_count > 1:
-            last_volume = self.lw_regions.item(volume_count - 1)
+            last_volume = self.lw_volumes.item(volume_count - 1)
             self.lw_volumes.takeItem(volume_count - 1)
             region = self.lw_regions.currentItem()
             if region is not None:
                 self.config_manager.dense[region.text()].pop(last_volume.text(), None)
+
+    def condition_change(self, text):
+        if text == "Dependiente de la temperatura":
+            self.le_ref_rho.setEnabled(True)
+            self.le_ref_temp.setEnabled(True)
+            self.le_local_value.setEnabled(False)
+            self.le_local_value.clear()
+        else:  # if text == "Valor constante":
+            self.le_ref_rho.setEnabled(False)
+            self.le_ref_temp.setEnabled(False)
+            self.le_local_value.setEnabled(True)
+            self.le_ref_rho.clear()
+            self.le_ref_temp.clear()
 
     def initialize_volume_data(self):
         """Inicializa los valores de malla para un volumen nuevo"""

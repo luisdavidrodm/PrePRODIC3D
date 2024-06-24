@@ -87,14 +87,14 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             if border and patch and variable and sender.objectName() in self.variable_widgets:
                 variable_key = variable.data(Qt.UserRole)
                 self.config_manager.bound[border.text()][patch.text()][variable_key].pop(sender.objectName(), None)
-                if not self.config_manager.bound[border.text()][patch.text()][variable_key]:
-                    del self.config_manager.bound[border.text()][patch.text()][variable_key]
-                if not self.config_manager.bound[border.text()][patch.text()]:
-                    del self.config_manager.bound[border.text()][patch.text()]
+                # if not self.config_manager.bound[border.text()][patch.text()][variable_key]:
+                #     del self.config_manager.bound[border.text()][patch.text()][variable_key]
+                # if not self.config_manager.bound[border.text()][patch.text()]:
+                #     del self.config_manager.bound[border.text()][patch.text()]
             elif border and patch and sender.objectName() in self.patch_widgets:
                 self.config_manager.bound[border.text()][patch.text()].pop(sender.objectName(), None)
-                if not self.config_manager.bound[border.text()][patch.text()]:
-                    del self.config_manager.bound[border.text()][patch.text()]
+                # if not self.config_manager.bound[border.text()][patch.text()]:
+                #     del self.config_manager.bound[border.text()][patch.text()]
 
     def get_configured_widgets(self, border, patch, variable):
         """"""
@@ -236,7 +236,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         border = self.lw_bordes.currentItem()
         if border:
             patch_count = self.lw_patchlist.count()
-            if patch_count > 2:
+            if patch_count > 1:
                 last_patch = self.lw_patchlist.item(patch_count - 1)
                 self.lw_patchlist.takeItem(patch_count - 1)
                 self.config_manager.bound[border.text()].pop(last_patch.text(), None)

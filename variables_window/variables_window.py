@@ -68,7 +68,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             for le_name in ["le_relax1", "le_relax2", "le_relax3"]:
                 le_widget = getattr(self, le_name)
                 le_widget.setEnabled(False)
-                le_widget.setText(False)
+                le_widget.setText("")
             self.chb_kprint11.setEnabled(False)
 
     def le_var_title_changed(self, _):

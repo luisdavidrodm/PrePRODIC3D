@@ -225,22 +225,22 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 # Eliminar valor del widget de volumen
                 self.config_manager.values[variable_key][region.text()][volume.text()].pop(sender.objectName(), None)
                 # Limpiar diccionarios vacíos
-                if not self.config_manager.values[variable_key][region.text()][volume.text()]:
-                    del self.config_manager.values[variable_key][region.text()][volume.text()]
-                    if not self.config_manager.values[variable_key][region.text()]:
-                        del self.config_manager.values[variable_key][region.text()]
+                # if not self.config_manager.values[variable_key][region.text()][volume.text()]:
+                #     del self.config_manager.values[variable_key][region.text()][volume.text()]
+                #     if not self.config_manager.values[variable_key][region.text()]:
+                #         del self.config_manager.values[variable_key][region.text()]
             elif region and sender.objectName() in self.region_widgets:
                 # Eliminar valor del widget de región
                 self.config_manager.values[variable_key][region.text()].pop(sender.objectName(), None)
                 # Limpiar diccionarios vacíos
-                if not self.config_manager.values[variable_key][region.text()]:
-                    del self.config_manager.values[variable_key][region.text()]
+                # if not self.config_manager.values[variable_key][region.text()]:
+                #     del self.config_manager.values[variable_key][region.text()]
             elif variable and sender.objectName() in self.variable_widgets:
                 # Eliminar valor del widget de variable
                 self.config_manager.values[variable_key].pop(sender.objectName(), None)
             # Limpieza adicional para asegurar que no queden diccionarios vacíos
-            if variable and not self.config_manager.values[variable_key]:
-                del self.config_manager.values[variable_key]
+            # if variable and not self.config_manager.values[variable_key]:
+            #     del self.config_manager.values[variable_key]
 
     def add_region(self):
         """"""
@@ -275,7 +275,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         """"""
         volume_count = self.lw_volumes.count()
         if volume_count > 1:
-            last_volume = self.lw_regions.item(volume_count - 1)
+            last_volume = self.lw_volumes.item(volume_count - 1)
             self.lw_volumes.takeItem(volume_count - 1)
             variable = self.lw_variables.currentItem()
             region = self.lw_regions.currentItem()

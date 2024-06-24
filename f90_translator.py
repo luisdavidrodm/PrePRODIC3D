@@ -200,7 +200,7 @@ class F90Translator:
         f90_lines.append("RETURN")
         return f90_lines
 
-    def translate_begin_section(self, grid, variables, bound, values, output):
+    def translate_begin_section(self, grid, variables, dense, bound, values, output):
         f90_lines = ["ENTRY BEGIN"]
 
         for num in range(1, 12):
@@ -266,7 +266,7 @@ class F90Translator:
                     ]
                 )
 
-        #### le_local_value
+        #### le_local_value in values
         for var_title, var_number in self.variables_map.items():
             if var_title in values:
                 regions = {key: value for key, value in values[var_title].items() if isinstance(value, dict)}
@@ -291,6 +291,32 @@ class F90Translator:
                                     "ENDDO",
                                 ]
                             )
+
+        #### le_local_value in dense
+        for region, region_values in dense.items():
+            volumes = {key: value for key, value in region_values.items() if isinstance(value, dict)}
+            for volume, volume_values in volumes.items():
+                cvi = 2 if volume_values.get("chb_exclude_borders", 1) == 2 else 1  # cvi: control_volume_index
+                condition_str = self.volume_operator_conditions(volume_values)
+                f90_lines.extend(
+                    [
+                        f"DO I={cvi},L{cvi}",
+                        f"{i}DO J={cvi},M{cvi}",
+                        f"{i}{i}DO K={cvi},N{cvi}",
+                    ]
+                )
+                if region_values.get("cb_condition", "Valor constante") == "Valor constante":
+                    f90_lines.append(f"{I}IF({condition_str}) RHO(I,J,K)={region_values['le_local_value']}")
+                else:
+                    ref_value = float(region_values.get("le_ref_rho", 1)) * float(region_values.get("le_ref_temp", 1))
+                    f90_lines.append(f"{I}IF({condition_str}) RHO(I,J,K)={ref_value}/F(I,J,K,5)")
+                f90_lines.extend(
+                    [
+                        f"{i}{i}ENDDO",
+                        f"{i}ENDDO",
+                        "ENDDO",
+                    ]
+                )
 
         for boundary, patchs in bound.items():
             for patch, patch_values in patchs.items():
@@ -416,9 +442,9 @@ class F90Translator:
                                 2 if volume_values.get("chb_exclude_borders", 1) == 2 else 1
                             )  # cvi: control_volume_index
                             condition_str = self.volume_operator_conditions(volume_values)
-                            f90_lines.append(f"{i}DO I={cvi},{cvi}")
-                            f90_lines.append(f"{i}{i}DO J={cvi},{cvi}")
-                            f90_lines.append(f"{I}DO K={cvi},{cvi}")
+                            f90_lines.append(f"{i}DO I={cvi},L{cvi}")
+                            f90_lines.append(f"{i}{i}DO J={cvi},M{cvi}")
+                            f90_lines.append(f"{I}DO K={cvi},N{cvi}")
                             if "le_local_sc" in region_values:
                                 f90_lines.append(f"{I}{i}IF({condition_str}) SC(I,J,K)={region_values['le_local_sc']}")
                             if "le_local_sp" in region_values:
@@ -608,6 +634,7 @@ class F90Translator:
         begin_section_lines = self.translate_begin_section(
             config_manager.grid,
             config_manager.variables,
+            config_manager.dense,
             config_manager.bound,
             config_manager.values,
             config_manager.output,
