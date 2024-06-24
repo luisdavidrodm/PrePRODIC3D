@@ -27,11 +27,11 @@ class F90Translator:
             "Z Min": ("I", "J", "L{}", "M{}", "(I,J,{})", "K1"),
         }
         self.custom_titles = {
-            1: " VEL U ",
-            2: " VEL V ",
-            3: " VEL W ",
+            1: "VEL U",
+            2: "VEL V",
+            3: "VEL W",
             4: "CORRECCION",
-            5: " TEMPERATURA ",
+            5: "TEMPERATURA",
             11: "PRESION",
         }
         self.in_mass = """IF(ITER.NE.0) GO TO 350
@@ -353,8 +353,8 @@ class F90Translator:
 
         if monitored_variables:
             iteration = int(output.get("le_last", 5)) - 5
-            standard_space = "5X"
-            format_string = "1X,'ITER',"
+            standard_space = "2X"
+            format_string = "4X,'ITER',"
             format_values = ["ITER"]
             for var, coords in monitored_variables.items():
                 format_string += f"{standard_space},'{var}{coords}',"

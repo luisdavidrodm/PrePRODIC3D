@@ -27,9 +27,9 @@ display.Representation = "Surface With Edges"
 point_data_info = reader.GetPointDataInformation()
 point_arrays = [array_info.GetName() for array_info in point_data_info]
 
-if " TEMPERA" in point_arrays:
-    display.ColorArrayName = ["POINTS", " TEMPERA"]
-    colorMap = GetColorTransferFunction(" TEMPERA")
+if "TEMPERAT" in point_arrays:
+    display.ColorArrayName = ["POINTS", "TEMPERAT"]
+    colorMap = GetColorTransferFunction("TEMPERAT")
     try:
         colorMap.ApplyPreset("Turbo", True)
         display.LookupTable = colorMap
@@ -44,7 +44,7 @@ if " TEMPERA" in point_arrays:
     except Exception as e:
         print("El preset 'Turbo' no está disponible. Verifica los presets de colores instalados.")
 else:
-    print("La variable ' TEMPERA' no se encontró en los datos.")
+    print("La variable 'TEMPERAT' no se encontró en los datos.")
 
 view.OrientationAxesLabelColor = [0.0, 0.0, 0.0]  # Ejes en negro
 Render(view)
