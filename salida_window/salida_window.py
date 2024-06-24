@@ -45,14 +45,15 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
             if variable and sender.objectName() in self.variable_widgets:
                 # Eliminar valor del widget de variable
                 variable_key = variable.data(Qt.UserRole)
-                self.config_manager.output[variable_key].pop(sender.objectName(), None)
+                if variable_key in self.config_manager.output:
+                    self.config_manager.output[variable_key].pop(sender.objectName(), None)
             else:
                 self.config_manager.output.pop(sender.objectName(), None)
             # Limpieza adicional para asegurar que no queden diccionarios vacíos
-            if variable and not self.config_manager.output[variable_key]:
-                del self.config_manager.output[variable_key]
-        self.print_dict(self.config_manager.output)
-        print()
+            if variable:
+                variable_key = variable.data(Qt.UserRole)
+                if variable_key in self.config_manager.output and not self.config_manager.output[variable_key]:
+                    del self.config_manager.output[variable_key]
 
     def toggle_widget_list(self, widgets, toggle):
         """"""
@@ -72,10 +73,12 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
         """"""
         # Esta función busca en la configuración y recoge todos los widgets configurados
         if variable:
-            config = self.config_manager.values[variable.data(Qt.UserRole)]
-            configured_widgets = set()
-            configured_widgets.update(key for key, value in config.items() if not isinstance(value, dict))
-            return configured_widgets
+            variable_key = variable.data(Qt.UserRole)
+            if variable_key in self.config_manager.output:
+                config = self.config_manager.output[variable.data(Qt.UserRole)]
+                configured_widgets = set()
+                configured_widgets.update(key for key, value in config.items())
+                return configured_widgets
         return []
 
     def load_current_config(self):
@@ -85,10 +88,12 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
         not_configured_widgets = [widget for widget in self.variable_widgets if widget not in configured_widgets]
         self.toggle_widget_list(not_configured_widgets, False)
         # Seleccionada una variable
-        if variable is not None:
-            config = self.config_manager.output[variable.data(Qt.UserRole)]
+        if variable:
             self.toggle_widget_list(self.variable_widgets, True)
-            self.config_manager.load_config(self, config)
+            variable_key = variable.data(Qt.UserRole)
+            if variable_key in self.config_manager.output:
+                config = self.config_manager.output[variable_key]
+                self.config_manager.load_config(self, config)
         self.config_manager.load_config(self, self.config_manager.output)
 
     def load_variables_list(self):
@@ -98,7 +103,6 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
             for i in range(self.lw_variables.count())
         ]
         new_items = [(data["name"], key) for key, data in self.config_manager.values.items() if "name" in data]
-        print("CURRENT VS NEW:", current_items, new_items)
         if new_items != current_items:
             self.lw_variables.clear()
             for name, tech_name in new_items:

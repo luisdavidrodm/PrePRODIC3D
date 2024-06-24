@@ -52,7 +52,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 configured_widgets.update(key for key, value in region_config.items() if not isinstance(value, dict))
                 if volume:
                     volume_config = region_config[volume.text()]
-                    configured_widgets.update(key for key, value in volume_config.items())
+                    configured_widgets.update(key for key in volume_config.keys())
             return configured_widgets
         return []
 

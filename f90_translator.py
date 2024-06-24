@@ -180,7 +180,7 @@ class F90Translator:
             f90_lines.append(f"NZX={grid[nz_widgets[0]]} ; NZY={grid[nz_widgets[1]]}; NZZ={grid[nz_widgets[2]]}")
 
         if "le_dirr_inidom" not in grid:
-            grid["le_dirr_inidom"] = 0
+            grid["le_dirr_inidom"] = "0"
 
         if "le_rini" not in grid:
             grid["le_rini"] = "0"
@@ -512,7 +512,7 @@ class F90Translator:
     def border_operator_conditions(self, patch_values, transversal_var, vertical_var):
         transversal_start = patch_values.get("le_transversal_start", None)
         transversal_start_op = patch_values.get("cb_ex_transversal_start", "GE")
-        transversal_start_op = self.operator_mapping.get(transversal_start, transversal_start)
+        transversal_start_op = self.operator_mapping.get(transversal_start_op, transversal_start_op)
 
         transversal_end = patch_values.get("le_transversal_end", None)
         transversal_end_op = patch_values.get("cb_ex_transversal_end", "LE")
@@ -520,7 +520,7 @@ class F90Translator:
 
         vertical_start = patch_values.get("le_vertical_start", None)
         vertical_start_op = patch_values.get("cb_ex_vertical_start", "GE")
-        vertical_start_op = self.operator_mapping.get(vertical_start, vertical_start)
+        vertical_start_op = self.operator_mapping.get(vertical_start_op, vertical_start_op)
 
         vertical_end = patch_values.get("le_vertical_end", None)
         vertical_end_op = patch_values.get("cb_ex_vertical_end", "LE")

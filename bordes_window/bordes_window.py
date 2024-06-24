@@ -85,6 +85,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 self.config_manager.bound[border.text()][patch.text()][sender.objectName()] = value
         else:
             if border and patch and variable and sender.objectName() in self.variable_widgets:
+                variable_key = variable.data(Qt.UserRole)
                 self.config_manager.bound[border.text()][patch.text()][variable_key].pop(sender.objectName(), None)
                 if not self.config_manager.bound[border.text()][patch.text()][variable_key]:
                     del self.config_manager.bound[border.text()][patch.text()][variable_key]
@@ -113,7 +114,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 if variable_key not in config:
                     config[variable_key] = {}
                 variable_config = config[variable_key]
-                configured_widgets.update(key for key, value in variable_config.items())
+                configured_widgets.update(key for key in variable_config.keys())
             return configured_widgets
         return []
 
@@ -195,9 +196,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
     def load_variables_list(self):
         """Carga y actualiza la lista de variables considerando el orden y permitiendo duplicados."""
+        excluded_keys = {"le_var_title4", "le_var_title12", "le_var_title11"}
         new_items = []
         for key, value in self.config_manager.variables.items():
-            if key.startswith("le_var_title"):
+            if key.startswith("le_var_title") and key not in excluded_keys:
                 number = int(key[len("le_var_title") :])
                 new_items.append((number, value, key))
         new_items.sort()

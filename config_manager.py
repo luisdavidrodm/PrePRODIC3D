@@ -41,6 +41,7 @@ class ConfigManager:
                 'le_relax5': '1',
                 'checkBox': 2
             },
+            'DENSE': {},
             'BOUND': {
                 'X Max': {
                     'Borde base': {'chb_wall': 2}
