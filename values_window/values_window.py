@@ -295,15 +295,15 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             }
         elif self.config_manager.is_cartesian and not self.config_manager.is_ezgrid:
             x_end = sum(
-                int(self.config_manager.grid.get(f"le_dirx_lon_zon{i}", 0))
+                float(self.config_manager.grid.get(f"le_dirx_lon_zon{i}", 0))
                 for i in range(1, self.config_manager.grid["sb_dirx_numz"] + 1)
             )
             y_end = sum(
-                int(self.config_manager.grid.get(f"le_diry_lon_zon{i}", 0))
+                float(self.config_manager.grid.get(f"le_diry_lon_zon{i}", 0))
                 for i in range(1, self.config_manager.grid["sb_diry_numz"] + 1)
             )
             z_end = sum(
-                int(self.config_manager.grid.get(f"le_dirz_lon_zon{i}", 0))
+                float(self.config_manager.grid.get(f"le_dirz_lon_zon{i}", 0))
                 for i in range(1, self.config_manager.grid["sb_dirz_numz"] + 1)
             )
             volume_data = {
@@ -316,15 +316,15 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             }
         else:  # if not self.config_manager.is_cartesian and not self.config_manager.is_ezgrid
             x_end = sum(
-                int(self.config_manager.grid.get(f"le_dirtita_lon_zon{i}", 0))
+                float(self.config_manager.grid.get(f"le_dirtita_lon_zon{i}", 0))
                 for i in range(1, self.config_manager.grid["sb_dirtita_numz"] + 1)
             )
             y_end = sum(
-                int(self.config_manager.grid.get(f"le_dirr_lon_zon{i}", 0))
+                float(self.config_manager.grid.get(f"le_dirr_lon_zon{i}", 0))
                 for i in range(1, self.config_manager.grid["sb_dirr_numz"] + 1)
             )
             z_end = sum(
-                int(self.config_manager.grid.get(f"le_dirzcil_lon_zon{i}", 0))
+                float(self.config_manager.grid.get(f"le_dirzcil_lon_zon{i}", 0))
                 for i in range(1, self.config_manager.grid["sb_dirzcil_numz"] + 1)
             )
             y_start = self.config_manager.grid.get("le_dirr_inidom", 0)

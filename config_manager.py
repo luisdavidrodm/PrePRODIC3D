@@ -22,7 +22,8 @@ class ConfigManager:
                 'sb_dirtita_numz': 1,
                 'sb_dirr_numz': 1,
                 'sb_dirzcil_numz': 1,
-                'le_dirr_inidom': "0"
+                'le_dirr_inidom': "0",
+                'le_rini': "0"
             },
             'VARIABLES': {
                 'cb_tsimu': 'Permanente',

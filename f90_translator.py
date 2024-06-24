@@ -183,7 +183,7 @@ class F90Translator:
             grid["le_dirr_inidom"] = 0
 
         if "le_rini" not in grid:
-            grid["le_rini"] = 0
+            grid["le_rini"] = "0"
 
         for group in (coord_variables, nvc_variables, powr_variables):
             group_lines = []
