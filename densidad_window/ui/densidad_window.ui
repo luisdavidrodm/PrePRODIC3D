@@ -24,7 +24,7 @@
        <widget class="QListWidget" name="lw_regions">
         <item>
          <property name="text">
-          <string>Region 1</string>
+          <string>Región 1</string>
          </property>
         </item>
        </widget>

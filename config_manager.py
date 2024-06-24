@@ -41,7 +41,11 @@ class ConfigManager:
                 'le_relax5': '1',
                 'checkBox': 2
             },
-            'DENSE': {},
+            'DENSE': {
+                'Región 1': {
+                    'Volumen 1': {}
+                }
+            },
             'BOUND': {
                 'X Max': {
                     'Borde base': {'chb_wall': 2}
@@ -65,43 +69,43 @@ class ConfigManager:
             'VALUES': {
                 'le_var_title1': {
                     'name': 'Velocidad U',
-                    'Region 1': {
+                    'Región 1': {
                         'Volumen 1': {}
                     }
                 },
                 'le_var_title2': {
                     'name': 'Velocidad V',
-                    'Region 1': {
+                    'Región 1': {
                         'Volumen 1': {}
                     }
                 },
                 'le_var_title3': {
                     'name': 'Velocidad W',
-                    'Region 1': {
+                    'Región 1': {
                         'Volumen 1': {}
                     }
                 },
                 'le_var_title4': {
                     'name': 'Corrección de presión',
-                    'Region 1': {
+                    'Región 1': {
                         'Volumen 1': {}
                     }
                 },
                 'le_var_title5': {
                     'name': 'Temperatura',
-                    'Region 1': {
+                    'Región 1': {
                         'Volumen 1': {}
                     }
                 },
                 'le_var_title11': {
                     'name': 'Presión',
-                    'Region 1': {
+                    'Región 1': {
                         'Volumen 1': {}
                     }
                 },
                 'le_var_title12': {
                     'name': 'Función de corriente',
-                    'Region 1': {
+                    'Región 1': {
                         'Volumen 1': {}
                     }
                 }
@@ -208,6 +212,10 @@ class ConfigManager:
     @property
     def variables(self):
         return self._config_structure["VARIABLES"]
+
+    @property
+    def dense(self):
+        return self._config_structure["DENSE"]
 
     @property
     def bound(self):

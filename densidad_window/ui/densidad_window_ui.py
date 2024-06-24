@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'densidad_windowleXCbn.ui'
+## Form generated from reading UI file 'densidad_windowcZJgCS.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -281,7 +281,7 @@ class Ui_densidad_window(object):
         __sortingEnabled = self.lw_regions.isSortingEnabled()
         self.lw_regions.setSortingEnabled(False)
         ___qlistwidgetitem = self.lw_regions.item(0)
-        ___qlistwidgetitem.setText(QCoreApplication.translate("densidad_window", u"Region 1", None));
+        ___qlistwidgetitem.setText(QCoreApplication.translate("densidad_window", u"Regi\u00f3n 1", None));
         self.lw_regions.setSortingEnabled(__sortingEnabled)
 
         self.pb_add_region.setText(QCoreApplication.translate("densidad_window", u"Agregar una regi\u00f3n", None))

@@ -225,8 +225,10 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 # Eliminar valor del widget de volumen
                 self.config_manager.values[variable_key][region.text()][volume.text()].pop(sender.objectName(), None)
                 # Limpiar diccionarios vacíos
-                if not self.config_manager.values[variable_key][region.text()]:
-                    del self.config_manager.values[variable_key][region.text()]
+                if not self.config_manager.values[variable_key][region.text()][volume.text()]:
+                    del self.config_manager.values[variable_key][region.text()][volume.text()]
+                    if not self.config_manager.values[variable_key][region.text()]:
+                        del self.config_manager.values[variable_key][region.text()]
             elif region and sender.objectName() in self.region_widgets:
                 # Eliminar valor del widget de región
                 self.config_manager.values[variable_key][region.text()].pop(sender.objectName(), None)
@@ -243,12 +245,12 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
     def add_region(self):
         """"""
         region_number = self.lw_regions.count() + 1
-        self.lw_regions.addItem(f"Region {region_number}")
+        self.lw_regions.addItem(f"Región {region_number}")
         variable = self.lw_variables.currentItem()
         if variable is not None:
-            if f"Region {region_number}" not in self.config_manager.values[variable.data(Qt.UserRole)]:
-                self.config_manager.values[variable.data(Qt.UserRole)][f"Region {region_number}"] = {}
-            self.config_manager.values[variable.data(Qt.UserRole)][f"Region {region_number}"]["Volumen 1"] = {}
+            if f"Región {region_number}" not in self.config_manager.values[variable.data(Qt.UserRole)]:
+                self.config_manager.values[variable.data(Qt.UserRole)][f"Región {region_number}"] = {}
+            self.config_manager.values[variable.data(Qt.UserRole)][f"Región {region_number}"]["Volumen 1"] = {}
 
     def remove_region(self):
         """"""
@@ -344,17 +346,3 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 "le_z_end": str(z_end),
             }
         return volume_data
-
-    def print_dict(self, od, indent=0, show_markers=False):
-        # Create an indentation space based on the current level
-        indent_space = "    " * indent
-        if show_markers:
-            print(f"{indent_space}INICIO ######################")
-        for key, value in od.items():
-            if isinstance(value, dict):
-                print(f"{indent_space}{key}:")
-                self.print_dict(value, indent + 1, show_markers=False)
-            else:
-                print(f"{indent_space}{key}: {value}")
-        if show_markers:
-            print(f"{indent_space}FINAL ######################")

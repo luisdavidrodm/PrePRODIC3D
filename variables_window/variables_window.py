@@ -91,7 +91,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
             else:
                 self.config_manager.values[le_name] = {
                     "name": sender.text(),
-                    "Region 1": {"Volumen 1": {}},
+                    "Región 1": {"Volumen 1": {}},
                 }
             if le_name in self.config_manager.output:
                 self.config_manager.output[le_name]["name"] = sender.text()
