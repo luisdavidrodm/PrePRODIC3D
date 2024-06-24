@@ -36,7 +36,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.widgets = self.variable_widgets + self.region_widgets + self.volume_widgets
 
         self.config_manager.connect_config(self)
-        self.chb_local_value.stateChanged.connect(self.load_current_config)
+        self.chb_local_value.stateChanged.connect(self.load_region_config)
         self.load_variables_list()
         # fmt: on
 
@@ -82,28 +82,44 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                     self.pb_add_volume.setEnabled(True)
                     self.pb_remove_volume.setEnabled(True)
                     # Seleccionado un volumen
-                    if volume is not None and self.config_manager.is_mesh_info_complete:
+                    if volume is not None:
                         self.toggle_widget_list(self.region_widgets, True)
                         self.config_manager.load_config(self, config[region.text()])
                         self.toggle_widget_list(self.volume_widgets, True)
                         self.config_manager.load_config(self, config[region.text()][volume.text()])
+                        if self.config_manager.is_mesh_info_complete:
+                            volume_data = self.initialize_volume_data()
+                            # Verificar si alguno de los valores ya está definido
+                            keys = ["le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end"]
+                            if not any(key in config[region.text()][volume.text()] for key in keys):
+                                self.le_x_start.setText(volume_data["le_x_start"])
+                                self.le_x_end.setText(volume_data["le_x_end"])
+                                self.le_y_start.setText(volume_data["le_y_start"])
+                                self.le_y_end.setText(volume_data["le_y_end"])
+                                self.le_z_start.setText(volume_data["le_z_start"])
+                                self.le_z_end.setText(volume_data["le_z_end"])
                     else:
                         self.toggle_widget_list(self.volume_widgets, False)
                 else:
                     self.toggle_widget_list(self.region_widgets + self.volume_widgets, False)
                     self.lw_volumes.setEnabled(False)
+                    self.lw_volumes.clear()
             else:
                 self.lw_regions.setEnabled(False)
+                self.lw_regions.clear()
                 self.pb_add_region.setEnabled(False)
                 self.pb_remove_region.setEnabled(False)
                 self.lw_volumes.setEnabled(False)
+                self.lw_volumes.clear()
                 self.pb_add_volume.setEnabled(False)
                 self.pb_remove_volume.setEnabled(False)
         else:
             self.lw_regions.setEnabled(False)
+            self.lw_regions.clear()
             self.pb_add_region.setEnabled(False)
             self.pb_remove_region.setEnabled(False)
             self.lw_volumes.setEnabled(False)
+            self.lw_volumes.clear()
             self.pb_add_volume.setEnabled(False)
             self.pb_remove_volume.setEnabled(False)
             self.chb_local_value.setEnabled(False)
@@ -149,9 +165,6 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             for key, value in config.items():
                 if isinstance(value, dict):
                     self.lw_volumes.addItem(key)
-                    # Si el diccionario está vacío, inicializar con los valores de malla
-                    if not value and self.config_manager.is_mesh_info_complete:
-                        config[key] = self.initialize_volume_data()
             self.load_current_config()
 
     def toggle_widget_list(self, widgets, toggle):
@@ -212,8 +225,6 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 # Eliminar valor del widget de volumen
                 self.config_manager.values[variable_key][region.text()][volume.text()].pop(sender.objectName(), None)
                 # Limpiar diccionarios vacíos
-                if not self.config_manager.values[variable_key][region.text()][volume.text()]:
-                    del self.config_manager.values[variable_key][region.text()][volume.text()]
                 if not self.config_manager.values[variable_key][region.text()]:
                     del self.config_manager.values[variable_key][region.text()]
             elif region and sender.objectName() in self.region_widgets:
@@ -257,10 +268,6 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         if variable is not None and region is not None:
             volume_key = f"Volumen {volume_number}"
             self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume_key] = {}
-            if self.config_manager.is_mesh_info_complete:
-                # Definir los valores iniciales y finales de las longitudes para este volumen
-                volume_data = self.initialize_volume_data()
-                self.config_manager.values[variable.data(Qt.UserRole)][region.text()][volume_key].update(volume_data)
 
     def remove_volume(self):
         """"""
