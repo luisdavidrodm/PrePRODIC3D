@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windowKExyjz.ui'
+## Form generated from reading UI file 'values_windowaKsfDR.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -504,7 +504,7 @@ class Ui_valores_window(object):
         __sortingEnabled1 = self.lw_regions.isSortingEnabled()
         self.lw_regions.setSortingEnabled(False)
         ___qlistwidgetitem1 = self.lw_regions.item(0)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("valores_window", u"Region 1", None));
+        ___qlistwidgetitem1.setText(QCoreApplication.translate("valores_window", u"Regi\u00f3n 1", None));
         self.lw_regions.setSortingEnabled(__sortingEnabled1)
 
         self.label_7.setText(QCoreApplication.translate("valores_window", u"Sc", None))

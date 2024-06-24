@@ -77,7 +77,7 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
             if variable_key in self.config_manager.output:
                 config = self.config_manager.output[variable.data(Qt.UserRole)]
                 configured_widgets = set()
-                configured_widgets.update(key for key, value in config.items())
+                configured_widgets.update(key for key in config.keys())
                 return configured_widgets
         return []
 

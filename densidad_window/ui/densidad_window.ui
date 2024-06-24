@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>675</width>
-    <height>575</height>
+    <height>583</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -21,17 +21,23 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
-       <widget class="QListWidget" name="listWidget"/>
+       <widget class="QListWidget" name="lw_regions">
+        <item>
+         <property name="text">
+          <string>Region 1</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton">
+       <widget class="QPushButton" name="pb_add_region">
         <property name="text">
          <string>Agregar una región</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_3">
+       <widget class="QPushButton" name="pb_remove_region">
         <property name="text">
          <string>Eliminar última región</string>
         </property>
@@ -51,14 +57,7 @@
           </widget>
          </item>
          <item row="0" column="1">
-          <widget class="QLineEdit" name="lineEdit_4"/>
-         </item>
-         <item row="1" column="0">
-          <widget class="QCheckBox" name="checkBox_3">
-           <property name="text">
-            <string/>
-           </property>
-          </widget>
+          <widget class="QLineEdit" name="le_local_value"/>
          </item>
         </layout>
        </widget>
@@ -73,7 +72,13 @@
      </property>
      <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QListWidget" name="listWidget_2"/>
+       <widget class="QListWidget" name="lw_volumes">
+        <item>
+         <property name="text">
+          <string>Volumen 1</string>
+         </property>
+        </item>
+       </widget>
       </item>
       <item>
        <spacer name="verticalSpacer">
@@ -89,16 +94,16 @@
        </spacer>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_2">
+       <widget class="QPushButton" name="pb_add_volume">
         <property name="text">
-         <string>Agregar un área</string>
+         <string>Agregar un volumen</string>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pushButton_4">
+       <widget class="QPushButton" name="pb_remove_volume">
         <property name="text">
-         <string>Eliminar última área</string>
+         <string>Eliminar último volumen</string>
         </property>
        </widget>
       </item>
@@ -119,7 +124,7 @@
     </widget>
    </item>
    <item row="1" column="0" colspan="2">
-    <widget class="QCheckBox" name="checkBox">
+    <widget class="QCheckBox" name="chb_local_value">
      <property name="contextMenuPolicy">
       <enum>Qt::CustomContextMenu</enum>
      </property>
@@ -148,27 +153,27 @@
        </widget>
       </item>
       <item row="3" column="1">
-       <widget class="QLineEdit" name="lineEdit"/>
+       <widget class="QLineEdit" name="le_general_value"/>
       </item>
-      <item row="4" column="0">
+      <item row="5" column="0">
        <widget class="QLabel" name="label_3">
         <property name="text">
          <string>Densidad de referencia</string>
         </property>
        </widget>
       </item>
-      <item row="4" column="1">
-       <widget class="QLineEdit" name="lineEdit_2"/>
+      <item row="5" column="1">
+       <widget class="QLineEdit" name="le_ref_rho"/>
       </item>
-      <item row="5" column="0">
+      <item row="6" column="0">
        <widget class="QLabel" name="label_4">
         <property name="text">
          <string>Temperatura de referencia</string>
         </property>
        </widget>
       </item>
-      <item row="5" column="1">
-       <widget class="QLineEdit" name="lineEdit_3"/>
+      <item row="6" column="1">
+       <widget class="QLineEdit" name="le_ref_temp"/>
       </item>
       <item row="0" column="0">
        <widget class="QLabel" name="label">
@@ -178,7 +183,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QComboBox" name="comboBox">
+       <widget class="QComboBox" name="cb_condition">
         <item>
          <property name="text">
           <string>Valor constante</string>
@@ -191,8 +196,8 @@
         </item>
        </widget>
       </item>
-      <item row="6" column="0">
-       <widget class="QCheckBox" name="checkBox_2">
+      <item row="4" column="1">
+       <widget class="QCheckBox" name="chb_ex_value">
         <property name="text">
          <string/>
         </property>
@@ -208,10 +213,10 @@
      </property>
      <layout class="QGridLayout" name="gridLayout">
       <item row="2" column="1">
-       <widget class="QLineEdit" name="lineEdit_7"/>
+       <widget class="QLineEdit" name="le_x_end"/>
       </item>
       <item row="2" column="4">
-       <widget class="QComboBox" name="comboBox_7">
+       <widget class="QComboBox" name="cb_ex_z_end">
         <item>
          <property name="text">
           <string/>
@@ -230,7 +235,7 @@
        </widget>
       </item>
       <item row="2" column="0">
-       <widget class="QComboBox" name="comboBox_3">
+       <widget class="QComboBox" name="cb_ex_x_end">
         <item>
          <property name="text">
           <string/>
@@ -249,7 +254,7 @@
        </widget>
       </item>
       <item row="1" column="2">
-       <widget class="QComboBox" name="comboBox_4">
+       <widget class="QComboBox" name="cb_ex_y_start">
         <item>
          <property name="text">
           <string/>
@@ -268,10 +273,10 @@
        </widget>
       </item>
       <item row="2" column="5">
-       <widget class="QLineEdit" name="lineEdit_9"/>
+       <widget class="QLineEdit" name="le_z_end"/>
       </item>
       <item row="2" column="2">
-       <widget class="QComboBox" name="comboBox_5">
+       <widget class="QComboBox" name="cb_ex_y_end">
         <item>
          <property name="text">
           <string/>
@@ -290,7 +295,7 @@
        </widget>
       </item>
       <item row="1" column="0">
-       <widget class="QComboBox" name="comboBox_2">
+       <widget class="QComboBox" name="cb_ex_x_start">
         <item>
          <property name="text">
           <string/>
@@ -329,10 +334,10 @@
        </widget>
       </item>
       <item row="1" column="1">
-       <widget class="QLineEdit" name="lineEdit_5"/>
+       <widget class="QLineEdit" name="le_x_start"/>
       </item>
       <item row="1" column="4">
-       <widget class="QComboBox" name="comboBox_6">
+       <widget class="QComboBox" name="cb_ex_z_start">
         <item>
          <property name="text">
           <string/>
@@ -351,7 +356,7 @@
        </widget>
       </item>
       <item row="2" column="3">
-       <widget class="QLineEdit" name="lineEdit_8"/>
+       <widget class="QLineEdit" name="le_y_end"/>
       </item>
       <item row="0" column="5">
        <widget class="QLabel" name="label_10">
@@ -364,16 +369,16 @@
        </widget>
       </item>
       <item row="1" column="5">
-       <widget class="QLineEdit" name="lineEdit_10"/>
+       <widget class="QLineEdit" name="le_z_start"/>
       </item>
       <item row="1" column="3">
-       <widget class="QLineEdit" name="lineEdit_6"/>
+       <widget class="QLineEdit" name="le_y_start"/>
       </item>
      </layout>
     </widget>
    </item>
    <item row="4" column="0">
-    <widget class="QCheckBox" name="checkBox_4">
+    <widget class="QCheckBox" name="chb_exclude_borders">
      <property name="text">
       <string>V.C Excluir Bordes</string>
      </property>
