@@ -29,29 +29,6 @@ class F90Translator:
             5: "TEMPERATURA",
             11: "PRESION",
         }
-        self.in_mass = """IF(ITER.NE.0) GO TO 350
-      FLOWIN=0.
-      DO I=2,L2
-       DO J=2,M2
-          FLOWIN=FLOWIN+RHO(I,J,1)*W(I,J,2)*ARZ(I,J)
-       ENDDO
-      ENDDO
-  350 FL=0.
-      AFL=0.
-      WMIN=0.
-      DO I=2,L2
-       DO J=2,M2
-         IF(W(I,J,N2).LT.0) WMIN=AMAX1(WMIN,-W(I,J,N2))
-         AFL=AFL+RHO(I,J,N1)*ARZ(I,J)
-         FL=FL+RHO(I,J,N1)*W(I,J,N2)*ARZ(I,J)
-       ENDDO
-      ENDDO
-      FACTOR=FLOWIN/(FL+AFL*WMIN+SMALL)
-      DO I=2,L2
-       DO J=2,M2
-        W(I,J,N1)=(W(I,J,N2)+WMIN)*FACTOR
-       ENDDO
-      ENDDO"""
         self.dimensionless = "DIMENSION  WSUM(25), TSUM(25), TB(25), WBAR(25), AREA(25)"
         self.dimensionless_common = "COMMON TW,TIN,WSUM,TSUM,TB,WBAR,AREA,FLOWIN,WMIN"
         self.dimensionless_output = """IF (ITER.EQ.LAST) THEN
@@ -213,6 +190,10 @@ class F90Translator:
         for num in range(1, 12):
             if variables.get(f"chb_kprint{num}") == 2:
                 f90_lines.append(f"KPRINT({num})=1")
+
+        if variables.get("cb_tsimu", "Permanente") == "Transitorio":
+            f90_lines.append(f"IPTM={variables.get('le_iptm', '0')}")
+            f90_lines.append(f"DT={variables.get('le_dt', '1.E+20')}")
 
         for num in range(1, 12):
             var_name = f"le_var_title{num}"
