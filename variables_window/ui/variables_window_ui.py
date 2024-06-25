@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'variables_windowEPEeAs.ui'
+## Form generated from reading UI file 'variables_windowSzbcoc.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -533,9 +533,10 @@ class Ui_variables_window(object):
         self.cb_tipoflujo.setItemText(1, QCoreApplication.translate("variables_window", u"Flujo Laminar", None))
 
         self.label_3.setText(QCoreApplication.translate("variables_window", u"Condiciones de tratamiento de borde", None))
-        self.cb_trataborde.setItemText(0, QCoreApplication.translate("variables_window", u"Esquema de bajo orden", None))
-        self.cb_trataborde.setItemText(1, QCoreApplication.translate("variables_window", u"Esquema de alto orden", None))
+        self.cb_trataborde.setItemText(0, QCoreApplication.translate("variables_window", u"Esquema de alto orden", None))
+        self.cb_trataborde.setItemText(1, QCoreApplication.translate("variables_window", u"Esquema de bajo orden", None))
 
+        self.cb_trataborde.setCurrentText(QCoreApplication.translate("variables_window", u"Esquema de alto orden", None))
         self.gb_variables2.setTitle(QCoreApplication.translate("variables_window", u"Variables a resolver", None))
         self.chb_kprint1.setText(QCoreApplication.translate("variables_window", u"Imprimir", None))
         self.chb_kprint9.setText(QCoreApplication.translate("variables_window", u"Imprimir", None))

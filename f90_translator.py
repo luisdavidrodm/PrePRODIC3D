@@ -120,7 +120,7 @@ class F90Translator:
         }.get((zone_type, coord_type), 0)
 
         mode = {"Cartesianas": 1, "Cilindricas": 2}.get(coord_type)
-        kcy = 1 if grid.get("cb_system_type", "Cerrado") == "Abierto" else 0
+        kcy = 0 if grid.get("cb_system_type", "Abierto") == "Abierto" else 1
         f90_lines.append(f"MODE={mode} ; KCY={kcy}")
 
         coord_variables = {
@@ -244,7 +244,7 @@ class F90Translator:
         tolerance = variables.get("le_tol")
         if tolerance is not None and tolerance != "":
             f90_lines.append(f"TOL={tolerance}")
-        kord = 2 if grid.get("cb_trataborde", "Esquema de bajo orden") == "Esquema de alto orden" else 1
+        kord = 2 if variables.get("cb_trataborde", "Esquema de alto orden") == "Esquema de alto orden" else 1
         last = int(output.get("le_last", 5))
         f90_lines.append(f"KORD={kord}")
         f90_lines.append(f"LAST={last}")

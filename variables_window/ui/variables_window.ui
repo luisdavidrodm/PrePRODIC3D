@@ -113,14 +113,17 @@
          </item>
          <item row="5" column="1">
           <widget class="QComboBox" name="cb_trataborde">
+           <property name="currentText">
+            <string>Esquema de alto orden</string>
+           </property>
            <item>
             <property name="text">
-             <string>Esquema de bajo orden</string>
+             <string>Esquema de alto orden</string>
             </property>
            </item>
            <item>
             <property name="text">
-             <string>Esquema de alto orden</string>
+             <string>Esquema de bajo orden</string>
             </property>
            </item>
           </widget>

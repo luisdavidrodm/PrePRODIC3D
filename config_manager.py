@@ -15,7 +15,7 @@ class ConfigManager:
             'GRID': {
                 'cb_coord_type': 'Cartesianas',
                 'cb_zone_type': 'Zona única',
-                'cb_system_type': 'Cerrado', 
+                'cb_system_type': 'Abierto', 
                 'sb_dirx_numz': 1,
                 'sb_diry_numz': 1,
                 'sb_dirz_numz': 1,
@@ -28,7 +28,7 @@ class ConfigManager:
             'VARIABLES': {
                 'cb_tsimu': 'Permanente',
                 'cb_tipoflujo': 'Difusivo',
-                'cb_trataborde': 'Esquema de bajo orden',
+                'cb_trataborde': 'Esquema de alto orden',
                 'le_var_title1': 'Velocidad U',
                 'le_var_title2': 'Velocidad V',
                 'le_var_title3': 'Velocidad W',
