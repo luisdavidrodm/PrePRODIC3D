@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'salida_windowcwvalT.ui'
+## Form generated from reading UI file 'salida_windowEoHwVf.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -180,18 +180,29 @@ class Ui_salida_window(object):
         self.label_5 = QLabel(self.groupBox_7)
         self.label_5.setObjectName(u"label_5")
 
-        self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.label_5)
+        self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.label_5)
 
         self.lineEdit_5 = QLineEdit(self.groupBox_7)
         self.lineEdit_5.setObjectName(u"lineEdit_5")
         self.lineEdit_5.setEnabled(False)
 
-        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.lineEdit_5)
+        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.lineEdit_5)
 
         self.chb_dimensionless = QCheckBox(self.groupBox_7)
         self.chb_dimensionless.setObjectName(u"chb_dimensionless")
 
-        self.formLayout_2.setWidget(2, QFormLayout.SpanningRole, self.chb_dimensionless)
+        self.formLayout_2.setWidget(3, QFormLayout.SpanningRole, self.chb_dimensionless)
+
+        self.label_6 = QLabel(self.groupBox_7)
+        self.label_6.setObjectName(u"label_6")
+
+        self.formLayout_2.setWidget(1, QFormLayout.LabelRole, self.label_6)
+
+        self.le_temp_last = QLineEdit(self.groupBox_7)
+        self.le_temp_last.setObjectName(u"le_temp_last")
+        self.le_temp_last.setAlignment(Qt.AlignCenter)
+
+        self.formLayout_2.setWidget(1, QFormLayout.FieldRole, self.le_temp_last)
 
 
         self.horizontalLayout_2.addWidget(self.groupBox_7)
@@ -246,5 +257,6 @@ class Ui_salida_window(object):
         self.le_last.setText(QCoreApplication.translate("salida_window", u"5", None))
         self.label_5.setText(QCoreApplication.translate("salida_window", u"\u00cdndice gr\u00e1fico", None))
         self.chb_dimensionless.setText(QCoreApplication.translate("salida_window", u"C\u00e1lculos adimensionales", None))
+        self.label_6.setText(QCoreApplication.translate("salida_window", u"Iteraciones de temperatura", None))
     # retranslateUi
 
