@@ -190,9 +190,9 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
     def generate_fortran_file(self):
         folder_path = self.save_data()
         if folder_path:
-            translator = F90Translator()
+            translator = F90Translator(self.config_manager)
             try:
-                f90_content = translator.generate_f90(self.config_manager)
+                f90_content = translator.generate_f90()
             except Exception as e:
                 qtw.QMessageBox.critical(
                     self,

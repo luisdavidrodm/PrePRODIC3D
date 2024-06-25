@@ -240,6 +240,22 @@ class ConfigManager:
     @property
     def is_ezgrid(self):
         return self.grid.get("cb_zone_type") == "Zona única"
+    
+    @property
+    def has_in_mass(self):
+        for border in self.bound.values():
+            for patch in border.values():
+                if patch.get('chb_inmass') == 2:
+                    return True
+        return False
+
+    @property
+    def has_out_mass(self):
+        for border in self.bound.values():
+            for patch in border.values():
+                if patch.get('chb_outmass') == 2:
+                    return True
+        return False
 
     @property
     def is_mesh_info_complete(self):

@@ -22,20 +22,21 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
         # Definir widgets de parches y listas de widgets
         self.patch_widgets = [
-            "le_value", "le_tempamb", "chb_wall", "chb_inmass", "chb_outmass", "le_value_veloc_u", 
-            "le_value_veloc_v", "le_value_veloc_w", "le_fracmass", "le_transversal_start", 
-            "le_transversal_end", "le_vertical_start", "le_vertical_end", "chb_ex_veloc_u", 
-            "chb_ex_veloc_v", "chb_ex_veloc_w", "chb_exclude_borders", "cb_ex_transversal_start", 
+            "chb_wall", "chb_inmass", "chb_outmass", "le_transversal_start", "le_transversal_end", 
+            "le_vertical_start", "le_vertical_end", "chb_exclude_borders", "cb_ex_transversal_start", 
             "cb_ex_transversal_end", "cb_ex_vertical_start", "cb_ex_vertical_end"
         ]
         self.variable_widgets = [
-            "le_value", "le_tempamb", "chb_value", "chb_flux", 
-            "chb_convec", "chb_ex_value", "le_k", "chb_ex_k"]
+            "chb_value", "chb_flux", "chb_convec", "le_value", "chb_ex_value", 
+            "le_tempamb", "le_k", "chb_ex_k"]
         self.widgets = self.patch_widgets + self.variable_widgets
 
         for chb_name in ['wall', 'inmass', 'outmass', 'value', 'flux', 'convec']:
             checkbox = getattr(self, f'chb_{chb_name}')
             checkbox.stateChanged.connect(self.handle_checkbox_state_changed)
+
+        self.chb_outmass.stateChanged.connect(self.handle_chb_outmass_state_changed)
+        self.chb_inmass.stateChanged.connect(self.handle_chb_inmass_state_changed)
 
         self.config_manager.connect_config(self)
         self.lw_bordes.setCurrentItem(self.lw_bordes.item(0))
@@ -130,7 +131,6 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             config = self.config_manager.bound[border.text()][patch.text()]
             self.toggle_widget_list(self.patch_widgets, True)
             self.config_manager.load_config(self, config)
-            self.lw_variables.setEnabled(True)
             if patch.text() == "Borde base":
                 self.le_transversal_start.setEnabled(False)
                 self.le_transversal_end.setEnabled(False)
@@ -146,14 +146,26 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                     self.le_transversal_end.setText(patch_data["transversal_end"])
                     self.le_vertical_start.setText(patch_data["vertical_start"])
                     self.le_vertical_end.setText(patch_data["vertical_end"])
-            if variable is not None:
-                self.toggle_widget_list(self.variable_widgets, True)
-                self.config_manager.load_config(self, config[variable.data(Qt.UserRole)])
-                self.le_tempamb.setEnabled(self.chb_convec.isChecked() or self.chb_flux.isChecked())
-                if not any([self.chb_value.isChecked(), self.chb_convec.isChecked(), self.chb_flux.isChecked()]):
-                    self.chb_value.setChecked(True)
-            else:
+            if self.config_manager.has_out_mass and not self.chb_outmass.isChecked():
+                self.chb_outmass.setEnabled(False)
+            if self.chb_outmass.isChecked():
+                self.lw_variables.setEnabled(False)
+                self.lw_variables.clearSelection()
                 self.toggle_widget_list(self.variable_widgets, False)
+            else:
+                self.lw_variables.setEnabled(True)
+                if variable is not None:
+                    variable_key = variable.data(Qt.UserRole)
+                    self.toggle_widget_list(self.variable_widgets, True)
+                    self.config_manager.load_config(self, config[variable_key])
+                    self.le_tempamb.setEnabled(self.chb_convec.isChecked() or self.chb_flux.isChecked())
+                    if self.chb_inmass.isChecked() and self.chb_ex_value not in config[variable_key]:
+                        if variable_key in [f"le_var_title{i}" for i in range(1, 4)]:
+                            self.chb_ex_value.setChecked(True)
+                    if not any(config[variable_key].get(chb) == 2 for chb in ["chb_value", "chb_convec", "chb_flux"]):
+                        self.chb_value.setChecked(True)
+                else:
+                    self.toggle_widget_list(self.variable_widgets, False)
         else:
             self.lw_variables.setEnabled(False)
 
@@ -211,17 +223,94 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.load_current_config()
 
     def handle_checkbox_state_changed(self, state: int):
-        """"""
         sender = self.sender()
         if state == 2:
             if sender in [self.chb_wall, self.chb_inmass, self.chb_outmass]:
-                self.chb_wall.setChecked(sender == self.chb_wall)
-                self.chb_inmass.setChecked(sender == self.chb_inmass)
-                self.chb_outmass.setChecked(sender == self.chb_outmass)
+                if sender == self.chb_wall:
+                    self.chb_wall.setChecked(True)
+                    if self.chb_inmass.isChecked():
+                        self.chb_inmass.setChecked(False)
+                    if self.chb_outmass.isChecked():
+                        self.chb_outmass.setChecked(False)
+                elif sender == self.chb_inmass:
+                    self.chb_inmass.setChecked(True)
+                    if self.chb_wall.isChecked():
+                        self.chb_wall.setChecked(False)
+                    if self.chb_outmass.isChecked():
+                        self.chb_outmass.setChecked(False)
+                elif sender == self.chb_outmass:
+                    self.chb_outmass.setChecked(True)
+                    if self.chb_wall.isChecked():
+                        self.chb_wall.setChecked(False)
+                    if self.chb_inmass.isChecked():
+                        self.chb_inmass.setChecked(False)
             elif sender in [self.chb_value, self.chb_flux, self.chb_convec]:
-                self.chb_value.setChecked(sender == self.chb_value)
-                self.chb_flux.setChecked(sender == self.chb_flux)
-                self.chb_convec.setChecked(sender == self.chb_convec)
+                if sender == self.chb_value:
+                    self.chb_value.setChecked(True)
+                    if self.chb_flux.isChecked():
+                        self.chb_flux.setChecked(False)
+                    if self.chb_convec.isChecked():
+                        self.chb_convec.setChecked(False)
+                elif sender == self.chb_flux:
+                    self.chb_flux.setChecked(True)
+                    if self.chb_value.isChecked():
+                        self.chb_value.setChecked(False)
+                    if self.chb_convec.isChecked():
+                        self.chb_convec.setChecked(False)
+                elif sender == self.chb_convec:
+                    self.chb_convec.setChecked(True)
+                    if self.chb_value.isChecked():
+                        self.chb_value.setChecked(False)
+                    if self.chb_flux.isChecked():
+                        self.chb_flux.setChecked(False)
+        elif state == 0:
+            if sender in [self.chb_wall, self.chb_inmass, self.chb_outmass]:
+                if all(not chb.isChecked() for chb in [self.chb_wall, self.chb_inmass, self.chb_outmass]):
+                    sender.setChecked(True)
+            elif sender in [self.chb_value, self.chb_flux, self.chb_convec]:
+                if all(not chb.isChecked() for chb in [self.chb_value, self.chb_flux, self.chb_convec]):
+                    sender.setChecked(True)
+
+    def handle_chb_outmass_state_changed(self, state):
+        if state == 2:
+            self.chb_exclude_borders.setChecked(True)
+            self.lw_variables.setEnabled(False)
+            self.lw_variables.clearSelection()
+            self.toggle_widget_list(self.variable_widgets, False)
+            border = self.lw_bordes.currentItem()
+            patch = self.lw_patchlist.currentItem()
+            if border and patch:
+                config = self.config_manager.bound[border.text()][patch.text()]
+                variables_to_pop = [variable for variable in config.keys() if variable not in self.patch_widgets]
+                for variable in variables_to_pop:
+                    self.config_manager.bound[border.text()][patch.text()].pop(variable, None)
+        else:
+            self.lw_variables.setEnabled(True)
+            variable = self.lw_variables.currentItem()
+            border = self.lw_bordes.currentItem()
+            patch = self.lw_patchlist.currentItem()
+            if border and patch:
+                config = self.config_manager.bound[border.text()][patch.text()]
+                if variable:
+                    variable_key = variable.data(Qt.UserRole)
+                    self.toggle_widget_list(self.variable_widgets, True)
+                    if variable_key not in config:
+                        self.config_manager.bound[border.text()][patch.text()][variable_key] = {"chb_value": 2}
+                    self.config_manager.load_config(self, config[variable_key])
+                    self.le_tempamb.setEnabled(self.chb_convec.isChecked() or self.chb_flux.isChecked())
+                    if self.chb_inmass.isChecked() and self.chb_ex_value not in config[variable_key]:
+                        if variable_key in [f"le_var_title{i}" for i in range(1, 4)]:
+                            self.chb_ex_value.setChecked(True)
+                    if not any(config[variable_key].get(chb) == 2 for chb in ["chb_value", "chb_convec", "chb_flux"]):
+                        self.chb_value.setChecked(True)
+
+    def handle_chb_inmass_state_changed(self, state):
+        if state == 2:
+            self.chb_exclude_borders.setChecked(True)
+            variable = self.lw_variables.currentItem()
+            if variable:
+                if variable.data(Qt.UserRole) in [f"le_var_title{i}" for i in range(1, 4)]:
+                    self.chb_ex_value.setChecked(True)
 
     def add_patch(self):
         """"""

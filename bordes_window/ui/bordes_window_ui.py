@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bordes_windowYnorHe.ui'
+## Form generated from reading UI file 'bordes_windowbdZmWs.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -27,206 +27,31 @@ class Ui_bordes_window(object):
         bordes_window.resize(579, 655)
         self.gridLayout_3 = QGridLayout(bordes_window)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
-        self.groupBox_5 = QGroupBox(bordes_window)
-        self.groupBox_5.setObjectName(u"groupBox_5")
-        self.horizontalLayout_34 = QHBoxLayout(self.groupBox_5)
-        self.horizontalLayout_34.setObjectName(u"horizontalLayout_34")
-        self.label_6 = QLabel(self.groupBox_5)
-        self.label_6.setObjectName(u"label_6")
+        self.gb_tipo_segment = QGroupBox(bordes_window)
+        self.gb_tipo_segment.setObjectName(u"gb_tipo_segment")
+        self.verticalLayout = QVBoxLayout(self.gb_tipo_segment)
+        self.verticalLayout.setObjectName(u"verticalLayout")
+        self.chb_wall = QCheckBox(self.gb_tipo_segment)
+        self.chb_wall.setObjectName(u"chb_wall")
+        self.chb_wall.setChecked(True)
+        self.chb_wall.setTristate(False)
 
-        self.horizontalLayout_34.addWidget(self.label_6)
+        self.verticalLayout.addWidget(self.chb_wall)
 
-        self.le_fracmass = QLineEdit(self.groupBox_5)
-        self.le_fracmass.setObjectName(u"le_fracmass")
-        self.le_fracmass.setEnabled(False)
+        self.chb_inmass = QCheckBox(self.gb_tipo_segment)
+        self.chb_inmass.setObjectName(u"chb_inmass")
+        self.chb_inmass.setEnabled(False)
 
-        self.horizontalLayout_34.addWidget(self.le_fracmass)
+        self.verticalLayout.addWidget(self.chb_inmass)
 
+        self.chb_outmass = QCheckBox(self.gb_tipo_segment)
+        self.chb_outmass.setObjectName(u"chb_outmass")
+        self.chb_outmass.setEnabled(False)
 
-        self.gridLayout_3.addWidget(self.groupBox_5, 2, 3, 1, 1)
+        self.verticalLayout.addWidget(self.chb_outmass)
 
-        self.groupBox_4 = QGroupBox(bordes_window)
-        self.groupBox_4.setObjectName(u"groupBox_4")
-        self.gridLayout_4 = QGridLayout(self.groupBox_4)
-        self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.label_4 = QLabel(self.groupBox_4)
-        self.label_4.setObjectName(u"label_4")
 
-        self.gridLayout_4.addWidget(self.label_4, 0, 1, 1, 1)
-
-        self.label_9 = QLabel(self.groupBox_4)
-        self.label_9.setObjectName(u"label_9")
-
-        self.gridLayout_4.addWidget(self.label_9, 2, 1, 1, 1)
-
-        self.le_value_veloc_v = QLineEdit(self.groupBox_4)
-        self.le_value_veloc_v.setObjectName(u"le_value_veloc_v")
-        self.le_value_veloc_v.setEnabled(True)
-
-        self.gridLayout_4.addWidget(self.le_value_veloc_v, 1, 2, 1, 1)
-
-        self.le_value_veloc_u = QLineEdit(self.groupBox_4)
-        self.le_value_veloc_u.setObjectName(u"le_value_veloc_u")
-        self.le_value_veloc_u.setEnabled(True)
-
-        self.gridLayout_4.addWidget(self.le_value_veloc_u, 0, 2, 1, 1)
-
-        self.label_5 = QLabel(self.groupBox_4)
-        self.label_5.setObjectName(u"label_5")
-
-        self.gridLayout_4.addWidget(self.label_5, 1, 1, 1, 1)
-
-        self.chb_ex_veloc_v = QCheckBox(self.groupBox_4)
-        self.chb_ex_veloc_v.setObjectName(u"chb_ex_veloc_v")
-
-        self.gridLayout_4.addWidget(self.chb_ex_veloc_v, 1, 3, 1, 1)
-
-        self.le_value_veloc_w = QLineEdit(self.groupBox_4)
-        self.le_value_veloc_w.setObjectName(u"le_value_veloc_w")
-        self.le_value_veloc_w.setEnabled(True)
-
-        self.gridLayout_4.addWidget(self.le_value_veloc_w, 2, 2, 1, 1)
-
-        self.chb_ex_veloc_w = QCheckBox(self.groupBox_4)
-        self.chb_ex_veloc_w.setObjectName(u"chb_ex_veloc_w")
-
-        self.gridLayout_4.addWidget(self.chb_ex_veloc_w, 2, 3, 1, 1)
-
-        self.chb_ex_veloc_u = QCheckBox(self.groupBox_4)
-        self.chb_ex_veloc_u.setObjectName(u"chb_ex_veloc_u")
-
-        self.gridLayout_4.addWidget(self.chb_ex_veloc_u, 0, 3, 1, 1)
-
-
-        self.gridLayout_3.addWidget(self.groupBox_4, 2, 0, 1, 1)
-
-        self.groupBox = QGroupBox(bordes_window)
-        self.groupBox.setObjectName(u"groupBox")
-        self.gridLayout = QGridLayout(self.groupBox)
-        self.gridLayout.setObjectName(u"gridLayout")
-        self.groupBox_7 = QGroupBox(self.groupBox)
-        self.groupBox_7.setObjectName(u"groupBox_7")
-        self.verticalLayout_5 = QVBoxLayout(self.groupBox_7)
-        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
-        self.pb_addpatch = QPushButton(self.groupBox_7)
-        self.pb_addpatch.setObjectName(u"pb_addpatch")
-
-        self.verticalLayout_5.addWidget(self.pb_addpatch)
-
-        self.pb_rempatch = QPushButton(self.groupBox_7)
-        self.pb_rempatch.setObjectName(u"pb_rempatch")
-
-        self.verticalLayout_5.addWidget(self.pb_rempatch)
-
-
-        self.gridLayout.addWidget(self.groupBox_7, 5, 0, 1, 4)
-
-        self.label_3 = QLabel(self.groupBox)
-        self.label_3.setObjectName(u"label_3")
-
-        self.gridLayout.addWidget(self.label_3, 3, 3, 1, 1)
-
-        self.label_2 = QLabel(self.groupBox)
-        self.label_2.setObjectName(u"label_2")
-
-        self.gridLayout.addWidget(self.label_2, 3, 0, 1, 2)
-
-        self.lw_patchlist = QListWidget(self.groupBox)
-        QListWidgetItem(self.lw_patchlist)
-        self.lw_patchlist.setObjectName(u"lw_patchlist")
-
-        self.gridLayout.addWidget(self.lw_patchlist, 4, 3, 1, 1)
-
-        self.groupBox_2 = QGroupBox(self.groupBox)
-        self.groupBox_2.setObjectName(u"groupBox_2")
-        self.gridLayout_5 = QGridLayout(self.groupBox_2)
-        self.gridLayout_5.setObjectName(u"gridLayout_5")
-        self.le_vertical_end = QLineEdit(self.groupBox_2)
-        self.le_vertical_end.setObjectName(u"le_vertical_end")
-
-        self.gridLayout_5.addWidget(self.le_vertical_end, 4, 5, 1, 1)
-
-        self.cb_ex_vertical_end = QComboBox(self.groupBox_2)
-        self.cb_ex_vertical_end.addItem("")
-        self.cb_ex_vertical_end.addItem("")
-        self.cb_ex_vertical_end.addItem("")
-        self.cb_ex_vertical_end.setObjectName(u"cb_ex_vertical_end")
-
-        self.gridLayout_5.addWidget(self.cb_ex_vertical_end, 4, 4, 1, 1)
-
-        self.cb_ex_vertical_start = QComboBox(self.groupBox_2)
-        self.cb_ex_vertical_start.addItem("")
-        self.cb_ex_vertical_start.addItem("")
-        self.cb_ex_vertical_start.addItem("")
-        self.cb_ex_vertical_start.setObjectName(u"cb_ex_vertical_start")
-
-        self.gridLayout_5.addWidget(self.cb_ex_vertical_start, 2, 4, 1, 1)
-
-        self.lb_transversal = QLabel(self.groupBox_2)
-        self.lb_transversal.setObjectName(u"lb_transversal")
-        self.lb_transversal.setLayoutDirection(Qt.LeftToRight)
-        self.lb_transversal.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_5.addWidget(self.lb_transversal, 0, 2, 1, 1)
-
-        self.cb_ex_transversal_start = QComboBox(self.groupBox_2)
-        self.cb_ex_transversal_start.addItem("")
-        self.cb_ex_transversal_start.addItem("")
-        self.cb_ex_transversal_start.addItem("")
-        self.cb_ex_transversal_start.setObjectName(u"cb_ex_transversal_start")
-
-        self.gridLayout_5.addWidget(self.cb_ex_transversal_start, 2, 1, 1, 1)
-
-        self.cb_ex_transversal_end = QComboBox(self.groupBox_2)
-        self.cb_ex_transversal_end.addItem("")
-        self.cb_ex_transversal_end.addItem("")
-        self.cb_ex_transversal_end.addItem("")
-        self.cb_ex_transversal_end.setObjectName(u"cb_ex_transversal_end")
-
-        self.gridLayout_5.addWidget(self.cb_ex_transversal_end, 4, 1, 1, 1)
-
-        self.lb_vertical = QLabel(self.groupBox_2)
-        self.lb_vertical.setObjectName(u"lb_vertical")
-        self.lb_vertical.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout_5.addWidget(self.lb_vertical, 0, 5, 1, 1)
-
-        self.le_transversal_start = QLineEdit(self.groupBox_2)
-        self.le_transversal_start.setObjectName(u"le_transversal_start")
-
-        self.gridLayout_5.addWidget(self.le_transversal_start, 2, 2, 1, 1)
-
-        self.le_vertical_start = QLineEdit(self.groupBox_2)
-        self.le_vertical_start.setObjectName(u"le_vertical_start")
-
-        self.gridLayout_5.addWidget(self.le_vertical_start, 2, 5, 1, 1)
-
-        self.le_transversal_end = QLineEdit(self.groupBox_2)
-        self.le_transversal_end.setObjectName(u"le_transversal_end")
-
-        self.gridLayout_5.addWidget(self.le_transversal_end, 4, 2, 1, 1)
-
-
-        self.gridLayout.addWidget(self.groupBox_2, 1, 0, 1, 4)
-
-        self.chb_exclude_borders = QCheckBox(self.groupBox)
-        self.chb_exclude_borders.setObjectName(u"chb_exclude_borders")
-
-        self.gridLayout.addWidget(self.chb_exclude_borders, 0, 0, 1, 1)
-
-        self.lw_bordes = QListWidget(self.groupBox)
-        QListWidgetItem(self.lw_bordes)
-        QListWidgetItem(self.lw_bordes)
-        QListWidgetItem(self.lw_bordes)
-        QListWidgetItem(self.lw_bordes)
-        QListWidgetItem(self.lw_bordes)
-        QListWidgetItem(self.lw_bordes)
-        self.lw_bordes.setObjectName(u"lw_bordes")
-
-        self.gridLayout.addWidget(self.lw_bordes, 4, 0, 1, 3)
-
-
-        self.gridLayout_3.addWidget(self.groupBox, 0, 0, 1, 2)
+        self.gridLayout_3.addWidget(self.gb_tipo_segment, 0, 2, 1, 2)
 
         self.groupBox_3 = QGroupBox(bordes_window)
         self.groupBox_3.setObjectName(u"groupBox_3")
@@ -322,37 +147,151 @@ class Ui_bordes_window(object):
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.chb_ex_k)
 
+        self.label_6 = QLabel(self.groupBox_9)
+        self.label_6.setObjectName(u"label_6")
+
+        self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_6)
+
+        self.le_fracmass = QLineEdit(self.groupBox_9)
+        self.le_fracmass.setObjectName(u"le_fracmass")
+        self.le_fracmass.setEnabled(False)
+        self.le_fracmass.setAlignment(Qt.AlignCenter)
+
+        self.formLayout.setWidget(3, QFormLayout.LabelRole, self.le_fracmass)
+
 
         self.horizontalLayout.addWidget(self.groupBox_9)
 
 
         self.gridLayout_3.addWidget(self.groupBox_3, 1, 0, 1, 4)
 
-        self.gb_tipo_segment = QGroupBox(bordes_window)
-        self.gb_tipo_segment.setObjectName(u"gb_tipo_segment")
-        self.verticalLayout = QVBoxLayout(self.gb_tipo_segment)
-        self.verticalLayout.setObjectName(u"verticalLayout")
-        self.chb_wall = QCheckBox(self.gb_tipo_segment)
-        self.chb_wall.setObjectName(u"chb_wall")
-        self.chb_wall.setChecked(True)
-        self.chb_wall.setTristate(False)
+        self.groupBox = QGroupBox(bordes_window)
+        self.groupBox.setObjectName(u"groupBox")
+        self.gridLayout = QGridLayout(self.groupBox)
+        self.gridLayout.setObjectName(u"gridLayout")
+        self.groupBox_7 = QGroupBox(self.groupBox)
+        self.groupBox_7.setObjectName(u"groupBox_7")
+        self.verticalLayout_5 = QVBoxLayout(self.groupBox_7)
+        self.verticalLayout_5.setObjectName(u"verticalLayout_5")
+        self.pb_addpatch = QPushButton(self.groupBox_7)
+        self.pb_addpatch.setObjectName(u"pb_addpatch")
 
-        self.verticalLayout.addWidget(self.chb_wall)
+        self.verticalLayout_5.addWidget(self.pb_addpatch)
 
-        self.chb_inmass = QCheckBox(self.gb_tipo_segment)
-        self.chb_inmass.setObjectName(u"chb_inmass")
-        self.chb_inmass.setEnabled(False)
+        self.pb_rempatch = QPushButton(self.groupBox_7)
+        self.pb_rempatch.setObjectName(u"pb_rempatch")
 
-        self.verticalLayout.addWidget(self.chb_inmass)
-
-        self.chb_outmass = QCheckBox(self.gb_tipo_segment)
-        self.chb_outmass.setObjectName(u"chb_outmass")
-        self.chb_outmass.setEnabled(False)
-
-        self.verticalLayout.addWidget(self.chb_outmass)
+        self.verticalLayout_5.addWidget(self.pb_rempatch)
 
 
-        self.gridLayout_3.addWidget(self.gb_tipo_segment, 0, 2, 1, 2)
+        self.gridLayout.addWidget(self.groupBox_7, 5, 0, 1, 4)
+
+        self.label_2 = QLabel(self.groupBox)
+        self.label_2.setObjectName(u"label_2")
+
+        self.gridLayout.addWidget(self.label_2, 3, 0, 1, 2)
+
+        self.lw_patchlist = QListWidget(self.groupBox)
+        QListWidgetItem(self.lw_patchlist)
+        self.lw_patchlist.setObjectName(u"lw_patchlist")
+
+        self.gridLayout.addWidget(self.lw_patchlist, 4, 3, 1, 1)
+
+        self.label_3 = QLabel(self.groupBox)
+        self.label_3.setObjectName(u"label_3")
+
+        self.gridLayout.addWidget(self.label_3, 3, 3, 1, 1)
+
+        self.chb_exclude_borders = QCheckBox(self.groupBox)
+        self.chb_exclude_borders.setObjectName(u"chb_exclude_borders")
+
+        self.gridLayout.addWidget(self.chb_exclude_borders, 0, 0, 1, 1)
+
+        self.groupBox_2 = QGroupBox(self.groupBox)
+        self.groupBox_2.setObjectName(u"groupBox_2")
+        self.gridLayout_5 = QGridLayout(self.groupBox_2)
+        self.gridLayout_5.setObjectName(u"gridLayout_5")
+        self.le_vertical_end = QLineEdit(self.groupBox_2)
+        self.le_vertical_end.setObjectName(u"le_vertical_end")
+
+        self.gridLayout_5.addWidget(self.le_vertical_end, 4, 5, 1, 1)
+
+        self.cb_ex_vertical_end = QComboBox(self.groupBox_2)
+        self.cb_ex_vertical_end.addItem("")
+        self.cb_ex_vertical_end.addItem("")
+        self.cb_ex_vertical_end.addItem("")
+        self.cb_ex_vertical_end.setObjectName(u"cb_ex_vertical_end")
+
+        self.gridLayout_5.addWidget(self.cb_ex_vertical_end, 4, 4, 1, 1)
+
+        self.cb_ex_vertical_start = QComboBox(self.groupBox_2)
+        self.cb_ex_vertical_start.addItem("")
+        self.cb_ex_vertical_start.addItem("")
+        self.cb_ex_vertical_start.addItem("")
+        self.cb_ex_vertical_start.setObjectName(u"cb_ex_vertical_start")
+
+        self.gridLayout_5.addWidget(self.cb_ex_vertical_start, 2, 4, 1, 1)
+
+        self.lb_transversal = QLabel(self.groupBox_2)
+        self.lb_transversal.setObjectName(u"lb_transversal")
+        self.lb_transversal.setLayoutDirection(Qt.LeftToRight)
+        self.lb_transversal.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.lb_transversal, 0, 2, 1, 1)
+
+        self.cb_ex_transversal_start = QComboBox(self.groupBox_2)
+        self.cb_ex_transversal_start.addItem("")
+        self.cb_ex_transversal_start.addItem("")
+        self.cb_ex_transversal_start.addItem("")
+        self.cb_ex_transversal_start.setObjectName(u"cb_ex_transversal_start")
+
+        self.gridLayout_5.addWidget(self.cb_ex_transversal_start, 2, 1, 1, 1)
+
+        self.cb_ex_transversal_end = QComboBox(self.groupBox_2)
+        self.cb_ex_transversal_end.addItem("")
+        self.cb_ex_transversal_end.addItem("")
+        self.cb_ex_transversal_end.addItem("")
+        self.cb_ex_transversal_end.setObjectName(u"cb_ex_transversal_end")
+
+        self.gridLayout_5.addWidget(self.cb_ex_transversal_end, 4, 1, 1, 1)
+
+        self.lb_vertical = QLabel(self.groupBox_2)
+        self.lb_vertical.setObjectName(u"lb_vertical")
+        self.lb_vertical.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout_5.addWidget(self.lb_vertical, 0, 5, 1, 1)
+
+        self.le_transversal_start = QLineEdit(self.groupBox_2)
+        self.le_transversal_start.setObjectName(u"le_transversal_start")
+
+        self.gridLayout_5.addWidget(self.le_transversal_start, 2, 2, 1, 1)
+
+        self.le_vertical_start = QLineEdit(self.groupBox_2)
+        self.le_vertical_start.setObjectName(u"le_vertical_start")
+
+        self.gridLayout_5.addWidget(self.le_vertical_start, 2, 5, 1, 1)
+
+        self.le_transversal_end = QLineEdit(self.groupBox_2)
+        self.le_transversal_end.setObjectName(u"le_transversal_end")
+
+        self.gridLayout_5.addWidget(self.le_transversal_end, 4, 2, 1, 1)
+
+
+        self.gridLayout.addWidget(self.groupBox_2, 1, 0, 1, 4)
+
+        self.lw_bordes = QListWidget(self.groupBox)
+        QListWidgetItem(self.lw_bordes)
+        QListWidgetItem(self.lw_bordes)
+        QListWidgetItem(self.lw_bordes)
+        QListWidgetItem(self.lw_bordes)
+        QListWidgetItem(self.lw_bordes)
+        QListWidgetItem(self.lw_bordes)
+        self.lw_bordes.setObjectName(u"lw_bordes")
+
+        self.gridLayout.addWidget(self.lw_bordes, 4, 0, 1, 3)
+
+
+        self.gridLayout_3.addWidget(self.groupBox, 0, 0, 1, 2)
 
 
         self.retranslateUi(bordes_window)
@@ -362,73 +301,18 @@ class Ui_bordes_window(object):
 
     def retranslateUi(self, bordes_window):
         bordes_window.setWindowTitle(QCoreApplication.translate("bordes_window", u"Bordes - PrePRODIC3D", None))
-        self.groupBox_5.setTitle(QCoreApplication.translate("bordes_window", u"Salida de la masa", None))
-        self.label_6.setText(QCoreApplication.translate("bordes_window", u"Fracci\u00f3n", None))
-        self.groupBox_4.setTitle(QCoreApplication.translate("bordes_window", u"Velocidad", None))
-        self.label_4.setText(QCoreApplication.translate("bordes_window", u"Velocidad U", None))
-        self.label_9.setText(QCoreApplication.translate("bordes_window", u"Velocidad W", None))
-        self.label_5.setText(QCoreApplication.translate("bordes_window", u"Velocidad V", None))
-        self.chb_ex_veloc_v.setText("")
-        self.chb_ex_veloc_w.setText("")
-        self.chb_ex_veloc_u.setText("")
-        self.groupBox.setTitle(QCoreApplication.translate("bordes_window", u"Divisi\u00f3n de bordes", None))
-        self.groupBox_7.setTitle("")
-        self.pb_addpatch.setText(QCoreApplication.translate("bordes_window", u"Agregar un segmento", None))
-        self.pb_rempatch.setText(QCoreApplication.translate("bordes_window", u"Eliminar un segmento", None))
-        self.label_3.setText(QCoreApplication.translate("bordes_window", u"Segmento", None))
-        self.label_2.setText(QCoreApplication.translate("bordes_window", u"Borde", None))
-
-        __sortingEnabled = self.lw_patchlist.isSortingEnabled()
-        self.lw_patchlist.setSortingEnabled(False)
-        ___qlistwidgetitem = self.lw_patchlist.item(0)
-        ___qlistwidgetitem.setText(QCoreApplication.translate("bordes_window", u"Borde base", None));
-        self.lw_patchlist.setSortingEnabled(__sortingEnabled)
-
-        self.groupBox_2.setTitle("")
-        self.cb_ex_vertical_end.setItemText(0, "")
-        self.cb_ex_vertical_end.setItemText(1, QCoreApplication.translate("bordes_window", u"<", None))
-        self.cb_ex_vertical_end.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2264", None))
-
-        self.cb_ex_vertical_start.setItemText(0, "")
-        self.cb_ex_vertical_start.setItemText(1, QCoreApplication.translate("bordes_window", u">", None))
-        self.cb_ex_vertical_start.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2265", None))
-
-        self.lb_transversal.setText(QCoreApplication.translate("bordes_window", u"Y", None))
-        self.cb_ex_transversal_start.setItemText(0, "")
-        self.cb_ex_transversal_start.setItemText(1, QCoreApplication.translate("bordes_window", u">", None))
-        self.cb_ex_transversal_start.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2265", None))
-
-        self.cb_ex_transversal_end.setItemText(0, "")
-        self.cb_ex_transversal_end.setItemText(1, QCoreApplication.translate("bordes_window", u"<", None))
-        self.cb_ex_transversal_end.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2264", None))
-
-        self.lb_vertical.setText(QCoreApplication.translate("bordes_window", u"Z", None))
-        self.chb_exclude_borders.setText(QCoreApplication.translate("bordes_window", u"V.C. Excluir bordes", None))
-
-        __sortingEnabled1 = self.lw_bordes.isSortingEnabled()
-        self.lw_bordes.setSortingEnabled(False)
-        ___qlistwidgetitem1 = self.lw_bordes.item(0)
-        ___qlistwidgetitem1.setText(QCoreApplication.translate("bordes_window", u"X Max", None));
-        ___qlistwidgetitem2 = self.lw_bordes.item(1)
-        ___qlistwidgetitem2.setText(QCoreApplication.translate("bordes_window", u"X Min", None));
-        ___qlistwidgetitem3 = self.lw_bordes.item(2)
-        ___qlistwidgetitem3.setText(QCoreApplication.translate("bordes_window", u"Y Max", None));
-        ___qlistwidgetitem4 = self.lw_bordes.item(3)
-        ___qlistwidgetitem4.setText(QCoreApplication.translate("bordes_window", u"Y Min", None));
-        ___qlistwidgetitem5 = self.lw_bordes.item(4)
-        ___qlistwidgetitem5.setText(QCoreApplication.translate("bordes_window", u"Z Max", None));
-        ___qlistwidgetitem6 = self.lw_bordes.item(5)
-        ___qlistwidgetitem6.setText(QCoreApplication.translate("bordes_window", u"Z Min", None));
-        self.lw_bordes.setSortingEnabled(__sortingEnabled1)
-
-        self.groupBox_3.setTitle(QCoreApplication.translate("bordes_window", u"Variables escalares", None))
+        self.gb_tipo_segment.setTitle(QCoreApplication.translate("bordes_window", u"Tipo de segmento", None))
+        self.chb_wall.setText(QCoreApplication.translate("bordes_window", u"Pared", None))
+        self.chb_inmass.setText(QCoreApplication.translate("bordes_window", u"Entrada de la masa", None))
+        self.chb_outmass.setText(QCoreApplication.translate("bordes_window", u"Salida de la masa", None))
+        self.groupBox_3.setTitle(QCoreApplication.translate("bordes_window", u"Variables", None))
         self.groupBox_6.setTitle("")
 
-        __sortingEnabled2 = self.lw_variables.isSortingEnabled()
+        __sortingEnabled = self.lw_variables.isSortingEnabled()
         self.lw_variables.setSortingEnabled(False)
-        ___qlistwidgetitem7 = self.lw_variables.item(0)
-        ___qlistwidgetitem7.setText(QCoreApplication.translate("bordes_window", u"Temperatura", None));
-        self.lw_variables.setSortingEnabled(__sortingEnabled2)
+        ___qlistwidgetitem = self.lw_variables.item(0)
+        ___qlistwidgetitem.setText(QCoreApplication.translate("bordes_window", u"Temperatura", None));
+        self.lw_variables.setSortingEnabled(__sortingEnabled)
 
         self.gb_chbvalues.setTitle("")
         self.chb_value.setText(QCoreApplication.translate("bordes_window", u"Valor", None))
@@ -448,9 +332,57 @@ class Ui_bordes_window(object):
         self.label.setText(QCoreApplication.translate("bordes_window", u"Conductividad", None))
         self.le_k.setPlaceholderText("")
         self.chb_ex_k.setText("")
-        self.gb_tipo_segment.setTitle(QCoreApplication.translate("bordes_window", u"Tipo de segmento", None))
-        self.chb_wall.setText(QCoreApplication.translate("bordes_window", u"Pared", None))
-        self.chb_inmass.setText(QCoreApplication.translate("bordes_window", u"Entrada de la masa", None))
-        self.chb_outmass.setText(QCoreApplication.translate("bordes_window", u"Salida de la masa", None))
+        self.label_6.setText(QCoreApplication.translate("bordes_window", u"Fracci\u00f3n m\u00e1sica", None))
+        self.le_fracmass.setText(QCoreApplication.translate("bordes_window", u"1", None))
+        self.groupBox.setTitle(QCoreApplication.translate("bordes_window", u"Divisi\u00f3n de bordes", None))
+        self.groupBox_7.setTitle("")
+        self.pb_addpatch.setText(QCoreApplication.translate("bordes_window", u"Agregar un segmento", None))
+        self.pb_rempatch.setText(QCoreApplication.translate("bordes_window", u"Eliminar un segmento", None))
+        self.label_2.setText(QCoreApplication.translate("bordes_window", u"Borde", None))
+
+        __sortingEnabled1 = self.lw_patchlist.isSortingEnabled()
+        self.lw_patchlist.setSortingEnabled(False)
+        ___qlistwidgetitem1 = self.lw_patchlist.item(0)
+        ___qlistwidgetitem1.setText(QCoreApplication.translate("bordes_window", u"Borde base", None));
+        self.lw_patchlist.setSortingEnabled(__sortingEnabled1)
+
+        self.label_3.setText(QCoreApplication.translate("bordes_window", u"Segmento", None))
+        self.chb_exclude_borders.setText(QCoreApplication.translate("bordes_window", u"V.C. Excluir bordes", None))
+        self.groupBox_2.setTitle("")
+        self.cb_ex_vertical_end.setItemText(0, "")
+        self.cb_ex_vertical_end.setItemText(1, QCoreApplication.translate("bordes_window", u"<", None))
+        self.cb_ex_vertical_end.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2264", None))
+
+        self.cb_ex_vertical_start.setItemText(0, "")
+        self.cb_ex_vertical_start.setItemText(1, QCoreApplication.translate("bordes_window", u">", None))
+        self.cb_ex_vertical_start.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2265", None))
+
+        self.lb_transversal.setText(QCoreApplication.translate("bordes_window", u"Y", None))
+        self.cb_ex_transversal_start.setItemText(0, "")
+        self.cb_ex_transversal_start.setItemText(1, QCoreApplication.translate("bordes_window", u">", None))
+        self.cb_ex_transversal_start.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2265", None))
+
+        self.cb_ex_transversal_end.setItemText(0, "")
+        self.cb_ex_transversal_end.setItemText(1, QCoreApplication.translate("bordes_window", u"<", None))
+        self.cb_ex_transversal_end.setItemText(2, QCoreApplication.translate("bordes_window", u"\u2264", None))
+
+        self.lb_vertical.setText(QCoreApplication.translate("bordes_window", u"Z", None))
+
+        __sortingEnabled2 = self.lw_bordes.isSortingEnabled()
+        self.lw_bordes.setSortingEnabled(False)
+        ___qlistwidgetitem2 = self.lw_bordes.item(0)
+        ___qlistwidgetitem2.setText(QCoreApplication.translate("bordes_window", u"X Max", None));
+        ___qlistwidgetitem3 = self.lw_bordes.item(1)
+        ___qlistwidgetitem3.setText(QCoreApplication.translate("bordes_window", u"X Min", None));
+        ___qlistwidgetitem4 = self.lw_bordes.item(2)
+        ___qlistwidgetitem4.setText(QCoreApplication.translate("bordes_window", u"Y Max", None));
+        ___qlistwidgetitem5 = self.lw_bordes.item(3)
+        ___qlistwidgetitem5.setText(QCoreApplication.translate("bordes_window", u"Y Min", None));
+        ___qlistwidgetitem6 = self.lw_bordes.item(4)
+        ___qlistwidgetitem6.setText(QCoreApplication.translate("bordes_window", u"Z Max", None));
+        ___qlistwidgetitem7 = self.lw_bordes.item(5)
+        ___qlistwidgetitem7.setText(QCoreApplication.translate("bordes_window", u"Z Min", None));
+        self.lw_bordes.setSortingEnabled(__sortingEnabled2)
+
     # retranslateUi
 
