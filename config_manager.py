@@ -39,7 +39,6 @@ class ConfigManager:
                 'chb_ksolve5': 2,
                 'chb_kprint5': 2,
                 'le_relax5': '1',
-                'checkBox': 2
             },
             'DENSE': {
                 'Región 1': {
@@ -240,12 +239,12 @@ class ConfigManager:
     @property
     def is_ezgrid(self):
         return self.grid.get("cb_zone_type") == "Zona única"
-    
+
     @property
     def has_in_mass(self):
         for border in self.bound.values():
             for patch in border.values():
-                if patch.get('chb_inmass') == 2:
+                if patch.get("chb_inmass") == 2:
                     return True
         return False
 
@@ -253,7 +252,7 @@ class ConfigManager:
     def has_out_mass(self):
         for border in self.bound.values():
             for patch in border.values():
-                if patch.get('chb_outmass') == 2:
+                if patch.get("chb_outmass") == 2:
                     return True
         return False
 

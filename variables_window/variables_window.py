@@ -11,7 +11,7 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
         self.config_manager = config_manager
         self.config_name = "VARIABLES"
 
-        self.widgets = ["cb_tsimu", "cb_tipoflujo", "cb_trataborde", "le_iptm", "le_dt", "le_tol", "checkBox"]
+        self.widgets = ["cb_tsimu", "cb_tipoflujo", "cb_trataborde", "le_iptm", "le_dt", "le_tol"]
         for i in range(1, 13):
             self.widgets.extend([f"le_var_title{i}", f"chb_kprint{i}"])
         for i in range(1, 12):
