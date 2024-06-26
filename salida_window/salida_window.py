@@ -12,9 +12,14 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
         self.config_name = "OUTPUT"
 
         self.general_widgets = ["le_last", "le_temp_last", "chb_dimensionless"]
-        self.variable_widgets = ["le_x", "le_y", "le_z", "chb_common_node", "chb_different_nodes"]
+        self.variable_widgets = ["le_x", "le_y", "le_z", "chb_all_corners"]
+        for i in range(1, 9):
+            self.variable_widgets.extend([f"chb_corner_{i}"])
+            getattr(self, f"chb_corner_{i}").stateChanged.connect(self.handle_chb_corners_changed)
+
         self.widgets = self.general_widgets + self.variable_widgets
 
+        self.chb_all_corners.stateChanged.connect(self.handle_chb_all_corners_changed)
         self.lw_variables.currentRowChanged.connect(self.load_current_config)
 
         self.config_manager.connect_config(self)
@@ -111,16 +116,15 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
                 self.lw_variables.addItem(item)
         self.load_current_config()
 
-    def print_dict(self, od, indent=0, show_markers=False):
-        # Create an indentation space based on the current level
-        indent_space = "    " * indent
-        if show_markers:
-            print(f"{indent_space}INICIO ######################")
-        for key, value in od.items():
-            if isinstance(value, dict):  # If the value is a dictionary, print the key and then the nested dictionary
-                print(f"{indent_space}{key}:")
-                self.print_dict(value, indent + 1, show_markers=False)
-            else:  # If the value is not a dictionary, print key-value pair
-                print(f"{indent_space}{key}: {value}")
-        if show_markers:
-            print(f"{indent_space}FINAL ######################")
+    def handle_chb_all_corners_changed(self, state):
+        if state == 2:
+            for i in range(1, 9):
+                getattr(self, f"chb_corner_{i}").setChecked(True)
+
+    def handle_chb_corners_changed(self, _):
+        if all([getattr(self, f"chb_corner_{i}").isChecked() for i in range(1, 9)]):
+            if not self.chb_all_corners.isChecked():
+                self.chb_all_corners.setChecked(True)
+        else:
+            if self.chb_all_corners.isChecked():
+                self.chb_all_corners.setChecked(False)

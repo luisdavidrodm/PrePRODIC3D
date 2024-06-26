@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>504</width>
+    <width>520</width>
     <height>452</height>
    </rect>
   </property>
@@ -50,7 +50,7 @@
             <string>Puntos de monitoreo</string>
            </property>
            <layout class="QGridLayout" name="gridLayout">
-            <item row="3" column="1">
+            <item row="1" column="1">
              <widget class="QLineEdit" name="le_y">
               <property name="text">
                <string>0</string>
@@ -58,54 +58,37 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="le_x">
+             <widget class="QLineEdit" name="le_z">
               <property name="text">
                <string>0</string>
               </property>
              </widget>
             </item>
-            <item row="0" column="0" colspan="2">
-             <widget class="QCheckBox" name="chb_common_node">
-              <property name="text">
-               <string>Nodo común</string>
-              </property>
-              <property name="tristate">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="0" colspan="2">
-             <widget class="QCheckBox" name="chb_different_nodes">
-              <property name="text">
-               <string>Distintos nodos</string>
-              </property>
-             </widget>
-            </item>
             <item row="2" column="0">
-             <widget class="QLabel" name="label">
-              <property name="text">
-               <string>X</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QLabel" name="label_2">
-              <property name="text">
-               <string>Y</string>
-              </property>
-             </widget>
-            </item>
-            <item row="4" column="0">
              <widget class="QLabel" name="label_3">
               <property name="text">
                <string>Z</string>
               </property>
              </widget>
             </item>
-            <item row="4" column="1">
-             <widget class="QLineEdit" name="le_z">
+            <item row="0" column="1">
+             <widget class="QLineEdit" name="le_x">
               <property name="text">
                <string>0</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QLabel" name="label_2">
+              <property name="text">
+               <string>Y</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QLabel" name="label">
+              <property name="text">
+               <string>X</string>
               </property>
              </widget>
             </item>
@@ -127,79 +110,66 @@
             <string>Promedio en las esquinas</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="1" column="0">
-             <widget class="QCheckBox" name="checkBox_4">
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="chb_corner_7">
+              <property name="text">
+               <string>(L1, 1, N1)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="chb_all_corners">
               <property name="text">
                <string>Todas las esquinas</string>
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <widget class="QCheckBox" name="checkBox_5">
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chb_corner_3">
               <property name="text">
-               <string>(1, N1, L1)</string>
+               <string>(1, M1, 1)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="chb_corner_5">
+              <property name="text">
+               <string>(L1, M1, 1)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="0">
+             <widget class="QCheckBox" name="chb_corner_1">
+              <property name="text">
+               <string>(1, 1, 1)</string>
               </property>
              </widget>
             </item>
             <item row="4" column="0">
-             <widget class="QCheckBox" name="checkBox_11">
+             <widget class="QCheckBox" name="chb_corner_4">
               <property name="text">
-               <string>(M1, N1, 1)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="checkBox_8">
-              <property name="text">
-               <string>(M1, 1. L1)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="checkBox_3">
-              <property name="tabletTracking">
-               <bool>false</bool>
-              </property>
-              <property name="text">
-               <string>Seleccionar esquinas</string>
-              </property>
-              <property name="tristate">
-               <bool>true</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QCheckBox" name="checkBox_6">
-              <property name="text">
-               <string>(1, 1, L1)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="1">
-             <widget class="QCheckBox" name="checkBox_9">
-              <property name="text">
-               <string>(M1, 1, 1)</string>
+               <string>(1, 1, N1)</string>
               </property>
              </widget>
             </item>
             <item row="4" column="1">
-             <widget class="QCheckBox" name="checkBox_12">
+             <widget class="QCheckBox" name="chb_corner_8">
               <property name="text">
-               <string>(1, N1, 1)</string>
+               <string>(L1, M1, N1)</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="0">
-             <widget class="QCheckBox" name="checkBox_10">
+            <item row="2" column="1">
+             <widget class="QCheckBox" name="chb_corner_6">
               <property name="text">
-               <string>(M1, N1, L1)</string>
+               <string>(1, M1, N1)</string>
               </property>
              </widget>
             </item>
-            <item row="5" column="1">
-             <widget class="QCheckBox" name="checkBox_7">
+            <item row="2" column="0">
+             <widget class="QCheckBox" name="chb_corner_2">
               <property name="text">
-               <string>(1, 1, 1)</string>
+               <string>(L1, 1, 1)</string>
               </property>
              </widget>
             </item>
@@ -229,27 +199,6 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0">
-             <widget class="QLabel" name="label_5">
-              <property name="text">
-               <string>Índice gráfico</string>
-              </property>
-             </widget>
-            </item>
-            <item row="2" column="1">
-             <widget class="QLineEdit" name="lineEdit_5">
-              <property name="enabled">
-               <bool>false</bool>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0" colspan="2">
-             <widget class="QCheckBox" name="chb_dimensionless">
-              <property name="text">
-               <string>Cálculos adimensionales</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QLabel" name="label_6">
               <property name="text">
@@ -261,6 +210,13 @@
              <widget class="QLineEdit" name="le_temp_last">
               <property name="alignment">
                <set>Qt::AlignCenter</set>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="0" colspan="2">
+             <widget class="QCheckBox" name="chb_dimensionless">
+              <property name="text">
+               <string>Cálculos adimensionales</string>
               </property>
              </widget>
             </item>

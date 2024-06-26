@@ -21,6 +21,16 @@ class F90Translator:
             "Z Max": ("I", "J", "L{}", "M{}", "(I,J,N{})", "N1", "ARZ(I,J)"),
             "Z Min": ("I", "J", "L{}", "M{}", "(I,J,{})", "K1", "ARZ(I,J)"),
         }
+        self.corner_mapping = {
+            "chb_corner_1": ("1", "1", "1"),
+            "chb_corner_2": ("L1", "1", "1"),
+            "chb_corner_3": ("1", "M1", "1"),
+            "chb_corner_4": ("1", "1", "N1"),
+            "chb_corner_5": ("L1", "M1", "1"),
+            "chb_corner_6": ("1", "M1", "N1"),
+            "chb_corner_7": ("L1", "1", "N1"),
+            "chb_corner_8": ("L1", "M1", "N1"),
+        }
         self.custom_titles = {
             1: "VEL U",
             2: "VEL V",
@@ -484,6 +494,15 @@ class F90Translator:
 
         if "chb_dimensionless" in output and output["chb_dimensionless"] == 2:
             f90_lines.append(self.dimensionless_output)
+
+        for key, value in output.items():
+            if key in self.variables_map:
+                for variable, variable_value in value.items():
+                    if variable in [f"chb_corner_{i}" for i in range(1, 9)] and variable_value == 2:
+                        var_number = self.variables_map[key]
+                        x, y, z = self.corner_mapping[variable]
+                        f90_lines.append(self.generate_corner_equation(x, y, z, var_number))
+
         f90_lines.append("RETURN")
         return f90_lines
 
@@ -703,6 +722,24 @@ class F90Translator:
                         new_entries[var_key] = value
                 extended_variables[key] = new_entries
         return extended_variables
+
+    def generate_corner_equation(self, i, j, k, var_index):
+        adj_i = "2" if i == "1" else "L2"
+        adj_j = "2" if j == "1" else "M2"
+        adj_k = "2" if k == "1" else "N2"
+        adjacents = [(i, adj_j, k), (adj_i, j, k), (i, j, adj_k)]
+        opposites = [(adj_i, adj_j, k), (adj_i, j, adj_k), (i, adj_j, adj_k)]
+        corner_opposite = (adj_i, adj_j, adj_k)
+        equation_parts = [f"F({i},{j},{k},{var_index}) = "]
+        equation_parts.append(f"F({adjacents[0][0]},{adjacents[0][1]},{adjacents[0][2]},{var_index}) ")
+        equation_parts.append(f"+ F({adjacents[1][0]},{adjacents[1][1]},{adjacents[1][2]},{var_index}) ")
+        equation_parts.append(f"+ F({adjacents[2][0]},{adjacents[2][1]},{adjacents[2][2]},{var_index}) ")
+        equation_parts.append(f"- F({opposites[0][0]},{opposites[0][1]},{opposites[0][2]},{var_index}) ")
+        equation_parts.append(f"- F({opposites[1][0]},{opposites[1][1]},{opposites[1][2]},{var_index}) ")
+        equation_parts.append(f"- F({opposites[2][0]},{opposites[2][1]},{opposites[2][2]},{var_index}) ")
+        equation_parts.append(f"+ F({corner_opposite[0]},{corner_opposite[1]},{corner_opposite[2]},{var_index})")
+        equation = "".join(equation_parts)
+        return equation
 
     def generate_f90(self):
         self.f90_lines.append(f"! Generado por PrePRODIC3D en fecha: {datetime.now().isoformat()}")
