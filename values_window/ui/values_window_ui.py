@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windowaKsfDR.ui'
+## Form generated from reading UI file 'values_windowkRRPMr.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -178,10 +178,11 @@ class Ui_valores_window(object):
 
         self.formLayout.setWidget(1, QFormLayout.LabelRole, self.label_3)
 
-        self.lineEdit_3 = QLineEdit(self.groupBox_5)
-        self.lineEdit_3.setObjectName(u"lineEdit_3")
+        self.le_therm_exp_coef = QLineEdit(self.groupBox_5)
+        self.le_therm_exp_coef.setObjectName(u"le_therm_exp_coef")
+        self.le_therm_exp_coef.setEnabled(False)
 
-        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.lineEdit_3)
+        self.formLayout.setWidget(1, QFormLayout.FieldRole, self.le_therm_exp_coef)
 
         self.label_4 = QLabel(self.groupBox_5)
         self.label_4.setObjectName(u"label_4")
@@ -189,10 +190,11 @@ class Ui_valores_window(object):
 
         self.formLayout.setWidget(2, QFormLayout.LabelRole, self.label_4)
 
-        self.lineEdit_4 = QLineEdit(self.groupBox_5)
-        self.lineEdit_4.setObjectName(u"lineEdit_4")
+        self.le_gravity = QLineEdit(self.groupBox_5)
+        self.le_gravity.setObjectName(u"le_gravity")
+        self.le_gravity.setEnabled(False)
 
-        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.lineEdit_4)
+        self.formLayout.setWidget(2, QFormLayout.FieldRole, self.le_gravity)
 
         self.label_5 = QLabel(self.groupBox_5)
         self.label_5.setObjectName(u"label_5")
@@ -200,15 +202,30 @@ class Ui_valores_window(object):
 
         self.formLayout.setWidget(3, QFormLayout.LabelRole, self.label_5)
 
-        self.lineEdit_5 = QLineEdit(self.groupBox_5)
-        self.lineEdit_5.setObjectName(u"lineEdit_5")
+        self.le_angle = QLineEdit(self.groupBox_5)
+        self.le_angle.setObjectName(u"le_angle")
+        self.le_angle.setEnabled(False)
 
-        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.lineEdit_5)
+        self.formLayout.setWidget(3, QFormLayout.FieldRole, self.le_angle)
 
-        self.checkBox = QCheckBox(self.groupBox_5)
-        self.checkBox.setObjectName(u"checkBox")
+        self.chb_buoyancy = QCheckBox(self.groupBox_5)
+        self.chb_buoyancy.setObjectName(u"chb_buoyancy")
 
-        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.checkBox)
+        self.formLayout.setWidget(0, QFormLayout.LabelRole, self.chb_buoyancy)
+
+        self.label_10 = QLabel(self.groupBox_5)
+        self.label_10.setObjectName(u"label_10")
+
+        self.formLayout.setWidget(4, QFormLayout.LabelRole, self.label_10)
+
+        self.cb_plane = QComboBox(self.groupBox_5)
+        self.cb_plane.addItem("")
+        self.cb_plane.addItem("")
+        self.cb_plane.addItem("")
+        self.cb_plane.setObjectName(u"cb_plane")
+        self.cb_plane.setEnabled(False)
+
+        self.formLayout.setWidget(4, QFormLayout.FieldRole, self.cb_plane)
 
 
         self.gridLayout_7.addWidget(self.groupBox_5, 0, 2, 1, 1)
@@ -496,7 +513,12 @@ class Ui_valores_window(object):
         self.label_3.setText(QCoreApplication.translate("valores_window", u"Coef. exp. term.", None))
         self.label_4.setText(QCoreApplication.translate("valores_window", u"Gravedad", None))
         self.label_5.setText(QCoreApplication.translate("valores_window", u"\u00c1ngulo", None))
-        self.checkBox.setText(QCoreApplication.translate("valores_window", u"Activar flotabilidad", None))
+        self.chb_buoyancy.setText(QCoreApplication.translate("valores_window", u"Activar flotabilidad", None))
+        self.label_10.setText(QCoreApplication.translate("valores_window", u"Plano", None))
+        self.cb_plane.setItemText(0, QCoreApplication.translate("valores_window", u"XY", None))
+        self.cb_plane.setItemText(1, QCoreApplication.translate("valores_window", u"YZ", None))
+        self.cb_plane.setItemText(2, QCoreApplication.translate("valores_window", u"XZ", None))
+
         self.chb_local_value.setText(QCoreApplication.translate("valores_window", u"Para aplicar valores locales para alguna variable, active la siguiente casilla", None))
         self.groupBox_6.setTitle(QCoreApplication.translate("valores_window", u"Valores locales por variable", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("valores_window", u"Regiones", None))

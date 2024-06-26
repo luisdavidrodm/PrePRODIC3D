@@ -219,7 +219,11 @@
                  </widget>
                 </item>
                 <item row="1" column="1">
-                 <widget class="QLineEdit" name="lineEdit_3"/>
+                 <widget class="QLineEdit" name="le_therm_exp_coef">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="2" column="0">
                  <widget class="QLabel" name="label_4">
@@ -232,7 +236,11 @@
                  </widget>
                 </item>
                 <item row="2" column="1">
-                 <widget class="QLineEdit" name="lineEdit_4"/>
+                 <widget class="QLineEdit" name="le_gravity">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="3" column="0">
                  <widget class="QLabel" name="label_5">
@@ -245,13 +253,46 @@
                  </widget>
                 </item>
                 <item row="3" column="1">
-                 <widget class="QLineEdit" name="lineEdit_5"/>
+                 <widget class="QLineEdit" name="le_angle">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                 </widget>
                 </item>
                 <item row="0" column="0">
-                 <widget class="QCheckBox" name="checkBox">
+                 <widget class="QCheckBox" name="chb_buoyancy">
                   <property name="text">
                    <string>Activar flotabilidad</string>
                   </property>
+                 </widget>
+                </item>
+                <item row="4" column="0">
+                 <widget class="QLabel" name="label_10">
+                  <property name="text">
+                   <string>Plano</string>
+                  </property>
+                 </widget>
+                </item>
+                <item row="4" column="1">
+                 <widget class="QComboBox" name="cb_plane">
+                  <property name="enabled">
+                   <bool>false</bool>
+                  </property>
+                  <item>
+                   <property name="text">
+                    <string>XY</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>YZ</string>
+                   </property>
+                  </item>
+                  <item>
+                   <property name="text">
+                    <string>XZ</string>
+                   </property>
+                  </item>
                  </widget>
                 </item>
                </layout>

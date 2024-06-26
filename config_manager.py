@@ -66,6 +66,8 @@ class ConfigManager:
                 }
             },
             'VALUES': {
+                'chb_buoyancy': 0,
+                'cb_plane': 'XY',
                 'le_var_title1': {
                     'name': 'Velocidad U',
                     'Región 1': {

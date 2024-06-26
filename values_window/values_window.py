@@ -22,6 +22,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.lw_regions.currentRowChanged.connect(self.load_volume_config)
         self.lw_volumes.currentRowChanged.connect(self.load_current_config)
 
+        self.general_widgets = ["chb_buoyancy", "le_therm_exp_coef", "le_gravity", "le_angle", "cb_plane"]
         self.variable_widgets = [
             "le_general_value", "le_k", "le_kblock", "chb_iborx", "chb_ibory",
             "chb_iborz", "chb_ipun", "chb_local_value", "le_ixyz", "chb_ex_value", "chb_ex_k"
@@ -33,9 +34,10 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             "le_x_start", "le_x_end", "le_y_start", "le_y_end", "le_z_start", "le_z_end", 
             "chb_exclude_borders", "cb_ex_x_start", "cb_ex_x_end", "cb_ex_y_start", "cb_ex_y_end",
             "cb_ex_z_start", "cb_ex_z_end"]
-        self.widgets = self.variable_widgets + self.region_widgets + self.volume_widgets
+        self.widgets = self.general_widgets + self.variable_widgets + self.region_widgets + self.volume_widgets
 
         self.config_manager.connect_config(self)
+        self.chb_buoyancy.stateChanged.connect(self.handle_chb_buoyancy_changed)
         self.chb_local_value.stateChanged.connect(self.load_region_config)
         self.load_variables_list()
         # fmt: on
@@ -58,11 +60,14 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
 
     def load_current_config(self):
         """"""
+        self.config_manager.load_config(self, self.config_manager.values)
         variable = self.lw_variables.currentItem()
         region = self.lw_regions.currentItem()
         volume = self.lw_volumes.currentItem()
         configured_widgets = self.get_configured_widgets(variable, region, volume)
-        not_configured_widgets = [widget for widget in self.widgets if widget not in configured_widgets]
+        not_configured_widgets = [
+            widget for widget in self.widgets if widget not in configured_widgets and widget not in self.general_widgets
+        ]
         self.toggle_widget_list(not_configured_widgets, False)
         # Seleccionada una variable
         if variable is not None:
@@ -132,7 +137,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         ]
         new_items = []
         for key, data in self.config_manager.values.items():
-            if "name" in data:
+            if key.startswith("le_var_title") and "name" in data:
                 number = int(key[len("le_var_title") :]) if key.startswith("le_var_title") else float("inf")
                 new_items.append((number, data["name"], key))
         new_items.sort()
@@ -195,10 +200,11 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         variable = self.lw_variables.currentItem()
         region = self.lw_regions.currentItem()
         volume = self.lw_volumes.currentItem()
-        variable_key = variable.data(Qt.UserRole)
+        if variable:
+            variable_key = variable.data(Qt.UserRole)
         if value is not None and value != "":
             # Si hay un valor nuevo válido
-            if region and volume and sender.objectName() in self.volume_widgets:
+            if variable and region and volume and sender.objectName() in self.volume_widgets:
                 # Si el cambio es en un widget de volumen
                 if variable_key not in self.config_manager.values:
                     self.config_manager.values[variable_key] = {}
@@ -207,7 +213,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 if volume.text() not in self.config_manager.values[variable_key][region.text()]:
                     self.config_manager.values[variable_key][region.text()][volume.text()] = {}
                 self.config_manager.values[variable_key][region.text()][volume.text()][sender.objectName()] = value
-            elif region and sender.objectName() in self.region_widgets:
+            elif variable and region and sender.objectName() in self.region_widgets:
                 # Si el cambio es en un widget de región
                 if variable_key not in self.config_manager.values:
                     self.config_manager.values[variable_key] = {}
@@ -219,9 +225,11 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 if variable_key not in self.config_manager.values:
                     self.config_manager.values[variable_key] = {}
                 self.config_manager.values[variable_key][sender.objectName()] = value
+            elif sender.objectName() in self.general_widgets:
+                self.config_manager.values[sender.objectName()] = value
         else:
             # Si el valor es None o vacío, eliminar el valor del diccionario
-            if region and volume and sender.objectName() in self.volume_widgets:
+            if variable and region and volume and sender.objectName() in self.volume_widgets:
                 # Eliminar valor del widget de volumen
                 self.config_manager.values[variable_key][region.text()][volume.text()].pop(sender.objectName(), None)
                 # Limpiar diccionarios vacíos
@@ -229,7 +237,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 #     del self.config_manager.values[variable_key][region.text()][volume.text()]
                 #     if not self.config_manager.values[variable_key][region.text()]:
                 #         del self.config_manager.values[variable_key][region.text()]
-            elif region and sender.objectName() in self.region_widgets:
+            elif variable and region and sender.objectName() in self.region_widgets:
                 # Eliminar valor del widget de región
                 self.config_manager.values[variable_key][region.text()].pop(sender.objectName(), None)
                 # Limpiar diccionarios vacíos
@@ -238,6 +246,8 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             elif variable and sender.objectName() in self.variable_widgets:
                 # Eliminar valor del widget de variable
                 self.config_manager.values[variable_key].pop(sender.objectName(), None)
+            elif sender.objectName() in self.general_widgets:
+                self.config_manager.values.pop(sender.objectName(), None)
             # Limpieza adicional para asegurar que no queden diccionarios vacíos
             # if variable and not self.config_manager.values[variable_key]:
             #     del self.config_manager.values[variable_key]
@@ -263,6 +273,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
                 self.config_manager.values[variable.data(Qt.UserRole)].pop(last_region.text(), None)
 
     def add_volume(self):
+        """"""
         volume_number = self.lw_volumes.count() + 1
         self.lw_volumes.addItem(f"Volumen {volume_number}")
         variable = self.lw_variables.currentItem()
@@ -281,6 +292,14 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             region = self.lw_regions.currentItem()
             if variable is not None and region is not None:
                 self.config_manager.values[variable.data(Qt.UserRole)][region.text()].pop(last_volume.text(), None)
+
+    def handle_chb_buoyancy_changed(self, state):
+        """"""
+        buoyancy_widgets = [widget for widget in self.general_widgets if widget != "chb_buoyancy"]
+        if state == 2:
+            self.toggle_widget_list(buoyancy_widgets, True)
+        else:
+            self.toggle_widget_list(buoyancy_widgets, False)
 
     def initialize_volume_data(self):
         """Inicializa los valores de malla para un volumen nuevo"""
