@@ -112,13 +112,13 @@ class ConfigManager:
                 }
             },
             'OUTPUT': {
-                'le_var_title1': {},
-                'le_var_title2': {},
-                'le_var_title3': {},
-                'le_var_title4': {},
-                'le_var_title5': {},
-                'le_var_title11': {},
-                'le_var_title12': {},
+                'le_var_title1': {'name': 'Velocidad U'},
+                'le_var_title2': {'name': 'Velocidad V'},
+                'le_var_title3': {'name': 'Velocidad W'},
+                'le_var_title4': {'name': 'Corrección de presión'},
+                'le_var_title5': {'name': 'Temperatura'},
+                'le_var_title11': {'name': 'Presión'},
+                'le_var_title12': {'name': 'Función de corriente'},
                 'le_last': '5'
             }
         }

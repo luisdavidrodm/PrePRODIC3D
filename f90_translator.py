@@ -513,6 +513,13 @@ class F90Translator:
         f90_lines = ["ENTRY PHI"]
         added_if = False
 
+        if values.get("chb_buoyancy", 0) == 2:
+            therm_exp_coef = values.get("le_therm_exp_coef", "1")
+            gravity = values.get("le_gravity", "9.81")
+            angle = values.get("le_angle", "3.141592653589793")
+            cb_plane = values.get("cb_plane", "XY")
+            f90_lines.extend(self.process_buoyancy(cb_plane, therm_exp_coef, gravity, angle))
+
         for var, nf_value in self.variables_map.items():
 
             #### GAM(I,J,K)=le_k
@@ -794,6 +801,35 @@ class F90Translator:
         equation_parts.append(f"+ F({corner_opposite[0]},{corner_opposite[1]},{corner_opposite[2]},{var_index})")
         equation = "".join(equation_parts)
         return equation
+
+    def process_buoyancy(self, plane, therm_exp_coef, gravity, angle):
+        if plane == "XY":
+            velocities = [(1, "X", "FX(I)", "FXM(I)", "SIN"), (2, "Y", "FY(J)", "FYM(J)", "COS")]
+        elif plane == "YZ":
+            velocities = [(2, "Y", "FY(J)", "FYM", "SIN"), (3, "Z", "FZ(K)", "FZM(K)", "COS")]
+        elif plane == "XZ":
+            velocities = [(1, "X", "FX(I)", "FXM(I)", "SIN"), (3, "Z", "FZ(K)", "FZM(K)", "COS")]
+
+        result = []
+        for nf, axis, F, FM, trig in velocities:
+            start_i, end_i = (3, "L2") if axis == "X" else (2, "L2")
+            start_j, end_j = (3, "M2") if axis == "Y" else (2, "M2")
+            start_k, end_k = (3, "N2") if axis == "Z" else (2, "N2")
+            result.extend(
+                [
+                    f"IF (NF.EQ.{nf}) THEN",
+                    f"{i}DO I={start_i},{end_i}",
+                    f"{i}{i}DO J={start_j},{end_j}",
+                    f"{I}DO K={start_k},{end_k}",
+                    f"{I}{i}TM={F}(I)*F(I,J,K,5)+{FM}(I)*F(I-1,J,K,5)",
+                    f"{I}{i}SC(I,J,K)=SC(I,J,K)+RHO(I,J,K)*{therm_exp_coef}*{gravity}*{trig}({angle})*TM",
+                    f"{I}ENDDO",
+                    f"{i}{i}ENDDO",
+                    f"{i}ENDDO",
+                    "ENDIF",
+                ]
+            )
+        return result
 
     def generate_f90(self):
         self.f90_lines.append(f"! Generado por PrePRODIC3D en fecha: {datetime.now().isoformat()}")

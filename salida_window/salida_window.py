@@ -107,7 +107,9 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
             (self.lw_variables.item(i).text(), self.lw_variables.item(i).data(Qt.UserRole))
             for i in range(self.lw_variables.count())
         ]
-        new_items = [(data["name"], key) for key, data in self.config_manager.values.items() if "name" in data]
+        new_items = [
+            (data["name"], key) for key, data in self.config_manager.output.items() if key.startswith("le_var_title")
+        ]
         if new_items != current_items:
             self.lw_variables.clear()
             for name, tech_name in new_items:
