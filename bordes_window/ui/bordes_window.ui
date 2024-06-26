@@ -14,48 +14,6 @@
    <string>Bordes - PrePRODIC3D</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
-   <item row="0" column="2" colspan="2">
-    <widget class="QGroupBox" name="gb_tipo_segment">
-     <property name="title">
-      <string>Tipo de segmento</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
-      <item>
-       <widget class="QCheckBox" name="chb_wall">
-        <property name="text">
-         <string>Pared</string>
-        </property>
-        <property name="checked">
-         <bool>true</bool>
-        </property>
-        <property name="tristate">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="chb_inmass">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Entrada de la masa</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QCheckBox" name="chb_outmass">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Salida de la masa</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="1" column="0" colspan="4">
     <widget class="QGroupBox" name="groupBox_3">
      <property name="title">
@@ -122,6 +80,9 @@
          <string/>
         </property>
         <layout class="QGridLayout" name="gridLayout_6">
+         <item row="3" column="0">
+          <widget class="QLineEdit" name="le_value"/>
+         </item>
          <item row="0" column="0">
           <widget class="QLabel" name="lb_value">
            <property name="text">
@@ -136,16 +97,6 @@
            </property>
           </widget>
          </item>
-         <item row="6" column="0">
-          <widget class="QLineEdit" name="le_tempamb">
-           <property name="enabled">
-            <bool>false</bool>
-           </property>
-          </widget>
-         </item>
-         <item row="3" column="0">
-          <widget class="QLineEdit" name="le_value"/>
-         </item>
          <item row="3" column="1">
           <widget class="QCheckBox" name="chb_ex_value">
            <property name="toolTip">
@@ -156,6 +107,13 @@
            </property>
            <property name="text">
             <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="6" column="0">
+          <widget class="QLineEdit" name="le_tempamb">
+           <property name="enabled">
+            <bool>false</bool>
            </property>
           </widget>
          </item>
@@ -175,13 +133,6 @@
           <widget class="QLabel" name="label">
            <property name="text">
             <string>Conductividad</string>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLineEdit" name="le_k">
-           <property name="placeholderText">
-            <string/>
            </property>
           </widget>
          </item>
@@ -212,13 +163,62 @@
            </property>
           </widget>
          </item>
+         <item row="1" column="0">
+          <widget class="QLineEdit" name="le_k">
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
         </layout>
        </widget>
       </item>
      </layout>
     </widget>
    </item>
-   <item row="0" column="0" colspan="2">
+   <item row="0" column="3">
+    <widget class="QGroupBox" name="gb_tipo_segment">
+     <property name="title">
+      <string>Tipo de segmento</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QCheckBox" name="chb_wall">
+        <property name="text">
+         <string>Pared</string>
+        </property>
+        <property name="checked">
+         <bool>true</bool>
+        </property>
+        <property name="tristate">
+         <bool>false</bool>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chb_inmass">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Entrada de la masa</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QCheckBox" name="chb_outmass">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Salida de la masa</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="0" column="0" colspan="3">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
       <string>División de bordes</string>
@@ -251,22 +251,6 @@
        <widget class="QLabel" name="label_2">
         <property name="text">
          <string>Borde</string>
-        </property>
-       </widget>
-      </item>
-      <item row="4" column="3">
-       <widget class="QListWidget" name="lw_patchlist">
-        <item>
-         <property name="text">
-          <string>Borde base</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item row="3" column="3">
-       <widget class="QLabel" name="label_3">
-        <property name="text">
-         <string>Segmento</string>
         </property>
        </widget>
       </item>
@@ -429,6 +413,22 @@
           <string>Z Min</string>
          </property>
         </item>
+       </widget>
+      </item>
+      <item row="4" column="3">
+       <widget class="QListWidget" name="lw_patchlist">
+        <item>
+         <property name="text">
+          <string>Borde base</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item row="3" column="3">
+       <widget class="QLabel" name="label_3">
+        <property name="text">
+         <string>Segmento</string>
+        </property>
        </widget>
       </item>
      </layout>
