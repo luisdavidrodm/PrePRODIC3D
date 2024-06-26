@@ -39,7 +39,7 @@ class F90Translator:
             5: "TEMPERATURA",
             11: "PRESION",
         }
-        self.dimensionless = "DIMENSION  WSUM(25), TSUM(25), TB(25), WBAR(25), AREA(25)"
+        self.dimensionless = "DIMENSION  WSUM(30), TSUM(30), TB(30), WBAR(30), AREA(30)"
         self.dimensionless_common = "COMMON TW,TIN,WSUM,TSUM,TB,WBAR,AREA,FLOWIN,WMIN"
         self.dimensionless_output = """IF (ITER.EQ.LAST) THEN
         DO K=2,N2
@@ -206,7 +206,7 @@ class F90Translator:
             f90_lines.append(f"DT={variables.get('le_dt', '1.E+20')}")
 
         if "chb_dimensionless" in output and output["chb_dimensionless"] == 2:
-            f90_lines.append("TW=1.0")
+            f90_lines.append(f"TW={output.get('le_tw', '1.0')}")
 
         for num in range(1, 12):
             var_name = f"le_var_title{num}"

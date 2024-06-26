@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>520</width>
+    <width>521</width>
     <height>452</height>
    </rect>
   </property>
@@ -110,34 +110,6 @@
             <string>Promedio en las esquinas</string>
            </property>
            <layout class="QGridLayout" name="gridLayout_2">
-            <item row="3" column="1">
-             <widget class="QCheckBox" name="chb_corner_7">
-              <property name="text">
-               <string>(L1, 1, N1)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="0" column="0">
-             <widget class="QCheckBox" name="chb_all_corners">
-              <property name="text">
-               <string>Todas las esquinas</string>
-              </property>
-             </widget>
-            </item>
-            <item row="3" column="0">
-             <widget class="QCheckBox" name="chb_corner_3">
-              <property name="text">
-               <string>(1, M1, 1)</string>
-              </property>
-             </widget>
-            </item>
-            <item row="1" column="1">
-             <widget class="QCheckBox" name="chb_corner_5">
-              <property name="text">
-               <string>(L1, M1, 1)</string>
-              </property>
-             </widget>
-            </item>
             <item row="1" column="0">
              <widget class="QCheckBox" name="chb_corner_1">
               <property name="text">
@@ -145,10 +117,10 @@
               </property>
              </widget>
             </item>
-            <item row="4" column="0">
-             <widget class="QCheckBox" name="chb_corner_4">
+            <item row="3" column="1">
+             <widget class="QCheckBox" name="chb_corner_7">
               <property name="text">
-               <string>(1, 1, N1)</string>
+               <string>(L1, 1, N1)</string>
               </property>
              </widget>
             </item>
@@ -170,6 +142,34 @@
              <widget class="QCheckBox" name="chb_corner_2">
               <property name="text">
                <string>(L1, 1, 1)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="4" column="0">
+             <widget class="QCheckBox" name="chb_corner_4">
+              <property name="text">
+               <string>(1, 1, N1)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="3" column="0">
+             <widget class="QCheckBox" name="chb_corner_3">
+              <property name="text">
+               <string>(1, M1, 1)</string>
+              </property>
+             </widget>
+            </item>
+            <item row="0" column="0">
+             <widget class="QCheckBox" name="chb_all_corners">
+              <property name="text">
+               <string>Todas las esquinas</string>
+              </property>
+             </widget>
+            </item>
+            <item row="1" column="1">
+             <widget class="QCheckBox" name="chb_corner_5">
+              <property name="text">
+               <string>(L1, M1, 1)</string>
               </property>
              </widget>
             </item>
@@ -213,12 +213,22 @@
               </property>
              </widget>
             </item>
-            <item row="2" column="0" colspan="2">
+            <item row="3" column="0" colspan="2">
              <widget class="QCheckBox" name="chb_dimensionless">
               <property name="text">
                <string>Cálculos adimensionales</string>
               </property>
              </widget>
+            </item>
+            <item row="2" column="0">
+             <widget class="QLabel" name="label_5">
+              <property name="text">
+               <string>TW</string>
+              </property>
+             </widget>
+            </item>
+            <item row="2" column="1">
+             <widget class="QLineEdit" name="le_tw"/>
             </item>
            </layout>
           </widget>

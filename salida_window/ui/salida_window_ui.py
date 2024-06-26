@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'salida_windowGRfYAb.ui'
+## Form generated from reading UI file 'salida_windowTXuHHh.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -24,7 +24,7 @@ class Ui_salida_window(object):
     def setupUi(self, salida_window):
         if not salida_window.objectName():
             salida_window.setObjectName(u"salida_window")
-        salida_window.resize(520, 452)
+        salida_window.resize(521, 452)
         self.gridLayout_3 = QGridLayout(salida_window)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.groupBox = QGroupBox(salida_window)
@@ -96,35 +96,15 @@ class Ui_salida_window(object):
         self.groupBox_6.setObjectName(u"groupBox_6")
         self.gridLayout_2 = QGridLayout(self.groupBox_6)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
-        self.chb_corner_7 = QCheckBox(self.groupBox_6)
-        self.chb_corner_7.setObjectName(u"chb_corner_7")
-
-        self.gridLayout_2.addWidget(self.chb_corner_7, 3, 1, 1, 1)
-
-        self.chb_all_corners = QCheckBox(self.groupBox_6)
-        self.chb_all_corners.setObjectName(u"chb_all_corners")
-
-        self.gridLayout_2.addWidget(self.chb_all_corners, 0, 0, 1, 1)
-
-        self.chb_corner_3 = QCheckBox(self.groupBox_6)
-        self.chb_corner_3.setObjectName(u"chb_corner_3")
-
-        self.gridLayout_2.addWidget(self.chb_corner_3, 3, 0, 1, 1)
-
-        self.chb_corner_5 = QCheckBox(self.groupBox_6)
-        self.chb_corner_5.setObjectName(u"chb_corner_5")
-
-        self.gridLayout_2.addWidget(self.chb_corner_5, 1, 1, 1, 1)
-
         self.chb_corner_1 = QCheckBox(self.groupBox_6)
         self.chb_corner_1.setObjectName(u"chb_corner_1")
 
         self.gridLayout_2.addWidget(self.chb_corner_1, 1, 0, 1, 1)
 
-        self.chb_corner_4 = QCheckBox(self.groupBox_6)
-        self.chb_corner_4.setObjectName(u"chb_corner_4")
+        self.chb_corner_7 = QCheckBox(self.groupBox_6)
+        self.chb_corner_7.setObjectName(u"chb_corner_7")
 
-        self.gridLayout_2.addWidget(self.chb_corner_4, 4, 0, 1, 1)
+        self.gridLayout_2.addWidget(self.chb_corner_7, 3, 1, 1, 1)
 
         self.chb_corner_8 = QCheckBox(self.groupBox_6)
         self.chb_corner_8.setObjectName(u"chb_corner_8")
@@ -140,6 +120,26 @@ class Ui_salida_window(object):
         self.chb_corner_2.setObjectName(u"chb_corner_2")
 
         self.gridLayout_2.addWidget(self.chb_corner_2, 2, 0, 1, 1)
+
+        self.chb_corner_4 = QCheckBox(self.groupBox_6)
+        self.chb_corner_4.setObjectName(u"chb_corner_4")
+
+        self.gridLayout_2.addWidget(self.chb_corner_4, 4, 0, 1, 1)
+
+        self.chb_corner_3 = QCheckBox(self.groupBox_6)
+        self.chb_corner_3.setObjectName(u"chb_corner_3")
+
+        self.gridLayout_2.addWidget(self.chb_corner_3, 3, 0, 1, 1)
+
+        self.chb_all_corners = QCheckBox(self.groupBox_6)
+        self.chb_all_corners.setObjectName(u"chb_all_corners")
+
+        self.gridLayout_2.addWidget(self.chb_all_corners, 0, 0, 1, 1)
+
+        self.chb_corner_5 = QCheckBox(self.groupBox_6)
+        self.chb_corner_5.setObjectName(u"chb_corner_5")
+
+        self.gridLayout_2.addWidget(self.chb_corner_5, 1, 1, 1, 1)
 
 
         self.horizontalLayout_2.addWidget(self.groupBox_6)
@@ -173,7 +173,17 @@ class Ui_salida_window(object):
         self.chb_dimensionless = QCheckBox(self.groupBox_7)
         self.chb_dimensionless.setObjectName(u"chb_dimensionless")
 
-        self.formLayout_2.setWidget(2, QFormLayout.SpanningRole, self.chb_dimensionless)
+        self.formLayout_2.setWidget(3, QFormLayout.SpanningRole, self.chb_dimensionless)
+
+        self.label_5 = QLabel(self.groupBox_7)
+        self.label_5.setObjectName(u"label_5")
+
+        self.formLayout_2.setWidget(2, QFormLayout.LabelRole, self.label_5)
+
+        self.le_tw = QLineEdit(self.groupBox_7)
+        self.le_tw.setObjectName(u"le_tw")
+
+        self.formLayout_2.setWidget(2, QFormLayout.FieldRole, self.le_tw)
 
 
         self.horizontalLayout_2.addWidget(self.groupBox_7)
@@ -211,19 +221,20 @@ class Ui_salida_window(object):
         self.label.setText(QCoreApplication.translate("salida_window", u"X", None))
         self.groupBox_5.setTitle("")
         self.groupBox_6.setTitle(QCoreApplication.translate("salida_window", u"Promedio en las esquinas", None))
-        self.chb_corner_7.setText(QCoreApplication.translate("salida_window", u"(L1, 1, N1)", None))
-        self.chb_all_corners.setText(QCoreApplication.translate("salida_window", u"Todas las esquinas", None))
-        self.chb_corner_3.setText(QCoreApplication.translate("salida_window", u"(1, M1, 1)", None))
-        self.chb_corner_5.setText(QCoreApplication.translate("salida_window", u"(L1, M1, 1)", None))
         self.chb_corner_1.setText(QCoreApplication.translate("salida_window", u"(1, 1, 1)", None))
-        self.chb_corner_4.setText(QCoreApplication.translate("salida_window", u"(1, 1, N1)", None))
+        self.chb_corner_7.setText(QCoreApplication.translate("salida_window", u"(L1, 1, N1)", None))
         self.chb_corner_8.setText(QCoreApplication.translate("salida_window", u"(L1, M1, N1)", None))
         self.chb_corner_6.setText(QCoreApplication.translate("salida_window", u"(1, M1, N1)", None))
         self.chb_corner_2.setText(QCoreApplication.translate("salida_window", u"(L1, 1, 1)", None))
+        self.chb_corner_4.setText(QCoreApplication.translate("salida_window", u"(1, 1, N1)", None))
+        self.chb_corner_3.setText(QCoreApplication.translate("salida_window", u"(1, M1, 1)", None))
+        self.chb_all_corners.setText(QCoreApplication.translate("salida_window", u"Todas las esquinas", None))
+        self.chb_corner_5.setText(QCoreApplication.translate("salida_window", u"(L1, M1, 1)", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("salida_window", u"Otras opciones", None))
         self.label_4.setText(QCoreApplication.translate("salida_window", u"Numero de iteraciones", None))
         self.le_last.setText(QCoreApplication.translate("salida_window", u"5", None))
         self.label_6.setText(QCoreApplication.translate("salida_window", u"Iteraciones de temperatura", None))
         self.chb_dimensionless.setText(QCoreApplication.translate("salida_window", u"C\u00e1lculos adimensionales", None))
+        self.label_5.setText(QCoreApplication.translate("salida_window", u"TW", None))
     # retranslateUi
 

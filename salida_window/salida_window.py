@@ -11,7 +11,7 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
         self.config_manager = config_manager
         self.config_name = "OUTPUT"
 
-        self.general_widgets = ["le_last", "le_temp_last", "chb_dimensionless"]
+        self.general_widgets = ["le_last", "le_temp_last", "le_tw", "chb_dimensionless"]
         self.variable_widgets = ["le_x", "le_y", "le_z", "chb_all_corners"]
         for i in range(1, 9):
             self.variable_widgets.extend([f"chb_corner_{i}"])
