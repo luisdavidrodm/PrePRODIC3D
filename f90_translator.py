@@ -804,14 +804,14 @@ class F90Translator:
 
     def process_buoyancy(self, plane, therm_exp_coef, gravity, angle):
         if plane == "XY":
-            velocities = [(1, "X", "FX(I)", "FXM(I)", "SIN"), (2, "Y", "FY(J)", "FYM(J)", "COS")]
+            velocities = [(1, "X", "FX(I)", "FXM(I)", "SIN", "I-1,J,K"), (2, "Y", "FY(J)", "FYM(J)", "COS", "I,J-1,K")]
         elif plane == "YZ":
-            velocities = [(2, "Y", "FY(J)", "FYM", "SIN"), (3, "Z", "FZ(K)", "FZM(K)", "COS")]
+            velocities = [(2, "Y", "FY(J)", "FYM", "SIN", "I,J-1,K"), (3, "Z", "FZ(K)", "FZM(K)", "COS", "I,J,K-1")]
         elif plane == "XZ":
-            velocities = [(1, "X", "FX(I)", "FXM(I)", "SIN"), (3, "Z", "FZ(K)", "FZM(K)", "COS")]
+            velocities = [(1, "X", "FX(I)", "FXM(I)", "SIN", "I-1,J,K"), (3, "Z", "FZ(K)", "FZM(K)", "COS", "I,J,K-1")]
 
         result = []
-        for nf, axis, F, FM, trig in velocities:
+        for nf, axis, F, FM, trig, indexes in velocities:
             start_i, end_i = (3, "L2") if axis == "X" else (2, "L2")
             start_j, end_j = (3, "M2") if axis == "Y" else (2, "M2")
             start_k, end_k = (3, "N2") if axis == "Z" else (2, "N2")
@@ -821,7 +821,7 @@ class F90Translator:
                     f"{i}DO I={start_i},{end_i}",
                     f"{i}{i}DO J={start_j},{end_j}",
                     f"{I}DO K={start_k},{end_k}",
-                    f"{I}{i}TM={F}(I)*F(I,J,K,5)+{FM}(I)*F(I-1,J,K,5)",
+                    f"{I}{i}TM={F}*F(I,J,K,5)+{FM}*F({indexes},5)",
                     f"{I}{i}SC(I,J,K)=SC(I,J,K)+RHO(I,J,K)*{therm_exp_coef}*{gravity}*{trig}({angle})*TM",
                     f"{I}ENDDO",
                     f"{i}{i}ENDDO",
