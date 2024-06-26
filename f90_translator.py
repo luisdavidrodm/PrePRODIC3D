@@ -182,7 +182,7 @@ class F90Translator:
         f90_lines.append("RETURN")
         return f90_lines
 
-    def translate_begin_section(self, grid, variables, dense, bound, values, output):
+    def translate_begin_section(self, variables, dense, bound, values, output):
         f90_lines = ["ENTRY BEGIN"]
 
         for num in range(1, 12):
@@ -204,6 +204,9 @@ class F90Translator:
         if variables.get("cb_tsimu", "Permanente") == "Transitorio":
             f90_lines.append(f"IPTM={variables.get('le_iptm', '0')}")
             f90_lines.append(f"DT={variables.get('le_dt', '1.E+20')}")
+
+        if "chb_dimensionless" in output and output["chb_dimensionless"] == 2:
+            f90_lines.append("TW=1.0")
 
         for num in range(1, 12):
             var_name = f"le_var_title{num}"
@@ -557,14 +560,16 @@ class F90Translator:
                             f90_lines.append(f"{i}{i}ENDDO")
                             f90_lines.append(f"{i}ENDDO")
 
-            #### KBC=chb_flux, FLXC=le_value, FLXP=le_tempamb y GAM=le_k
+            #### chb_flux, FLXC=le_value, FLXP=le_tempamb y GAM=le_k
             for boundary, patches in bound.items():
                 for patch, patch_values in patches.items():
-                    transversal_var, vertical_var, transversal_end, vertical_end, indexes, phi_var, _ = (
+                    transversal_var, vertical_var, transversal_end, vertical_end, indexes, phi_var, arv = (
                         self.loop_mapping[boundary]
                     )
                     cvi = 2 if patch_values.get("chb_exclude_borders", 1) == 2 else 1  # cvi: control_volume_index
                     condition_str = self.border_operator_conditions(patch_values, transversal_var, vertical_var)
+
+                    #### chb_flux
                     if var in patch_values and "chb_flux" in patch_values[var] and patch_values[var]["chb_flux"] == 2:
                         if not added_if:
                             f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
@@ -601,6 +606,55 @@ class F90Translator:
                                 f"{i}ENDDO",
                             ]
                         )
+
+                    #### chb_convec
+                    if (
+                        var in patch_values
+                        and "chb_convec" in patch_values[var]
+                        and patch_values[var]["chb_convec"] == 2
+                    ):
+                        if not added_if:
+                            f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
+                            added_if = True
+                        f90_lines.extend(
+                            [
+                                f"{i}DO {transversal_var}={cvi},{transversal_end.format(cvi)}",
+                                f"{i}{i}DO {vertical_var}={cvi},{vertical_end.format(cvi)}",
+                            ]
+                        )
+                        if patch == "Borde base":
+                            f90_lines.append(f"{I}KBC{phi_var}({transversal_var},{vertical_var})=2")
+                        else:
+                            f90_lines.append(f"{I}IF({condition_str}) KBC{phi_var}({transversal_var},{vertical_var})=2")
+                        if "le_value" in patch_values[var]:
+                            le_value = patch_values[var]["le_value"]
+                            le_tempamb = patch_values[var].get("le_tempamb", "1")
+                            if patch == "Borde base":
+                                f90_lines.append(
+                                    f"{I}FLXC{phi_var}({transversal_var},{vertical_var})={le_value}*{le_tempamb}*{arv}"
+                                )
+                            else:
+                                f90_lines.append(
+                                    f"{I}IF({condition_str}) FLXC{phi_var}({transversal_var},{vertical_var})={le_value}*{le_tempamb}*{arv}"
+                                )
+                        if "le_tempamb" in patch_values[var]:
+                            le_tempamb = patch_values[var]["le_tempamb"]
+                            if patch == "Borde base":
+                                f90_lines.append(
+                                    f"{I}FLXP{phi_var}({transversal_var},{vertical_var})=-{le_tempamb}*{arv}"
+                                )
+                            else:
+                                f90_lines.append(
+                                    f"{I}IF({condition_str}) FLXP{phi_var}({transversal_var},{vertical_var})=-{le_tempamb}*{arv}"
+                                )
+                        f90_lines.extend(
+                            [
+                                f"{i}{i}ENDDO",
+                                f"{i}ENDDO",
+                            ]
+                        )
+
+                    ##### GAM=le_k
                     if var in patch_values and "le_k" in patch_values[var]:
                         if not added_if:
                             f90_lines.append(f"IF (NF.EQ.{nf_value}) THEN")
@@ -723,14 +777,14 @@ class F90Translator:
                 extended_variables[key] = new_entries
         return extended_variables
 
-    def generate_corner_equation(self, i, j, k, var_index):
-        adj_i = "2" if i == "1" else "L2"
-        adj_j = "2" if j == "1" else "M2"
-        adj_k = "2" if k == "1" else "N2"
-        adjacents = [(i, adj_j, k), (adj_i, j, k), (i, j, adj_k)]
-        opposites = [(adj_i, adj_j, k), (adj_i, j, adj_k), (i, adj_j, adj_k)]
+    def generate_corner_equation(self, x, y, z, var_index):
+        adj_i = "2" if x == "1" else "L2"
+        adj_j = "2" if y == "1" else "M2"
+        adj_k = "2" if z == "1" else "N2"
+        adjacents = [(x, adj_j, z), (adj_i, y, z), (x, y, adj_k)]
+        opposites = [(adj_i, adj_j, z), (adj_i, y, adj_k), (x, adj_j, adj_k)]
         corner_opposite = (adj_i, adj_j, adj_k)
-        equation_parts = [f"F({i},{j},{k},{var_index}) = "]
+        equation_parts = [f"F({x},{y},{z},{var_index}) = "]
         equation_parts.append(f"F({adjacents[0][0]},{adjacents[0][1]},{adjacents[0][2]},{var_index}) ")
         equation_parts.append(f"+ F({adjacents[1][0]},{adjacents[1][1]},{adjacents[1][2]},{var_index}) ")
         equation_parts.append(f"+ F({adjacents[2][0]},{adjacents[2][1]},{adjacents[2][2]},{var_index}) ")
@@ -755,7 +809,6 @@ class F90Translator:
 
         # BEGIN
         begin_section_lines = self.translate_begin_section(
-            self.config_manager.grid,
             self.config_manager.variables,
             self.config_manager.dense,
             self.config_manager.bound,
