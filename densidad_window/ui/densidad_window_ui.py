@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'densidad_windowSvDJuz.ui'
+## Form generated from reading UI file 'densidad_windowuHzvDi.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -285,6 +285,12 @@ class Ui_densidad_window(object):
         self.cb_ex_z_start.setItemText(2, QCoreApplication.translate("densidad_window", u"\u2265", None))
 
         self.label_10.setText(QCoreApplication.translate("densidad_window", u"Z", None))
+#if QT_CONFIG(tooltip)
+        self.chb_exclude_borders.setToolTip(QCoreApplication.translate("densidad_window", u"<html><head/><body><p>Activa esta opci\u00f3n para excluir<br/>los bordes inicial y final del dominio<br/>para cada iteraci\u00f3n en el volumen<br/>seleccionado, independientemente<br/>de las limitantes por coordenadas.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(whatsthis)
+        self.chb_exclude_borders.setWhatsThis(QCoreApplication.translate("densidad_window", u"Activa esta opci\u00f3n para excluir los bordes inicial y final del dominio para cada iteraci\u00f3n en el volumen seleccionado, independientemente de las limitantes por coordenadas.", None))
+#endif // QT_CONFIG(whatsthis)
         self.chb_exclude_borders.setText(QCoreApplication.translate("densidad_window", u"V.C Excluir Bordes", None))
         self.groupBox_3.setTitle(QCoreApplication.translate("densidad_window", u"Conformaci\u00f3n de la regi\u00f3n", None))
         self.pb_add_volume.setText(QCoreApplication.translate("densidad_window", u"Agregar un volumen", None))

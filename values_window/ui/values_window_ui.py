@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windowkRRPMr.ui'
+## Form generated from reading UI file 'values_windowdaxOgA.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -503,7 +503,19 @@ class Ui_valores_window(object):
         self.label_16.setText(QCoreApplication.translate("valores_window", u"Ind. Impresi\u00f3n", None))
         self.groupBox_11.setTitle("")
         self.chb_ipun.setText(QCoreApplication.translate("valores_window", u"Esquinas", None))
+#if QT_CONFIG(tooltip)
+        self.chb_ex_value.setToolTip(QCoreApplication.translate("valores_window", u"<html><head/><body><p>Activa esta opci\u00f3n para excluir los <br/>bordes inicial y final del dominio al <br/>iterar este valor.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(whatsthis)
+        self.chb_ex_value.setWhatsThis(QCoreApplication.translate("valores_window", u"Activa esta opci\u00f3n para excluir los bordes inicial y final del dominio al iterar este valor.", None))
+#endif // QT_CONFIG(whatsthis)
         self.chb_ex_value.setText("")
+#if QT_CONFIG(tooltip)
+        self.chb_ex_k.setToolTip(QCoreApplication.translate("valores_window", u"<html><head/><body><p>Activa esta opci\u00f3n para excluir los <br/>bordes inicial y final del dominio al <br/>iterar este valor.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(whatsthis)
+        self.chb_ex_k.setWhatsThis(QCoreApplication.translate("valores_window", u"Activa esta opci\u00f3n para excluir los bordes inicial y final del dominio al iterar este valor.", None))
+#endif // QT_CONFIG(whatsthis)
         self.chb_ex_k.setText("")
         self.groupBox_10.setTitle("")
         self.chb_iborx.setText(QCoreApplication.translate("valores_window", u"X", None))
@@ -545,6 +557,12 @@ class Ui_valores_window(object):
 
         self.pb_add_volume.setText(QCoreApplication.translate("valores_window", u"Agregar un volumen", None))
         self.pb_remove_volume.setText(QCoreApplication.translate("valores_window", u"Eliminar \u00faltimo volumen", None))
+#if QT_CONFIG(tooltip)
+        self.chb_exclude_borders.setToolTip(QCoreApplication.translate("valores_window", u"<html><head/><body><p>Activa esta opci\u00f3n para excluir<br/>los bordes inicial y final del dominio<br/>para cada iteraci\u00f3n en el volumen<br/>seleccionado, independientemente<br/>de las limitantes por coordenadas.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(whatsthis)
+        self.chb_exclude_borders.setWhatsThis(QCoreApplication.translate("valores_window", u"Activa esta opci\u00f3n para excluir los bordes inicial y final del dominio para cada iteraci\u00f3n en el volumen seleccionado, independientemente de las limitantes por coordenadas.", None))
+#endif // QT_CONFIG(whatsthis)
         self.chb_exclude_borders.setText(QCoreApplication.translate("valores_window", u"V.C. Excluir bordes", None))
         self.groupBox_9.setTitle("")
         self.label_13.setText(QCoreApplication.translate("valores_window", u"Y", None))

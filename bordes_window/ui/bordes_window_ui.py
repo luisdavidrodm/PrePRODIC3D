@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bordes_windowPoVgXi.ui'
+## Form generated from reading UI file 'bordes_windowyewDIl.ui'
 ##
 ## Created by: Qt User Interface Compiler version 6.4.3
 ##
@@ -89,6 +89,9 @@ class Ui_bordes_window(object):
 
         self.chb_ex_value = QCheckBox(self.groupBox_8)
         self.chb_ex_value.setObjectName(u"chb_ex_value")
+#if QT_CONFIG(whatsthis)
+        self.chb_ex_value.setWhatsThis(u"Activa esta opci\u00f3n para iterar este valor en la posici\u00f3n vecina del borde seleccionado en vez de iterar en el borde mismo.")
+#endif // QT_CONFIG(whatsthis)
 
         self.gridLayout_6.addWidget(self.chb_ex_value, 3, 1, 1, 1)
 
@@ -113,6 +116,9 @@ class Ui_bordes_window(object):
 
         self.chb_ex_k = QCheckBox(self.groupBox_9)
         self.chb_ex_k.setObjectName(u"chb_ex_k")
+#if QT_CONFIG(whatsthis)
+        self.chb_ex_k.setWhatsThis(u"Activa esta opci\u00f3n para iterar este valor en la posici\u00f3n vecina del borde seleccionado en vez de iterar en el borde mismo.")
+#endif // QT_CONFIG(whatsthis)
 
         self.formLayout.setWidget(1, QFormLayout.FieldRole, self.chb_ex_k)
 
@@ -318,14 +324,14 @@ class Ui_bordes_window(object):
         self.lb_value.setText(QCoreApplication.translate("bordes_window", u"Valor", None))
         self.lb_variable.setText(QCoreApplication.translate("bordes_window", u"Temp. ambiente", None))
 #if QT_CONFIG(tooltip)
-        self.chb_ex_value.setToolTip(QCoreApplication.translate("bordes_window", u"Hola", None))
+        self.chb_ex_value.setToolTip(QCoreApplication.translate("bordes_window", u"<html><head/><body><p>Activa esta opci\u00f3n para iterar este<br/>valor en la posici\u00f3n vecina del borde<br/>seleccionado en vez de iterar en el<br/>borde mismo.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)
-#if QT_CONFIG(whatsthis)
-        self.chb_ex_value.setWhatsThis(QCoreApplication.translate("bordes_window", u"Probando", None))
-#endif // QT_CONFIG(whatsthis)
         self.chb_ex_value.setText("")
         self.groupBox_9.setTitle("")
         self.label.setText(QCoreApplication.translate("bordes_window", u"Conductividad", None))
+#if QT_CONFIG(tooltip)
+        self.chb_ex_k.setToolTip(QCoreApplication.translate("bordes_window", u"<html><head/><body><p>Activa esta opci\u00f3n para iterar este<br/>valor en la posici\u00f3n vecina del borde<br/>seleccionado en vez de iterar en el<br/>borde mismo.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
         self.chb_ex_k.setText("")
         self.label_6.setText(QCoreApplication.translate("bordes_window", u"Fracci\u00f3n m\u00e1sica", None))
         self.le_fracmass.setText(QCoreApplication.translate("bordes_window", u"1", None))
@@ -339,6 +345,12 @@ class Ui_bordes_window(object):
         self.pb_addpatch.setText(QCoreApplication.translate("bordes_window", u"Agregar un segmento", None))
         self.pb_rempatch.setText(QCoreApplication.translate("bordes_window", u"Eliminar un segmento", None))
         self.label_2.setText(QCoreApplication.translate("bordes_window", u"Borde", None))
+#if QT_CONFIG(tooltip)
+        self.chb_exclude_borders.setToolTip(QCoreApplication.translate("bordes_window", u"<html><head/><body><p>Activa esta opci\u00f3n para excluir<br/>los bordes inicial y final del dominio<br/>para cada iteraci\u00f3n en el parche<br/>seleccionado, independientemente<br/>de las limitantes por coordenadas.</p></body></html>", None))
+#endif // QT_CONFIG(tooltip)
+#if QT_CONFIG(whatsthis)
+        self.chb_exclude_borders.setWhatsThis(QCoreApplication.translate("bordes_window", u"Activa esta opci\u00f3n para excluir los bordes inicial y final del dominio para cada iteraci\u00f3n en el parche seleccionado, independientemente de las limitantes por coordenadas.", None))
+#endif // QT_CONFIG(whatsthis)
         self.chb_exclude_borders.setText(QCoreApplication.translate("bordes_window", u"V.C. Excluir bordes", None))
         self.groupBox_2.setTitle("")
         self.cb_ex_vertical_end.setItemText(0, "")

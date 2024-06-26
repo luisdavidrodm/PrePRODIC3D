@@ -142,6 +142,12 @@
                 </item>
                 <item row="0" column="2">
                  <widget class="QCheckBox" name="chb_ex_value">
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activa esta opción para excluir los &lt;br/&gt;bordes inicial y final del dominio al &lt;br/&gt;iterar este valor.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Activa esta opción para excluir los bordes inicial y final del dominio al iterar este valor.</string>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
@@ -149,6 +155,12 @@
                 </item>
                 <item row="2" column="2">
                  <widget class="QCheckBox" name="chb_ex_k">
+                  <property name="toolTip">
+                   <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activa esta opción para excluir los &lt;br/&gt;bordes inicial y final del dominio al &lt;br/&gt;iterar este valor.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+                  </property>
+                  <property name="whatsThis">
+                   <string>Activa esta opción para excluir los bordes inicial y final del dominio al iterar este valor.</string>
+                  </property>
                   <property name="text">
                    <string/>
                   </property>
@@ -470,6 +482,12 @@
           </item>
           <item row="4" column="0">
            <widget class="QCheckBox" name="chb_exclude_borders">
+            <property name="toolTip">
+             <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activa esta opción para excluir&lt;br/&gt;los bordes inicial y final del dominio&lt;br/&gt;para cada iteración en el volumen&lt;br/&gt;seleccionado, independientemente&lt;br/&gt;de las limitantes por coordenadas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+            </property>
+            <property name="whatsThis">
+             <string>Activa esta opción para excluir los bordes inicial y final del dominio para cada iteración en el volumen seleccionado, independientemente de las limitantes por coordenadas.</string>
+            </property>
             <property name="text">
              <string>V.C. Excluir bordes</string>
             </property>
