@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windowvMIIGg.ui'
+## Form generated from reading UI file 'values_windowHYSkLU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -17,7 +17,7 @@ class Ui_valores_window(object):
     def setupUi(self, valores_window):
         if not valores_window.objectName():
             valores_window.setObjectName(u"valores_window")
-        valores_window.resize(646, 788)
+        valores_window.resize(613, 788)
         sizePolicy = QSizePolicy(QSizePolicy.Fixed, QSizePolicy.Fixed)
         sizePolicy.setHorizontalStretch(0)
         sizePolicy.setVerticalStretch(0)
@@ -35,7 +35,7 @@ class Ui_valores_window(object):
         self.scrollArea.setWidgetResizable(True)
         self.scrollAreaWidgetContents = QWidget()
         self.scrollAreaWidgetContents.setObjectName(u"scrollAreaWidgetContents")
-        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 626, 768))
+        self.scrollAreaWidgetContents.setGeometry(QRect(0, 0, 596, 751))
         self.verticalLayout_3 = QVBoxLayout(self.scrollAreaWidgetContents)
         self.verticalLayout_3.setObjectName(u"verticalLayout_3")
         self.groupBox = QGroupBox(self.scrollAreaWidgetContents)
@@ -340,110 +340,17 @@ class Ui_valores_window(object):
         self.chb_exclude_borders = QCheckBox(self.groupBox)
         self.chb_exclude_borders.setObjectName(u"chb_exclude_borders")
 
-        self.formLayout_3.setWidget(4, QFormLayout.LabelRole, self.chb_exclude_borders)
+        self.formLayout_3.setWidget(5, QFormLayout.LabelRole, self.chb_exclude_borders)
 
         self.groupBox_9 = QGroupBox(self.groupBox)
         self.groupBox_9.setObjectName(u"groupBox_9")
         self.gridLayout = QGridLayout(self.groupBox_9)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.label_13 = QLabel(self.groupBox_9)
-        self.label_13.setObjectName(u"label_13")
-        self.label_13.setAlignment(Qt.AlignCenter)
-
-        self.gridLayout.addWidget(self.label_13, 0, 3, 1, 1)
-
-        self.le_y_end = QLineEdit(self.groupBox_9)
-        self.le_y_end.setObjectName(u"le_y_end")
-        sizePolicy2 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed)
-        sizePolicy2.setHorizontalStretch(0)
-        sizePolicy2.setVerticalStretch(0)
-        sizePolicy2.setHeightForWidth(self.le_y_end.sizePolicy().hasHeightForWidth())
-        self.le_y_end.setSizePolicy(sizePolicy2)
-
-        self.gridLayout.addWidget(self.le_y_end, 2, 3, 1, 1)
-
-        self.le_z_end = QLineEdit(self.groupBox_9)
-        self.le_z_end.setObjectName(u"le_z_end")
-        sizePolicy2.setHeightForWidth(self.le_z_end.sizePolicy().hasHeightForWidth())
-        self.le_z_end.setSizePolicy(sizePolicy2)
-
-        self.gridLayout.addWidget(self.le_z_end, 2, 5, 1, 1)
-
-        self.cb_ex_y_end = QComboBox(self.groupBox_9)
-        self.cb_ex_y_end.addItem("")
-        self.cb_ex_y_end.addItem("")
-        self.cb_ex_y_end.addItem("")
-        self.cb_ex_y_end.setObjectName(u"cb_ex_y_end")
-
-        self.gridLayout.addWidget(self.cb_ex_y_end, 2, 2, 1, 1)
-
-        self.cb_ex_x_end = QComboBox(self.groupBox_9)
-        self.cb_ex_x_end.addItem("")
-        self.cb_ex_x_end.addItem("")
-        self.cb_ex_x_end.addItem("")
-        self.cb_ex_x_end.setObjectName(u"cb_ex_x_end")
-
-        self.gridLayout.addWidget(self.cb_ex_x_end, 2, 0, 1, 1)
-
-        self.cb_ex_z_end = QComboBox(self.groupBox_9)
-        self.cb_ex_z_end.addItem("")
-        self.cb_ex_z_end.addItem("")
-        self.cb_ex_z_end.addItem("")
-        self.cb_ex_z_end.setObjectName(u"cb_ex_z_end")
-        sizePolicy.setHeightForWidth(self.cb_ex_z_end.sizePolicy().hasHeightForWidth())
-        self.cb_ex_z_end.setSizePolicy(sizePolicy)
-
-        self.gridLayout.addWidget(self.cb_ex_z_end, 2, 4, 1, 1)
-
-        self.cb_ex_x_start = QComboBox(self.groupBox_9)
-        self.cb_ex_x_start.addItem("")
-        self.cb_ex_x_start.addItem("")
-        self.cb_ex_x_start.addItem("")
-        self.cb_ex_x_start.setObjectName(u"cb_ex_x_start")
-
-        self.gridLayout.addWidget(self.cb_ex_x_start, 1, 0, 1, 1)
-
-        self.le_y_start = QLineEdit(self.groupBox_9)
-        self.le_y_start.setObjectName(u"le_y_start")
-        sizePolicy2.setHeightForWidth(self.le_y_start.sizePolicy().hasHeightForWidth())
-        self.le_y_start.setSizePolicy(sizePolicy2)
-
-        self.gridLayout.addWidget(self.le_y_start, 1, 3, 1, 1)
-
-        self.cb_ex_z_start = QComboBox(self.groupBox_9)
-        self.cb_ex_z_start.addItem("")
-        self.cb_ex_z_start.addItem("")
-        self.cb_ex_z_start.addItem("")
-        self.cb_ex_z_start.setObjectName(u"cb_ex_z_start")
-
-        self.gridLayout.addWidget(self.cb_ex_z_start, 1, 4, 1, 1)
-
-        self.le_z_start = QLineEdit(self.groupBox_9)
-        self.le_z_start.setObjectName(u"le_z_start")
-        sizePolicy2.setHeightForWidth(self.le_z_start.sizePolicy().hasHeightForWidth())
-        self.le_z_start.setSizePolicy(sizePolicy2)
-
-        self.gridLayout.addWidget(self.le_z_start, 1, 5, 1, 1)
-
         self.label_14 = QLabel(self.groupBox_9)
         self.label_14.setObjectName(u"label_14")
         self.label_14.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.label_14, 0, 5, 1, 1)
-
-        self.le_x_start = QLineEdit(self.groupBox_9)
-        self.le_x_start.setObjectName(u"le_x_start")
-        sizePolicy2.setHeightForWidth(self.le_x_start.sizePolicy().hasHeightForWidth())
-        self.le_x_start.setSizePolicy(sizePolicy2)
-
-        self.gridLayout.addWidget(self.le_x_start, 1, 1, 1, 1)
-
-        self.le_x_end = QLineEdit(self.groupBox_9)
-        self.le_x_end.setObjectName(u"le_x_end")
-        sizePolicy2.setHeightForWidth(self.le_x_end.sizePolicy().hasHeightForWidth())
-        self.le_x_end.setSizePolicy(sizePolicy2)
-
-        self.gridLayout.addWidget(self.le_x_end, 2, 1, 1, 1)
 
         self.cb_ex_y_start = QComboBox(self.groupBox_9)
         self.cb_ex_y_start.addItem("")
@@ -453,14 +360,99 @@ class Ui_valores_window(object):
 
         self.gridLayout.addWidget(self.cb_ex_y_start, 1, 2, 1, 1)
 
+        self.cb_ex_x_start = QComboBox(self.groupBox_9)
+        self.cb_ex_x_start.addItem("")
+        self.cb_ex_x_start.addItem("")
+        self.cb_ex_x_start.addItem("")
+        self.cb_ex_x_start.setObjectName(u"cb_ex_x_start")
+
+        self.gridLayout.addWidget(self.cb_ex_x_start, 1, 0, 1, 1)
+
+        self.cb_ex_x_end = QComboBox(self.groupBox_9)
+        self.cb_ex_x_end.addItem("")
+        self.cb_ex_x_end.addItem("")
+        self.cb_ex_x_end.addItem("")
+        self.cb_ex_x_end.setObjectName(u"cb_ex_x_end")
+
+        self.gridLayout.addWidget(self.cb_ex_x_end, 2, 0, 1, 1)
+
         self.label_12 = QLabel(self.groupBox_9)
         self.label_12.setObjectName(u"label_12")
         self.label_12.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.label_12, 0, 1, 1, 1)
 
+        self.cb_ex_y_end = QComboBox(self.groupBox_9)
+        self.cb_ex_y_end.addItem("")
+        self.cb_ex_y_end.addItem("")
+        self.cb_ex_y_end.addItem("")
+        self.cb_ex_y_end.setObjectName(u"cb_ex_y_end")
 
-        self.formLayout_3.setWidget(5, QFormLayout.SpanningRole, self.groupBox_9)
+        self.gridLayout.addWidget(self.cb_ex_y_end, 2, 2, 1, 1)
+
+        self.label_13 = QLabel(self.groupBox_9)
+        self.label_13.setObjectName(u"label_13")
+        self.label_13.setAlignment(Qt.AlignCenter)
+
+        self.gridLayout.addWidget(self.label_13, 0, 3, 1, 1)
+
+        self.le_z_end = QLineEdit(self.groupBox_9)
+        self.le_z_end.setObjectName(u"le_z_end")
+        sizePolicy2 = QSizePolicy(QSizePolicy.Ignored, QSizePolicy.Fixed)
+        sizePolicy2.setHorizontalStretch(0)
+        sizePolicy2.setVerticalStretch(0)
+        sizePolicy2.setHeightForWidth(self.le_z_end.sizePolicy().hasHeightForWidth())
+        self.le_z_end.setSizePolicy(sizePolicy2)
+
+        self.gridLayout.addWidget(self.le_z_end, 2, 5, 1, 1)
+
+        self.le_x_end = QLineEdit(self.groupBox_9)
+        self.le_x_end.setObjectName(u"le_x_end")
+        sizePolicy2.setHeightForWidth(self.le_x_end.sizePolicy().hasHeightForWidth())
+        self.le_x_end.setSizePolicy(sizePolicy2)
+
+        self.gridLayout.addWidget(self.le_x_end, 2, 1, 1, 1)
+
+        self.le_z_start = QLineEdit(self.groupBox_9)
+        self.le_z_start.setObjectName(u"le_z_start")
+        sizePolicy2.setHeightForWidth(self.le_z_start.sizePolicy().hasHeightForWidth())
+        self.le_z_start.setSizePolicy(sizePolicy2)
+
+        self.gridLayout.addWidget(self.le_z_start, 1, 5, 1, 1)
+
+        self.le_x_start = QLineEdit(self.groupBox_9)
+        self.le_x_start.setObjectName(u"le_x_start")
+        sizePolicy2.setHeightForWidth(self.le_x_start.sizePolicy().hasHeightForWidth())
+        self.le_x_start.setSizePolicy(sizePolicy2)
+
+        self.gridLayout.addWidget(self.le_x_start, 1, 1, 1, 1)
+
+        self.le_y_end = QLineEdit(self.groupBox_9)
+        self.le_y_end.setObjectName(u"le_y_end")
+        sizePolicy2.setHeightForWidth(self.le_y_end.sizePolicy().hasHeightForWidth())
+        self.le_y_end.setSizePolicy(sizePolicy2)
+
+        self.gridLayout.addWidget(self.le_y_end, 2, 3, 1, 1)
+
+        self.le_y_start = QLineEdit(self.groupBox_9)
+        self.le_y_start.setObjectName(u"le_y_start")
+        sizePolicy2.setHeightForWidth(self.le_y_start.sizePolicy().hasHeightForWidth())
+        self.le_y_start.setSizePolicy(sizePolicy2)
+
+        self.gridLayout.addWidget(self.le_y_start, 1, 3, 1, 1)
+
+        self.cb_ex_z_start = QComboBox(self.groupBox_9)
+        self.cb_ex_z_start.setObjectName(u"cb_ex_z_start")
+
+        self.gridLayout.addWidget(self.cb_ex_z_start, 1, 4, 1, 1)
+
+        self.comboBox_2 = QComboBox(self.groupBox_9)
+        self.comboBox_2.setObjectName(u"comboBox_2")
+
+        self.gridLayout.addWidget(self.comboBox_2, 2, 4, 1, 1)
+
+
+        self.formLayout_3.setWidget(6, QFormLayout.SpanningRole, self.groupBox_9)
 
 
         self.verticalLayout_3.addWidget(self.groupBox)
@@ -557,32 +549,24 @@ class Ui_valores_window(object):
 #endif // QT_CONFIG(whatsthis)
         self.chb_exclude_borders.setText(QCoreApplication.translate("valores_window", u"V.C. Excluir bordes", None))
         self.groupBox_9.setTitle("")
-        self.label_13.setText(QCoreApplication.translate("valores_window", u"Y", None))
-        self.cb_ex_y_end.setItemText(0, "")
-        self.cb_ex_y_end.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
-        self.cb_ex_y_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
-
-        self.cb_ex_x_end.setItemText(0, "")
-        self.cb_ex_x_end.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
-        self.cb_ex_x_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
-
-        self.cb_ex_z_end.setItemText(0, "")
-        self.cb_ex_z_end.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
-        self.cb_ex_z_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
-
-        self.cb_ex_x_start.setItemText(0, "")
-        self.cb_ex_x_start.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
-        self.cb_ex_x_start.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
-
-        self.cb_ex_z_start.setItemText(0, "")
-        self.cb_ex_z_start.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
-        self.cb_ex_z_start.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
-
         self.label_14.setText(QCoreApplication.translate("valores_window", u"Z", None))
         self.cb_ex_y_start.setItemText(0, "")
         self.cb_ex_y_start.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
         self.cb_ex_y_start.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
 
+        self.cb_ex_x_start.setItemText(0, "")
+        self.cb_ex_x_start.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
+        self.cb_ex_x_start.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
+
+        self.cb_ex_x_end.setItemText(0, "")
+        self.cb_ex_x_end.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
+        self.cb_ex_x_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
+
         self.label_12.setText(QCoreApplication.translate("valores_window", u"X", None))
+        self.cb_ex_y_end.setItemText(0, "")
+        self.cb_ex_y_end.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
+        self.cb_ex_y_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
+
+        self.label_13.setText(QCoreApplication.translate("valores_window", u"Y", None))
     # retranslateUi
 

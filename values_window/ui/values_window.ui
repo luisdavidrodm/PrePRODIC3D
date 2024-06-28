@@ -6,7 +6,7 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>646</width>
+    <width>613</width>
     <height>788</height>
    </rect>
   </property>
@@ -36,8 +36,8 @@
        <rect>
         <x>0</x>
         <y>0</y>
-        <width>626</width>
-        <height>768</height>
+        <width>596</width>
+        <height>751</height>
        </rect>
       </property>
       <layout class="QVBoxLayout" name="verticalLayout_3">
@@ -480,7 +480,7 @@
             </layout>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QCheckBox" name="chb_exclude_borders">
             <property name="toolTip">
              <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activa esta opción para excluir&lt;br/&gt;los bordes inicial y final del dominio&lt;br/&gt;para cada iteración en el volumen&lt;br/&gt;seleccionado, independientemente&lt;br/&gt;de las limitantes por coordenadas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
@@ -493,44 +493,24 @@
             </property>
            </widget>
           </item>
-          <item row="5" column="0" colspan="2">
+          <item row="6" column="0" colspan="2">
            <widget class="QGroupBox" name="groupBox_9">
             <property name="title">
              <string/>
             </property>
             <layout class="QGridLayout" name="gridLayout">
-             <item row="0" column="3">
-              <widget class="QLabel" name="label_13">
+             <item row="0" column="5">
+              <widget class="QLabel" name="label_14">
                <property name="text">
-                <string>Y</string>
+                <string>Z</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
-             <item row="2" column="3">
-              <widget class="QLineEdit" name="le_y_end">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="5">
-              <widget class="QLineEdit" name="le_z_end">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="2" column="2">
-              <widget class="QComboBox" name="cb_ex_y_end">
+             <item row="1" column="2">
+              <widget class="QComboBox" name="cb_ex_y_start">
                <item>
                 <property name="text">
                  <string/>
@@ -538,56 +518,12 @@
                </item>
                <item>
                 <property name="text">
-                 <string>&lt;</string>
+                 <string>&gt;</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>≤</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="2" column="0">
-              <widget class="QComboBox" name="cb_ex_x_end">
-               <item>
-                <property name="text">
-                 <string/>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>&lt;</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>≤</string>
-                </property>
-               </item>
-              </widget>
-             </item>
-             <item row="2" column="4">
-              <widget class="QComboBox" name="cb_ex_z_end">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Fixed" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-               <item>
-                <property name="text">
-                 <string/>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>&lt;</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>≤</string>
+                 <string>≥</string>
                 </property>
                </item>
               </widget>
@@ -611,18 +547,8 @@
                </item>
               </widget>
              </item>
-             <item row="1" column="3">
-              <widget class="QLineEdit" name="le_y_start">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="1" column="4">
-              <widget class="QComboBox" name="cb_ex_z_start">
+             <item row="2" column="0">
+              <widget class="QComboBox" name="cb_ex_x_end">
                <item>
                 <property name="text">
                  <string/>
@@ -630,38 +556,57 @@
                </item>
                <item>
                 <property name="text">
-                 <string>&gt;</string>
+                 <string>&lt;</string>
                 </property>
                </item>
                <item>
                 <property name="text">
-                 <string>≥</string>
+                 <string>≤</string>
                 </property>
                </item>
               </widget>
              </item>
-             <item row="1" column="5">
-              <widget class="QLineEdit" name="le_z_start">
-               <property name="sizePolicy">
-                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
-                 <horstretch>0</horstretch>
-                 <verstretch>0</verstretch>
-                </sizepolicy>
-               </property>
-              </widget>
-             </item>
-             <item row="0" column="5">
-              <widget class="QLabel" name="label_14">
+             <item row="0" column="1">
+              <widget class="QLabel" name="label_12">
                <property name="text">
-                <string>Z</string>
+                <string>X</string>
                </property>
                <property name="alignment">
                 <set>Qt::AlignCenter</set>
                </property>
               </widget>
              </item>
-             <item row="1" column="1">
-              <widget class="QLineEdit" name="le_x_start">
+             <item row="2" column="2">
+              <widget class="QComboBox" name="cb_ex_y_end">
+               <item>
+                <property name="text">
+                 <string/>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>&lt;</string>
+                </property>
+               </item>
+               <item>
+                <property name="text">
+                 <string>≤</string>
+                </property>
+               </item>
+              </widget>
+             </item>
+             <item row="0" column="3">
+              <widget class="QLabel" name="label_13">
+               <property name="text">
+                <string>Y</string>
+               </property>
+               <property name="alignment">
+                <set>Qt::AlignCenter</set>
+               </property>
+              </widget>
+             </item>
+             <item row="2" column="5">
+              <widget class="QLineEdit" name="le_z_end">
                <property name="sizePolicy">
                 <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
                  <horstretch>0</horstretch>
@@ -680,34 +625,51 @@
                </property>
               </widget>
              </item>
-             <item row="1" column="2">
-              <widget class="QComboBox" name="cb_ex_y_start">
-               <item>
-                <property name="text">
-                 <string/>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>&gt;</string>
-                </property>
-               </item>
-               <item>
-                <property name="text">
-                 <string>≥</string>
-                </property>
-               </item>
+             <item row="1" column="5">
+              <widget class="QLineEdit" name="le_z_start">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
               </widget>
              </item>
-             <item row="0" column="1">
-              <widget class="QLabel" name="label_12">
-               <property name="text">
-                <string>X</string>
-               </property>
-               <property name="alignment">
-                <set>Qt::AlignCenter</set>
+             <item row="1" column="1">
+              <widget class="QLineEdit" name="le_x_start">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
                </property>
               </widget>
+             </item>
+             <item row="2" column="3">
+              <widget class="QLineEdit" name="le_y_end">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="3">
+              <widget class="QLineEdit" name="le_y_start">
+               <property name="sizePolicy">
+                <sizepolicy hsizetype="Ignored" vsizetype="Fixed">
+                 <horstretch>0</horstretch>
+                 <verstretch>0</verstretch>
+                </sizepolicy>
+               </property>
+              </widget>
+             </item>
+             <item row="1" column="4">
+              <widget class="QComboBox" name="cb_ex_z_start"/>
+             </item>
+             <item row="2" column="4">
+              <widget class="QComboBox" name="comboBox_2"/>
              </item>
             </layout>
            </widget>
