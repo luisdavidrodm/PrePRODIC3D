@@ -2,11 +2,13 @@ import glob
 import sys
 import os
 import subprocess
+
 import shutil
 import configparser
 
 from PySide2 import QtWidgets as qtw
 from PySide2 import QtCore as qtc
+from PySide2.QtGui import QIcon
 
 from main_window.ui.main_window_ui import Ui_main_window
 from inicio_window.inicio_window import InicioWindow
@@ -293,7 +295,9 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             config.read(config_path, encoding="utf-8")
             if "Rutas" not in config or "ruta_paraview" not in config["Rutas"]:
                 qtw.QMessageBox.warning(
-                    self, "Advertencia de Configuración", "La ruta de ParaView no está definida en la configuración."
+                    self,
+                    "Advertencia de Configuración de paraview.exe",
+                    "La ruta de ParaView no está definida en la configuración.",
                 )
                 return None
             paraview_path = config["Rutas"]["ruta_paraview"]
@@ -301,13 +305,15 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
                 return None
             if not os.path.exists(paraview_path):
                 qtw.QMessageBox.warning(
-                    self, "Advertencia de Configuración", f"La ruta especificada no existe: {paraview_path}"
+                    self,
+                    "Advertencia de Configuración de paraview.exe",
+                    f"La ruta especificada no existe: {paraview_path}",
                 )
                 return None
             if not os.path.isfile(paraview_path):
                 qtw.QMessageBox.warning(
                     self,
-                    "Advertencia de Configuración",
+                    "Advertencia de Configuración de paraview.exe",
                     f"No se encontró paraview.exe en la ruta especificada: {paraview_path}",
                 )
                 return None
@@ -318,10 +324,12 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             )
         except configparser.Error:
             qtw.QMessageBox.warning(
-                self, "Advertencia de Configuración", "Error en el formato del archivo de configuración."
+                self,
+                "Advertencia de Configuración de paraview.exe",
+                "Error en el formato del archivo de configuración.",
             )
         except Exception as e:
-            qtw.QMessageBox.warning(self, "Advertencia de Configuración", str(e))
+            qtw.QMessageBox.warning(self, "Advertencia de Configuración de paraview.exe", str(e))
 
         return None
 
@@ -355,21 +363,23 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             if not os.path.isfile(gfortran_path):
                 qtw.QMessageBox.warning(
                     self,
-                    "Advertencia de Configuración gfortran.exe",
+                    "Advertencia de Configuración de gfortran.exe",
                     f"No se encontró gfortran.exe en la ruta especificada en la configuración: {gfortran_path}",
                 )
                 return None
             return gfortran_path
         except FileNotFoundError:
             qtw.QMessageBox.warning(
-                self, "Advertencia de Configuración", "El archivo de configuración no se encuentra."
+                self, "Advertencia de Configuración de gfortran.exe", "El archivo de configuración no se encuentra."
             )
         except configparser.Error:
             qtw.QMessageBox.warning(
-                self, "Advertencia de Configuración", "Error en el formato del archivo de configuración."
+                self,
+                "Advertencia de Configuración de gfortran.exe",
+                "Error en el formato del archivo de configuración.",
             )
         except Exception as e:
-            qtw.QMessageBox.warning(self, "Advertencia de Configuración", str(e))
+            qtw.QMessageBox.warning(self, "Advertencia de Configuración de gfortran.exe", str(e))
         return None
 
     def is_gfortran_available(self):
@@ -388,11 +398,13 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
                 return False
         except FileNotFoundError:
             qtw.QMessageBox.warning(
-                self, "Advertencia de Configuración gfortran.exe", "gfortran no está disponible en el PATH del sistema."
+                self,
+                "Advertencia de Configuración de gfortran.exe",
+                "gfortran no está disponible en el PATH del sistema.",
             )
             return False
         except Exception as e:
-            qtw.QMessageBox.warning(self, "Advertencia de Configuración", str(e))
+            qtw.QMessageBox.warning(self, "Advertencia de Configuración de gfortran.exe", str(e))
             return False
 
     def load_gfortran_and_check(self):
@@ -587,7 +599,10 @@ class AboutDialog(qtw.QDialog):
 
     def init_ui(self):
         self.setWindowTitle("Acerca de")
-        self.setFixedSize(265, 320)
+        self.setFixedSize(265, 345)
+        icon = QIcon()
+        icon.addFile(":/icon/icon/prodic_icon.png", qtc.QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)
         layout = qtw.QVBoxLayout()
         layout.setContentsMargins(2, 2, 2, 2)
         layout.setSpacing(2)
@@ -604,6 +619,7 @@ class AboutDialog(qtw.QDialog):
             "<b>Br. Diego Jesús Rojas Becerra</b></p>"
             "<hr style='border: 1px solid #000;'>"
             "<p><b>Maracaibo, Julio de 2024</b></p>"
+            "<p><b>Versión: 1.0.0</b></p>"
             "<hr style='border: 1px solid #000;'>"
             "<p><a href='https://github.com/luisdavidrodm/PrePRODIC3D'>https://github.com/luisdavidrodm/PrePRODIC3D</a></p>"
             "</div>"

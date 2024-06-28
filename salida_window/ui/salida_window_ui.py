@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'salida_windowzKPsPF.ui'
+## Form generated from reading UI file 'salida_windowwMulTb.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -12,12 +12,16 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
+import resources_rc
 
 class Ui_salida_window(object):
     def setupUi(self, salida_window):
         if not salida_window.objectName():
             salida_window.setObjectName(u"salida_window")
         salida_window.resize(502, 345)
+        icon = QIcon()
+        icon.addFile(u":/icon/icon/prodic_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        salida_window.setWindowIcon(icon)
         self.gridLayout_3 = QGridLayout(salida_window)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.groupBox = QGroupBox(salida_window)

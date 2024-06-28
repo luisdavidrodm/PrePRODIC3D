@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowjzMvvJ.ui'
+## Form generated from reading UI file 'main_windowzWNXJk.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -12,6 +12,7 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
+import resources_rc
 
 class Ui_main_window(object):
     def setupUi(self, main_window):
@@ -19,7 +20,7 @@ class Ui_main_window(object):
             main_window.setObjectName(u"main_window")
         main_window.resize(301, 265)
         icon = QIcon()
-        icon.addFile(u"../../resources/icon/prodic_icon.jpg", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/icon/icon/prodic_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         main_window.setWindowIcon(icon)
         self.action_save_data = QAction(main_window)
         self.action_save_data.setObjectName(u"action_save_data")

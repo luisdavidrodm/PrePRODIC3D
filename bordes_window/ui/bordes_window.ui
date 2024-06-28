@@ -14,8 +14,8 @@
    <string>Bordes - PrePRODIC3D</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../resources/recursos.qrc">
-    <normaloff>:/icon/icon/prodic_icon.jpg</normaloff>:/icon/icon/prodic_icon.jpg</iconset>
+   <iconset resource="../../resources/resources.qrc">
+    <normaloff>:/icon/icon/prodic_icon.png</normaloff>:/icon/icon/prodic_icon.png</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="1" column="0" colspan="4">
@@ -186,7 +186,7 @@
    <item row="0" column="3">
     <widget class="QGroupBox" name="gb_tipo_segment">
      <property name="title">
-      <string>Tipo de segmento</string>
+      <string>Tipo de borde</string>
      </property>
      <layout class="QVBoxLayout" name="verticalLayout">
       <item>
@@ -450,7 +450,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../resources/recursos.qrc"/>
+  <include location="../../resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>

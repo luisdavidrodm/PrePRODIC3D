@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'densidad_windowzGWIFx.ui'
+## Form generated from reading UI file 'densidad_windowusAJJh.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -12,12 +12,16 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
+import resources_rc
 
 class Ui_densidad_window(object):
     def setupUi(self, densidad_window):
         if not densidad_window.objectName():
             densidad_window.setObjectName(u"densidad_window")
         densidad_window.resize(349, 445)
+        icon = QIcon()
+        icon.addFile(u":/icon/icon/prodic_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        densidad_window.setWindowIcon(icon)
         self.gridLayout_2 = QGridLayout(densidad_window)
         self.gridLayout_2.setObjectName(u"gridLayout_2")
         self.groupBox_2 = QGroupBox(densidad_window)

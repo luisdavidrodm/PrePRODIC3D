@@ -1,6 +1,8 @@
 import os
 import configparser
 from PySide2 import QtWidgets
+from PySide2.QtGui import QIcon
+from PySide2.QtCore import QSize
 
 
 class SettingsWindow(QtWidgets.QDialog):
@@ -12,6 +14,10 @@ class SettingsWindow(QtWidgets.QDialog):
         self.setWindowTitle("Configuración")
         self.resize(400, 200)
         self.center()
+
+        icon = QIcon()
+        icon.addFile(":/icon/icon/prodic_icon.png", QSize(), QIcon.Normal, QIcon.Off)
+        self.setWindowIcon(icon)
 
         layout = QtWidgets.QVBoxLayout()
         layout.setContentsMargins(15, 15, 15, 15)

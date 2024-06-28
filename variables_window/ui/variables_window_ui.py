@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'variables_windowHOYBJG.ui'
+## Form generated from reading UI file 'variables_windowhbbcww.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -12,13 +12,15 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
+import resources_rc
+
 class Ui_variables_window(object):
     def setupUi(self, variables_window):
         if not variables_window.objectName():
             variables_window.setObjectName(u"variables_window")
         variables_window.resize(487, 622)
         icon = QIcon()
-        icon.addFile(u":/icon/icon/prodic_icon.jpg", QSize(), QIcon.Normal, QIcon.Off)
+        icon.addFile(u":/icon/icon/prodic_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         variables_window.setWindowIcon(icon)
         self.horizontalLayout = QHBoxLayout(variables_window)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
@@ -277,7 +279,7 @@ class Ui_variables_window(object):
 
         self.le_relax4 = QLineEdit(self.gb_variables2)
         self.le_relax4.setObjectName(u"le_relax4")
-        self.le_relax4.setEnabled(False)
+        self.le_relax4.setEnabled(True)
         self.le_relax4.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_relax4, 4, 5, 1, 1)
@@ -390,7 +392,7 @@ class Ui_variables_window(object):
 
         self.le_relax3 = QLineEdit(self.gb_variables2)
         self.le_relax3.setObjectName(u"le_relax3")
-        self.le_relax3.setEnabled(False)
+        self.le_relax3.setEnabled(True)
         self.le_relax3.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_relax3, 3, 5, 1, 1)
@@ -455,7 +457,7 @@ class Ui_variables_window(object):
 
         self.le_relax1 = QLineEdit(self.gb_variables2)
         self.le_relax1.setObjectName(u"le_relax1")
-        self.le_relax1.setEnabled(False)
+        self.le_relax1.setEnabled(True)
         self.le_relax1.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_relax1, 1, 5, 1, 1)
@@ -469,7 +471,7 @@ class Ui_variables_window(object):
 
         self.le_relax2 = QLineEdit(self.gb_variables2)
         self.le_relax2.setObjectName(u"le_relax2")
-        self.le_relax2.setEnabled(False)
+        self.le_relax2.setEnabled(True)
         self.le_relax2.setAlignment(Qt.AlignCenter)
 
         self.gridLayout.addWidget(self.le_relax2, 2, 5, 1, 1)

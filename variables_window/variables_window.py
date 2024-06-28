@@ -55,9 +55,6 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
                 "chb_ksolve1", "chb_ksolve2", "chb_ksolve3", "chb_ksolve4", "chb_ksolve11",
             ]:  # fmt: on
                 getattr(self, chb_name).setChecked(True)
-            for le_name in ["le_relax1", "le_relax2", "le_relax3"]:
-                getattr(self, le_name).setEnabled(True)
-            self.chb_kprint11.setEnabled(True)
         else:  # if text == "Difusivo":
             # fmt: off
             for chb_name in [
@@ -65,11 +62,6 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
                 "chb_ksolve3", "chb_ksolve4", "chb_ksolve11", "chb_kprint11", "chb_kprint12",
             ]:  # fmt: on
                 getattr(self, chb_name).setChecked(False)
-            for le_name in ["le_relax1", "le_relax2", "le_relax3"]:
-                le_widget = getattr(self, le_name)
-                le_widget.setEnabled(False)
-                le_widget.setText("")
-            self.chb_kprint11.setEnabled(False)
 
     def le_var_title_changed(self, _):
         """Actualiza el config_structure en el ConfigManager basado en el texto del LineEdit."""

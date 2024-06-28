@@ -14,8 +14,8 @@
    <string>Variables - PrePRODIC3D</string>
   </property>
   <property name="windowIcon">
-   <iconset resource="../../resources/recursos.qrc">
-    <normaloff>:/icon/icon/prodic_icon.jpg</normaloff>:/icon/icon/prodic_icon.jpg</iconset>
+   <iconset resource="../../resources/resources.qrc">
+    <normaloff>:/icon/icon/prodic_icon.png</normaloff>:/icon/icon/prodic_icon.png</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -408,7 +408,7 @@
          <item row="4" column="5">
           <widget class="QLineEdit" name="le_relax4">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -588,7 +588,7 @@
          <item row="3" column="5">
           <widget class="QLineEdit" name="le_relax3">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -689,7 +689,7 @@
          <item row="1" column="5">
           <widget class="QLineEdit" name="le_relax1">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -709,7 +709,7 @@
          <item row="2" column="5">
           <widget class="QLineEdit" name="le_relax2">
            <property name="enabled">
-            <bool>false</bool>
+            <bool>true</bool>
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
@@ -749,7 +749,7 @@
   </layout>
  </widget>
  <resources>
-  <include location="../../resources/recursos.qrc"/>
+  <include location="../../resources/resources.qrc"/>
  </resources>
  <connections/>
 </ui>
