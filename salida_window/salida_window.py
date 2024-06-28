@@ -1,5 +1,5 @@
-from PySide6 import QtWidgets as qtw
-from PySide6.QtCore import Qt
+from PySide2 import QtWidgets as qtw
+from PySide2.QtCore import Qt
 
 from salida_window.ui.salida_window_ui import Ui_salida_window
 

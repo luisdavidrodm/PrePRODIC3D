@@ -1,4 +1,4 @@
-from PySide6 import QtWidgets as qtw
+from PySide2 import QtWidgets as qtw
 
 from malla_window.ui.malla_window_ui import Ui_malla_window
 

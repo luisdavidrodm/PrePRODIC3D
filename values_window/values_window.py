@@ -1,5 +1,5 @@
-from PySide6 import QtWidgets as qtw
-from PySide6.QtCore import Qt
+from PySide2 import QtWidgets as qtw
+from PySide2.QtCore import Qt
 
 from values_window.ui.values_window_ui import Ui_valores_window
 

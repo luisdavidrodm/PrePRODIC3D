@@ -1,4 +1,4 @@
-from PySide6 import QtWidgets as qtw
+from PySide2 import QtWidgets as qtw
 
 from inicio_window.ui.inicio_window_ui import Ui_inicio_window
 

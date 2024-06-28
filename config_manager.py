@@ -1,6 +1,6 @@
 import json
 
-from PySide6.QtWidgets import QLineEdit, QSpinBox, QComboBox, QCheckBox, QListWidget
+from PySide2.QtWidgets import QLineEdit, QSpinBox, QComboBox, QCheckBox, QListWidget
 
 
 class ConfigManager:

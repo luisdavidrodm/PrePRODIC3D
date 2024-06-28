@@ -1,4 +1,4 @@
-from PySide6 import QtWidgets as qtw
+from PySide2 import QtWidgets as qtw
 
 from densidad_window.ui.densidad_window_ui import Ui_densidad_window
 

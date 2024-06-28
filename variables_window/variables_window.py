@@ -1,4 +1,4 @@
-from PySide6 import QtWidgets as qtw
+from PySide2 import QtWidgets as qtw
 
 from variables_window.ui.variables_window_ui import Ui_variables_window
 

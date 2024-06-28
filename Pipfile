@@ -4,12 +4,9 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-pyqt6 = "*"
-pyside6 = "*"
-pyqt6-tools = "*"
 
 [dev-packages]
 
 [requires]
-python_version = "3.9"
-python_full_version = "3.9.13"
+python_version = "3.7"
+python_full_version = "3.7.9"

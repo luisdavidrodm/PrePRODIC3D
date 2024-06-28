@@ -72,7 +72,7 @@
      <x>0</x>
      <y>0</y>
      <width>301</width>
-     <height>22</height>
+     <height>21</height>
     </rect>
    </property>
    <widget class="QMenu" name="menu_archivo">
@@ -92,6 +92,8 @@
      <string>Herramientas</string>
     </property>
     <addaction name="action_manual"/>
+    <addaction name="action_settings"/>
+    <addaction name="action_about"/>
    </widget>
    <addaction name="menu_archivo"/>
    <addaction name="menu_herramientas"/>
@@ -141,6 +143,16 @@
   <action name="action_view_results_from_tecplot">
    <property name="text">
     <string>Visualizar resultados a partir de archivo Tecplot</string>
+   </property>
+  </action>
+  <action name="action_about">
+   <property name="text">
+    <string>Acerca de</string>
+   </property>
+  </action>
+  <action name="action_settings">
+   <property name="text">
+    <string>Configuración</string>
    </property>
   </action>
  </widget>

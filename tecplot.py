@@ -16,11 +16,6 @@ reader.UpdatePipeline()
 
 view = GetActiveViewOrCreate("RenderView")
 
-# Fondo blanco
-colorPalette = GetSettingsProxy("ColorPalette")
-colorPalette.SetPropertyWithName("Background", [1.0, 1.0, 1.0])
-colorPalette.SetPropertyWithName("Background2", [1.0, 1.0, 1.0])
-
 display = GetDisplayProperties(reader, view=view)
 display.Representation = "Surface With Edges"
 
@@ -36,15 +31,9 @@ if "TEMPERAT" in point_arrays:
         display.RescaleTransferFunctionToDataRange(True, False)
         display.SetScalarBarVisibility(view, True)
 
-        # Anotaciones en negro
-        scalarBar = GetScalarBar(colorMap, view)
-        scalarBar.TitleColor = [0.0, 0.0, 0.0]
-        scalarBar.LabelColor = [0.0, 0.0, 0.0]
-
     except Exception as e:
         print("El preset 'Turbo' no está disponible. Verifica los presets de colores instalados.")
 else:
     print("La variable 'TEMPERAT' no se encontró en los datos.")
 
-view.OrientationAxesLabelColor = [0.0, 0.0, 0.0]  # Ejes en negro
 Render(view)
