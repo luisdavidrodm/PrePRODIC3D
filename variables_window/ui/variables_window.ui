@@ -7,11 +7,15 @@
     <x>0</x>
     <y>0</y>
     <width>487</width>
-    <height>674</height>
+    <height>622</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Variables - PrePRODIC3D</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../resources/recursos.qrc">
+    <normaloff>:/icon/icon/prodic_icon.jpg</normaloff>:/icon/icon/prodic_icon.jpg</iconset>
   </property>
   <layout class="QHBoxLayout" name="horizontalLayout">
    <item>
@@ -744,6 +748,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources/recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>

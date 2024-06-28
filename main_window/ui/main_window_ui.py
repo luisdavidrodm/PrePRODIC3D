@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windownwBeaf.ui'
+## Form generated from reading UI file 'main_windowjzMvvJ.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,6 +18,9 @@ class Ui_main_window(object):
         if not main_window.objectName():
             main_window.setObjectName(u"main_window")
         main_window.resize(301, 265)
+        icon = QIcon()
+        icon.addFile(u"../../resources/icon/prodic_icon.jpg", QSize(), QIcon.Normal, QIcon.Off)
+        main_window.setWindowIcon(icon)
         self.action_save_data = QAction(main_window)
         self.action_save_data.setObjectName(u"action_save_data")
         self.action_save_data.setCheckable(False)

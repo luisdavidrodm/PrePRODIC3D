@@ -6,12 +6,16 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>579</width>
-    <height>655</height>
+    <width>562</width>
+    <height>573</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Bordes - PrePRODIC3D</string>
+  </property>
+  <property name="windowIcon">
+   <iconset resource="../../resources/recursos.qrc">
+    <normaloff>:/icon/icon/prodic_icon.jpg</normaloff>:/icon/icon/prodic_icon.jpg</iconset>
   </property>
   <layout class="QGridLayout" name="gridLayout_3">
    <item row="1" column="0" colspan="4">
@@ -93,7 +97,7 @@
          <item row="5" column="0">
           <widget class="QLabel" name="lb_variable">
            <property name="text">
-            <string>Temp. ambiente</string>
+            <string/>
            </property>
           </widget>
          </item>
@@ -121,14 +125,11 @@
        </widget>
       </item>
       <item>
-       <widget class="QGroupBox" name="groupBox_9">
+       <widget class="QGroupBox" name="groupBox_4">
         <property name="title">
          <string/>
         </property>
-        <property name="alignment">
-         <set>Qt::AlignCenter</set>
-        </property>
-        <layout class="QFormLayout" name="formLayout">
+        <layout class="QGridLayout" name="gridLayout_4">
          <item row="0" column="0">
           <widget class="QLabel" name="label">
            <property name="text">
@@ -149,14 +150,21 @@
            </property>
           </widget>
          </item>
-         <item row="2" column="0">
+         <item row="3" column="0">
           <widget class="QLabel" name="label_6">
            <property name="text">
             <string>Fracción másica</string>
            </property>
           </widget>
          </item>
-         <item row="3" column="0">
+         <item row="1" column="0">
+          <widget class="QLineEdit" name="le_k">
+           <property name="placeholderText">
+            <string/>
+           </property>
+          </widget>
+         </item>
+         <item row="4" column="0">
           <widget class="QLineEdit" name="le_fracmass">
            <property name="enabled">
             <bool>false</bool>
@@ -166,13 +174,6 @@
            </property>
            <property name="alignment">
             <set>Qt::AlignCenter</set>
-           </property>
-          </widget>
-         </item>
-         <item row="1" column="0">
-          <widget class="QLineEdit" name="le_k">
-           <property name="placeholderText">
-            <string/>
            </property>
           </widget>
          </item>
@@ -239,14 +240,14 @@
          <item>
           <widget class="QPushButton" name="pb_addpatch">
            <property name="text">
-            <string>Agregar un segmento</string>
+            <string>Agregar un parches</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="pb_rempatch">
            <property name="text">
-            <string>Eliminar un segmento</string>
+            <string>Eliminar un parches</string>
            </property>
           </widget>
          </item>
@@ -256,7 +257,7 @@
       <item row="3" column="0" colspan="2">
        <widget class="QLabel" name="label_2">
         <property name="text">
-         <string>Borde</string>
+         <string>Bordes</string>
         </property>
        </widget>
       </item>
@@ -439,7 +440,7 @@
       <item row="3" column="3">
        <widget class="QLabel" name="label_3">
         <property name="text">
-         <string>Segmento</string>
+         <string>Parches</string>
         </property>
        </widget>
       </item>
@@ -448,6 +449,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources/recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>

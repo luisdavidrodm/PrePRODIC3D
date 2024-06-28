@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>Malla - PrePRODIC3D</string>
   </property>
+  <property name="windowIcon">
+   <iconset resource="../../resources/recursos.qrc">
+    <normaloff>:/icon/icon/prodic_icon.jpg</normaloff>:/icon/icon/prodic_icon.jpg</iconset>
+  </property>
   <layout class="QVBoxLayout" name="verticalLayout">
    <item>
     <widget class="QGroupBox" name="gb_malla">
@@ -4041,6 +4045,8 @@
    </item>
   </layout>
  </widget>
- <resources/>
+ <resources>
+  <include location="../../resources/recursos.qrc"/>
+ </resources>
  <connections/>
 </ui>

@@ -37,8 +37,7 @@ class ConfigManager:
                 'le_var_title11': 'Presión',
                 'le_var_title12': 'Función de corriente',
                 'chb_ksolve5': 2,
-                'chb_kprint5': 2,
-                'le_relax5': '1',
+                'chb_kprint5': 2
             },
             'DENSE': {
                 'Región 1': {

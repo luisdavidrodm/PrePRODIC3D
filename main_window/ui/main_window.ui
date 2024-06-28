@@ -13,6 +13,10 @@
   <property name="windowTitle">
    <string>PrePRODIC3D</string>
   </property>
+  <property name="windowIcon">
+   <iconset>
+    <normaloff>../../resources/icon/prodic_icon.jpg</normaloff>../../resources/icon/prodic_icon.jpg</iconset>
+  </property>
   <widget class="QWidget" name="centralwidget">
    <layout class="QVBoxLayout" name="verticalLayout">
     <item>

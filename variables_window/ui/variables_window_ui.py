@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'variables_windowDLIrIv.ui'
+## Form generated from reading UI file 'variables_windowHOYBJG.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -12,12 +12,14 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
-
 class Ui_variables_window(object):
     def setupUi(self, variables_window):
         if not variables_window.objectName():
             variables_window.setObjectName(u"variables_window")
-        variables_window.resize(487, 674)
+        variables_window.resize(487, 622)
+        icon = QIcon()
+        icon.addFile(u":/icon/icon/prodic_icon.jpg", QSize(), QIcon.Normal, QIcon.Off)
+        variables_window.setWindowIcon(icon)
         self.horizontalLayout = QHBoxLayout(variables_window)
         self.horizontalLayout.setObjectName(u"horizontalLayout")
         self.gb_variables = QGroupBox(variables_window)
