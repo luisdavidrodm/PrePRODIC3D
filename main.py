@@ -85,7 +85,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.inicio_window is None or not self.inicio_window.isVisible():
             self.inicio_window = InicioWindow(self.config_manager)
-            self.inicio_window.show()
+            self.inicio_window.exec_()
         else:
             self.inicio_window.raise_()
             self.inicio_window.activateWindow()
@@ -94,7 +94,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.malla_window is None or not self.malla_window.isVisible():
             self.malla_window = MallaWindow(self.config_manager)
-            self.malla_window.show()
+            self.malla_window.exec_()
         else:
             self.malla_window.raise_()
             self.malla_window.activateWindow()
@@ -103,7 +103,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.variables_window is None or not self.variables_window.isVisible():
             self.variables_window = VariablesWindow(self.config_manager)
-            self.variables_window.show()
+            self.variables_window.exec_()
         else:
             self.variables_window.raise_()
             self.variables_window.activateWindow()
@@ -112,7 +112,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.valores_window is None or not self.valores_window.isVisible():
             self.valores_window = ValuesWindow(self.config_manager)
-            self.valores_window.show()
+            self.valores_window.exec_()
         else:
             self.valores_window.raise_()
             self.valores_window.activateWindow()
@@ -121,7 +121,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.bordes_window is None or not self.bordes_window.isVisible():
             self.bordes_window = BordesWindow(self.config_manager)
-            self.bordes_window.show()
+            self.bordes_window.exec_()
         else:
             self.bordes_window.raise_()
             self.bordes_window.activateWindow()
@@ -130,7 +130,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.densidad_window is None or not self.densidad_window.isVisible():
             self.densidad_window = DensidadWindow(self.config_manager)
-            self.densidad_window.show()
+            self.densidad_window.exec_()
         else:
             self.densidad_window.raise_()
             self.densidad_window.activateWindow()
@@ -139,7 +139,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.close_open_windows()
         if self.salida_window is None or not self.salida_window.isVisible():
             self.salida_window = SalidaWindow(self.config_manager)
-            self.salida_window.show()
+            self.salida_window.exec_()
         else:
             self.salida_window.raise_()
             self.salida_window.activateWindow()
@@ -197,14 +197,14 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
                 except OSError as e:
                     qtw.QMessageBox.critical(
                         self,
-                        "Error al guardar configuración",
+                        "Error al guardar datos",
                         f"No se pudo crear la carpeta '{folder_path}': {e}",
                     )
                     return False
         else:
             qtw.QMessageBox.critical(
                 self,
-                "Error al guardar configuración",
+                "Error al guardar datos",
                 "No se indicó el nombre de la simulación",
             )
             return False
@@ -226,7 +226,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             except Exception as e:
                 qtw.QMessageBox.critical(
                     self,
-                    "Error al guardar configuración",
+                    "Error al guardar datos",
                     f"No se pudo generar el archivo adapt.f90 en '{folder_path}': {e}",
                 )
                 return False
@@ -470,6 +470,8 @@ class Worker(qtc.QThread):
         self.tecplot_file = tecplot_file
         if adapt_file == "adapt.f90":
             self.adapt_file = os.path.join(self.folder_path, adapt_file).replace("\\", "/")
+        else:
+            self.adapt_file = adapt_file
 
     def run(self):
         try:
