@@ -130,8 +130,15 @@ class ConfigManager:
     ################################################################################
 
     def load_from_json(self, filename):
-        with open(filename, "r", encoding="utf8") as f:
-            self._config_structure = json.load(f)
+        try:
+            with open(filename, "r", encoding="utf8") as f:
+                data = json.load(f)
+                if isinstance(data, dict):
+                    self._config_structure = data
+                else:
+                    raise ValueError("El archivo JSON no contiene un diccionario.")
+        except (json.decoder.JSONDecodeError, ValueError) as e:
+            raise e
 
     def save_to_json(self, filename):
         with open(filename, "w", encoding="utf8") as f:

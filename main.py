@@ -1,8 +1,8 @@
 import glob
 import sys
 import os
+import json
 import subprocess
-
 import shutil
 import configparser
 
@@ -180,7 +180,19 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             self, "Seleccionar archivo de datos para cargar...", results_dir, "Archivos JSON (*.json)"
         )
         if filename:
-            self.config_manager.load_from_json(filename)
+            try:
+                self.config_manager.load_from_json(filename)
+                qtw.QMessageBox.information(self, "Cargar datos", "Archivo cargado correctamente.")
+            except json.decoder.JSONDecodeError:
+                qtw.QMessageBox.warning(
+                    self,
+                    "Error de lectura",
+                    "No se pudo leer el archivo. Asegúrate de que tenga el formato JSON correcto.",
+                )
+            except ValueError as e:
+                qtw.QMessageBox.warning(self, "Error de formato", str(e))
+            except Exception as e:
+                qtw.QMessageBox.critical(self, "Error", f"Ocurrió un error inesperado: {e}")
 
     def save_data(self):
         folder_name = self.config_manager.header.get("le_titulosimu", None)
@@ -212,8 +224,8 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.config_manager.save_to_json(json_path)
         qtw.QMessageBox.information(
             self,
-            "Guardar Cambios",
-            f"La configuración se ha guardado correctamente en '{json_path}'.",
+            "Guardar datos",
+            f"Los datos se han guardado correctamente en '{json_path}'.",
         )
         return folder_path
 
@@ -235,8 +247,8 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
                 f.write(f90_content)
             qtw.QMessageBox.information(
                 self,
-                "Guardar Cambios",
-                f"La rutina ADAPT se ha guardado correctamente en '{f90_path}'.",
+                "Guardar datos",
+                f"La rutina ADAPT se ha generado correctamente en '{f90_path}'.",
             )
             return folder_path
         else:
@@ -248,7 +260,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             base_dir = os.path.dirname(os.path.realpath(__file__))
             gfortran_path = self.load_gfortran_and_check()
             paraview_path = self.load_paraview_config()
-            script_path = os.path.join(base_dir, "tecplot.py")
+            script_path = os.path.join(base_dir, "tecplot.py").replace("\\", "/")
             self.run_worker(folder_path, base_dir, gfortran_path, paraview_path, script_path)
 
     def generate_and_view_results_from_f90(self):
@@ -264,7 +276,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             base_dir = os.path.dirname(os.path.realpath(__file__))
             gfortran_path = self.load_gfortran_and_check()
             paraview_path = self.load_paraview_config()
-            script_path = os.path.join(base_dir, "tecplot.py")
+            script_path = os.path.join(base_dir, "tecplot.py").replace("\\", "/")
             self.run_worker(folder_path, base_dir, gfortran_path, paraview_path, script_path, adapt_file=adapt_file)
 
     def view_results_from_tecplot(self):
@@ -280,7 +292,7 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
             base_dir = os.path.dirname(os.path.realpath(__file__))
             paraview_path = self.load_paraview_config()
             if paraview_path:
-                script_path = os.path.join(base_dir, "tecplot.py")
+                script_path = os.path.join(base_dir, "tecplot.py").replace("\\", "/")
                 self.run_worker(folder_path, base_dir, None, paraview_path, script_path, tecplot_file=tecplot_file)
 
     def load_paraview_config(self):
@@ -475,30 +487,33 @@ class Worker(qtc.QThread):
 
     def run(self):
         try:
+            base_path = (
+                os.path.dirname(sys.executable)
+                if getattr(sys, "frozen", False)
+                else os.path.dirname(os.path.abspath(__file__))
+            )
             if not self.tecplot_file:
+                self.output.emit(f"Carpeta de destino: {self.folder_path}\n")
                 self.output.emit("Copiando archivos f90 si no existen...\n")
                 exe_path = os.path.join(self.folder_path, "ejecutable.exe").replace("\\", "/")
-                base_path = (
-                    os.path.dirname(sys.executable)
-                    if getattr(sys, "frozen", False)
-                    else os.path.dirname(os.path.abspath(__file__))
-                )
                 prodic3d_path = os.path.join(base_path, "prodic3d.f90")
                 common_path = os.path.join(base_path, "3dcommon.f90")
                 if not os.path.exists(os.path.join(self.folder_path, "prodic3d.f90")):
                     shutil.copy(prodic3d_path, self.folder_path)
+                    self.output.emit("Copiando prodic3d.f90 a carpeta de destino...\n")
                 if not os.path.exists(os.path.join(self.folder_path, "3dcommon.f90")):
                     shutil.copy(common_path, self.folder_path)
+                    self.output.emit("Copiando 3dcommon.f90 a carpeta de destino...\n")
                 if self.gfortran_path is not None:
-                    self.output.emit("Compilando y ejecutando...\n")
+                    self.output.emit(f"Compilando {self.adapt_file}...\n")
                     cwd_prodic3d = os.path.join(self.folder_path, "prodic3d.f90").replace("\\", "/")
                     gfortran_directory = os.path.dirname(self.gfortran_path)
                     compile_command = f'gfortran -o "{exe_path}" "{cwd_prodic3d}" "{self.adapt_file}"'
-                    self.output.emit(f"Carpeta de destino: {self.folder_path}")
                     rc = self.add_to_path_and_run(compile_command, gfortran_directory, self.folder_path)
                     if rc != 0:
                         self.output.emit(f"Errores durante la compilación. Código de retorno: {rc}")
                         return
+                    self.output.emit(f"Ejecutando {exe_path}...\n")
                     rc = self.add_to_path_and_run(str(exe_path), gfortran_directory, self.folder_path)
                     if rc != 0:
                         self.output.emit(f"Errores durante la ejecución. Código de retorno: {rc}")
@@ -524,11 +539,31 @@ class Worker(qtc.QThread):
                     return
             if self.paraview_path is not None:
                 tecplot_path = os.path.join(self.folder_path, self.tecplot_file)
-                os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
                 self.output.emit("Ejecutando ParaView...\n")
-                paraview_command = f'"{self.paraview_path}" --script="{self.script_path}"'
-                self.run_command(paraview_command, wait=False)
-                del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
+                # os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
+                # paraview_command = f'"{self.paraview_path}" --script="{self.script_path}"'
+                # self.run_command(paraview_command, wait=False)
+                # del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
+                paraview_dir = os.path.dirname(self.paraview_path).replace("\\", "/")
+                paraview_platforms = os.path.join(paraview_dir, "platforms")
+                paraview_styles = os.path.join(paraview_dir, "styles")
+                paraview_iconengines = os.path.join(paraview_dir, "iconengines")
+                paraview_imageformats = os.path.join(paraview_dir, "imageformats")
+                batch_file_content = f"""@echo off
+setlocal
+set QT_QPA_PLATFORM_PLUGIN_PATH={paraview_platforms}
+set QT_PLUGIN_PATH={paraview_platforms};{paraview_styles};{paraview_iconengines};{paraview_imageformats}
+set PREPRODIC3D_TECPLOT_FILE_PATH={tecplot_path}
+"{self.paraview_path}" --script="{self.script_path}"
+endlocal
+                """
+                self.output.emit(batch_file_content)
+                batch_file_path = os.path.join(base_path, "temp_script.bat")
+                with open(batch_file_path, "w", encoding="utf-8") as batch_file:
+                    batch_file.write(batch_file_content)
+                command = f'"{batch_file_path}"'
+                self.run_command(command, wait=False)
+                self.output.emit("ParaView se está iniciando...\n")
                 self.output.emit("Proceso finalizado.\n")
                 self.finished.emit()
             else:

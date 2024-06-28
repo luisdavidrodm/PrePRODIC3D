@@ -12,6 +12,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.setupUi(self)
         self.config_manager = config_manager
         self.config_name = "BOUND"
+        # self.load_borders_list()
 
         self.pb_addpatch.clicked.connect(self.add_patch)
         self.pb_rempatch.clicked.connect(self.remove_patch)
@@ -302,6 +303,33 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 last_patch = self.lw_patchlist.item(patch_count - 1)
                 self.lw_patchlist.takeItem(patch_count - 1)
                 self.config_manager.bound[border.text()].pop(last_patch.text(), None)
+
+    def load_borders_list(self):
+        """"""
+        self.lw_bordes.clear()
+        if self.config_manager.is_cartesian:
+            new_items = [
+                (1, "X Max", "X Max"),
+                (2, "X Min", "X Min"),
+                (3, "Y Max", "Y Max"),
+                (4, "Y Min", "Y Min"),
+                (5, "Z Max", "Z Max"),
+                (6, "Z Min", "Z Min"),
+            ]
+        else:
+            new_items = [
+                (1, "θ Max", "X Max"),
+                (2, "θ Min", "X Min"),
+                (3, "R Max", "Y Max"),
+                (4, "R Min", "Y Min"),
+                (5, "Z Max", "Z Max"),
+                (6, "Z Min", "Z Min"),
+            ]
+        new_items.sort()
+        for _, name, tech_name in new_items:
+            item = qtw.QListWidgetItem(name)
+            item.setData(Qt.UserRole, tech_name)
+            self.lw_bordes.addItem(item)
 
     def initialize_patch_labels(self):
         """
