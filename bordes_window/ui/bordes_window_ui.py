@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bordes_windowXDUDrC.ui'
+## Form generated from reading UI file 'bordes_windowUMjtgq.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -338,8 +338,8 @@ class Ui_bordes_window(object):
         self.chb_outmass.setText(QCoreApplication.translate("bordes_window", u"Salida de la masa", None))
         self.groupBox.setTitle(QCoreApplication.translate("bordes_window", u"Divisi\u00f3n de bordes", None))
         self.groupBox_7.setTitle("")
-        self.pb_addpatch.setText(QCoreApplication.translate("bordes_window", u"Agregar un parches", None))
-        self.pb_rempatch.setText(QCoreApplication.translate("bordes_window", u"Eliminar un parches", None))
+        self.pb_addpatch.setText(QCoreApplication.translate("bordes_window", u"Agregar un parche", None))
+        self.pb_rempatch.setText(QCoreApplication.translate("bordes_window", u"Eliminar \u00faltimo parche", None))
         self.label_2.setText(QCoreApplication.translate("bordes_window", u"Bordes", None))
 #if QT_CONFIG(tooltip)
         self.chb_exclude_borders.setToolTip(QCoreApplication.translate("bordes_window", u"<html><head/><body><p>Activa esta opci\u00f3n para excluir<br/>los bordes inicial y final del dominio<br/>para cada iteraci\u00f3n en el parche<br/>seleccionado, independientemente<br/>de las limitantes por coordenadas.</p></body></html>", None))

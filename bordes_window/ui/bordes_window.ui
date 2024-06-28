@@ -240,14 +240,14 @@
          <item>
           <widget class="QPushButton" name="pb_addpatch">
            <property name="text">
-            <string>Agregar un parches</string>
+            <string>Agregar un parche</string>
            </property>
           </widget>
          </item>
          <item>
           <widget class="QPushButton" name="pb_rempatch">
            <property name="text">
-            <string>Eliminar un parches</string>
+            <string>Eliminar último parche</string>
            </property>
           </widget>
          </item>

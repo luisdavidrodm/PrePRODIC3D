@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windoweFtrXB.ui'
+## Form generated from reading UI file 'values_windowjyOjwX.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -338,11 +338,17 @@ class Ui_valores_window(object):
         self.gridLayout.addWidget(self.le_y_start, 1, 3, 1, 1)
 
         self.cb_ex_z_start = QComboBox(self.groupBox_9)
+        self.cb_ex_z_start.addItem("")
+        self.cb_ex_z_start.addItem("")
+        self.cb_ex_z_start.addItem("")
         self.cb_ex_z_start.setObjectName(u"cb_ex_z_start")
 
         self.gridLayout.addWidget(self.cb_ex_z_start, 1, 4, 1, 1)
 
         self.cb_ex_z_end = QComboBox(self.groupBox_9)
+        self.cb_ex_z_end.addItem("")
+        self.cb_ex_z_end.addItem("")
+        self.cb_ex_z_end.addItem("")
         self.cb_ex_z_end.setObjectName(u"cb_ex_z_end")
 
         self.gridLayout.addWidget(self.cb_ex_z_end, 2, 4, 1, 1)
@@ -542,6 +548,14 @@ class Ui_valores_window(object):
         self.cb_ex_y_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
 
         self.label_13.setText(QCoreApplication.translate("valores_window", u"Y", None))
+        self.cb_ex_z_start.setItemText(0, "")
+        self.cb_ex_z_start.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
+        self.cb_ex_z_start.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
+
+        self.cb_ex_z_end.setItemText(0, "")
+        self.cb_ex_z_end.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
+        self.cb_ex_z_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
+
         self.groupBox_6.setTitle(QCoreApplication.translate("valores_window", u"Valores locales por variable", None))
         self.groupBox_7.setTitle(QCoreApplication.translate("valores_window", u"Regiones", None))
         self.label_7.setText(QCoreApplication.translate("valores_window", u"Sc", None))
