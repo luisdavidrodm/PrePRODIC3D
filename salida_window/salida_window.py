@@ -25,6 +25,7 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
         self.config_manager.connect_config(self)
         self.load_variables_list()
         self.lw_variables.setCurrentItem(self.lw_variables.item(0))
+        self.initialize_patch_labels()
 
     def value_changed(self, value):
         """
@@ -130,3 +131,16 @@ class SalidaWindow(qtw.QDialog, Ui_salida_window):
         else:
             if self.chb_all_corners.isChecked():
                 self.chb_all_corners.setChecked(False)
+
+    def initialize_patch_labels(self):
+        """
+        Initialize patch labels based on the selected patch.
+        """
+        if self.config_manager.is_cartesian:
+            self.lb_x.setText("X")
+            self.lb_y.setText("Y")
+            self.lb_z.setText("Z")
+        else:
+            self.lb_x.setText("θ")
+            self.lb_y.setText("R")
+            self.lb_z.setText("Z")

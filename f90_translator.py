@@ -513,7 +513,7 @@ class F90Translator:
         f90_lines = ["ENTRY PHI"]
         added_if = False
 
-        if values.get("chb_buoyancy", 0) == 2:
+        if values.get("chb_buoyancy", 0) == 2 and self.config_manager.is_cartesian:
             therm_exp_coef = values.get("le_therm_exp_coef", "1")
             gravity = values.get("le_gravity", "9.81")
             angle = values.get("le_angle", "3.141592653589793")

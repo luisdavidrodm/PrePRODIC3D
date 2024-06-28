@@ -153,6 +153,15 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                 variable_key = variable.data(Qt.UserRole)
                 self.toggle_widget_list(self.variable_widgets, True)
                 self.config_manager.load_config(self, config[variable_key])
+                variable_number = int(variable_key[len("le_var_title") :])
+                if variable_number in [1, 2, 3, 4, 11, 12]:
+                    self.chb_convec.setEnabled(False)
+                if variable_number in [1, 2, 3]:
+                    self.lb_cond.setText("Viscosidad")
+                elif variable_number == 5:
+                    self.lb_cond.setText("k/Cp")
+                else:
+                    self.lb_cond.setText("Coef. Difusión")
                 self.le_tempamb.setEnabled(self.chb_convec.isChecked() or self.chb_flux.isChecked())
                 if self.chb_inmass.isChecked() or self.chb_outmass.isChecked():
                     if (
@@ -206,7 +215,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
 
     def load_variables_list(self):
         """Carga y actualiza la lista de variables considerando el orden y permitiendo duplicados."""
-        excluded_keys = {"le_var_title4", "le_var_title12", "le_var_title11"}
+        excluded_keys = {"le_var_title4", "le_var_title11", "le_var_title12"}
         new_items = []
         for key, value in self.config_manager.variables.items():
             if key.startswith("le_var_title") and key not in excluded_keys:
@@ -245,18 +254,24 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             elif sender in [self.chb_value, self.chb_flux, self.chb_convec]:
                 if sender == self.chb_value:
                     self.chb_value.setChecked(True)
+                    self.lb_value.setText("Valor")
+                    self.lb_variable.setText("")
                     if self.chb_flux.isChecked():
                         self.chb_flux.setChecked(False)
                     if self.chb_convec.isChecked():
                         self.chb_convec.setChecked(False)
                 elif sender == self.chb_flux:
                     self.chb_flux.setChecked(True)
+                    self.lb_value.setText("Fc")
+                    self.lb_variable.setText("Fp")
                     if self.chb_value.isChecked():
                         self.chb_value.setChecked(False)
                     if self.chb_convec.isChecked():
                         self.chb_convec.setChecked(False)
                 elif sender == self.chb_convec:
                     self.chb_convec.setChecked(True)
+                    self.lb_value.setText("Coeficiente")
+                    self.lb_variable.setText("Temp. Amb.")
                     if self.chb_value.isChecked():
                         self.chb_value.setChecked(False)
                     if self.chb_flux.isChecked():
@@ -309,14 +324,14 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
                     vertical_label = "Y"
             else:
                 if border_text in {"X Max", "X Min"}:
-                    transversal_label = "Y"
+                    transversal_label = "R"
                     vertical_label = "Z"
                 elif border_text in {"Y Max", "Y Min"}:
-                    transversal_label = "X"
+                    transversal_label = "θ"
                     vertical_label = "Z"
                 elif border_text in {"Z Max", "Z Min"}:
-                    transversal_label = "X"
-                    vertical_label = "Y"
+                    transversal_label = "θ"
+                    vertical_label = "R"
         self.lb_transversal.setText(transversal_label)
         self.lb_vertical.setText(vertical_label)
 

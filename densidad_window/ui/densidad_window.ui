@@ -197,7 +197,7 @@
        </widget>
       </item>
       <item row="0" column="3">
-       <widget class="QLabel" name="label_9">
+       <widget class="QLabel" name="lb_y">
         <property name="text">
          <string>Y</string>
         </property>
@@ -207,7 +207,7 @@
        </widget>
       </item>
       <item row="0" column="1">
-       <widget class="QLabel" name="label_8">
+       <widget class="QLabel" name="lb_x">
         <property name="text">
          <string>X</string>
         </property>
@@ -253,7 +253,7 @@
        </widget>
       </item>
       <item row="0" column="5">
-       <widget class="QLabel" name="label_10">
+       <widget class="QLabel" name="lb_z">
         <property name="text">
          <string>Z</string>
         </property>

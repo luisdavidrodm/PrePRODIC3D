@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'salida_windowwMulTb.ui'
+## Form generated from reading UI file 'salida_windowjApItE.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -59,25 +59,25 @@ class Ui_salida_window(object):
 
         self.gridLayout.addWidget(self.le_z, 2, 1, 1, 1)
 
-        self.label_3 = QLabel(self.groupBox_4)
-        self.label_3.setObjectName(u"label_3")
+        self.lb_z = QLabel(self.groupBox_4)
+        self.lb_z.setObjectName(u"lb_z")
 
-        self.gridLayout.addWidget(self.label_3, 2, 0, 1, 1)
+        self.gridLayout.addWidget(self.lb_z, 2, 0, 1, 1)
 
         self.le_x = QLineEdit(self.groupBox_4)
         self.le_x.setObjectName(u"le_x")
 
         self.gridLayout.addWidget(self.le_x, 0, 1, 1, 1)
 
-        self.label_2 = QLabel(self.groupBox_4)
-        self.label_2.setObjectName(u"label_2")
+        self.lb_y = QLabel(self.groupBox_4)
+        self.lb_y.setObjectName(u"lb_y")
 
-        self.gridLayout.addWidget(self.label_2, 1, 0, 1, 1)
+        self.gridLayout.addWidget(self.lb_y, 1, 0, 1, 1)
 
-        self.label = QLabel(self.groupBox_4)
-        self.label.setObjectName(u"label")
+        self.lb_x = QLabel(self.groupBox_4)
+        self.lb_x.setObjectName(u"lb_x")
 
-        self.gridLayout.addWidget(self.label, 0, 0, 1, 1)
+        self.gridLayout.addWidget(self.lb_x, 0, 0, 1, 1)
 
 
         self.horizontalLayout.addWidget(self.groupBox_4)
@@ -212,10 +212,10 @@ class Ui_salida_window(object):
         self.groupBox_4.setTitle(QCoreApplication.translate("salida_window", u"Puntos de monitoreo", None))
         self.le_y.setText(QCoreApplication.translate("salida_window", u"0", None))
         self.le_z.setText(QCoreApplication.translate("salida_window", u"0", None))
-        self.label_3.setText(QCoreApplication.translate("salida_window", u"Z", None))
+        self.lb_z.setText(QCoreApplication.translate("salida_window", u"Z", None))
         self.le_x.setText(QCoreApplication.translate("salida_window", u"0", None))
-        self.label_2.setText(QCoreApplication.translate("salida_window", u"Y", None))
-        self.label.setText(QCoreApplication.translate("salida_window", u"X", None))
+        self.lb_y.setText(QCoreApplication.translate("salida_window", u"Y", None))
+        self.lb_x.setText(QCoreApplication.translate("salida_window", u"X", None))
         self.groupBox_5.setTitle("")
         self.groupBox_6.setTitle(QCoreApplication.translate("salida_window", u"Promedio en las esquinas", None))
         self.chb_corner_1.setText(QCoreApplication.translate("salida_window", u"(1, 1, 1)", None))

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'values_windowjyOjwX.ui'
+## Form generated from reading UI file 'values_windowVphOct.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -207,10 +207,10 @@ class Ui_valores_window(object):
 
         self.gridLayout_8.addWidget(self.label, 0, 0, 1, 1)
 
-        self.label_2 = QLabel(self.groupBox_4)
-        self.label_2.setObjectName(u"label_2")
+        self.lb_cond = QLabel(self.groupBox_4)
+        self.lb_cond.setObjectName(u"lb_cond")
 
-        self.gridLayout_8.addWidget(self.label_2, 1, 0, 1, 1)
+        self.gridLayout_8.addWidget(self.lb_cond, 1, 0, 1, 1)
 
         self.label_16 = QLabel(self.groupBox_4)
         self.label_16.setObjectName(u"label_16")
@@ -242,11 +242,11 @@ class Ui_valores_window(object):
         self.groupBox_9.setObjectName(u"groupBox_9")
         self.gridLayout = QGridLayout(self.groupBox_9)
         self.gridLayout.setObjectName(u"gridLayout")
-        self.label_14 = QLabel(self.groupBox_9)
-        self.label_14.setObjectName(u"label_14")
-        self.label_14.setAlignment(Qt.AlignCenter)
+        self.lb_z = QLabel(self.groupBox_9)
+        self.lb_z.setObjectName(u"lb_z")
+        self.lb_z.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_14, 0, 5, 1, 1)
+        self.gridLayout.addWidget(self.lb_z, 0, 5, 1, 1)
 
         self.cb_ex_y_start = QComboBox(self.groupBox_9)
         self.cb_ex_y_start.addItem("")
@@ -272,11 +272,11 @@ class Ui_valores_window(object):
 
         self.gridLayout.addWidget(self.cb_ex_x_end, 2, 0, 1, 1)
 
-        self.label_12 = QLabel(self.groupBox_9)
-        self.label_12.setObjectName(u"label_12")
-        self.label_12.setAlignment(Qt.AlignCenter)
+        self.lb_x = QLabel(self.groupBox_9)
+        self.lb_x.setObjectName(u"lb_x")
+        self.lb_x.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_12, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.lb_x, 0, 1, 1, 1)
 
         self.cb_ex_y_end = QComboBox(self.groupBox_9)
         self.cb_ex_y_end.addItem("")
@@ -286,11 +286,11 @@ class Ui_valores_window(object):
 
         self.gridLayout.addWidget(self.cb_ex_y_end, 2, 2, 1, 1)
 
-        self.label_13 = QLabel(self.groupBox_9)
-        self.label_13.setObjectName(u"label_13")
-        self.label_13.setAlignment(Qt.AlignCenter)
+        self.lb_y = QLabel(self.groupBox_9)
+        self.lb_y.setObjectName(u"lb_y")
+        self.lb_y.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_13, 0, 3, 1, 1)
+        self.gridLayout.addWidget(self.lb_y, 0, 3, 1, 1)
 
         self.le_z_end = QLineEdit(self.groupBox_9)
         self.le_z_end.setObjectName(u"le_z_end")
@@ -407,11 +407,11 @@ class Ui_valores_window(object):
 
         self.gridLayout_6.addWidget(self.pb_add_region, 1, 0, 1, 2)
 
-        self.label_9 = QLabel(self.groupBox_7)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setAlignment(Qt.AlignCenter)
+        self.lb_cond_local = QLabel(self.groupBox_7)
+        self.lb_cond_local.setObjectName(u"lb_cond_local")
+        self.lb_cond_local.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout_6.addWidget(self.label_9, 9, 0, 1, 1)
+        self.gridLayout_6.addWidget(self.lb_cond_local, 9, 0, 1, 1)
 
         self.label_8 = QLabel(self.groupBox_7)
         self.label_8.setObjectName(u"label_8")
@@ -511,7 +511,7 @@ class Ui_valores_window(object):
         self.label_17.setText(QCoreApplication.translate("valores_window", u"Ind. correc. bloque", None))
         self.label_15.setText(QCoreApplication.translate("valores_window", u"Extrapola excepto:", None))
         self.label.setText(QCoreApplication.translate("valores_window", u"Valor general", None))
-        self.label_2.setText(QCoreApplication.translate("valores_window", u"Conductividad", None))
+        self.lb_cond.setText(QCoreApplication.translate("valores_window", u"Coef. Difusi\u00f3n", None))
         self.label_16.setText(QCoreApplication.translate("valores_window", u"Ind. Impresi\u00f3n", None))
 #if QT_CONFIG(tooltip)
         self.chb_ex_value.setToolTip(QCoreApplication.translate("valores_window", u"<html><head/><body><p>Activa esta opci\u00f3n para excluir los <br/>bordes inicial y final del dominio al <br/>iterar este valor.</p></body></html>", None))
@@ -529,7 +529,7 @@ class Ui_valores_window(object):
 #endif // QT_CONFIG(whatsthis)
         self.chb_exclude_borders.setText(QCoreApplication.translate("valores_window", u"V.C. Excluir bordes", None))
         self.groupBox_9.setTitle("")
-        self.label_14.setText(QCoreApplication.translate("valores_window", u"Z", None))
+        self.lb_z.setText(QCoreApplication.translate("valores_window", u"Z", None))
         self.cb_ex_y_start.setItemText(0, "")
         self.cb_ex_y_start.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
         self.cb_ex_y_start.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
@@ -542,12 +542,12 @@ class Ui_valores_window(object):
         self.cb_ex_x_end.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
         self.cb_ex_x_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
 
-        self.label_12.setText(QCoreApplication.translate("valores_window", u"X", None))
+        self.lb_x.setText(QCoreApplication.translate("valores_window", u"X", None))
         self.cb_ex_y_end.setItemText(0, "")
         self.cb_ex_y_end.setItemText(1, QCoreApplication.translate("valores_window", u"<", None))
         self.cb_ex_y_end.setItemText(2, QCoreApplication.translate("valores_window", u"\u2264", None))
 
-        self.label_13.setText(QCoreApplication.translate("valores_window", u"Y", None))
+        self.lb_y.setText(QCoreApplication.translate("valores_window", u"Y", None))
         self.cb_ex_z_start.setItemText(0, "")
         self.cb_ex_z_start.setItemText(1, QCoreApplication.translate("valores_window", u">", None))
         self.cb_ex_z_start.setItemText(2, QCoreApplication.translate("valores_window", u"\u2265", None))
@@ -562,7 +562,7 @@ class Ui_valores_window(object):
         self.pb_remove_region.setText(QCoreApplication.translate("valores_window", u"Eliminar \u00faltima regi\u00f3n", None))
         self.label_6.setText(QCoreApplication.translate("valores_window", u"Valor local", None))
         self.pb_add_region.setText(QCoreApplication.translate("valores_window", u"Agregar una regi\u00f3n", None))
-        self.label_9.setText(QCoreApplication.translate("valores_window", u"k local", None))
+        self.lb_cond_local.setText(QCoreApplication.translate("valores_window", u"Coef. Difusi\u00f3n local", None))
         self.label_8.setText(QCoreApplication.translate("valores_window", u"Sp", None))
 
         __sortingEnabled1 = self.lw_regions.isSortingEnabled()

@@ -40,6 +40,7 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         self.chb_buoyancy.stateChanged.connect(self.handle_chb_buoyancy_changed)
         self.chb_local_value.stateChanged.connect(self.load_region_config)
         self.load_variables_list()
+        self.initialize_patch_labels()
         # fmt: on
 
     def get_configured_widgets(self, variable, region, volume):
@@ -60,7 +61,10 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
 
     def load_current_config(self):
         """"""
-        self.config_manager.load_config(self, self.config_manager.values)
+        if self.config_manager.is_cartesian:
+            self.config_manager.load_config(self, self.config_manager.values)
+        else:
+            self.chb_buoyancy.setEnabled(False)
         variable = self.lw_variables.currentItem()
         region = self.lw_regions.currentItem()
         volume = self.lw_volumes.currentItem()
@@ -154,10 +158,21 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
         variable = self.lw_variables.currentItem()
         if variable is not None:
             self.lw_regions.clear()
-            config = self.config_manager.values[variable.data(Qt.UserRole)]
+            variable_key = variable.data(Qt.UserRole)
+            config = self.config_manager.values[variable_key]
             for key, value in config.items():
                 if isinstance(value, dict):
                     self.lw_regions.addItem(key)
+            variable_number = int(variable_key[len("le_var_title") :])
+            if variable_number in [1, 2, 3]:
+                self.lb_cond.setText("Viscosidad")
+                self.lb_cond_local.setText("   Viscosidad local   ")
+            elif variable_number == 5:
+                self.lb_cond.setText("k/Cp")
+                self.lb_cond_local.setText("        k/Cp local       ")
+            else:
+                self.lb_cond.setText("Coef. Difusión")
+                self.lb_cond_local.setText("Coef. Difusión local")
             self.load_current_config()
 
     def load_volume_config(self):
@@ -300,6 +315,25 @@ class ValuesWindow(qtw.QDialog, Ui_valores_window):
             self.toggle_widget_list(buoyancy_widgets, True)
         else:
             self.toggle_widget_list(buoyancy_widgets, False)
+
+    def initialize_patch_labels(self):
+        """
+        Initialize patch labels based on the selected patch.
+        """
+        if self.config_manager.is_cartesian:
+            self.lb_x.setText("X")
+            self.chb_iborx.setText("X")
+            self.lb_y.setText("Y")
+            self.chb_ibory.setText("Y")
+            self.lb_z.setText("Z")
+            self.chb_iborz.setText("Z")
+        else:
+            self.lb_x.setText("θ")
+            self.chb_iborx.setText("θ")
+            self.lb_y.setText("R")
+            self.chb_ibory.setText("R")
+            self.lb_z.setText("Z")
+            self.chb_iborz.setText("Z")
 
     def initialize_volume_data(self):
         """Inicializa los valores de malla para un volumen nuevo"""

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'bordes_windowUMjtgq.ui'
+## Form generated from reading UI file 'bordes_windowcpjzIO.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -105,10 +105,10 @@ class Ui_bordes_window(object):
         self.groupBox_4.setObjectName(u"groupBox_4")
         self.gridLayout_4 = QGridLayout(self.groupBox_4)
         self.gridLayout_4.setObjectName(u"gridLayout_4")
-        self.label = QLabel(self.groupBox_4)
-        self.label.setObjectName(u"label")
+        self.lb_cond = QLabel(self.groupBox_4)
+        self.lb_cond.setObjectName(u"lb_cond")
 
-        self.gridLayout_4.addWidget(self.label, 0, 0, 1, 1)
+        self.gridLayout_4.addWidget(self.lb_cond, 0, 0, 1, 1)
 
         self.chb_ex_k = QCheckBox(self.groupBox_4)
         self.chb_ex_k.setObjectName(u"chb_ex_k")
@@ -324,7 +324,7 @@ class Ui_bordes_window(object):
 #endif // QT_CONFIG(tooltip)
         self.chb_ex_value.setText("")
         self.groupBox_4.setTitle("")
-        self.label.setText(QCoreApplication.translate("bordes_window", u"Conductividad", None))
+        self.lb_cond.setText(QCoreApplication.translate("bordes_window", u"Coef. Difusi\u00f3n", None))
 #if QT_CONFIG(tooltip)
         self.chb_ex_k.setToolTip(QCoreApplication.translate("bordes_window", u"<html><head/><body><p>Activa esta opci\u00f3n para iterar este<br/>valor en la posici\u00f3n vecina del borde<br/>seleccionado en vez de iterar en el<br/>borde mismo.</p></body></html>", None))
 #endif // QT_CONFIG(tooltip)

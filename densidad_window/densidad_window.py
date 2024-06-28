@@ -34,6 +34,7 @@ class DensidadWindow(qtw.QDialog, Ui_densidad_window):
         self.config_manager.connect_config(self)
         self.lw_regions.setCurrentItem(self.lw_regions.item(0))
         self.lw_volumes.setCurrentItem(self.lw_volumes.item(0))
+        self.initialize_patch_labels()
         # fmt: on
 
     def get_configured_widgets(self, region, volume):
@@ -194,6 +195,19 @@ class DensidadWindow(qtw.QDialog, Ui_densidad_window):
             self.le_local_value.setEnabled(True)
             self.le_ref_rho.clear()
             self.le_ref_temp.clear()
+
+    def initialize_patch_labels(self):
+        """
+        Initialize patch labels based on the selected patch.
+        """
+        if self.config_manager.is_cartesian:
+            self.lb_x.setText("X")
+            self.lb_y.setText("Y")
+            self.lb_z.setText("Z")
+        else:
+            self.lb_x.setText("θ")
+            self.lb_y.setText("R")
+            self.lb_z.setText("Z")
 
     def initialize_volume_data(self):
         """Inicializa los valores de malla para un volumen nuevo"""

@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'densidad_windowusAJJh.ui'
+## Form generated from reading UI file 'densidad_window.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -114,17 +114,17 @@ class Ui_densidad_window(object):
 
         self.gridLayout.addWidget(self.cb_ex_x_start, 1, 0, 1, 1)
 
-        self.label_9 = QLabel(self.groupBox_4)
-        self.label_9.setObjectName(u"label_9")
-        self.label_9.setAlignment(Qt.AlignCenter)
+        self.lb_y = QLabel(self.groupBox_4)
+        self.lb_y.setObjectName(u"lb_y")
+        self.lb_y.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_9, 0, 3, 1, 1)
+        self.gridLayout.addWidget(self.lb_y, 0, 3, 1, 1)
 
-        self.label_8 = QLabel(self.groupBox_4)
-        self.label_8.setObjectName(u"label_8")
-        self.label_8.setAlignment(Qt.AlignCenter)
+        self.lb_x = QLabel(self.groupBox_4)
+        self.lb_x.setObjectName(u"lb_x")
+        self.lb_x.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_8, 0, 1, 1, 1)
+        self.gridLayout.addWidget(self.lb_x, 0, 1, 1, 1)
 
         self.le_x_start = QLineEdit(self.groupBox_4)
         self.le_x_start.setObjectName(u"le_x_start")
@@ -147,11 +147,11 @@ class Ui_densidad_window(object):
 
         self.gridLayout.addWidget(self.le_y_end, 2, 3, 1, 1)
 
-        self.label_10 = QLabel(self.groupBox_4)
-        self.label_10.setObjectName(u"label_10")
-        self.label_10.setAlignment(Qt.AlignCenter)
+        self.lb_z = QLabel(self.groupBox_4)
+        self.lb_z.setObjectName(u"lb_z")
+        self.lb_z.setAlignment(Qt.AlignCenter)
 
-        self.gridLayout.addWidget(self.label_10, 0, 5, 1, 1)
+        self.gridLayout.addWidget(self.lb_z, 0, 5, 1, 1)
 
         self.le_z_start = QLineEdit(self.groupBox_4)
         self.le_z_start.setObjectName(u"le_z_start")
@@ -292,13 +292,13 @@ class Ui_densidad_window(object):
         self.cb_ex_x_start.setItemText(1, QCoreApplication.translate("densidad_window", u">", None))
         self.cb_ex_x_start.setItemText(2, QCoreApplication.translate("densidad_window", u"\u2265", None))
 
-        self.label_9.setText(QCoreApplication.translate("densidad_window", u"Y", None))
-        self.label_8.setText(QCoreApplication.translate("densidad_window", u"X", None))
+        self.lb_y.setText(QCoreApplication.translate("densidad_window", u"Y", None))
+        self.lb_x.setText(QCoreApplication.translate("densidad_window", u"X", None))
         self.cb_ex_z_start.setItemText(0, "")
         self.cb_ex_z_start.setItemText(1, QCoreApplication.translate("densidad_window", u">", None))
         self.cb_ex_z_start.setItemText(2, QCoreApplication.translate("densidad_window", u"\u2265", None))
 
-        self.label_10.setText(QCoreApplication.translate("densidad_window", u"Z", None))
+        self.lb_z.setText(QCoreApplication.translate("densidad_window", u"Z", None))
         self.groupBox.setTitle(QCoreApplication.translate("densidad_window", u"Densidad de la regi\u00f3n", None))
         self.label.setText(QCoreApplication.translate("densidad_window", u"Condici\u00f3n", None))
         self.cb_condition.setItemText(0, QCoreApplication.translate("densidad_window", u"Valor constante", None))
