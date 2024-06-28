@@ -6,15 +6,63 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>675</width>
-    <height>583</height>
+    <width>349</width>
+    <height>445</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Densidad - PrePRODIC3D</string>
   </property>
   <layout class="QGridLayout" name="gridLayout_2">
-   <item row="4" column="0" colspan="2">
+   <item row="1" column="0">
+    <widget class="QGroupBox" name="groupBox_2">
+     <property name="title">
+      <string>Regiones</string>
+     </property>
+     <layout class="QVBoxLayout" name="verticalLayout">
+      <item>
+       <widget class="QListWidget" name="lw_regions">
+        <item>
+         <property name="text">
+          <string>Región 1</string>
+         </property>
+        </item>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_add_region">
+        <property name="text">
+         <string>Agregar una región</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_remove_region">
+        <property name="text">
+         <string>Eliminar última región</string>
+        </property>
+       </widget>
+      </item>
+     </layout>
+    </widget>
+   </item>
+   <item row="4" column="0">
+    <widget class="QCheckBox" name="chb_exclude_borders">
+     <property name="enabled">
+      <bool>false</bool>
+     </property>
+     <property name="toolTip">
+      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activa esta opción para excluir&lt;br/&gt;los bordes inicial y final del dominio&lt;br/&gt;para cada iteración en el volumen&lt;br/&gt;seleccionado, independientemente&lt;br/&gt;de las limitantes por coordenadas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
+     </property>
+     <property name="whatsThis">
+      <string>Activa esta opción para excluir los bordes inicial y final del dominio para cada iteración en el volumen seleccionado, independientemente de las limitantes por coordenadas.</string>
+     </property>
+     <property name="text">
+      <string>V.C Excluir Bordes</string>
+     </property>
+    </widget>
+   </item>
+   <item row="5" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBox_4">
      <property name="title">
       <string/>
@@ -227,58 +275,6 @@
      </layout>
     </widget>
    </item>
-   <item row="3" column="0">
-    <widget class="QCheckBox" name="chb_exclude_borders">
-     <property name="enabled">
-      <bool>false</bool>
-     </property>
-     <property name="toolTip">
-      <string>&lt;html&gt;&lt;head/&gt;&lt;body&gt;&lt;p&gt;Activa esta opción para excluir&lt;br/&gt;los bordes inicial y final del dominio&lt;br/&gt;para cada iteración en el volumen&lt;br/&gt;seleccionado, independientemente&lt;br/&gt;de las limitantes por coordenadas.&lt;/p&gt;&lt;/body&gt;&lt;/html&gt;</string>
-     </property>
-     <property name="whatsThis">
-      <string>Activa esta opción para excluir los bordes inicial y final del dominio para cada iteración en el volumen seleccionado, independientemente de las limitantes por coordenadas.</string>
-     </property>
-     <property name="text">
-      <string>V.C Excluir Bordes</string>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1">
-    <widget class="QGroupBox" name="groupBox_3">
-     <property name="title">
-      <string>Conformación de la región</string>
-     </property>
-     <layout class="QVBoxLayout" name="verticalLayout_2">
-      <item>
-       <widget class="QListWidget" name="lw_volumes">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_add_volume">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Agregar un volumen</string>
-        </property>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_remove_volume">
-        <property name="enabled">
-         <bool>false</bool>
-        </property>
-        <property name="text">
-         <string>Eliminar último volumen</string>
-        </property>
-       </widget>
-      </item>
-     </layout>
-    </widget>
-   </item>
    <item row="2" column="0" colspan="2">
     <widget class="QGroupBox" name="groupBox">
      <property name="title">
@@ -354,32 +350,36 @@
      </layout>
     </widget>
    </item>
-   <item row="1" column="0">
-    <widget class="QGroupBox" name="groupBox_2">
+   <item row="1" column="1">
+    <widget class="QGroupBox" name="groupBox_3">
      <property name="title">
-      <string>Regiones</string>
+      <string>Conformación de la región</string>
      </property>
-     <layout class="QVBoxLayout" name="verticalLayout">
+     <layout class="QVBoxLayout" name="verticalLayout_2">
       <item>
-       <widget class="QListWidget" name="lw_regions">
-        <item>
-         <property name="text">
-          <string>Región 1</string>
-         </property>
-        </item>
-       </widget>
-      </item>
-      <item>
-       <widget class="QPushButton" name="pb_add_region">
-        <property name="text">
-         <string>Agregar una región</string>
+       <widget class="QListWidget" name="lw_volumes">
+        <property name="enabled">
+         <bool>false</bool>
         </property>
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="pb_remove_region">
+       <widget class="QPushButton" name="pb_add_volume">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
         <property name="text">
-         <string>Eliminar última región</string>
+         <string>Agregar un volumen</string>
+        </property>
+       </widget>
+      </item>
+      <item>
+       <widget class="QPushButton" name="pb_remove_volume">
+        <property name="enabled">
+         <bool>false</bool>
+        </property>
+        <property name="text">
+         <string>Eliminar último volumen</string>
         </property>
        </widget>
       </item>

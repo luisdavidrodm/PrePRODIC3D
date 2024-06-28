@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'malla_windowsnmsbh.ui'
+## Form generated from reading UI file 'malla_windowFPwVbG.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -12,11 +12,13 @@ from PySide2.QtCore import *
 from PySide2.QtGui import *
 from PySide2.QtWidgets import *
 
+import recursos_rc
+
 class Ui_malla_window(object):
     def setupUi(self, malla_window):
         if not malla_window.objectName():
             malla_window.setObjectName(u"malla_window")
-        malla_window.resize(861, 584)
+        malla_window.resize(816, 545)
         icon = QIcon()
         icon.addFile(u":/icon/icon/prodic_icon.jpg", QSize(), QIcon.Normal, QIcon.Off)
         malla_window.setWindowIcon(icon)

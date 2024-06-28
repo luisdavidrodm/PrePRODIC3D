@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'salida_windowzdIAhP.ui'
+## Form generated from reading UI file 'salida_windowzKPsPF.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -17,7 +17,7 @@ class Ui_salida_window(object):
     def setupUi(self, salida_window):
         if not salida_window.objectName():
             salida_window.setObjectName(u"salida_window")
-        salida_window.resize(521, 452)
+        salida_window.resize(502, 345)
         self.gridLayout_3 = QGridLayout(salida_window)
         self.gridLayout_3.setObjectName(u"gridLayout_3")
         self.groupBox = QGroupBox(salida_window)
