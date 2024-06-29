@@ -12,7 +12,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         self.setupUi(self)
         self.config_manager = config_manager
         self.config_name = "BOUND"
-        # self.load_borders_list()
+        self.load_borders_list()
 
         self.pb_addpatch.clicked.connect(self.add_patch)
         self.pb_rempatch.clicked.connect(self.remove_patch)
@@ -72,37 +72,41 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
             if border and patch and variable and sender.objectName() in self.variable_widgets:
                 variable_key = variable.data(Qt.UserRole)
                 self.le_tempamb.setEnabled(self.chb_convec.isChecked() or self.chb_flux.isChecked())
-                if border.text() not in self.config_manager.bound:
-                    self.config_manager.bound[border.text()] = {}
-                if patch.text() not in self.config_manager.bound[border.text()]:
-                    self.config_manager.bound[border.text()][patch.text()] = {}
-                if variable_key not in self.config_manager.bound[border.text()][patch.text()]:
-                    self.config_manager.bound[border.text()][patch.text()][variable_key] = {}
-                self.config_manager.bound[border.text()][patch.text()][variable_key][sender.objectName()] = value
+                border_text = border.data(Qt.UserRole)
+                if border_text not in self.config_manager.bound:
+                    self.config_manager.bound[border_text] = {}
+                if patch.text() not in self.config_manager.bound[border_text]:
+                    self.config_manager.bound[border_text][patch.text()] = {}
+                if variable_key not in self.config_manager.bound[border_text][patch.text()]:
+                    self.config_manager.bound[border_text][patch.text()][variable_key] = {}
+                self.config_manager.bound[border_text][patch.text()][variable_key][sender.objectName()] = value
             elif border and patch and sender.objectName() in self.patch_widgets:
-                if border.text() not in self.config_manager.bound:
-                    self.config_manager.bound[border.text()] = {}
-                if patch.text() not in self.config_manager.bound[border.text()]:
-                    self.config_manager.bound[border.text()][patch.text()] = {}
-                self.config_manager.bound[border.text()][patch.text()][sender.objectName()] = value
+                border_text = border.data(Qt.UserRole)
+                if border_text not in self.config_manager.bound:
+                    self.config_manager.bound[border_text] = {}
+                if patch.text() not in self.config_manager.bound[border_text]:
+                    self.config_manager.bound[border_text][patch.text()] = {}
+                self.config_manager.bound[border_text][patch.text()][sender.objectName()] = value
         else:
             if border and patch and variable and sender.objectName() in self.variable_widgets:
                 variable_key = variable.data(Qt.UserRole)
-                self.config_manager.bound[border.text()][patch.text()][variable_key].pop(sender.objectName(), None)
-                # if not self.config_manager.bound[border.text()][patch.text()][variable_key]:
-                #     del self.config_manager.bound[border.text()][patch.text()][variable_key]
-                # if not self.config_manager.bound[border.text()][patch.text()]:
-                #     del self.config_manager.bound[border.text()][patch.text()]
+                border_text = border.data(Qt.UserRole)
+                self.config_manager.bound[border_text][patch.text()][variable_key].pop(sender.objectName(), None)
+                # if not self.config_manager.bound[border_text][patch.text()][variable_key]:
+                #     del self.config_manager.bound[border_text][patch.text()][variable_key]
+                # if not self.config_manager.bound[border_text][patch.text()]:
+                #     del self.config_manager.bound[border_text][patch.text()]
             elif border and patch and sender.objectName() in self.patch_widgets:
-                self.config_manager.bound[border.text()][patch.text()].pop(sender.objectName(), None)
-                # if not self.config_manager.bound[border.text()][patch.text()]:
-                #     del self.config_manager.bound[border.text()][patch.text()]
+                border_text = border.data(Qt.UserRole)
+                self.config_manager.bound[border_text][patch.text()].pop(sender.objectName(), None)
+                # if not self.config_manager.bound[border_text][patch.text()]:
+                #     del self.config_manager.bound[border_text][patch.text()]
 
     def get_configured_widgets(self, border, patch, variable):
         """"""
         # Esta función busca en la configuración y recoge todos los widgets configurados
         if border and patch:
-            border_text = border.text()
+            border_text = border.data(Qt.UserRole)
             patch_text = patch.text()
             if border_text not in self.config_manager.bound:
                 self.config_manager.bound[border_text] = {}
@@ -129,7 +133,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         not_configured_widgets = [widget for widget in self.widgets if widget not in configured_widgets]
         self.toggle_widget_list(not_configured_widgets, False)
         if border and patch:
-            config = self.config_manager.bound[border.text()][patch.text()]
+            border_text = border.data(Qt.UserRole)
+            config = self.config_manager.bound[border_text][patch.text()]
             self.toggle_widget_list(self.patch_widgets, True)
             self.config_manager.load_config(self, config)
             self.lw_variables.setEnabled(True)
@@ -182,7 +187,8 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         border = self.lw_bordes.currentItem()
         if border is not None:
             self.lw_patchlist.clear()
-            config = self.config_manager.bound[border.text()]
+            border_text = border.data(Qt.UserRole)
+            config = self.config_manager.bound[border_text]
             for key, value in config.items():
                 if isinstance(value, dict):
                     self.lw_patchlist.addItem(key)
@@ -194,7 +200,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         border = self.lw_bordes.currentItem()
         patch = self.lw_patchlist.currentItem()
         if border is not None and patch is not None:
-            border_text = border.text()
+            border_text = border.data(Qt.UserRole)
             patch_text = patch.text()
             if self.config_manager.is_mesh_info_complete and patch_text != "Borde base":
                 patch_data = self.initialize_patch_data()
@@ -290,9 +296,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         """"""
         border = self.lw_bordes.currentItem()
         if border:
+            border_text = border.data(Qt.UserRole)
             patch_number = self.lw_patchlist.count()
             self.lw_patchlist.addItem(f"Parche {patch_number}")
-            self.config_manager.bound[border.text()][f"Parche {patch_number}"] = {"chb_wall": 2}
+            self.config_manager.bound[border_text][f"Parche {patch_number}"] = {"chb_wall": 2}
 
     def remove_patch(self):
         """"""
@@ -300,9 +307,10 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         if border:
             patch_count = self.lw_patchlist.count()
             if patch_count > 1:
+                border_text = border.data(Qt.UserRole)
                 last_patch = self.lw_patchlist.item(patch_count - 1)
                 self.lw_patchlist.takeItem(patch_count - 1)
-                self.config_manager.bound[border.text()].pop(last_patch.text(), None)
+                self.config_manager.bound[border_text].pop(last_patch.text(), None)
 
     def load_borders_list(self):
         """"""
@@ -339,7 +347,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         vertical_label = ""
         border = self.lw_bordes.currentItem()
         if border is not None:
-            border_text = border.text()
+            border_text = border.data(Qt.UserRole)
             if self.config_manager.is_cartesian:
                 if border_text in {"X Max", "X Min"}:
                     transversal_label = "Y"
@@ -371,7 +379,7 @@ class BordesWindow(qtw.QDialog, Ui_bordes_window):
         border = self.lw_bordes.currentItem()
         patch = self.lw_patchlist.currentItem()
         if border is not None and patch is not None:
-            border_text = border.text()
+            border_text = border.data(Qt.UserRole)
             if self.config_manager.is_cartesian and self.config_manager.is_ezgrid:
                 if border_text in {"X Max", "X Min"}:
                     patch_data = {

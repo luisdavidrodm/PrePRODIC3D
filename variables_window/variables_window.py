@@ -105,3 +105,9 @@ class VariablesWindow(qtw.QDialog, Ui_variables_window):
                 del self.config_manager.values[le_name]
             if le_name in self.config_manager.output:
                 del self.config_manager.output[le_name]
+            for border in self.config_manager.bound:
+                if isinstance(self.config_manager.bound[border], dict):
+                    for patch in self.config_manager.bound[border]:
+                        if isinstance(self.config_manager.bound[border][patch], dict):
+                            if le_name in self.config_manager.bound[border][patch]:
+                                del self.config_manager.bound[border][patch][le_name]
