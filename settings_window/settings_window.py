@@ -13,7 +13,6 @@ class SettingsWindow(QtWidgets.QDialog):
     def init_ui(self):
         self.setWindowTitle("Configuración")
         self.resize(500, 200)
-        self.center()
 
         icon = QIcon()
         icon.addFile(":/icon/icon/prodic_icon.png", QSize(), QIcon.Normal, QIcon.Off)
@@ -61,11 +60,6 @@ class SettingsWindow(QtWidgets.QDialog):
 
         self.setLayout(layout)
         self.load_config()
-
-    def center(self):
-        screen = QtWidgets.QDesktopWidget().screenGeometry()
-        size = self.geometry()
-        self.move((screen.width() - size.width()) / 2, (screen.height() - size.height()) / 2)
 
     def browse_paraview(self):
         file_name, _ = QtWidgets.QFileDialog.getOpenFileName(

@@ -59,6 +59,16 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         self.pb_densidad.clicked.connect(self.open_densidad)
         self.pb_salida.clicked.connect(self.open_salida)
 
+        self.adjust_window_size()
+
+    def adjust_window_size(self):
+        title = self.windowTitle()
+        font_metrics = self.fontMetrics()
+        title_width = font_metrics.boundingRect(title).width()
+        margin = 50
+        required_width = title_width + margin
+        self.setMinimumWidth(required_width)
+
     ################################################################################
     ##
     ## Funciones para abrir ventanas

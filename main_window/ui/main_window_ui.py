@@ -1,7 +1,7 @@
 # -*- coding: utf-8 -*-
 
 ################################################################################
-## Form generated from reading UI file 'main_windowbRawov.ui'
+## Form generated from reading UI file 'main_windowMBQkSU.ui'
 ##
 ## Created by: Qt User Interface Compiler version 5.15.2
 ##
@@ -18,7 +18,7 @@ class Ui_main_window(object):
     def setupUi(self, main_window):
         if not main_window.objectName():
             main_window.setObjectName(u"main_window")
-        main_window.resize(334, 258)
+        main_window.resize(365, 258)
         icon = QIcon()
         icon.addFile(u":/icon/icon/prodic_icon.png", QSize(), QIcon.Normal, QIcon.Off)
         main_window.setWindowIcon(icon)
@@ -86,7 +86,7 @@ class Ui_main_window(object):
         main_window.setCentralWidget(self.centralwidget)
         self.menubar = QMenuBar(main_window)
         self.menubar.setObjectName(u"menubar")
-        self.menubar.setGeometry(QRect(0, 0, 334, 22))
+        self.menubar.setGeometry(QRect(0, 0, 365, 22))
         self.menu_archivo = QMenu(self.menubar)
         self.menu_archivo.setObjectName(u"menu_archivo")
         self.menu_herramientas = QMenu(self.menubar)
