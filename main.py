@@ -269,7 +269,10 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         if not os.path.exists(results_dir):
             os.makedirs(results_dir)
         adapt_file, _ = qtw.QFileDialog.getOpenFileName(
-            self, "Seleccionar archivo Fortran (.f90) para cargar...", results_dir, "Archivos Fortran (*.f90)"
+            self,
+            "Seleccionar archivo ADAPT Fortran (.f90) para cargar...",
+            results_dir,
+            "Archivos ADAPT Fortran (*.f90)",
         )
         if adapt_file:
             folder_path = os.path.dirname(adapt_file)
@@ -285,7 +288,10 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         if not os.path.exists(results_dir):
             os.makedirs(results_dir)
         tecplot_file, _ = qtw.QFileDialog.getOpenFileName(
-            self, "Seleccionar archivo Tecplot para cargar...", results_dir, "Todos los archivos (*)"
+            self,
+            "Seleccionar archivo Tecplot para cargar...",
+            results_dir,
+            "Archivos .000, .005... Todos los archivos (*)",
         )
         if tecplot_file:
             folder_path = os.path.dirname(tecplot_file)
@@ -446,9 +452,6 @@ class MainWindow(qtw.QMainWindow, Ui_main_window):
         tecplot_file=None,
     ):
         terminal_dialog = TerminalOutputDialog(self)
-        title = self.config_manager.header.get("le_titulosimu", None)
-        terminal_dialog.setWindowTitle(f"Resultados de Simulación: {title}")
-
         worker = Worker(folder_path, base_dir, gfortran_path, paraview_path, script_path, adapt_file, tecplot_file)
         worker.error.connect(lambda msg: qtw.QMessageBox.critical(self, "Error", msg))
         worker.finished.connect(terminal_dialog.enable_close_button)
@@ -508,7 +511,9 @@ class Worker(qtc.QThread):
                     self.output.emit(f"Compilando {self.adapt_file}...\n")
                     cwd_prodic3d = os.path.join(self.folder_path, "prodic3d.f90").replace("\\", "/")
                     gfortran_directory = os.path.dirname(self.gfortran_path)
-                    compile_command = f'gfortran -o "{exe_path}" "{cwd_prodic3d}" "{self.adapt_file}"'
+                    compile_command = (
+                        f'gfortran -ffree-line-length-none -o "{exe_path}" "{cwd_prodic3d}" "{self.adapt_file}"'
+                    )
                     rc = self.add_to_path_and_run(compile_command, gfortran_directory, self.folder_path)
                     if rc != 0:
                         self.output.emit(f"Errores durante la compilación. Código de retorno: {rc}")
@@ -526,6 +531,7 @@ class Worker(qtc.QThread):
                         self.finished.emit()
                         return
                     self.tecplot_file = tecplot_files[0]
+                    self.output.emit(f"Se encontró el archivo grafico {self.tecplot_file}...\n")
                     self.output.emit(
                         f"Los resultados numéricos se guardaron en el archivo PRINTF en {self.folder_path}\n"
                     )
@@ -538,27 +544,22 @@ class Worker(qtc.QThread):
                     self.finished.emit()
                     return
             if self.paraview_path is not None:
-                tecplot_path = os.path.join(self.folder_path, self.tecplot_file)
-                self.output.emit("Ejecutando ParaView...\n")
-                # os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"] = tecplot_path
-                # paraview_command = f'"{self.paraview_path}" --script="{self.script_path}"'
-                # self.run_command(paraview_command, wait=False)
-                # del os.environ["PREPRODIC3D_TECPLOT_FILE_PATH"]
+                tecplot_path = os.path.join(self.folder_path, self.tecplot_file).replace("\\", "/")
+                self.output.emit(f"Ejecutando ParaView para visualizar el archivo {tecplot_path}...\n")
                 paraview_dir = os.path.dirname(self.paraview_path).replace("\\", "/")
-                paraview_platforms = os.path.join(paraview_dir, "platforms")
-                paraview_styles = os.path.join(paraview_dir, "styles")
-                paraview_iconengines = os.path.join(paraview_dir, "iconengines")
-                paraview_imageformats = os.path.join(paraview_dir, "imageformats")
+                paraview_platforms = os.path.join(paraview_dir, "platforms").replace("\\", "/")
+                paraview_styles = os.path.join(paraview_dir, "styles").replace("\\", "/")
+                paraview_iconengines = os.path.join(paraview_dir, "iconengines").replace("\\", "/")
+                paraview_imageformats = os.path.join(paraview_dir, "imageformats").replace("\\", "/")
                 batch_file_content = f"""@echo off
 setlocal
 set QT_QPA_PLATFORM_PLUGIN_PATH={paraview_platforms}
 set QT_PLUGIN_PATH={paraview_platforms};{paraview_styles};{paraview_iconengines};{paraview_imageformats}
 set PREPRODIC3D_TECPLOT_FILE_PATH={tecplot_path}
 "{self.paraview_path}" --script="{self.script_path}"
-endlocal
+endlocal\n
                 """
-                self.output.emit(batch_file_content)
-                batch_file_path = os.path.join(base_path, "temp_script.bat")
+                batch_file_path = os.path.join(base_path, "temp_script.bat").replace("\\", "/")
                 with open(batch_file_path, "w", encoding="utf-8") as batch_file:
                     batch_file.write(batch_file_content)
                 command = f'"{batch_file_path}"'
@@ -605,7 +606,7 @@ endlocal
 class TerminalOutputDialog(qtw.QDialog):
     def __init__(self, parent=None):
         super().__init__(parent)
-        self.setWindowTitle("Resultados")
+        self.setWindowTitle("Resultados de Simulación")
         self.resize(800, 600)
 
         layout = qtw.QVBoxLayout(self)
@@ -636,7 +637,6 @@ class AboutDialog(qtw.QDialog):
 
     def init_ui(self):
         self.setWindowTitle("Acerca de")
-        self.setFixedSize(265, 345)
         icon = QIcon()
         icon.addFile(":/icon/icon/prodic_icon.png", qtc.QSize(), QIcon.Normal, QIcon.Off)
         self.setWindowIcon(icon)
@@ -651,12 +651,12 @@ class AboutDialog(qtw.QDialog):
             "Escuela de Ingeniería Mecánica<br>"
             "Departamento de Energía</p>"
             "<hr style='border: 1px solid #000;'>"
-            "<p><b>Realizado por:</b></p>"
+            "<p><b>Trabajo Especial de Grado realizado por:</b></p>"
             "<p><b>Br. Luis David Rodríguez Muñoz</b><br>"
             "<b>Br. Diego Jesús Rojas Becerra</b></p>"
             "<hr style='border: 1px solid #000;'>"
             "<p><b>Maracaibo, Julio de 2024</b></p>"
-            "<p><b>Versión: 1.0.0</b></p>"
+            "<p><b>Versión: 1.0.1</b></p>"
             "<hr style='border: 1px solid #000;'>"
             "<p><a href='https://github.com/luisdavidrodm/PrePRODIC3D'>https://github.com/luisdavidrodm/PrePRODIC3D</a></p>"
             "</div>"
@@ -670,11 +670,7 @@ class AboutDialog(qtw.QDialog):
         button_box.accepted.connect(self.accept)
         layout.addWidget(button_box)
         self.setLayout(layout)
-
-
-def show_about_dialog(self):
-    about_dialog = AboutDialog()
-    about_dialog.exec_()
+        self.adjustSize()
 
 
 if __name__ == "__main__":

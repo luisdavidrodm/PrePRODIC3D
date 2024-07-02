@@ -12,7 +12,7 @@ class SettingsWindow(QtWidgets.QDialog):
 
     def init_ui(self):
         self.setWindowTitle("Configuración")
-        self.resize(400, 200)
+        self.resize(500, 200)
         self.center()
 
         icon = QIcon()
