@@ -806,7 +806,7 @@ class F90Translator:
         if plane == "XY":
             velocities = [(1, "X", "FX(I)", "FXM(I)", "SIN", "I-1,J,K"), (2, "Y", "FY(J)", "FYM(J)", "COS", "I,J-1,K")]
         elif plane == "YZ":
-            velocities = [(2, "Y", "FY(J)", "FYM", "SIN", "I,J-1,K"), (3, "Z", "FZ(K)", "FZM(K)", "COS", "I,J,K-1")]
+            velocities = [(2, "Y", "FY(J)", "FYM(J)", "SIN", "I,J-1,K"), (3, "Z", "FZ(K)", "FZM(K)", "COS", "I,J,K-1")]
         elif plane == "XZ":
             velocities = [(1, "X", "FX(I)", "FXM(I)", "SIN", "I-1,J,K"), (3, "Z", "FZ(K)", "FZM(K)", "COS", "I,J,K-1")]
 
